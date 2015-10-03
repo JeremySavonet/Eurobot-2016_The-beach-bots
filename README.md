@@ -1,7 +1,7 @@
 EUROBOT 2016 - The Beach Bots
 ====
 
-<h3>HW:</h3>
+<h4>HW:</h4>
 ----
 
 Board : https://www.olimex.com/Products/ARM/ST/STM32-E407/open-source-hardware <br>
