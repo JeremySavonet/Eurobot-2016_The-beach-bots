@@ -26,3 +26,9 @@ Chibios seems to be a better alternative than FreeRtos for severals reasons:<br>
 <li>FreeRTOS api is not type safe (mutex / semaphore / queue) - ChibiOS api is type safe</li>
 <li>i have a feeling that ChibiOS is more efficient than FreeRTOS</li>
 <li>using ChibiOS hal will make us stop relying on the buggy ST libraries in the longer term</li>
+
+<h4>Usefull links:</h4>
+----
+
+<li>https://www.alexwhittemore.com/using-the-stm32f4discovery-on-the-mac-os-x-10-8-4-command-line/</li>
+<li>http://www.telecom-robotics.org/2013/08/robotics-101-quick-start/</li>
