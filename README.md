@@ -16,8 +16,8 @@ WiFi IoT module : https://www.olimex.com/Products/IoT/MOD-WIFI-ESP8266/open-sour
 
 Need to test those to RTOS:<br>
 
-    * Freertos : https://github.com/frtos-wpan/freertos-201309/tree/master/FreeRTOS/Demo/E407
-    * ChibiOS : http://chibios.org/dokuwiki/doku.php?id=chibios:documentation:start
+<li>Freertos : https://github.com/frtos-wpan/freertos-201309/tree/master/FreeRTOS/Demo/E407</li>
+<li>ChibiOS : http://chibios.org/dokuwiki/doku.php?id=chibios:documentation:start</li>
     
 Chibios seems to be a better alternative than FreeRtos for severals reasons:<br>
 <li>maintaining our own hal eats a lot of development time - ChibiOS comes with a hal</li>
