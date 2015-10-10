@@ -15725,10 +15725,6 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
-<part name="R11" library="resistor" deviceset="R-EU_" device="R0603" value="10K - 0603"/>
-<part name="R1" library="resistor" deviceset="R-EU_" device="R0603" value="10K - 0603"/>
-<part name="R2" library="resistor" deviceset="R-EU_" device="R0603" value="10K - 0603"/>
-<part name="R3" library="resistor" deviceset="R-EU_" device="R0603" value="10K - 0603"/>
 <part name="R4" library="resistor" deviceset="R-EU_" device="R0603" value="0R"/>
 <part name="R7" library="resistor" deviceset="R-EU_" device="R0603" value="0R"/>
 <part name="R8" library="resistor" deviceset="R-EU_" device="R0603" value="0R"/>
@@ -15812,10 +15808,6 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <instance part="GND1" gate="1" x="0" y="-38.1"/>
 <instance part="GND4" gate="1" x="-66.04" y="71.12"/>
 <instance part="GND6" gate="1" x="-15.24" y="60.96"/>
-<instance part="R11" gate="G$1" x="-43.18" y="27.94" rot="R90"/>
-<instance part="R1" gate="G$1" x="-38.1" y="27.94" rot="R90"/>
-<instance part="R2" gate="G$1" x="-33.02" y="27.94" rot="R90"/>
-<instance part="R3" gate="G$1" x="-27.94" y="27.94" rot="R90"/>
 <instance part="R4" gate="G$1" x="-30.48" y="-10.16" rot="R180"/>
 <instance part="R7" gate="G$1" x="-30.48" y="-12.7" rot="R180"/>
 <instance part="R8" gate="G$1" x="-30.48" y="-15.24" rot="R180"/>
