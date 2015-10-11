@@ -45,7 +45,6 @@ int main( void )
             MAJOR_VERSION, 
             MINOR_VERSION, 
             PATCH_VERSION );
-
     
     //Init ADXL362 measurement mode
     adxl362_init();
