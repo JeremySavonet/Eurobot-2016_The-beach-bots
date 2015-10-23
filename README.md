@@ -27,6 +27,23 @@ Chibios seems to be a better alternative than FreeRtos for severals reasons:<br>
 <li>i have a feeling that ChibiOS is more efficient than FreeRTOS</li>
 <li>using ChibiOS hal will make us stop relying on the buggy ST libraries in the longer term</li>
 
+<h5>How to setup the env:</h5>
+
+<li>Install arm gcc:</li>
+<ul>brew tap PX4/homebrew-px4</ul>
+<ul>brew update</ul>
+<ul>brew install gcc-arm-none-eabi</ul>
+
+<li>Install dfu-util:</li>
+<ul>brew install dfu-util</ul>
+
+<li>Make the projet:</li>
+<ul>Just run make in the project folder</ul>
+
+<li>Program the target:</li>
+<ul>Put the device in dfu mode (set the jumper like explain in the manual</ul>
+<ul>Run the command: dfu-util -v -d 0483:df11 -a 0 -s 0x08000000 -D prog.hex</ul>
+
 <h4>Usefull links:</h4>
 ----
 
