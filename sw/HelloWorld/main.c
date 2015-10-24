@@ -4,6 +4,10 @@
  * Description: 
  * A simple HelloWorld program that create a task that blinks a led
  *
+ * Added support for:
+ * 90s timer to stop all the thread
+ * Uart
+ *
  * Author: JS
  * Date: 2015-10-03
  * Version: V0.1
@@ -20,9 +24,33 @@
 /* Main and generic code.                                                    */
 /*===========================================================================*/
 
+static int gameTick = 0;
+static thread_t *tp;
+static virtual_timer_t gameTimer;
+
 /*
-* Struct to config serial module
-*/
+ * Game running loop 
+ */
+void runGame( void *p ) 
+{
+ 
+    /* Restarts the timer.*/
+    chSysLockFromISR();
+    chVTSetI( &gameTimer, MS2ST( 1000 ), runGame, p );
+    chSysUnlockFromISR();
+ 
+    
+    // Wait 90s and stop all the thread properly
+    if( ++gameTick >= 90 )
+    {
+        // Stop the blinker thread
+        chThdWait( tp ); 
+    }
+}
+
+/*
+ * Struct to config serial module
+ */
 static SerialConfig uartCfg =
 {
     115200, // bit rate
@@ -32,8 +60,8 @@ static SerialConfig uartCfg =
 };
 
 /*
-* Green LED blinker thread, times are in milliseconds.
-*/
+ * Green LED blinker thread, times are in milliseconds.
+ */
 static THD_WORKING_AREA( waThread1, 128 );
 static THD_FUNCTION( Thread1, arg )
 {
@@ -49,15 +77,18 @@ static THD_FUNCTION( Thread1, arg )
 int main( void )
 {
     /*
-    * System initializations.
-    * - HAL initialization, this also initializes the configured device drivers
-    *   and performs the board-specific initializations.
-    * - Kernel initialization, the main() function becomes a thread and the
-    *   RTOS is active.
-    */
+     * System initializations.
+     * - HAL initialization, this also initializes the configured device drivers
+     *   and performs the board-specific initializations.
+     * - Kernel initialization, the main() function becomes a thread and the
+     *   RTOS is active.
+     */
     halInit();
     chSysInit();
 
+    // Start game timer
+    chVTSet( &gameTimer, MS2ST( 1000 ), runGame, NULL );
+ 
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
     // used function : USART3_TX 
@@ -68,21 +99,21 @@ int main( void )
     
     // starts the serial driver with uartCfg as a config 
     sdStart( &SD3, &uartCfg ); 
-    char data[] = "Hello World ! \n \r"; 
+    const char data[] = "Hello World ! \n \r"; 
  
     /*
-    * Creates the blinker thread.
-    */
-    chThdCreateStatic( waThread1,
-                       sizeof( waThread1 ),
-                       NORMALPRIO,
-                       Thread1,
-                       NULL );
+     * Creates the blinker thread.
+     */
+    tp = chThdCreateStatic( waThread1,
+                           sizeof( waThread1 ),
+                           NORMALPRIO,
+                           Thread1,
+                           NULL );
 
     /*
-    * Normal main() thread activity, in this demo it does nothing except
-    * sleeping in a loop and listen for events.
-    */
+     * Normal main() thread activity, in this demo it does nothing except
+     * sleeping in a loop and listen for events.
+     */
     while( true )
     {
         // Writes "Hello World in the UART output
