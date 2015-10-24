@@ -21,6 +21,17 @@
 /*===========================================================================*/
 
 /*
+* Struct to config serial module
+*/
+static SerialConfig uartCfg =
+{
+    115200, // bit rate
+    0,
+    0,
+    0,
+};
+
+/*
 * Green LED blinker thread, times are in milliseconds.
 */
 static THD_WORKING_AREA( waThread1, 128 );
@@ -47,8 +58,18 @@ int main( void )
     halInit();
     chSysInit();
 
-    palSetPadMode(GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL);
+    palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
+    // used function : USART3_TX 
+    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) ); 
+    
+    // used function : USART3_RX 
+    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) ); 
+    
+    // starts the serial driver with uartCfg as a config 
+    sdStart( &SD3, &uartCfg ); 
+    char data[] = "Hello World ! \n \r"; 
+ 
     /*
     * Creates the blinker thread.
     */
@@ -64,6 +85,8 @@ int main( void )
     */
     while( true )
     {
-        chThdSleepMilliseconds(500); /* Iddle thread */ 
+        // Writes "Hello World in the UART output
+        sdWrite( &SD3, (uint8_t *) data, strlen( data ) ); 
+        chThdSleepMilliseconds( 500 ); /* Iddle thread */
     }
 }
