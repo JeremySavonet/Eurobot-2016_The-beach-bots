@@ -6,7 +6,8 @@
  *
  * Added support for:
  * 90s timer to stop all the thread
- * Uart
+ * Uart 
+ * UEXT reader thread
  *
  * Author: JS
  * Date: 2015-10-03
@@ -19,6 +20,10 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+
+#define USART_CR1_9BIT_WORD     (1 << 12)   /* CR1 9 bit word */
+#define USART_CR1_PARITY_SET    (1 << 10)   /* CR1 parity bit enable */
+#define USART_CR1_EVEN_PARITY   (0 << 9)    /* CR1 even parity */
 
 /*===========================================================================*/
 /* Main and generic code.                                                    */
@@ -48,10 +53,10 @@ void runGame( void *p )
  */
 static SerialConfig uartCfg =
 {
-    115200, // bit rate
+    115200,              
     0,
     0,
-    0,
+    0
 };
 
 /*
@@ -93,6 +98,48 @@ static THD_FUNCTION( Thread2, arg )
     palSetPad( GPIOC, GPIOC_LED );   
 }
 
+/* Periodic thread for reading data */
+static THD_WORKING_AREA( waRead, 128 );
+static THD_FUNCTION( Thread3, arg )
+{
+    (void)arg;
+    chRegSetThreadName( "uartModwifi" );
+
+    while( true )
+    {
+        /* This will wait for a character to be received */
+        char c;
+        c = sdGet( &SD6 );
+        sdPut( &SD3, c );
+    }
+
+    /*event_listener_t s6EventListener;*/
+    /*chEvtRegisterMask((event_source_t *)chnGetEventSource(&SD6), &s6EventListener, EVENT_MASK(1));*/
+
+    /*while( true )*/
+    /*{*/
+    /*eventflags_t flags;*/
+    /*chEvtWaitOneTimeout(EVENT_MASK(1), MS2ST(10));*/
+    /*chSysLock();*/
+    /*flags = chEvtGetAndClearFlags(&s6EventListener);    */
+    /*chSysUnlock(); */
+    /*uint8_t c = sdGet( &SD6 );*/
+    /*sdPut( &SD3, c ); */
+    /*if (flags & CHN_INPUT_AVAILABLE)*/
+    /*{*/
+    /**//* Data available read here.*/
+    /*uint8_t c = sdGet( &SD6 );*/
+    /*sdPut( &SD3, c );*/
+    /*}*/
+    /*if (flags & CHN_OUTPUT_EMPTY) {*/
+    /**//* Data sent, you may transmit from here.*/
+    /*}*/
+    /*if (flags & (SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |*/
+    /*SD_NOISE_ERROR | SD_BREAK_DETECTED)) {*/
+    /**//* Some receive error happened.*/
+    /*}*/
+    /*}*/
+}
 
 int main( void )
 {
@@ -113,16 +160,25 @@ int main( void )
     
     // Used function : USART3_RX 
     palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) ); 
+  
+    // Used function : USART6_TX 
+    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
     
+    // Used function : USART6_RX 
+    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) ); 
+ 
+    // UART6 READER THREAD 
+    chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, Thread3, NULL );
+ 
     // Starts the serial driver with uartCfg as a config 
     sdStart( &SD3, &uartCfg ); 
-    
+    sdStart( &SD6, &uartCfg );
+
     const char data[] = "Ready..."; 
-    
-    sdWrite( &SD3, (uint8_t *) data, strlen( data ) );  
-    
+
     // Board is ready
     palClearPad( GPIOC, GPIOC_LED ); 
+    sdWrite( &SD3, (uint8_t *) data, strlen( data ) );
     
     /*
      * Normal main() thread activity, in this demo it does nothing except
@@ -153,7 +209,7 @@ int main( void )
             
             running = true;
         }
-         
+        
         chThdSleepMilliseconds( 100 ); /* Iddle thread */
     }
 }
