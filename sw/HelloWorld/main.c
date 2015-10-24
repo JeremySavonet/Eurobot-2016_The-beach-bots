@@ -21,8 +21,8 @@
 /*===========================================================================*/
 
 /*
- * Green LED blinker thread, times are in milliseconds.
- */
+* Green LED blinker thread, times are in milliseconds.
+*/
 static THD_WORKING_AREA( waThread1, 128 );
 static THD_FUNCTION( Thread1, arg )
 {
@@ -37,31 +37,33 @@ static THD_FUNCTION( Thread1, arg )
 
 int main( void )
 {
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
+    /*
+    * System initializations.
+    * - HAL initialization, this also initializes the configured device drivers
+    *   and performs the board-specific initializations.
+    * - Kernel initialization, the main() function becomes a thread and the
+    *   RTOS is active.
+    */
     halInit();
     chSysInit();
 
-  /*
-   * Creates the blinker thread.
-   */
+    palSetPadMode(GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL);
+
+    /*
+    * Creates the blinker thread.
+    */
     chThdCreateStatic( waThread1,
                        sizeof( waThread1 ),
                        NORMALPRIO,
                        Thread1,
                        NULL );
 
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and listen for events.
-   */
+    /*
+    * Normal main() thread activity, in this demo it does nothing except
+    * sleeping in a loop and listen for events.
+    */
     while( true )
     {
-        // DO NOTHING
+        chThdSleepMilliseconds(500); /* Iddle thread */ 
     }
 }
