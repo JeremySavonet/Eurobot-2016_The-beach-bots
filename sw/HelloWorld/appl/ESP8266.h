@@ -1,7 +1,7 @@
 /*
-    ESP8266 module driver.
-    Talks to a ESP8266 mod-WiFi module over serial
-*/
+ *  ESP8266 module driver.
+ *  Talks to a ESP8266 mod-WiFi module over serial 
+ */
 
 #include "ch.h"
 #include "hal.h"

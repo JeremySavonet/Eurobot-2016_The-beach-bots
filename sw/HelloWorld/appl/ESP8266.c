@@ -1,16 +1,16 @@
 /*
- *   ESP8266 module driver.
- *   Talks to a ESP8266 mod-WiFi module over serial
+ *  ESP8266 module driver.
+ *  Talks to a ESP8266 mod-WiFi module over serial
  *
- * Author: JS
- * Date: 2015-10-25
- * Version: V0.1
+ *  Author: JS
+ *  Date: 2015-10-25
+ *  Version: V0.1
  */
 
 #include <stdio.h>
 #include <string.h>
 
-#include "console.h" //use for debug
+#include "console.h" 
 #include "ESP8266.h"
 #include "test.h"
 

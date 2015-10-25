@@ -8,6 +8,7 @@
  * 90s timer to stop all the thread
  * Uart 
  * UEXT reader thread
+ * PWM on port D pin 12/13/14/15
  *
  * Author: JS
  * Date: 2015-10-03
@@ -19,6 +20,7 @@
 
 #include "appl/console.h"
 #include "appl/ESP8266.h"
+#include "appl/motors.h"
 
 #include "ch.h"
 #include "hal.h"
@@ -88,9 +90,13 @@ static THD_FUNCTION( Thread2, arg )
    
     // Wait here all thread to terminate properly 
     chThdWait( tp );
-    
+
+    MotorSetSpeed( 0, 0 );
+    MotorSetSpeed( 1, 0 );
+    MotorSetSpeed( 2, 0 );
+    MotorSetSpeed( 3, 0 );
     DPRINT( 1, "Stop..." );
-    palSetPad( GPIOC, GPIOC_LED );   
+    palSetPad( GPIOC, GPIOC_LED );  
 }
 
 int main( void )
@@ -113,6 +119,9 @@ int main( void )
 
     // Init ESP8266 WiFi module
     ESP8266Init();
+    
+    // Init Motors module
+    MotorsInit();
 
     // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED ); 
@@ -133,6 +142,14 @@ int main( void )
                                     NORMALPRIO,
                                     Thread1,
                                     NULL );
+
+            // Set motors speed to 50% duty cycle
+            pwmcnt_t speedM4 = 5000;  
+            MotorSetSpeed( 0, speedM4 );
+            MotorSetSpeed( 1, speedM4 );
+            MotorSetSpeed( 2, speedM4 );
+            MotorSetSpeed( 3, speedM4 );
+            
             // Start killer thread
             chThdCreateStatic( waThread2,
                     sizeof( waThread2 ),

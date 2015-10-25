@@ -1,5 +1,5 @@
 /*
- *
+ *  Console module used to debug
  */
 
 #ifndef _CONSOLE_H_
