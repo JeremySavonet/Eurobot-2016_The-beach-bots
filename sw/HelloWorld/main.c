@@ -127,6 +127,26 @@ int main( void )
     palClearPad( GPIOC, GPIOC_LED ); 
     DPRINT( 1, "Ready..." );
 
+    chThdSleepMilliseconds( 600 ); /* Iddle thread */
+    
+    ESP8266RequestVersion();
+    chThdSleepMilliseconds( 100 ); /* Iddle thread */
+    
+    ESP8266SetMode();
+    chThdSleepMilliseconds( 100 ); /* Iddle thread */
+    
+    ESP8266EnableMultipleConnection();  
+    chThdSleepMilliseconds( 100 ); /* Iddle thread */
+    
+    ESP8266ConfigureServer();  
+    chThdSleepMilliseconds( 100 ); /* Iddle thread */
+    
+    ESP8266SetAccessPoint();
+    chThdSleepMilliseconds( 1000 ); /* Iddle thread */
+    
+    ESP8266JoinAccessPoint();
+    chThdSleepMilliseconds( 100 ); /* Iddle thread */
+
     // Global main loop
     while( true )
     {

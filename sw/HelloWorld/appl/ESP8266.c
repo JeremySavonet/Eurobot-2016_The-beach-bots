@@ -14,6 +14,11 @@
 #include "ESP8266.h"
 #include "test.h"
 
+
+// Private functions
+void sendCommand( char *p );
+
+
 // Struct to config serial module 
 static SerialConfig sd6Cfg =
 {
@@ -79,4 +84,44 @@ void ESP8266Init( void )
     sdStart( &SD6, &sd6Cfg );
     
     chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, ESP8266, NULL );
+}
+
+void ESP8266RequestVersion( void )
+{
+    sendCommand( "AT+GMR\r\n" );
+}
+
+void ESP8266ListAccessPoint( void )
+{
+    sendCommand( "AT+CWLAP\r\n" );
+}
+
+void ESP8266SetMode( void )
+{
+    sendCommand( "AT+CWMODE=3\r\n" );
+}
+
+void ESP8266JoinAccessPoint( void )
+{
+    sendCommand( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
+}
+
+void ESP8266SetAccessPoint( void )
+{
+    sendCommand( "AT+CWSAP=\"esp_123\",\"1234567890\",5,3\r\n" );
+}
+
+void ESP8266EnableMultipleConnection( void )
+{
+    sendCommand( "AT+CIPMUX=1\r\n" );
+}
+
+void ESP8266ConfigureServer( void )
+{
+    sendCommand( "AT+CIPSERVER=1\r\n" );
+}
+
+void sendCommand( char *p ) 
+{
+    while (*p) chSequentialStreamPut( &SD6, *p++ );
 }
