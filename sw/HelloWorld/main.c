@@ -519,8 +519,6 @@ int main( void )
     palClearPad( GPIOC, GPIOC_LED ); 
     DPRINT( 1, "Ready..." );
 
-    chThdSleepMilliseconds( 600 ); /* Iddle thread */
-    
     ESP8266RequestVersion();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
     
