@@ -17,16 +17,22 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "appl/console.h"
+#include "appl/ESP8266.h"
+
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
 
-#define USART_CR1_9BIT_WORD     (1 << 12)   /* CR1 9 bit word */
-#define USART_CR1_PARITY_SET    (1 << 10)   /* CR1 parity bit enable */
-#define USART_CR1_EVEN_PARITY   (0 << 9)    /* CR1 even parity */
+/*===========================================================================*/
+/* Global static functions                                                   */
+/*===========================================================================*/
+
+static void initDebug( void );
+static void runGame( void *p ); 
 
 /*===========================================================================*/
-/* Main and generic code.                                                    */
+/* Global static variables                                                   */
 /*===========================================================================*/
 
 static bool running = false;
@@ -34,34 +40,24 @@ static int gameTick = 0;
 static thread_t *tp = NULL;
 static virtual_timer_t gameTimer;
 
-/*
- * Game running loop 
- */
-void runGame( void *p ) 
-{
- 
-    /* Restarts the timer.*/
-    chSysLockFromISR();
-    chVTSetI( &gameTimer, MS2ST( 1000 ), runGame, p );
-    chSysUnlockFromISR();
+/*===========================================================================*/
+/* Global structures                                                         */
+/*===========================================================================*/
 
-    if( ++gameTick < 90 ) {}
-}
-
-/*
- * Struct to config serial module
- */
+// Struct to config serial module for debug 
 static SerialConfig uartCfg =
 {
     115200,              
     0,
     0,
     0
-};
+}; 
 
-/*
- * Green LED blinker thread, times are in milliseconds.
- */
+/*===========================================================================*/
+/* Application threads                                                       */
+/*===========================================================================*/
+
+// Green LED blinker thread, times are in milliseconds.
 static THD_WORKING_AREA( waThread1, 128 );
 static THD_FUNCTION( Thread1, arg )
 {
@@ -69,8 +65,7 @@ static THD_FUNCTION( Thread1, arg )
     chRegSetThreadName( "blinker" );
     while( true )
     {
-        const char data[] = "Running..."; 
-        sdWrite( &SD3, (uint8_t *) data, strlen( data ) ); 
+        DPRINT( 3, "Running..." );
  
         palTogglePad( GPIOC, GPIOC_LED );
         chThdSleepMilliseconds( 500 );
@@ -78,12 +73,13 @@ static THD_FUNCTION( Thread1, arg )
         // Wait 90s and stop all the thread properly
         if( gameTick >= 5 )
         {
-            msg_t msg;
+            msg_t msg = NULL;
             chThdExit( msg );
         }
     }
 }
 
+// Killer thread : wait for all sigterm signals 
 static THD_WORKING_AREA( waThread2, 128 );
 static THD_FUNCTION( Thread2, arg )
 {
@@ -93,52 +89,8 @@ static THD_FUNCTION( Thread2, arg )
     // Wait here all thread to terminate properly 
     chThdWait( tp );
     
-    const char data[] = "Stop..."; 
-    sdWrite( &SD3, (uint8_t *) data, strlen( data ) );
+    DPRINT( 1, "Stop..." );
     palSetPad( GPIOC, GPIOC_LED );   
-}
-
-/* Periodic thread for reading data */
-static THD_WORKING_AREA( waRead, 128 );
-static THD_FUNCTION( Thread3, arg )
-{
-    (void)arg;
-    chRegSetThreadName( "uartModwifi" );
-
-    while( true )
-    {
-        /* This will wait for a character to be received */
-        char c;
-        c = sdGet( &SD6 );
-        sdPut( &SD3, c );
-    }
-
-    /*event_listener_t s6EventListener;*/
-    /*chEvtRegisterMask((event_source_t *)chnGetEventSource(&SD6), &s6EventListener, EVENT_MASK(1));*/
-
-    /*while( true )*/
-    /*{*/
-    /*eventflags_t flags;*/
-    /*chEvtWaitOneTimeout(EVENT_MASK(1), MS2ST(10));*/
-    /*chSysLock();*/
-    /*flags = chEvtGetAndClearFlags(&s6EventListener);    */
-    /*chSysUnlock(); */
-    /*uint8_t c = sdGet( &SD6 );*/
-    /*sdPut( &SD3, c ); */
-    /*if (flags & CHN_INPUT_AVAILABLE)*/
-    /*{*/
-    /**//* Data available read here.*/
-    /*uint8_t c = sdGet( &SD6 );*/
-    /*sdPut( &SD3, c );*/
-    /*}*/
-    /*if (flags & CHN_OUTPUT_EMPTY) {*/
-    /**//* Data sent, you may transmit from here.*/
-    /*}*/
-    /*if (flags & (SD_PARITY_ERROR | SD_FRAMING_ERROR | SD_OVERRUN_ERROR |*/
-    /*SD_NOISE_ERROR | SD_BREAK_DETECTED)) {*/
-    /**//* Some receive error happened.*/
-    /*}*/
-    /*}*/
 }
 
 int main( void )
@@ -153,37 +105,20 @@ int main( void )
     halInit();
     chSysInit();
 
+    // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
-    // Used function : USART3_TX 
-    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) ); 
-    
-    // Used function : USART3_RX 
-    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) ); 
-  
-    // Used function : USART6_TX 
-    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
-    
-    // Used function : USART6_RX 
-    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) ); 
- 
-    // UART6 READER THREAD 
-    chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, Thread3, NULL );
- 
-    // Starts the serial driver with uartCfg as a config 
-    sdStart( &SD3, &uartCfg ); 
-    sdStart( &SD6, &uartCfg );
+    // Init debug UART
+    initDebug();
 
-    const char data[] = "Ready..."; 
+    // Init ESP8266 WiFi module
+    ESP8266Init();
 
-    // Board is ready
+    // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED ); 
-    sdWrite( &SD3, (uint8_t *) data, strlen( data ) );
-    
-    /*
-     * Normal main() thread activity, in this demo it does nothing except
-     * sleeping in a loop and listen for events.
-     */
+    DPRINT( 1, "Ready..." );
+
+    // Global main loop
     while( true )
     {
         // Wait start button
@@ -192,24 +127,46 @@ int main( void )
             // Start game timer
             chVTSet( &gameTimer, MS2ST( 1000 ), runGame, NULL );
             
-            /*
-             * Creates the blinker thread.
-             */ 
+            // Creates the blinker thread.
             tp = chThdCreateStatic( waThread1,
                                     sizeof( waThread1 ),
                                     NORMALPRIO,
                                     Thread1,
                                     NULL );
-           
+            // Start killer thread
             chThdCreateStatic( waThread2,
-                               sizeof( waThread2 ),
-                               NORMALPRIO,
-                               Thread2,
-                               NULL );
-            
+                    sizeof( waThread2 ),
+                    NORMALPRIO,
+                    Thread2,
+                    NULL ); 
+
             running = true;
         }
         
         chThdSleepMilliseconds( 100 ); /* Iddle thread */
     }
 }
+
+/*===========================================================================*/
+/* Functions                                                                 */
+/*===========================================================================*/
+
+void initDebug( void )
+{
+    // Configure UART3 for debug 115200 8N1 
+    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) ); 
+    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) ); 
+    sdStart( &SD3, &uartCfg ); 
+}
+
+// Game running loop 
+void runGame( void *p ) 
+{
+    // Restarts the timer
+    chSysLockFromISR();
+    chVTSetI( &gameTimer, MS2ST( 1000 ), runGame, p );
+    chSysUnlockFromISR();
+
+    if( ++gameTick < 90 ) {}
+}
+
