@@ -102,14 +102,14 @@ static void cmd_threads( BaseSequentialStream *chp, int argc, char *argv[] )
     } while( tp != NULL );
 }
 
-static void cmd_test( BaseSequentialStream *chp, int argc, char *argv[] )
+static void cmd_benchmark( BaseSequentialStream *chp, int argc, char *argv[] )
 {
     thread_t *tp;
 
     (void)argv;
     if( argc > 0 )
     {
-        chprintf( chp, "Usage: test\r\n" );
+        chprintf( chp, "Usage: benchmark\r\n" );
         return;
     }
 
@@ -127,6 +127,18 @@ static void cmd_test( BaseSequentialStream *chp, int argc, char *argv[] )
     chThdWait( tp );
 }
 
+static void cmd_tests( BaseSequentialStream *chp, int argc, char *argv[] )
+{
+    (void)argv;
+    if( argc > 0 )
+    {
+        chprintf( chp, "Usage: tests\r\n" );
+        return;
+    }
+
+    chprintf( chp, "Running\r\n" );
+}
+
 /*===========================================================================*/
 /* Global structures                                                         */
 /*===========================================================================*/
@@ -142,9 +154,10 @@ static SerialConfig uartCfg =
 
 static const ShellCommand commands[] =
 {
-    { "mem",     cmd_mem },
-    { "threads", cmd_threads },
-    { "test",    cmd_test },
+    { "mem",       cmd_mem },
+    { "threads",   cmd_threads },
+    { "benchmark", cmd_benchmark },
+    { "tests",     cmd_tests },
     { NULL, NULL }
 };
 
