@@ -1,5 +1,5 @@
 /*
- *  
+ * CLI over USB driver
  */
 
 #include "ch.h"

@@ -1,12 +1,12 @@
 /*
  * Simple demo program
  *
- * Description: 
+ * Description:
  * A simple HelloWorld program that create a task that blinks a led
  *
  * Added support for:
  * 90s timer to stop all the thread
- * Uart 
+ * Uart
  * UEXT reader thread
  * PWM on port D pin 12/13/14/15
  * ESP8266 API
@@ -30,6 +30,7 @@
 #include "appl/ESP8266.h"
 #include "appl/motors.h"
 #include "appl/usbConfig.h"
+//#include "test/noRegression.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
@@ -43,7 +44,7 @@
 /*===========================================================================*/
 
 static void debugInit( void );
-static void runGame( void *p ); 
+static void runGame( void *p );
 
 /*===========================================================================*/
 /* Global static variables                                                   */
@@ -59,74 +60,87 @@ static virtual_timer_t gameTimer;
 /* TODO : Nice to have little macro to add new cli function                  */
 /*===========================================================================*/
 
-static void cmd_mem( BaseSequentialStream *chp, int argc, char *argv[] ) 
+static void cmd_mem( BaseSequentialStream *chp, int argc, char *argv[] )
 {
     size_t n, size;
 
     (void)argv;
-    if (argc > 0) {
-      chprintf(chp, "Usage: mem\r\n");
-      return;
+    if( argc > 0 )
+    {
+        chprintf( chp, "Usage: mem\r\n" );
+        return;
     }
-    n = chHeapStatus(NULL, &size);
-    chprintf(chp, "core free memory : %u bytes\r\n", chCoreGetStatusX());
-    chprintf(chp, "heap fragments   : %u\r\n", n);
-    chprintf(chp, "heap free total  : %u bytes\r\n", size);
+
+    n = chHeapStatus( NULL, &size );
+    chprintf( chp, "core free memory : %u bytes\r\n", chCoreGetStatusX() );
+    chprintf( chp, "heap fragments   : %u\r\n", n );
+    chprintf( chp, "heap free total  : %u bytes\r\n", size );
 }
 
-static void cmd_threads( BaseSequentialStream *chp, int argc, char *argv[] ) 
+static void cmd_threads( BaseSequentialStream *chp, int argc, char *argv[] )
 {
-    static const char *states[] = {CH_STATE_NAMES};
+    static const char *states[] = { CH_STATE_NAMES };
     thread_t *tp;
 
     (void)argv;
-    if (argc > 0) {
-      chprintf(chp, "Usage: threads\r\n");
-      return;
+    if( argc > 0 )
+    {
+        chprintf( chp, "Usage: threads\r\n" );
+        return;
     }
-    chprintf(chp, "    addr    stack prio refs     state time\r\n");
+
+    chprintf( chp, "    addr    stack prio refs     state time\r\n" );
     tp = chRegFirstThread();
-    do {
-      chprintf(chp, "%08lx %08lx %4lu %4lu %9s\r\n",
-              (uint32_t)tp, (uint32_t)tp->p_ctx.r13,
-              (uint32_t)tp->p_prio, (uint32_t)(tp->p_refs - 1),
-              states[tp->p_state]);
-      tp = chRegNextThread(tp);
-    } while (tp != NULL);
+    do
+    {
+        chprintf( chp, "%08lx %08lx %4lu %4lu %9s\r\n",
+                  (uint32_t)tp, (uint32_t)tp->p_ctx.r13,
+                  (uint32_t)tp->p_prio, (uint32_t)( tp->p_refs - 1 ),
+                  states[tp->p_state]);
+
+        tp = chRegNextThread( tp );
+    } while( tp != NULL );
 }
 
-static void cmd_test( BaseSequentialStream *chp, int argc, char *argv[] ) 
+static void cmd_test( BaseSequentialStream *chp, int argc, char *argv[] )
 {
     thread_t *tp;
 
     (void)argv;
-    if (argc > 0) {
-      chprintf(chp, "Usage: test\r\n");
-      return;
+    if( argc > 0 )
+    {
+        chprintf( chp, "Usage: test\r\n" );
+        return;
     }
-    tp = chThdCreateFromHeap(NULL, TEST_WA_SIZE, chThdGetPriorityX(),
-                             TestThread, chp);
-    if (tp == NULL) {
-      chprintf(chp, "out of memory\r\n");
-      return;
+
+    tp = chThdCreateFromHeap( NULL,
+                              TEST_WA_SIZE,
+                              chThdGetPriorityX(),
+                              TestThread,
+                              chp );
+    if( tp == NULL )
+    {
+        chprintf( chp, "out of memory\r\n" );
+        return;
     }
-    chThdWait(tp);
+
+    chThdWait( tp );
 }
 
 /*===========================================================================*/
 /* Global structures                                                         */
 /*===========================================================================*/
 
-// Struct to config serial module for debug 
+// Struct to config serial module for debug
 static SerialConfig uartCfg =
 {
-    115200,              
+    115200,
     0,
     0,
     0
 };
 
-static const ShellCommand commands[] = 
+static const ShellCommand commands[] =
 {
     { "mem",     cmd_mem },
     { "threads", cmd_threads },
@@ -134,7 +148,7 @@ static const ShellCommand commands[] =
     { NULL, NULL }
 };
 
-static const ShellConfig shellCfg1 = 
+static const ShellConfig shellCfg1 =
 {
     (BaseSequentialStream *)&SDU2,
     commands
@@ -153,7 +167,7 @@ static THD_FUNCTION( Thread1, arg )
     while( true )
     {
         DPRINT( 3, "Running..." );
- 
+
         palTogglePad( GPIOC, GPIOC_LED );
         chThdSleepMilliseconds( 500 );
 
@@ -166,14 +180,14 @@ static THD_FUNCTION( Thread1, arg )
     }
 }
 
-// Killer thread : wait for all sigterm signals 
+// Killer thread : wait for all sigterm signals
 static THD_WORKING_AREA( waThread2, 128 );
 static THD_FUNCTION( Thread2, arg )
 {
     (void)arg;
     chRegSetThreadName( "killer" );
-   
-    // Wait here all thread to terminate properly 
+
+    // Wait here all thread to terminate properly
     chThdWait( tp );
 
     MotorSetSpeed( 0, 0 );
@@ -181,13 +195,13 @@ static THD_FUNCTION( Thread2, arg )
     MotorSetSpeed( 2, 0 );
     MotorSetSpeed( 3, 0 );
     DPRINT( 1, "Stop..." );
-    palSetPad( GPIOC, GPIOC_LED );  
+    palSetPad( GPIOC, GPIOC_LED );
 }
 
 int main( void )
 {
     static thread_t *shelltp = NULL;
- 
+
     /*
      * System initializations.
      * - HAL initialization, this also initializes the configured device drivers
@@ -200,39 +214,39 @@ int main( void )
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
-        
+
     // Init CLI
-    UsbInit(); 
-    shellInit(); 
-    
+    UsbInit();
+    shellInit();
+
     // Init debug UART
     debugInit();
 
     // Init ESP8266 WiFi module
     ESP8266Init();
-    
+
     // Init Motors module
     MotorsInit();
 
     // Init done => Board ready
-    palClearPad( GPIOC, GPIOC_LED ); 
+    palClearPad( GPIOC, GPIOC_LED );
     DPRINT( 1, "Ready..." );
 
     ESP8266RequestVersion();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
-    
+
     ESP8266SetMode();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
-    
-    ESP8266EnableMultipleConnection();  
+
+    ESP8266EnableMultipleConnection();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
-    
-    ESP8266ConfigureServer();  
+
+    ESP8266ConfigureServer();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
-    
+
     ESP8266SetAccessPoint();
     chThdSleepMilliseconds( 1000 ); /* Iddle thread */
-    
+
     ESP8266JoinAccessPoint();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
 
@@ -243,18 +257,18 @@ int main( void )
         {
             shelltp = shellCreate( &shellCfg1, SHELL_WA_SIZE, NORMALPRIO );
         }
-        else if( chThdTerminatedX( shelltp ) ) 
+        else if( chThdTerminatedX( shelltp ) )
         {
             chThdRelease( shelltp );  /* Recovers memory of the previous shell.   */
             shelltp = NULL;           /* Triggers spawning of a new shell.        */
         }
 
         // Wait start button
-        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false ) 
+        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false )
         {
             // Start game timer
             chVTSet( &gameTimer, MS2ST( 1000 ), runGame, NULL );
-            
+
             // Creates the blinker thread.
             tp = chThdCreateStatic( waThread1,
                                     sizeof( waThread1 ),
@@ -263,22 +277,22 @@ int main( void )
                                     NULL );
 
             // Set motors speed to 50% duty cycle
-            pwmcnt_t speedM4 = 5000;  
+            pwmcnt_t speedM4 = 5000;
             MotorSetSpeed( 0, speedM4 );
             MotorSetSpeed( 1, speedM4 );
             MotorSetSpeed( 2, speedM4 );
             MotorSetSpeed( 3, speedM4 );
-            
+
             // Start killer thread
             chThdCreateStatic( waThread2,
                     sizeof( waThread2 ),
                     NORMALPRIO,
                     Thread2,
-                    NULL ); 
+                    NULL );
 
             running = true;
         }
-        
+
         chThdSleepMilliseconds( 100 ); /* Iddle thread */
     }
 }
@@ -289,14 +303,14 @@ int main( void )
 
 void debugInit( void )
 {
-    // Configure UART3 for debug 115200 8N1 
-    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) ); 
-    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) ); 
-    sdStart( &SD3, &uartCfg ); 
+    // Configure UART3 for debug 115200 8N1
+    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) );
+    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) );
+    sdStart( &SD3, &uartCfg );
 }
 
-// Game running loop 
-void runGame( void *p ) 
+// Game running loop
+void runGame( void *p )
 {
     // Restarts the timer
     chSysLockFromISR();
