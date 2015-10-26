@@ -124,6 +124,7 @@ CSRC = $(STARTUPSRC) \
 	   $(CHIBIOS)appl/console.c \
 	   appl/ESP8266.c \
 	   appl/motors.c \
+	   appl/usbConfig.c \
 	   main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
