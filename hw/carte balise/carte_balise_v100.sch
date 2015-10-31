@@ -1099,13 +1099,6 @@ chip</description>
 <text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
 <pin name="VDD_RADIO" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
 </symbol>
-<symbol name="+3V3P">
-<description>Permanent +3.3V supply symbol</description>
-<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
-<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="+3V3P" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-</symbol>
 </symbols>
 <devicesets>
 <deviceset name="GND" prefix="GND">
@@ -1125,19 +1118,6 @@ chip</description>
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="G$1" symbol="VDD_RADIO" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="+3V3P" prefix="+3V3P">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="G$1" symbol="+3V3P" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -8074,7 +8054,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="R23" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="10k-0402"/>
 <part name="VDD_RADIO2" library="DEVIALET_SUPPLY" deviceset="VDD_RADIO" device="" value="3V3_ZB"/>
 <part name="IC3" library="DEVIALET_MICROCHIP" deviceset="MRF24J40MA" device="GND" value="MRF24J40MAGND"/>
-<part name="3V3_ZB" library="DEVIALET_SUPPLY" deviceset="VDD_RADIO" device="" value="3V3_ZB"/>
 <part name="GND7" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
 <part name="GND11" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
 <part name="M3" library="DEVIALET_TRANSISTORS" deviceset="DMP2035" device="U"/>
@@ -8088,7 +8067,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="R8" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="100k-0402"/>
 <part name="C2" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
 <part name="R9" library="DEVIALET_RESISTORS" deviceset="R" device="0603K" value="0R-0603"/>
-<part name="+3V3P2" library="DEVIALET_SUPPLY" deviceset="+3V3P" device="" value="+3V3"/>
 <part name="R5" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="10M-0402"/>
 <part name="C3" library="DEVIALET_CAPACITORS" deviceset="C" device="0603K" value="10u/6V3/0603"/>
 <part name="C4" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
@@ -8132,7 +8110,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="GND20" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
 <part name="U$3" library="etienne" deviceset="L" device="_603"/>
 <part name="R16" library="DEVIALET_RESISTORS" deviceset="R" device="0603K" value="0R-0603"/>
-<part name="+3V3P1" library="DEVIALET_SUPPLY" deviceset="+3V3P" device="" value="+3V3"/>
 <part name="IC1" library="dspic33ep" deviceset="DSPIC33EP512MU810-X_PF" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND5" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
@@ -8140,7 +8117,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="C13" library="DEVIALET_CAPACITORS" deviceset="C" device="0603K" value="10u/6V3/0603"/>
 <part name="C14" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
 <part name="R17" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="10R-0402"/>
-<part name="+3V6" library="supply1" deviceset="+3V3" device="" value="VPIC"/>
 <part name="GND10" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
 <part name="SUPPLY1" library="supply2" deviceset="V+" device="" value="VPIC"/>
 <part name="GND12" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
@@ -8199,6 +8175,17 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="JP12" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="GND30" library="supply1" deviceset="GND" device=""/>
 <part name="SUPPLY8" library="supply2" deviceset="V+" device="" value="VPIC"/>
+<part name="C19" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
+<part name="C20" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
+<part name="C21" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
+<part name="C22" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
+<part name="C23" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
+<part name="GND31" library="DEVIALET_SUPPLY" deviceset="GND" device=""/>
+<part name="SUPPLY9" library="supply2" deviceset="V+" device="" value="VPIC"/>
+<part name="SUPPLY10" library="supply2" deviceset="V+" device="" value="VPIC"/>
+<part name="+3V6" library="supply1" deviceset="+3V3" device=""/>
+<part name="+3V8" library="supply1" deviceset="+3V3" device=""/>
+<part name="VDD_RADIO1" library="DEVIALET_SUPPLY" deviceset="VDD_RADIO" device="" value="3V3_ZB"/>
 </parts>
 <sheets>
 <sheet>
@@ -8254,7 +8241,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="R23" gate="G$1" x="25.4" y="177.8" rot="MR90"/>
 <instance part="VDD_RADIO2" gate="G$1" x="284.48" y="218.44" rot="MR0"/>
 <instance part="IC3" gate="G$1" x="353.06" y="228.6"/>
-<instance part="3V3_ZB" gate="G$1" x="360.68" y="259.08" rot="MR0"/>
 <instance part="GND7" gate="1" x="355.6" y="205.74"/>
 <instance part="GND11" gate="1" x="284.48" y="198.12"/>
 <instance part="M3" gate="G$1" x="276.86" y="226.06" rot="MR180"/>
@@ -8268,7 +8254,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="R8" gate="G$1" x="264.16" y="228.6" rot="R180"/>
 <instance part="C2" gate="G" x="271.78" y="233.68" rot="R180"/>
 <instance part="R9" gate="G$1" x="279.4" y="248.92" rot="R90"/>
-<instance part="+3V3P2" gate="G$1" x="279.4" y="259.08"/>
 <instance part="R5" gate="G$1" x="266.7" y="243.84" rot="R180"/>
 <instance part="C3" gate="G" x="279.4" y="208.28"/>
 <instance part="C4" gate="G" x="284.48" y="208.28"/>
@@ -8312,15 +8297,13 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="GND20" gate="1" x="337.82" y="172.72" rot="R270"/>
 <instance part="U$3" gate="G$1" x="360.68" y="172.72" rot="R180"/>
 <instance part="R16" gate="G$1" x="368.3" y="180.34" rot="R90"/>
-<instance part="+3V3P1" gate="G$1" x="368.3" y="190.5"/>
 <instance part="IC1" gate="A" x="137.16" y="93.98"/>
-<instance part="+3V1" gate="G$1" x="35.56" y="231.14"/>
-<instance part="GND5" gate="1" x="30.48" y="210.82"/>
-<instance part="GND8" gate="1" x="35.56" y="210.82"/>
-<instance part="C13" gate="G" x="30.48" y="220.98"/>
-<instance part="C14" gate="G" x="35.56" y="220.98"/>
-<instance part="R17" gate="G$1" x="20.32" y="226.06" rot="R180"/>
-<instance part="+3V6" gate="G$1" x="12.7" y="231.14"/>
+<instance part="+3V1" gate="G$1" x="33.02" y="236.22"/>
+<instance part="GND5" gate="1" x="27.94" y="215.9"/>
+<instance part="GND8" gate="1" x="33.02" y="215.9"/>
+<instance part="C13" gate="G" x="27.94" y="226.06"/>
+<instance part="C14" gate="G" x="33.02" y="226.06"/>
+<instance part="R17" gate="G$1" x="17.78" y="231.14" rot="R180"/>
 <instance part="GND10" gate="1" x="63.5" y="50.8" rot="MR0"/>
 <instance part="SUPPLY1" gate="1" x="60.96" y="127"/>
 <instance part="GND12" gate="1" x="142.24" y="35.56" rot="MR0"/>
@@ -8380,6 +8363,17 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="JP12" gate="A" x="281.94" y="68.58"/>
 <instance part="GND30" gate="1" x="271.78" y="58.42"/>
 <instance part="SUPPLY8" gate="1" x="274.32" y="119.38"/>
+<instance part="C19" gate="G" x="38.1" y="210.82"/>
+<instance part="C20" gate="G" x="43.18" y="210.82"/>
+<instance part="C21" gate="G" x="48.26" y="210.82"/>
+<instance part="C22" gate="G" x="53.34" y="210.82"/>
+<instance part="C23" gate="G" x="58.42" y="210.82"/>
+<instance part="GND31" gate="1" x="48.26" y="200.66"/>
+<instance part="SUPPLY9" gate="1" x="10.16" y="236.22"/>
+<instance part="SUPPLY10" gate="1" x="48.26" y="220.98"/>
+<instance part="+3V6" gate="G$1" x="368.3" y="190.5"/>
+<instance part="+3V8" gate="G$1" x="279.4" y="259.08"/>
+<instance part="VDD_RADIO1" gate="G$1" x="360.68" y="259.08" rot="MR0"/>
 </instances>
 <busses>
 </busses>
@@ -8482,12 +8476,12 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <segment>
 <pinref part="C13" gate="G" pin="2"/>
 <pinref part="GND5" gate="1" pin="GND"/>
-<wire x1="30.48" y1="213.36" x2="30.48" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="218.44" x2="27.94" y2="220.98" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C14" gate="G" pin="2"/>
 <pinref part="GND8" gate="1" pin="GND"/>
-<wire x1="35.56" y1="213.36" x2="35.56" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="218.44" x2="33.02" y2="220.98" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="A" pin="VSS_2"/>
@@ -8682,6 +8676,26 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="294.64" y1="60.96" x2="271.78" y2="60.96" width="0.1524" layer="91"/>
 <junction x="271.78" y="60.96"/>
 </segment>
+<segment>
+<pinref part="C19" gate="G" pin="2"/>
+<wire x1="38.1" y1="205.74" x2="38.1" y2="203.2" width="0.1524" layer="91"/>
+<pinref part="C23" gate="G" pin="2"/>
+<wire x1="38.1" y1="203.2" x2="43.18" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="203.2" x2="48.26" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="203.2" x2="53.34" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="203.2" x2="58.42" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="203.2" x2="58.42" y2="205.74" width="0.1524" layer="91"/>
+<pinref part="C22" gate="G" pin="2"/>
+<wire x1="53.34" y1="205.74" x2="53.34" y2="203.2" width="0.1524" layer="91"/>
+<pinref part="C21" gate="G" pin="2"/>
+<wire x1="48.26" y1="205.74" x2="48.26" y2="203.2" width="0.1524" layer="91"/>
+<pinref part="C20" gate="G" pin="2"/>
+<wire x1="43.18" y1="205.74" x2="43.18" y2="203.2" width="0.1524" layer="91"/>
+<junction x="43.18" y="203.2"/>
+<junction x="48.26" y="203.2"/>
+<junction x="53.34" y="203.2"/>
+<pinref part="GND31" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -8697,22 +8711,16 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 </segment>
 <segment>
 <pinref part="C14" gate="G" pin="1"/>
-<wire x1="35.56" y1="226.06" x2="35.56" y2="223.52" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="231.14" x2="33.02" y2="228.6" width="0.1524" layer="91"/>
 <pinref part="C13" gate="G" pin="1"/>
-<wire x1="30.48" y1="226.06" x2="30.48" y2="223.52" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="231.14" x2="27.94" y2="228.6" width="0.1524" layer="91"/>
 <pinref part="R17" gate="G$1" pin="1"/>
-<wire x1="25.4" y1="226.06" x2="30.48" y2="226.06" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="226.06" x2="30.48" y2="226.06" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="231.14" x2="27.94" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="231.14" x2="27.94" y2="231.14" width="0.1524" layer="91"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
-<wire x1="35.56" y1="226.06" x2="35.56" y2="228.6" width="0.1524" layer="91"/>
-<junction x="30.48" y="226.06"/>
-<junction x="35.56" y="226.06"/>
-</segment>
-<segment>
-<pinref part="R17" gate="G$1" pin="2"/>
-<wire x1="15.24" y1="226.06" x2="12.7" y2="226.06" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="226.06" x2="12.7" y2="228.6" width="0.1524" layer="91"/>
-<pinref part="+3V6" gate="G$1" pin="+3V3"/>
+<wire x1="33.02" y1="231.14" x2="33.02" y2="233.68" width="0.1524" layer="91"/>
+<junction x="27.94" y="231.14"/>
+<junction x="33.02" y="231.14"/>
 </segment>
 <segment>
 <wire x1="220.98" y1="246.38" x2="223.52" y2="246.38" width="0.1524" layer="91"/>
@@ -8740,13 +8748,18 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="73.66" y1="33.02" x2="73.66" y2="30.48" width="0.1524" layer="91"/>
 <junction x="73.66" y="30.48"/>
 </segment>
+<segment>
+<pinref part="R16" gate="G$1" pin="2"/>
+<wire x1="368.3" y1="187.96" x2="368.3" y2="185.42" width="0.1524" layer="91"/>
+<pinref part="+3V6" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="R9" gate="G$1" pin="2"/>
+<wire x1="279.4" y1="256.54" x2="279.4" y2="254" width="0.1524" layer="91"/>
+<pinref part="+3V8" gate="G$1" pin="+3V3"/>
+</segment>
 </net>
 <net name="VDD_RADIO" class="0">
-<segment>
-<pinref part="IC3" gate="G$1" pin="10.VIN"/>
-<pinref part="3V3_ZB" gate="G$1" pin="VDD_RADIO"/>
-<wire x1="360.68" y1="243.84" x2="360.68" y2="256.54" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <pinref part="M3" gate="G$1" pin="D"/>
 <wire x1="279.4" y1="220.98" x2="279.4" y2="213.36" width="0.1524" layer="91"/>
@@ -8760,6 +8773,21 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="284.48" y1="213.36" x2="284.48" y2="210.82" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G" pin="1"/>
 <wire x1="279.4" y1="213.36" x2="279.4" y2="210.82" width="0.1524" layer="91"/>
+<junction x="284.48" y="213.36"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="10.VIN"/>
+<wire x1="360.68" y1="243.84" x2="360.68" y2="254" width="0.1524" layer="91"/>
+<pinref part="VDD_RADIO1" gate="G$1" pin="VDD_RADIO"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<wire x1="360.68" y1="254" x2="360.68" y2="256.54" width="0.1524" layer="91"/>
+<wire x1="332.74" y1="251.46" x2="332.74" y2="254" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="332.74" y1="254" x2="337.82" y2="254" width="0.1524" layer="91"/>
+<wire x1="337.82" y1="251.46" x2="337.82" y2="254" width="0.1524" layer="91"/>
+<wire x1="337.82" y1="254" x2="360.68" y2="254" width="0.1524" layer="91"/>
+<junction x="337.82" y="254"/>
+<junction x="360.68" y="254"/>
 </segment>
 </net>
 <net name="!MCLR" class="0">
@@ -8824,6 +8852,7 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="335.28" y1="238.76" x2="320.04" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="335.28" y1="238.76" x2="335.28" y2="215.9" width="0.1524" layer="91"/>
 <label x="320.04" y="238.76" size="1.778" layer="95"/>
+<junction x="335.28" y="238.76"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="A" pin="RP31/RA15"/>
@@ -8906,16 +8935,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <label x="213.36" y="111.76" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$10" class="0">
-<segment>
-<pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="332.74" y1="251.46" x2="332.74" y2="254" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="332.74" y1="254" x2="337.82" y2="254" width="0.1524" layer="91"/>
-<wire x1="337.82" y1="251.46" x2="337.82" y2="254" width="0.1524" layer="91"/>
-<wire x1="337.82" y1="254" x2="360.68" y2="254" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="ZB_SPI_MISO" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
@@ -8967,18 +8986,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="279.4" y1="243.84" x2="279.4" y2="241.3" width="0.1524" layer="91"/>
 <pinref part="R5" gate="G$1" pin="1"/>
 <wire x1="271.78" y1="243.84" x2="279.4" y2="243.84" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="+3V3P" class="0">
-<segment>
-<pinref part="+3V3P2" gate="G$1" pin="+3V3P"/>
-<pinref part="R9" gate="G$1" pin="2"/>
-<wire x1="279.4" y1="256.54" x2="279.4" y2="254" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="R16" gate="G$1" pin="2"/>
-<pinref part="+3V3P1" gate="G$1" pin="+3V3P"/>
-<wire x1="368.3" y1="187.96" x2="368.3" y2="185.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -9442,6 +9449,33 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <junction x="292.1" y="104.14"/>
 <junction x="292.1" y="91.44"/>
 <junction x="292.1" y="78.74"/>
+</segment>
+<segment>
+<pinref part="R17" gate="G$1" pin="2"/>
+<wire x1="12.7" y1="231.14" x2="10.16" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="231.14" x2="10.16" y2="233.68" width="0.1524" layer="91"/>
+<pinref part="SUPPLY9" gate="1" pin="V+"/>
+</segment>
+<segment>
+<pinref part="C19" gate="G" pin="1"/>
+<wire x1="38.1" y1="213.36" x2="38.1" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="C23" gate="G" pin="1"/>
+<wire x1="38.1" y1="215.9" x2="43.18" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="215.9" x2="48.26" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="215.9" x2="53.34" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="215.9" x2="58.42" y2="215.9" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="215.9" x2="58.42" y2="213.36" width="0.1524" layer="91"/>
+<pinref part="C22" gate="G" pin="1"/>
+<wire x1="53.34" y1="213.36" x2="53.34" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="C21" gate="G" pin="1"/>
+<wire x1="48.26" y1="213.36" x2="48.26" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="C20" gate="G" pin="1"/>
+<wire x1="43.18" y1="213.36" x2="43.18" y2="215.9" width="0.1524" layer="91"/>
+<junction x="53.34" y="215.9"/>
+<junction x="48.26" y="215.9"/>
+<junction x="43.18" y="215.9"/>
+<wire x1="48.26" y1="215.9" x2="48.26" y2="218.44" width="0.1524" layer="91"/>
+<pinref part="SUPPLY10" gate="1" pin="V+"/>
 </segment>
 </net>
 <net name="N$38" class="0">
