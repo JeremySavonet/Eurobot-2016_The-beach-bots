@@ -8126,7 +8126,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="SUPPLY5" library="supply2" deviceset="V+" device="" value="VPIC"/>
 <part name="R18" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="33R-0402"/>
 <part name="R19" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="33R-0402"/>
-<part name="R20" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="33R-0402"/>
 <part name="R21" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="33R-0402"/>
 <part name="GND23" library="supply1" deviceset="GND" device=""/>
 <part name="U$10" library="etienne" deviceset="QUARTZ" device="_CMS"/>
@@ -8162,19 +8161,16 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="JP3" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP4" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="GND27" library="supply1" deviceset="GND" device=""/>
-<part name="SUPPLY6" library="supply2" deviceset="V+" device="" value="VPIC"/>
 <part name="JP5" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP6" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP7" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP8" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="GND29" library="supply1" deviceset="GND" device=""/>
-<part name="SUPPLY7" library="supply2" deviceset="V+" device="" value="VPIC"/>
 <part name="JP9" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP10" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP11" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="JP12" library="pinhead" deviceset="PINHD-2X3" device=""/>
 <part name="GND30" library="supply1" deviceset="GND" device=""/>
-<part name="SUPPLY8" library="supply2" deviceset="V+" device="" value="VPIC"/>
 <part name="C19" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
 <part name="C20" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
 <part name="C21" library="DEVIALET_CAPACITORS" deviceset="C" device="0402K" value="100n-0402"/>
@@ -8186,6 +8182,10 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <part name="+3V6" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V8" library="supply1" deviceset="+3V3" device=""/>
 <part name="VDD_RADIO1" library="DEVIALET_SUPPLY" deviceset="VDD_RADIO" device="" value="3V3_ZB"/>
+<part name="+3V9" library="supply1" deviceset="+3V3" device=""/>
+<part name="+3V10" library="supply1" deviceset="+3V3" device=""/>
+<part name="+3V11" library="supply1" deviceset="+3V3" device=""/>
+<part name="R24" library="DEVIALET_RESISTORS" deviceset="R" device="0402K" value="33R-0402"/>
 </parts>
 <sheets>
 <sheet>
@@ -8313,7 +8313,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="SUPPLY5" gate="1" x="144.78" y="157.48"/>
 <instance part="R18" gate="G$1" x="228.6" y="106.68" rot="R180"/>
 <instance part="R19" gate="G$1" x="228.6" y="104.14" rot="R180"/>
-<instance part="R20" gate="G$1" x="40.64" y="96.52" rot="R180"/>
 <instance part="R21" gate="G$1" x="40.64" y="93.98" rot="R180"/>
 <instance part="GND23" gate="1" x="243.84" y="81.28"/>
 <instance part="U$10" gate="SYM" x="233.68" y="87.63" rot="R270"/>
@@ -8350,19 +8349,16 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="JP3" gate="A" x="241.3" y="149.86"/>
 <instance part="JP4" gate="A" x="241.3" y="137.16"/>
 <instance part="GND27" gate="1" x="231.14" y="127"/>
-<instance part="SUPPLY6" gate="1" x="233.68" y="187.96"/>
 <instance part="JP5" gate="A" x="281.94" y="175.26"/>
 <instance part="JP6" gate="A" x="281.94" y="162.56"/>
 <instance part="JP7" gate="A" x="281.94" y="149.86"/>
 <instance part="JP8" gate="A" x="281.94" y="137.16"/>
 <instance part="GND29" gate="1" x="271.78" y="127"/>
-<instance part="SUPPLY7" gate="1" x="274.32" y="187.96"/>
 <instance part="JP9" gate="A" x="281.94" y="106.68"/>
 <instance part="JP10" gate="A" x="281.94" y="93.98"/>
 <instance part="JP11" gate="A" x="281.94" y="81.28"/>
 <instance part="JP12" gate="A" x="281.94" y="68.58"/>
 <instance part="GND30" gate="1" x="271.78" y="58.42"/>
-<instance part="SUPPLY8" gate="1" x="274.32" y="119.38"/>
 <instance part="C19" gate="G" x="38.1" y="210.82"/>
 <instance part="C20" gate="G" x="43.18" y="210.82"/>
 <instance part="C21" gate="G" x="48.26" y="210.82"/>
@@ -8374,6 +8370,10 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <instance part="+3V6" gate="G$1" x="368.3" y="190.5"/>
 <instance part="+3V8" gate="G$1" x="279.4" y="259.08"/>
 <instance part="VDD_RADIO1" gate="G$1" x="360.68" y="259.08" rot="MR0"/>
+<instance part="+3V9" gate="G$1" x="233.68" y="187.96"/>
+<instance part="+3V10" gate="G$1" x="274.32" y="187.96"/>
+<instance part="+3V11" gate="G$1" x="274.32" y="119.38"/>
+<instance part="R24" gate="G$1" x="40.64" y="91.44" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -8758,6 +8758,114 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <wire x1="279.4" y1="256.54" x2="279.4" y2="254" width="0.1524" layer="91"/>
 <pinref part="+3V8" gate="G$1" pin="+3V3"/>
 </segment>
+<segment>
+<pinref part="JP4" gate="A" pin="5"/>
+<wire x1="238.76" y1="134.62" x2="233.68" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="134.62" x2="233.68" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="A" pin="5"/>
+<wire x1="233.68" y1="147.32" x2="233.68" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="160.02" x2="233.68" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="172.72" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="182.88" x2="233.68" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="147.32" x2="233.68" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="A" pin="5"/>
+<wire x1="238.76" y1="160.02" x2="233.68" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="5"/>
+<wire x1="238.76" y1="172.72" x2="233.68" y2="172.72" width="0.1524" layer="91"/>
+<junction x="233.68" y="147.32"/>
+<junction x="233.68" y="160.02"/>
+<junction x="233.68" y="172.72"/>
+<pinref part="JP4" gate="A" pin="6"/>
+<wire x1="246.38" y1="134.62" x2="251.46" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="251.46" y1="134.62" x2="251.46" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="6"/>
+<wire x1="251.46" y1="147.32" x2="251.46" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="251.46" y1="160.02" x2="251.46" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="251.46" y1="172.72" x2="251.46" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="246.38" y1="172.72" x2="251.46" y2="172.72" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="A" pin="6"/>
+<wire x1="246.38" y1="160.02" x2="251.46" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="A" pin="6"/>
+<wire x1="246.38" y1="147.32" x2="251.46" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="251.46" y1="182.88" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
+<junction x="233.68" y="182.88"/>
+<junction x="251.46" y="172.72"/>
+<junction x="251.46" y="160.02"/>
+<junction x="251.46" y="147.32"/>
+<pinref part="+3V9" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="JP8" gate="A" pin="5"/>
+<wire x1="279.4" y1="134.62" x2="274.32" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="134.62" x2="274.32" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP7" gate="A" pin="5"/>
+<wire x1="274.32" y1="147.32" x2="274.32" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="160.02" x2="274.32" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="172.72" x2="274.32" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="182.88" x2="274.32" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="147.32" x2="274.32" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP6" gate="A" pin="5"/>
+<wire x1="279.4" y1="160.02" x2="274.32" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="5"/>
+<wire x1="279.4" y1="172.72" x2="274.32" y2="172.72" width="0.1524" layer="91"/>
+<junction x="274.32" y="147.32"/>
+<junction x="274.32" y="160.02"/>
+<junction x="274.32" y="172.72"/>
+<pinref part="JP8" gate="A" pin="6"/>
+<wire x1="287.02" y1="134.62" x2="292.1" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="134.62" x2="292.1" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="6"/>
+<wire x1="292.1" y1="147.32" x2="292.1" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="160.02" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="172.72" x2="292.1" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="172.72" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
+<pinref part="JP6" gate="A" pin="6"/>
+<wire x1="287.02" y1="160.02" x2="292.1" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="JP7" gate="A" pin="6"/>
+<wire x1="287.02" y1="147.32" x2="292.1" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="182.88" x2="274.32" y2="182.88" width="0.1524" layer="91"/>
+<junction x="274.32" y="182.88"/>
+<junction x="292.1" y="172.72"/>
+<junction x="292.1" y="160.02"/>
+<junction x="292.1" y="147.32"/>
+<pinref part="+3V10" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="JP12" gate="A" pin="5"/>
+<wire x1="279.4" y1="66.04" x2="274.32" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="66.04" x2="274.32" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="JP11" gate="A" pin="5"/>
+<wire x1="274.32" y1="78.74" x2="274.32" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="91.44" x2="274.32" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="104.14" x2="274.32" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="114.3" x2="274.32" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="78.74" x2="274.32" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="JP10" gate="A" pin="5"/>
+<wire x1="279.4" y1="91.44" x2="274.32" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="JP9" gate="A" pin="5"/>
+<wire x1="279.4" y1="104.14" x2="274.32" y2="104.14" width="0.1524" layer="91"/>
+<junction x="274.32" y="78.74"/>
+<junction x="274.32" y="91.44"/>
+<junction x="274.32" y="104.14"/>
+<pinref part="JP12" gate="A" pin="6"/>
+<wire x1="287.02" y1="66.04" x2="292.1" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="66.04" x2="292.1" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="JP9" gate="A" pin="6"/>
+<wire x1="292.1" y1="78.74" x2="292.1" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="91.44" x2="292.1" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="104.14" x2="292.1" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="104.14" x2="292.1" y2="104.14" width="0.1524" layer="91"/>
+<pinref part="JP10" gate="A" pin="6"/>
+<wire x1="287.02" y1="91.44" x2="292.1" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="JP11" gate="A" pin="6"/>
+<wire x1="287.02" y1="78.74" x2="292.1" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="114.3" x2="274.32" y2="114.3" width="0.1524" layer="91"/>
+<junction x="274.32" y="114.3"/>
+<junction x="292.1" y="104.14"/>
+<junction x="292.1" y="91.44"/>
+<junction x="292.1" y="78.74"/>
+<pinref part="+3V11" gate="G$1" pin="+3V3"/>
+</segment>
 </net>
 <net name="VDD_RADIO" class="0">
 <segment>
@@ -9010,9 +9118,9 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <label x="73.66" y="241.3" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R20" gate="G$1" pin="2"/>
-<wire x1="35.56" y1="96.52" x2="20.32" y2="96.52" width="0.1524" layer="91"/>
-<label x="20.32" y="96.52" size="1.778" layer="95"/>
+<wire x1="35.56" y1="91.44" x2="20.32" y2="91.44" width="0.1524" layer="91"/>
+<label x="20.32" y="91.44" size="1.778" layer="95"/>
+<pinref part="R24" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="ADXL_MOSI" class="0">
@@ -9038,9 +9146,9 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <junction x="99.06" y="233.68"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="A" pin="AN17/PWM5H/RP50/RC2"/>
-<wire x1="66.04" y1="104.14" x2="45.72" y2="104.14" width="0.1524" layer="91"/>
-<label x="45.72" y="104.14" size="1.778" layer="95"/>
+<pinref part="IC1" gate="A" pin="AN19/PWM6H/RP52/RC4"/>
+<wire x1="66.04" y1="99.06" x2="45.72" y2="99.06" width="0.1524" layer="91"/>
+<label x="45.72" y="99.06" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -9057,9 +9165,9 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <label x="73.66" y="236.22" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="A" pin="C2IND/SDO2/PMA3/RP120/RG8"/>
-<wire x1="66.04" y1="91.44" x2="45.72" y2="91.44" width="0.1524" layer="91"/>
-<label x="45.72" y="91.44" size="1.778" layer="95"/>
+<pinref part="IC1" gate="A" pin="C1IND/SCK2/PMA5/RP118/RG6"/>
+<wire x1="66.04" y1="96.52" x2="45.72" y2="96.52" width="0.1524" layer="91"/>
+<label x="45.72" y="96.52" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -9102,9 +9210,9 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <label x="134.62" y="236.22" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="A" pin="AN18/PWM6L/RP51/RC3"/>
-<wire x1="66.04" y1="101.6" x2="45.72" y2="101.6" width="0.1524" layer="91"/>
-<label x="45.72" y="101.6" size="1.778" layer="95"/>
+<pinref part="IC1" gate="A" pin="AN16/PWM5L/RP49/RC1"/>
+<wire x1="66.04" y1="106.68" x2="45.72" y2="106.68" width="0.1524" layer="91"/>
+<label x="45.72" y="106.68" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ADXL_INT2" class="0">
@@ -9114,9 +9222,9 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <label x="134.62" y="233.68" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="A" pin="AN19/PWM6H/RP52/RC4"/>
-<wire x1="66.04" y1="99.06" x2="45.72" y2="99.06" width="0.1524" layer="91"/>
-<label x="45.72" y="99.06" size="1.778" layer="95"/>
+<pinref part="IC1" gate="A" pin="AN17/PWM5H/RP50/RC2"/>
+<wire x1="66.04" y1="104.14" x2="45.72" y2="104.14" width="0.1524" layer="91"/>
+<label x="45.72" y="104.14" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="3V3_ADXL_EN" class="0">
@@ -9343,114 +9451,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <pinref part="SUPPLY5" gate="1" pin="V+"/>
 </segment>
 <segment>
-<pinref part="JP4" gate="A" pin="5"/>
-<wire x1="238.76" y1="134.62" x2="233.68" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="134.62" x2="233.68" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="5"/>
-<wire x1="233.68" y1="147.32" x2="233.68" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="160.02" x2="233.68" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="172.72" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="182.88" x2="233.68" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="147.32" x2="233.68" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="A" pin="5"/>
-<wire x1="238.76" y1="160.02" x2="233.68" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="A" pin="5"/>
-<wire x1="238.76" y1="172.72" x2="233.68" y2="172.72" width="0.1524" layer="91"/>
-<junction x="233.68" y="147.32"/>
-<junction x="233.68" y="160.02"/>
-<junction x="233.68" y="172.72"/>
-<pinref part="SUPPLY6" gate="1" pin="V+"/>
-<pinref part="JP4" gate="A" pin="6"/>
-<wire x1="246.38" y1="134.62" x2="251.46" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="134.62" x2="251.46" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP2" gate="A" pin="6"/>
-<wire x1="251.46" y1="147.32" x2="251.46" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="160.02" x2="251.46" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="172.72" x2="251.46" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="246.38" y1="172.72" x2="251.46" y2="172.72" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="A" pin="6"/>
-<wire x1="246.38" y1="160.02" x2="251.46" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="JP3" gate="A" pin="6"/>
-<wire x1="246.38" y1="147.32" x2="251.46" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="182.88" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
-<junction x="233.68" y="182.88"/>
-<junction x="251.46" y="172.72"/>
-<junction x="251.46" y="160.02"/>
-<junction x="251.46" y="147.32"/>
-</segment>
-<segment>
-<pinref part="JP8" gate="A" pin="5"/>
-<wire x1="279.4" y1="134.62" x2="274.32" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="134.62" x2="274.32" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP7" gate="A" pin="5"/>
-<wire x1="274.32" y1="147.32" x2="274.32" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="160.02" x2="274.32" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="172.72" x2="274.32" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="182.88" x2="274.32" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="147.32" x2="274.32" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP6" gate="A" pin="5"/>
-<wire x1="279.4" y1="160.02" x2="274.32" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="5"/>
-<wire x1="279.4" y1="172.72" x2="274.32" y2="172.72" width="0.1524" layer="91"/>
-<junction x="274.32" y="147.32"/>
-<junction x="274.32" y="160.02"/>
-<junction x="274.32" y="172.72"/>
-<pinref part="SUPPLY7" gate="1" pin="V+"/>
-<pinref part="JP8" gate="A" pin="6"/>
-<wire x1="287.02" y1="134.62" x2="292.1" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="134.62" x2="292.1" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="6"/>
-<wire x1="292.1" y1="147.32" x2="292.1" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="160.02" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="172.72" x2="292.1" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="172.72" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
-<pinref part="JP6" gate="A" pin="6"/>
-<wire x1="287.02" y1="160.02" x2="292.1" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="JP7" gate="A" pin="6"/>
-<wire x1="287.02" y1="147.32" x2="292.1" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="182.88" x2="274.32" y2="182.88" width="0.1524" layer="91"/>
-<junction x="274.32" y="182.88"/>
-<junction x="292.1" y="172.72"/>
-<junction x="292.1" y="160.02"/>
-<junction x="292.1" y="147.32"/>
-</segment>
-<segment>
-<pinref part="JP12" gate="A" pin="5"/>
-<wire x1="279.4" y1="66.04" x2="274.32" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="66.04" x2="274.32" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="JP11" gate="A" pin="5"/>
-<wire x1="274.32" y1="78.74" x2="274.32" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="91.44" x2="274.32" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="104.14" x2="274.32" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="114.3" x2="274.32" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="78.74" x2="274.32" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="JP10" gate="A" pin="5"/>
-<wire x1="279.4" y1="91.44" x2="274.32" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="JP9" gate="A" pin="5"/>
-<wire x1="279.4" y1="104.14" x2="274.32" y2="104.14" width="0.1524" layer="91"/>
-<junction x="274.32" y="78.74"/>
-<junction x="274.32" y="91.44"/>
-<junction x="274.32" y="104.14"/>
-<pinref part="SUPPLY8" gate="1" pin="V+"/>
-<pinref part="JP12" gate="A" pin="6"/>
-<wire x1="287.02" y1="66.04" x2="292.1" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="66.04" x2="292.1" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="JP9" gate="A" pin="6"/>
-<wire x1="292.1" y1="78.74" x2="292.1" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="91.44" x2="292.1" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="104.14" x2="292.1" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="287.02" y1="104.14" x2="292.1" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="JP10" gate="A" pin="6"/>
-<wire x1="287.02" y1="91.44" x2="292.1" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="JP11" gate="A" pin="6"/>
-<wire x1="287.02" y1="78.74" x2="292.1" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="114.3" x2="274.32" y2="114.3" width="0.1524" layer="91"/>
-<junction x="274.32" y="114.3"/>
-<junction x="292.1" y="104.14"/>
-<junction x="292.1" y="91.44"/>
-<junction x="292.1" y="78.74"/>
-</segment>
-<segment>
 <pinref part="R17" gate="G$1" pin="2"/>
 <wire x1="12.7" y1="231.14" x2="10.16" y2="231.14" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="231.14" x2="10.16" y2="233.68" width="0.1524" layer="91"/>
@@ -9483,13 +9483,6 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <pinref part="IC1" gate="A" pin="C1INC/SDI2/PMA4/RP119/RG7"/>
 <wire x1="66.04" y1="93.98" x2="45.72" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="R21" gate="G$1" pin="1"/>
-</segment>
-</net>
-<net name="N$39" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="C1IND/SCK2/PMA5/RP118/RG6"/>
-<wire x1="66.04" y1="96.52" x2="45.72" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="R20" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="PWM4_H" class="0">
@@ -10110,6 +10103,13 @@ Utilisé pour relier le cable de liaison CAN. Mais peut également être utilis�
 <pinref part="12V1" gate="1" pin="+12V"/>
 <wire x1="12.7" y1="27.94" x2="12.7" y2="30.48" width="0.1524" layer="91"/>
 <junction x="12.7" y="27.94"/>
+</segment>
+</net>
+<net name="N$10" class="0">
+<segment>
+<pinref part="IC1" gate="A" pin="C2IND/SDO2/PMA3/RP120/RG8"/>
+<wire x1="66.04" y1="91.44" x2="45.72" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="R24" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
