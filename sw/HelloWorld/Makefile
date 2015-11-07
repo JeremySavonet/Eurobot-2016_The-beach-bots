@@ -10,7 +10,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = 
+  USE_COPT = -std=gnu99
 endif
 
 # C++ specific options here (added to USE_OPT).
@@ -124,7 +124,9 @@ CSRC = $(STARTUPSRC) \
 	   $(CHIBIOS)appl/console.c \
 	   appl/ESP8266.c \
 	   appl/motors.c \
+	   appl/microshell2.c \
 	   appl/usbConfig.c \
+	   appl/microrl.c \
 	   main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

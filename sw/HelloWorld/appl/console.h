@@ -8,12 +8,12 @@
 #define DEBUG
 #define DLEVEL 3
 #ifdef DEBUG
-#define DPRINT( level, fmt )     if (DLEVEL >= (level)) print( fmt"\r\n" )
+#define DPRINT( level, fmt )    if (DLEVEL >= (level)) consolePrint( fmt"\r\n" )
 #else
 #define DPRINT( level, fmt )
 #endif
 
 // Public functions
-void print( char *p );
+void consolePrint( char *p );
 
 #endif /* _CONSOLE_H_ */
