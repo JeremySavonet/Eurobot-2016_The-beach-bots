@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "color.h"
 #include "console.h" 
 #include "ESP8266.h"
 #include "test.h"
@@ -63,7 +64,7 @@ static THD_FUNCTION( ESP8266, arg )
             //Handling errors first.
             if( flags & (SD_FRAMING_ERROR | SD_PARITY_ERROR) )
             {   
-                DPRINT( 4, "FRAMING/PARITY ERROR" );
+                DPRINT( 4, KRED "FRAMING/PARITY ERROR" );
             }
             if( flags & CHN_INPUT_AVAILABLE )
             {

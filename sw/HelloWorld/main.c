@@ -21,7 +21,6 @@
 #include <string.h>
 
 #include "ch.h"
-#include "chprintf.h"
 #include "hal.h"
 #include "test.h"
 
@@ -44,6 +43,7 @@
 /*===========================================================================*/
 
 static void debugInit( void );
+static void displayBootInfos( void );
 static void runGame( void *p );
 
 /*===========================================================================*/
@@ -96,7 +96,7 @@ static THD_FUNCTION( Thread1, arg )
     chRegSetThreadName( "blinker" );
     while( true )
     {
-        DPRINT( 3, "Running..." );
+        DPRINT( 3, "Running...\r\n" );
 
         palTogglePad( GPIOC, GPIOC_LED );
         chThdSleepMilliseconds( 500 );
@@ -124,7 +124,7 @@ static THD_FUNCTION( Thread2, arg )
     MotorSetSpeed( 1, 0 );
     MotorSetSpeed( 2, 0 );
     MotorSetSpeed( 3, 0 );
-    DPRINT( 1, "Stop..." );
+    DPRINT( 1, "Stop...\r\n" );
     palSetPad( GPIOC, GPIOC_LED );
 }
 
@@ -142,30 +142,6 @@ int main( void )
     halInit();
     chSysInit();
     
-    /*//Display boot sys info:*/
-    /*DEBUG_PRINT( KBLU "Kernel:       %s\r\n", CH_KERNEL_VERSION );*/
-    /*#ifdef CH_COMPILER_NAME*/
-    /*DEBUG_PRINT( KBLU "Compiler:     %s\r\n", CH_COMPILER_NAME );*/
-    /*#endif*/
-    /*DEBUG_PRINT( KBLU "Architecture: %s\r\n", PORT_ARCHITECTURE_NAME );*/
-    /*#ifdef CH_CORE_VARIANT_NAME*/
-    /*DEBUG_PRINT( KBLU "Core Variant: %s\r\n", CH_CORE_VARIANT_NAME );*/
-    /*#endif*/
-    /*#ifdef CH_PORT_INFO*/
-    /*DEBUG_PRINT( KBLU "Port Info:    %s\r\n", CH_PORT_INFO );*/
-    /*#endif*/
-    /*#ifdef PLATFORM_NAME*/
-    /*DEBUG_PRINT( KBLU "Platform:     %s\r\n", PLATFORM_NAME );*/
-    /*#endif*/
-    /*#ifdef BOARD_NAME*/
-    /*DEBUG_PRINT( KBLU "Board:        %s\r\n", BOARD_NAME );*/
-    /*#endif*/
-    /*#ifdef __DATE__*/
-    /*#ifdef __TIME__*/
-    /*DEBUG_PRINT( KBLU "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );*/
-    /*#endif*/
-    /*#endif*/
-
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
@@ -183,8 +159,9 @@ int main( void )
 
     // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED );
-    DPRINT( 1, "Ready..." );
-
+   
+    displayBootInfos();
+    
     ESP8266RequestVersion();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
 
@@ -202,7 +179,9 @@ int main( void )
 
     ESP8266JoinAccessPoint();
     chThdSleepMilliseconds( 100 ); /* Iddle thread */
-
+    
+    DPRINT( 1, "System ready\r\n" );
+    
     // Global main loop
     while( true )
     {
@@ -264,6 +243,41 @@ void debugInit( void )
     palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) );
     palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) );
     sdStart( &SD3, &uartCfg );
+}
+
+void displayBootInfos( void )
+{
+    //Display boot sys info:
+    DPRINT( 1, KNRM "__   __                          _     _   _          ___    ___ \r\n" );
+    DPRINT( 1, KNRM "\\ \\ / /  ___   _ _   ___  __ _  | |_  (_) | |  ___   / _ \\  / __|\r\n" );
+    DPRINT( 1, KNRM " \\ V /  / -_) | '_| (_-< / _` | |  _| | | | | / -_) | (_) | \\__ \\\r\n" );
+    DPRINT( 1, KNRM "  \\_/   \\___| |_|   /__/ \\__,_|  \\__| |_| |_| \\___| \\ \\___/  |___/\r\n" );
+
+    DPRINT( 1, KGRN "Kernel:       %s\r\n", CH_KERNEL_VERSION );
+    #ifdef CH_COMPILER_NAME
+        DPRINT( 1, KGRN "Compiler:     %s\r\n", CH_COMPILER_NAME );
+    #endif
+     DPRINT( 1, KGRN "Architecture: %s\r\n", PORT_ARCHITECTURE_NAME );
+    #ifdef CH_CORE_VARIANT_NAME
+        DPRINT( 1, KGRN "Core Variant: %s\r\n", CH_CORE_VARIANT_NAME );
+    #endif
+    #ifdef CH_PORT_INFO
+        DPRINT( 1, KGRN "Port Info:    %s\r\n", CH_PORT_INFO );
+    #endif
+    #ifdef PLATFORM_NAME
+        DPRINT( 1, KGRN "Platform:     %s\r\n", PLATFORM_NAME );
+    #endif
+    #ifdef BOARD_NAME
+        DPRINT( 1, KGRN "Board:        %s\r\n", BOARD_NAME );
+    #endif
+    #ifdef __DATE__
+    #ifdef __TIME__
+        DPRINT( 1, KGRN "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );
+    #endif
+    #endif
+    
+    // Set color cursor to normal
+    DPRINT( 1, KNRM "" );
 }
 
 // Game running loop
