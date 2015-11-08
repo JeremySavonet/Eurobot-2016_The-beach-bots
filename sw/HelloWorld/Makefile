@@ -121,10 +121,10 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
 	   $(CHIBIOS)appl/adcManager.c \
-	   appl/ESP8266.c \
-	   appl/motors.c \
+	   appl/esp8266Manager.c \
+	   appl/motorsManager.c \
 	   appl/microshell.c \
-	   appl/usbConfig.c \
+	   appl/usbManager.c \
 	   appl/microrl.c \
 	   system.c \
 	   main.c

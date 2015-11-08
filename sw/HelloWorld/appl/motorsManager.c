@@ -7,7 +7,7 @@
 #include "ch.h"
 #include "hal.h"
 
-#include "motors.h"
+#include "motorsManager.h"
 
 static PWMConfig pwmcfg = 
 {
@@ -29,7 +29,7 @@ static PWMConfig pwmcfg =
 
 pwmcnt_t motor_speeds[ NUM_MOTORS ];
 
-void MotorsInit( void )
+void motorsManagerInit( void )
 {   
     palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(2));
     palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(2));

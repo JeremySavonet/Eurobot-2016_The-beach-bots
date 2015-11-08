@@ -27,13 +27,9 @@
 #include "system.h"
 
 #include "appl/adcManager.h"
-#include "appl/ESP8266.h"
-#include "appl/color.h"
 #include "appl/console.h"
-#include "appl/microrl.h"
 #include "appl/microshell.h"
-#include "appl/motors.h"
-#include "appl/usbConfig.h"
+#include "appl/motorsManager.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
@@ -45,8 +41,6 @@
 /* Global static functions                                                   */
 /*===========================================================================*/
 
-static void debugInit( void );
-static void displayBootInfos( void );
 static void runGame( void *p );
 
 /*===========================================================================*/
@@ -59,27 +53,8 @@ static thread_t *tp = NULL;
 static virtual_timer_t gameTimer;
 
 /*===========================================================================*/
-/* Global structures                                                         */
-/*===========================================================================*/
-
-// Struct to config serial module for debug
-static SerialConfig uartCfg =
-{
-    115200,
-    0,
-    0,
-    0
-};
-
-/*===========================================================================*/
 /* User commands for CLI                                                     */
 /*===========================================================================*/
-static void usage( char *p ) 
-{
-    chprint( KYEL "Usage: %s\r\n", p );
-}
-
-// Here the list of user commands (i.e.: all commands to access robot structure)
 ShellCommand user_commands[] = {
 
     {"measure", cmd_measure},
@@ -102,7 +77,7 @@ static THD_WORKING_AREA( waShell, 2048 );
 static THD_FUNCTION( Shell, arg )
 {
     (void) arg;
-    chRegSetThreadName("shell");
+    chRegSetThreadName( "shell" );
     start_shell();
 }
 
@@ -159,50 +134,10 @@ int main( void )
      */
     halInit();
     chSysInit();
-    
-    // Init IOs
-    palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
-    // Init CLI
-    UsbInit();
-
-    // Init debug UART
-    debugInit();
-
-    // Init ESP8266 WiFi module
-    ESP8266Init();
-
-    // Init Motors module
-    MotorsInit();
-
-    // Init Adc module
-    initAdc();
-
-    // Init done => Board ready
-    palClearPad( GPIOC, GPIOC_LED );
-   
-    displayBootInfos();
-    
-    ESP8266RequestVersion();
-    chThdSleepMilliseconds( 100 ); /* Iddle thread */
-
-    ESP8266SetMode();
-    chThdSleepMilliseconds( 100 ); /* Iddle thread */
-
-    ESP8266EnableMultipleConnection();
-    chThdSleepMilliseconds( 100 ); /* Iddle thread */
-
-    ESP8266ConfigureServer();
-    chThdSleepMilliseconds( 100 ); /* Iddle thread */
-
-    ESP8266SetAccessPoint();
-    chThdSleepMilliseconds( 1000 ); /* Iddle thread */
-
-    ESP8266JoinAccessPoint();
-    chThdSleepMilliseconds( 100 ); /* Iddle thread */
-    
-    DPRINT( 1, "System ready\r\n" );
-    
+    //init all managers
+    initSystem();
+        
     // Global main loop
     while( true )
     {
@@ -257,49 +192,6 @@ int main( void )
 /*===========================================================================*/
 /* Functions                                                                 */
 /*===========================================================================*/
-
-void debugInit( void )
-{
-    // Configure UART3 for debug 115200 8N1
-    palSetPadMode( GPIOB, 10, PAL_MODE_ALTERNATE( 7 ) );
-    palSetPadMode( GPIOB, 11, PAL_MODE_ALTERNATE( 7 ) );
-    sdStart( &SD3, &uartCfg );
-}
-
-void displayBootInfos( void )
-{
-    //Display boot sys info:
-    DPRINT( 1, KNRM "__   __                          _     _   _          ___    ___ \r\n" );
-    DPRINT( 1, KNRM "\\ \\ / /  ___   _ _   ___  __ _  | |_  (_) | |  ___   / _ \\  / __|\r\n" );
-    DPRINT( 1, KNRM " \\ V /  / -_) | '_| (_-< / _` | |  _| | | | | / -_) | (_) | \\__ \\\r\n" );
-    DPRINT( 1, KNRM "  \\_/   \\___| |_|   /__/ \\__,_|  \\__| |_| |_| \\___|  \\___/  |___/\r\n" );
-
-    DPRINT( 1, KGRN "Kernel:       %s\r\n", CH_KERNEL_VERSION );
-    #ifdef CH_COMPILER_NAME
-        DPRINT( 1, KGRN "Compiler:     %s\r\n", CH_COMPILER_NAME );
-    #endif
-     DPRINT( 1, KGRN "Architecture: %s\r\n", PORT_ARCHITECTURE_NAME );
-    #ifdef CH_CORE_VARIANT_NAME
-        DPRINT( 1, KGRN "Core Variant: %s\r\n", CH_CORE_VARIANT_NAME );
-    #endif
-    #ifdef CH_PORT_INFO
-        DPRINT( 1, KGRN "Port Info:    %s\r\n", CH_PORT_INFO );
-    #endif
-    #ifdef PLATFORM_NAME
-        DPRINT( 1, KGRN "Platform:     %s\r\n", PLATFORM_NAME );
-    #endif
-    #ifdef BOARD_NAME
-        DPRINT( 1, KGRN "Board:        %s\r\n", BOARD_NAME );
-    #endif
-    #ifdef __DATE__
-    #ifdef __TIME__
-        DPRINT( 1, KGRN "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );
-    #endif
-    #endif
-    
-    // Set color cursor to normal
-    DPRINT( 1, KNRM "" );
-}
 
 // Game running loop
 void runGame( void *p )

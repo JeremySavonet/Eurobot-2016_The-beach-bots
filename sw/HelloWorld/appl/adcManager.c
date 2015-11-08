@@ -363,7 +363,7 @@ void cmd_measureRead( int argc, char *argv[] )
     }
 }
 
-void initAdc( void )
+void adcManagerInit( void )
 {
   palSetGroupMode( GPIOG, 
                    PAL_PORT_BIT(1),

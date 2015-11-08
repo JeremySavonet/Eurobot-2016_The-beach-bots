@@ -2,7 +2,7 @@
  * CLI over USB driver
  */
 
-#include "usbConfig.h"
+#include "usbManager.h"
 
 SerialUSBDriver SDU2;
 
@@ -288,7 +288,7 @@ const SerialUSBConfig serusbcfg =
 };
 
 // Public functions here ==>
-void UsbInit( void )
+void usbManagerInit( void )
 {
     // Initializes a serial-over-USB CDC driver.
     sduObjectInit( &SDU2 );

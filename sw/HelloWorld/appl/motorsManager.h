@@ -13,7 +13,7 @@
 #define NUM_MOTORS 4
 #define MAX_MOTOR_SPEED 10000
 
-void MotorsInit( void );
+void motorsManagerInit( void );
 
 void MotorDisablePwm( unsigned motor );
 void MotorSetSpeed( unsigned motor, pwmcnt_t speed );

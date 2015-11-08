@@ -16,6 +16,6 @@ void cmd_measureCont( int argc, char *argv[] );
 void cmd_measureRead( int argc, char *argv[] );
 void cmd_measureStop( int argc, char *argv[] );
 
-void initAdc( void );
+void adcManagerInit( void );
 
 #endif // _ADCMANAGER_H_

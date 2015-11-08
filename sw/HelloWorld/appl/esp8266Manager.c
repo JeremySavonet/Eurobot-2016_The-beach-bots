@@ -1,6 +1,6 @@
 /*
- *  ESP8266 module driver.
- *  Talks to a ESP8266 mod-WiFi module over serial
+ *  esp8266 module driver.
+ *  Talks to a esp8266 mod-WiFi module over serial
  *
  *  Author: JS
  *  Date: 2015-10-25
@@ -12,7 +12,7 @@
 
 #include "color.h"
 #include "console.h" 
-#include "ESP8266.h"
+#include "esp8266Manager.h"
 #include "test.h"
 
 
@@ -31,10 +31,10 @@ static SerialConfig sd6Cfg =
 
 // Periodic thread to handle modwifi uart
 static THD_WORKING_AREA( waRead, 128 );
-static THD_FUNCTION( ESP8266, arg )
+static THD_FUNCTION( esp8266, arg )
 {
     (void)arg;
-    chRegSetThreadName( "ESP8266" );
+    chRegSetThreadName( "esp8266" );
     event_listener_t serialListener;
 
     /* Registering on the serial driver 6 as event 1, interested in
@@ -76,7 +76,7 @@ static THD_FUNCTION( ESP8266, arg )
     }
 }
 
-void ESP8266Init( void )
+void esp8266ManagerInit( void )
 {
     // Used function : USART6_TX 
     palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
@@ -84,40 +84,40 @@ void ESP8266Init( void )
     
     sdStart( &SD6, &sd6Cfg );
     
-    chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, ESP8266, NULL );
+    chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, esp8266, NULL );
 }
 
-void ESP8266RequestVersion( void )
+void esp8266RequestVersion( void )
 {
     sendCommand( "AT+GMR\r\n" );
 }
 
-void ESP8266ListAccessPoint( void )
+void esp8266ListAccessPoint( void )
 {
     sendCommand( "AT+CWLAP\r\n" );
 }
 
-void ESP8266SetMode( void )
+void esp8266SetMode( void )
 {
     sendCommand( "AT+CWMODE=3\r\n" );
 }
 
-void ESP8266JoinAccessPoint( void )
+void esp8266JoinAccessPoint( void )
 {
     sendCommand( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
 }
 
-void ESP8266SetAccessPoint( void )
+void esp8266SetAccessPoint( void )
 {
     sendCommand( "AT+CWSAP=\"esp_123\",\"1234567890\",5,3\r\n" );
 }
 
-void ESP8266EnableMultipleConnection( void )
+void esp8266EnableMultipleConnection( void )
 {
     sendCommand( "AT+CIPMUX=1\r\n" );
 }
 
-void ESP8266ConfigureServer( void )
+void esp8266ConfigureServer( void )
 {
     sendCommand( "AT+CIPSERVER=1\r\n" );
 }

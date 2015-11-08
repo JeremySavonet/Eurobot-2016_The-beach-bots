@@ -18,6 +18,6 @@ extern SerialUSBDriver SDU2;
 extern const USBConfig usbcfg;
 extern const SerialUSBConfig serusbcfg;
 
-void UsbInit( void );
+void usbManagerInit( void );
 
 #endif /* _USBCONFIG_H_ */
