@@ -6,10 +6,9 @@
 #include "system.h"
 
 #include "appl/adcManager.h"
-#include "appl/debugManager.h"
 #include "appl/color.h"
-#include "appl/console.h"
 #include "appl/esp8266Manager.h"
+#include "appl/debugManager.h"
 #include "appl/microrl.h"
 #include "appl/microshell.h"
 #include "appl/motorsManager.h"
