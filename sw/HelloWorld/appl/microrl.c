@@ -13,7 +13,6 @@
 #include <stdio.h>
 #endif
 
-//#define DBG(...) fprintf(stderr, "\033[33m");fprintf(stderr,__VA_ARGS__);fprintf(stderr,"\033[0m");
 #define printf(...) chprintf(STDOUT_SD, __VA_ARGS__)
 
 char * prompt_default = _PROMPT_DEFAULT;

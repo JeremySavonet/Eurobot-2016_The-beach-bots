@@ -1,19 +1,21 @@
-//
-//  microshell2.c
-//
-//
-//  Created by Marian Such on 8/5/13.
-//
-//
+/*
+ * Micro shell is a shell wrapped around microrl lib.
+ * It allows autocomplete, history commands and color.
+ *
+ * Originally created by Marian Such
+ * Modified by Jeremy S
+ */
 
-#include <string.h>
 #include <ch.h>
-#include <hal.h>
-#include <test.h>
 #include <chprintf.h>
-#include "microrl.h"
+#include <hal.h>
+#include <string.h>
+#include <test.h>
+
+#include "color.h"
 #include "config.h"
-#include "microshell2.h"
+#include "microrl.h"
+#include "microshell.h"
 
 #define TEST_WA_SIZE    THD_WORKING_AREA_SIZE( 256 )
 
@@ -23,9 +25,9 @@ extern ShellCommand user_commands[];
 // array for completion
 char * compl_world [32];
 
-void print(const char * str)
+void print( const char * str )
 {
-    chprint("%s", str);
+    chprint( "%s", str );
 }
 
 /*===========================================================================*/
@@ -33,17 +35,20 @@ void print(const char * str)
 /* TODO : Nice to have little macro to add new cli function                  */
 /*===========================================================================*/
 
-static void usage(char *p) {
-    chprint("Usage: %s\r\n", p);
+static void usage( char *p ) 
+{
+    chprint( KYEL "Usage: %s\r\n", p );
 }
 
-static void cmd_systime(int argc, char * argv[]) {
+static void cmd_systime( int argc, char * argv[] ) 
+{
     (void)argv;
-    if (argc > 0) {
-        usage("systime");
+    if( argc > 0 ) 
+    {
+        usage( "systime" );
         return;
     }
-    chprint("%lu\r\n", (unsigned long)chVTGetSystemTime() );
+    chprint( "%lu\r\n", (unsigned long)chVTGetSystemTime() );
 }
 
 static void cmd_mem( int argc, char *argv[] )
@@ -53,7 +58,7 @@ static void cmd_mem( int argc, char *argv[] )
     (void)argv;
     if( argc > 0 )
     {
-        chprint( "Usage: mem\r\n" );
+        usage( "mem" );
         return;
     }
 
@@ -71,7 +76,7 @@ static void cmd_threads( int argc, char *argv[] )
     (void)argv;
     if( argc > 0 )
     {
-        chprint( "Usage: threads\r\n" );
+        usage( "threads" );
         return;
     }
 
@@ -95,7 +100,7 @@ static void cmd_benchmark( int argc, char *argv[] )
     (void)argv;
     if( argc > 0 )
     {
-        chprint( "Usage: benchmark\r\n" );
+        usage( "benchmark" );
         return;
     }
 
@@ -116,30 +121,31 @@ static void cmd_benchmark( int argc, char *argv[] )
 void cmd_info( int argc, char * argv[] )
 {
     (void)argv;
-    if (argc > 0) {
-        usage("info");
+    if( argc > 0 ) 
+    {
+        usage( "info" );
         return;
     }
-    chprint("Kernel:       %s\r\n", CH_KERNEL_VERSION);
+    chprint( "Kernel:       %s\r\n", CH_KERNEL_VERSION );
 #ifdef CH_COMPILER_NAME
-    chprint("Compiler:     %s\r\n", CH_COMPILER_NAME);
+    chprint( "Compiler:     %s\r\n", CH_COMPILER_NAME );
 #endif
-    chprint("Architecture: %s\r\n", PORT_ARCHITECTURE_NAME);
+    chprint( "Architecture: %s\r\n", PORT_ARCHITECTURE_NAME );
 #ifdef CH_CORE_VARIANT_NAME
-    chprint("Core Variant: %s\r\n", CH_CORE_VARIANT_NAME);
+    chprint( "Core Variant: %s\r\n", CH_CORE_VARIANT_NAME );
 #endif
 #ifdef CH_PORT_INFO
-    chprint("Port Info:    %s\r\n", CH_PORT_INFO);
+    chprint( "Port Info:    %s\r\n", CH_PORT_INFO );
 #endif
 #ifdef PLATFORM_NAME
-    chprint("Platform:     %s\r\n", PLATFORM_NAME);
+    chprint( "Platform:     %s\r\n", PLATFORM_NAME );
 #endif
 #ifdef BOARD_NAME
-    chprint("Board:        %s\r\n", BOARD_NAME);
+    chprint( "Board:        %s\r\n", BOARD_NAME );
 #endif
 #ifdef __DATE__
 #ifdef __TIME__
-    chprint("Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__);
+    chprint( "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );
 #endif
 #endif
 }
@@ -153,11 +159,35 @@ static ShellCommand local_commands[] = {
     { NULL, NULL }
 };
 
-static int cmdexec(ShellCommand *scp,
-                   char *name, int argc, char * argv[]) {
-    while (scp->sc_name != NULL) {
-        if (strcasecmp(scp->sc_name, name) == 0) {
-            scp->sc_function(argc, argv);
+static void list_commands( const ShellCommand *scp )
+{
+    while( NULL != scp->sc_name )
+    {
+        chprint( KYEL "%s ", scp->sc_name );
+        scp++;
+    }
+}
+
+static int cmdexec( ShellCommand *scp,
+                    char *name, int argc, char * argv[] ) 
+{
+    while( scp->sc_name != NULL ) 
+    {
+        if( strcasecmp( scp->sc_name, name ) == 0 ) 
+        {
+            scp->sc_function( argc, argv );
+            return FALSE;
+        }
+        else if( strcasecmp( name, "help" ) == 0 )
+        {
+            if( argc > 0 )
+            {
+                usage( "help" );
+                return FALSE;
+            }
+            list_commands( local_commands );
+            list_commands( user_commands );
+            chprint( "\r\n" );
             return FALSE;
         }
         scp++;
@@ -165,30 +195,30 @@ static int cmdexec(ShellCommand *scp,
     return TRUE;
 }
 
-static int exec(int argc, char ** argv)
+static int exec( int argc, char ** argv )
 {
-    if( (cmdexec(local_commands, argv[0],
-                 argc - 1,
-                 (char **)&argv[1])) &&
-       (cmdexec(user_commands, argv[0],
-                argc - 1,
-                (char **)&argv[1])) )
+    if( ( cmdexec( local_commands, argv[0],
+                   argc - 1,
+                   (char **)&argv[1] ) ) &&
+        ( cmdexec( user_commands, argv[0],
+                   argc - 1,
+                   (char **)&argv[1] ) ) )
     {
-        chprint("Command not found: %s\r\n",
-                argv[0]);
-    };
+        chprint( KRED "Command not found: %s\r\n",
+                 argv[0] );
+    }
     return 0;
 }
 
-void sigint (microrl_t * this)
+void sigint( microrl_t * this )
 {
-    mlab_sigint(this);
+    mlab_sigint( this );
 }
 
 #ifdef _USE_COMPLETE
 //*****************************************************************************
 // completion callback for microrl library
-char ** complete (int argc, char ** argv)
+char ** complete( int argc, char ** argv )
 {
     int j = 0;
     
@@ -196,27 +226,30 @@ char ** complete (int argc, char ** argv)
     ShellCommand * scp;
     
     // if there is token in cmdline
-    if (argc == 1) {
+    if( argc == 1 ) 
+    {
         // get last entered token
-        char * bit = (char *) argv[0];
+        char * bit = (char *)argv[0];
         // iterate through our available token and match it
         scp = local_commands;
-        for(j = 0; scp->sc_name != NULL; scp++)
+        for( j = 0; scp->sc_name != NULL; scp++ )
         {
             // if token is matched (text is part of our token starting from 0 char)
-            if (strstr(scp->sc_name, bit) == scp->sc_name) {
+            if( strstr( scp->sc_name, bit ) == scp->sc_name ) 
+            {
                 // add it to completion set
-                compl_world[j++] = (char *) scp->sc_name;
+                compl_world[j++] = (char *)scp->sc_name;
             }
         }
         
         scp = user_commands;
-        for( ; scp->sc_name != NULL; scp++)
+        for( ; scp->sc_name != NULL; scp++ )
         {
             // if token is matched (text is part of our token starting from 0 char)
-            if (strstr(scp->sc_name, bit) == scp->sc_name) {
+            if( strstr( scp->sc_name, bit ) == scp->sc_name ) 
+            {
                 // add it to completion set
-                compl_world [j++] = (char *) scp->sc_name;
+                compl_world [j++] = (char *)scp->sc_name;
             }
         }
     }
@@ -275,21 +308,21 @@ char ** complete (int argc, char ** argv)
     //
     //  }
     
-    else { // if there is no token in cmdline, just print all available token
+    else 
+    {   // if there is no token in cmdline, just print all available token
         /* list system default commands */
         scp = local_commands;
-        for(j = 0; scp->sc_name != NULL; scp++, j++)
+        for( j = 0; scp->sc_name != NULL; scp++, j++ )
         {
-            compl_world[j] = (char *) scp->sc_name;
+            compl_world[j] = (char *)scp->sc_name;
         }
         
         /* list user defined commands */
         scp = user_commands;
-        for( ; scp->sc_name != NULL; scp++, j++)
+        for( ; scp->sc_name != NULL; scp++, j++ )
         {
-            compl_world[j] = (char *) scp->sc_name;
+            compl_world[j] = (char *)scp->sc_name;
         }
-        
     }
     
     // note! last ptr in array always must be NULL!!!
@@ -299,17 +332,18 @@ char ** complete (int argc, char ** argv)
 }
 #endif
 
-void start_shell(void)
+void start_shell( void )
 {
     microrl_t rl;
     msg_t c;
     
-    microrl_init(&rl, print);
-    microrl_set_execute_callback(&rl, exec);
-    microrl_set_complete_callback(&rl, complete);
-    microrl_set_sigint_callback(&rl, sigint);
-    while (TRUE) {
-        c = sdGet(&SDU2);
-        microrl_insert_char(&rl, (int) c);
+    microrl_init( &rl, print );
+    microrl_set_execute_callback( &rl, exec );
+    microrl_set_complete_callback( &rl, complete );
+    microrl_set_sigint_callback( &rl, sigint );
+    while( true ) 
+    {
+        c = sdGet( &SDU2 );
+        microrl_insert_char( &rl, (int)c );
     }
 }

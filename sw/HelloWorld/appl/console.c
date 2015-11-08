@@ -1,6 +1,7 @@
 /*
  * Some usefull function to debug
  */
+
 #include <stdio.h>
 #include <string.h>
 

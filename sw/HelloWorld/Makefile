@@ -124,7 +124,7 @@ CSRC = $(STARTUPSRC) \
 	   $(CHIBIOS)appl/console.c \
 	   appl/ESP8266.c \
 	   appl/motors.c \
-	   appl/microshell2.c \
+	   appl/microshell.c \
 	   appl/usbConfig.c \
 	   appl/microrl.c \
 	   main.c

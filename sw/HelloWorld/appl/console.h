@@ -16,4 +16,4 @@
 // Public functions
 void consolePrint( char *p );
 
-#endif /* _CONSOLE_H_ */
+#endif // _CONSOLE_H_

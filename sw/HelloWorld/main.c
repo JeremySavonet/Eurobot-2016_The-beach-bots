@@ -25,13 +25,13 @@
 #include "hal.h"
 #include "test.h"
 
-#include "appl/console.h"
 #include "appl/ESP8266.h"
+#include "appl/color.h"
+#include "appl/console.h"
+#include "appl/microrl.h"
+#include "appl/microshell.h"
 #include "appl/motors.h"
 #include "appl/usbConfig.h"
-#include "appl/microrl.h"
-#include "appl/microshell2.h"
-//#include "test/noRegression.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
@@ -141,6 +141,30 @@ int main( void )
      */
     halInit();
     chSysInit();
+    
+    /*//Display boot sys info:*/
+    /*DEBUG_PRINT( KBLU "Kernel:       %s\r\n", CH_KERNEL_VERSION );*/
+    /*#ifdef CH_COMPILER_NAME*/
+    /*DEBUG_PRINT( KBLU "Compiler:     %s\r\n", CH_COMPILER_NAME );*/
+    /*#endif*/
+    /*DEBUG_PRINT( KBLU "Architecture: %s\r\n", PORT_ARCHITECTURE_NAME );*/
+    /*#ifdef CH_CORE_VARIANT_NAME*/
+    /*DEBUG_PRINT( KBLU "Core Variant: %s\r\n", CH_CORE_VARIANT_NAME );*/
+    /*#endif*/
+    /*#ifdef CH_PORT_INFO*/
+    /*DEBUG_PRINT( KBLU "Port Info:    %s\r\n", CH_PORT_INFO );*/
+    /*#endif*/
+    /*#ifdef PLATFORM_NAME*/
+    /*DEBUG_PRINT( KBLU "Platform:     %s\r\n", PLATFORM_NAME );*/
+    /*#endif*/
+    /*#ifdef BOARD_NAME*/
+    /*DEBUG_PRINT( KBLU "Board:        %s\r\n", BOARD_NAME );*/
+    /*#endif*/
+    /*#ifdef __DATE__*/
+    /*#ifdef __TIME__*/
+    /*DEBUG_PRINT( KBLU "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );*/
+    /*#endif*/
+    /*#endif*/
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
