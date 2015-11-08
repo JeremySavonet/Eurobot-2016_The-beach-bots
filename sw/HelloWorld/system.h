@@ -44,7 +44,6 @@ typedef struct
 extern SYSTEM sys;
 
 void systemPrintBootMsg( void );
-void debugManagerInit( void );
 void initSystem( void );
 
 #endif // _SYSTEM_h

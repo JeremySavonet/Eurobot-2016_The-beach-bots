@@ -121,6 +121,7 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
 	   $(CHIBIOS)appl/adcManager.c \
+	   appl/debugManager.c \
 	   appl/esp8266Manager.c \
 	   appl/motorsManager.c \
 	   appl/microshell.c \

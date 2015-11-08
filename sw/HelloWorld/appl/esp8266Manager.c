@@ -11,10 +11,9 @@
 #include <string.h>
 
 #include "color.h"
-#include "console.h" 
+#include "debugManager.h" 
 #include "esp8266Manager.h"
 #include "test.h"
-
 
 // Private functions
 void sendCommand( char *p );

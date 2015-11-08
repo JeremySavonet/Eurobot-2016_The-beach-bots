@@ -1,9 +1,10 @@
 /*
- *  Console module used to debug
+ * Debug manager module
+ * Author: Jeremy S.
  */
 
-#ifndef _CONSOLE_H_
-#define _CONSOLE_H_
+#ifndef _DEBUGMANAGER_H_
+#define _DEBUGMANAGER_H_
 
 #include <stdio.h>
 #include <string.h>
@@ -25,4 +26,6 @@
 #define DPRINT( level, ... )
 #endif
 
-#endif // _CONSOLE_H_
+void debugManagerInit( void );
+
+#endif // _DEBUGMANAGER_H_
