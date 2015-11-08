@@ -251,7 +251,7 @@ void displayBootInfos( void )
     DPRINT( 1, KNRM "__   __                          _     _   _          ___    ___ \r\n" );
     DPRINT( 1, KNRM "\\ \\ / /  ___   _ _   ___  __ _  | |_  (_) | |  ___   / _ \\  / __|\r\n" );
     DPRINT( 1, KNRM " \\ V /  / -_) | '_| (_-< / _` | |  _| | | | | / -_) | (_) | \\__ \\\r\n" );
-    DPRINT( 1, KNRM "  \\_/   \\___| |_|   /__/ \\__,_|  \\__| |_| |_| \\___| \\ \\___/  |___/\r\n" );
+    DPRINT( 1, KNRM "  \\_/   \\___| |_|   /__/ \\__,_|  \\__| |_| |_| \\___|  \\___/  |___/\r\n" );
 
     DPRINT( 1, KGRN "Kernel:       %s\r\n", CH_KERNEL_VERSION );
     #ifdef CH_COMPILER_NAME
