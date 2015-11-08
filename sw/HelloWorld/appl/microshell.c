@@ -6,11 +6,13 @@
  * Modified by Jeremy S
  */
 
-#include <ch.h>
-#include <chprintf.h>
-#include <hal.h>
+#include <stdio.h>
 #include <string.h>
-#include <test.h>
+
+#include "ch.h"
+#include "chprintf.h"
+#include "hal.h"
+#include "test.h"
 
 #include "color.h"
 #include "config.h"

@@ -24,6 +24,9 @@
 #include "hal.h"
 #include "test.h"
 
+#include "system.h"
+
+#include "appl/adcManager.h"
 #include "appl/ESP8266.h"
 #include "appl/color.h"
 #include "appl/console.h"
@@ -68,11 +71,26 @@ static SerialConfig uartCfg =
     0
 };
 
+/*===========================================================================*/
+/* User commands for CLI                                                     */
+/*===========================================================================*/
+static void usage( char *p ) 
+{
+    chprint( KYEL "Usage: %s\r\n", p );
+}
+
 // Here the list of user commands (i.e.: all commands to access robot structure)
 ShellCommand user_commands[] = {
 
-    //TODO
-    {NULL, NULL}
+    {"measure", cmd_measure},
+    {"measureAnalog", cmd_measureA},
+    {"vref", cmd_Vref},
+    {"temperature", cmd_Temperature},
+    {"measureDirect", cmd_measureDirect},
+    {"measureContinuous", cmd_measureCont},
+    {"readContinuousData", cmd_measureRead},
+    {"stopContinuous", cmd_measureStop},
+    { NULL, NULL }
 };
 
 /*===========================================================================*/
@@ -156,6 +174,9 @@ int main( void )
 
     // Init Motors module
     MotorsInit();
+
+    // Init Adc module
+    initAdc();
 
     // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED );

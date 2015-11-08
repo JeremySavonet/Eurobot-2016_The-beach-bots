@@ -497,3 +497,7 @@
 #endif  /* _CHCONF_H_ */
 
 /** @} */
+
+#if !defined(CHPRINTF_USE_FLOAT) || defined(__DOXYGEN__)
+#define CHPRINTF_USE_FLOAT   TRUE
+#endif
