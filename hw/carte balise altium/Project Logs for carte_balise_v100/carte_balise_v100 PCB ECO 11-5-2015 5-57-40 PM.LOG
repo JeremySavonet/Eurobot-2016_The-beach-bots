@@ -1,0 +1,4 @@
+Added Component: Designator=C?(SMD_CA_0603_HD)
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=VPIC Pin=C?-2
+Added Member To Class: ClassName=carte_balise_v100 Member=Component C? 100n/0603

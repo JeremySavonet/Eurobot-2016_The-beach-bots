@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=PGEC/RX Pin=R17-2
+Added Pin To Net: NetName=PGED/TX Pin=R17-2
+Added Member To Class: ClassName=carte_balise_v100 Member=Component R1 0R/0603
+Added Room: Name=carte_balise_v100

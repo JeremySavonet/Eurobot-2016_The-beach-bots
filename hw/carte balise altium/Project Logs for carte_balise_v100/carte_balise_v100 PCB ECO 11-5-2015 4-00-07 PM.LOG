@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=Z\B\_\I\N\T\ Pin=IC1-58
+Removed Pin From Net: NetName=ZB_WAKE Pin=IC1-59
+Added Pin To Net: NetName=ZB_WAKE Pin=IC1-58
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=IC1-59
+Added Member To Class: ClassName=carte_balise_v100 Member=Component C8 100n/0603
+Added Member To Class: ClassName=carte_balise_v100 Member=Component C9 100n/0603

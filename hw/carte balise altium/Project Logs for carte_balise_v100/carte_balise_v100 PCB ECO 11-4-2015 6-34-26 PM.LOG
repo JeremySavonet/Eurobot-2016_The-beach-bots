@@ -1,0 +1,3 @@
+Added Pin To Net: NetName=V+ Pin=R15-2
+Change Net Name : Old Net Name=V+ New Net Name=VPIC
+Added Room: Name=carte_balise_v100

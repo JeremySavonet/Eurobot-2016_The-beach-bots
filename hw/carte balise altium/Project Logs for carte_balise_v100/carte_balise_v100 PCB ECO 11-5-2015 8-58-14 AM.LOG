@@ -1,0 +1,101 @@
+Change Component DesignItemId : Designator=R15 Old DesignItemId=10k RC0402FR-0710KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R6 Old DesignItemId=10M CRCW040210M0FKED SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R13 Old DesignItemId=10M CRCW040210M0FKED SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R3 Old DesignItemId=10R RC0402FR-0710RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R9 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R10 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R18 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R19 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R20 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R21 Old DesignItemId=33R RC0402FR-0733RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R23 Old DesignItemId=75R RC0402FR-0775RL SMD R0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R2 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R7 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R8 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R12 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R16 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=R17 Old DesignItemId=100k RC0402FR-07100KL  SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=C1 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C2 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C3 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C8 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C15 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C16 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C17 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C18 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C19 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=R22 Old DesignItemId=330R RC0402FR-07330RL SMD R 0402 New DesignItemId=?? SMD R 0603
+Change Component DesignItemId : Designator=C4 Old DesignItemId=470n/16V X7R SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C5 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C9 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C10 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C11 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C12 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=C13 Old DesignItemId=NE SMD 0603 New DesignItemId=?? SMD 0603
+Change Component DesignItemId : Designator=R11 Old DesignItemId=NE SMD R 0603 New DesignItemId=?? SMD R 0603
+Change Component Footprint: Designator=C1 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C2 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C3 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C8 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C15 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C16 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C17 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C18 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C19 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=R2 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R3 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R6 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R7 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R8 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R9 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R10 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R12 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R13 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R15 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R16 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R17 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R18 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R19 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R20 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R21 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R22 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Footprint: Designator=R23 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Comment : Designator=R15 Old Comment=10k/0402 New Comment=10k/0603
+Change Component Comment : Designator=R6 Old Comment=10M/0402 New Comment=10M/0603
+Change Component Comment : Designator=R13 Old Comment=10M/0402 New Comment=10M/0603
+Change Component Comment : Designator=R3 Old Comment=10R/0402 New Comment=10R/0603
+Change Component Comment : Designator=R9 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R10 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R18 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R19 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R20 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R21 Old Comment=33R/0402 New Comment=33R/0603
+Change Component Comment : Designator=R23 Old Comment=79K3/0402 New Comment=79.3k/0603
+Change Component Comment : Designator=R2 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=R7 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=R8 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=R12 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=R16 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=R17 Old Comment=100k/0402 New Comment=100k/0603
+Change Component Comment : Designator=C1 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C2 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C3 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C8 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C15 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C16 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C17 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C18 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C19 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=R22 Old Comment=330R/0402 New Comment=330R/0603
+Change Component Comment : Designator=LED1 Old Comment=NE New Comment=0603
+Change Component Comment : Designator=LED2 Old Comment=NE New Comment=0603
+Change Component Comment : Designator=LED3 Old Comment=NE New Comment=0603
+Change Component Comment : Designator=C4 Old Comment=NE / 0603 New Comment=100n/0603
+Change Component Description : Designator=C4 Old Description=Capacitor - 470nF 16V X7R 10% 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C5 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C9 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C10 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C11 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C12 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=C13 Old Description=Capacitor - Not Equipe 0603 SMD New Description=Capacitor - 0603 SMD
+Change Component Description : Designator=R11 Old Description=Resistor - 0603 NOT EQUIPE SMD New Description=Resistor - 0603 ??? SMD

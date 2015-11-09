@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=Z\B\_\R\E\S\E\T\ Pin=IC1-48
+Removed Pin From Net: NetName=ZB_WAKE Pin=IC1-49
+Removed Pin From Net: NetName=Z\B\_\I\N\T\ Pin=IC1-50
+Removed Pin From Net: NetName=PIC_RF2 Pin=IC1-52
+Removed Pin From Net: NetName=PIC_RF8 Pin=IC1-53
+Removed Pin From Net: NetName=PIC_RG3 Pin=IC1-56
+Added Pin To Net: NetName=PIC_RF2 Pin=IC1-48
+Added Pin To Net: NetName=PIC_RF8 Pin=IC1-49
+Added Pin To Net: NetName=PIC_RG3 Pin=IC1-50

@@ -1,0 +1,132 @@
+Importer Log Report
+Project : carte_balise_v100.PrjPcb
+
+Section : Analyze Document - \\psf\Home\Documents\Robotics\Eurobot-2016_The-beach-bots\hw\carte balise\carte_balise_v100.brd
+    Analyzing data of \\psf\Home\Documents\Robotics\Eurobot-2016_The-beach-bots\hw\carte balise\carte_balise_v100.brd
+    Load settings
+    Load layers 107
+    Load Library "DEVIALET_CAPACITORS"
+    Load Packages 2
+    Load Library "holes"
+    Load Packages 1
+    Load Library "DEVIALET_MICROCHIP"
+    Load Packages 1
+    Load Library "pinhead-2"
+    Load Packages 1
+    Load Library "DEVIALET_LEDS"
+    Load Packages 1
+    Load Library "DEVIALET_TRANSISTORS"
+    Load Packages 1
+    Load Library "clubrobot"
+    Load Packages 1
+    Load Library "DEVIALET_RESISTORS"
+    Load Packages 2
+    Load Library "etienne"
+    Load Packages 6
+    Load Library "SparkFun-Aesthetics"
+    Load Packages 1
+    Load Library "SparkFun-Sensors"
+    Load Packages 1
+    Load Library "dspic33ep"
+    Load Packages 1
+    Load Library "microchip-dspic"
+    Load Packages 1
+    Load Library "clubrobot2"
+    Load Packages 1
+    Load Library "con-wago-500"
+    Load Packages 1
+    Load Library "pinhead"
+    Load Packages 1
+EndSection
+
+Section : Analyze Document - \\psf\Home\Documents\Robotics\Eurobot-2016_The-beach-bots\hw\carte balise\carte_balise_v100.sch
+    Analyzing data of \\psf\Home\Documents\Robotics\Eurobot-2016_The-beach-bots\hw\carte balise\carte_balise_v100.sch
+    Load settings
+    Load layers 107
+    Load schematic
+    Load Libraries 20
+    Load Library "frames"
+    Load Packages 0
+    Load Symbols 2
+    Load DeviceSets 1
+    Load Library "DEVIALET_RESISTORS"
+    Load Packages 12
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "DEVIALET_MICROCHIP"
+    Load Packages 2
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "DEVIALET_CAPACITORS"
+    Load Packages 15
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "DEVIALET_SUPPLY"
+    Load Packages 0
+    Load Symbols 2
+    Load DeviceSets 2
+    Load Library "DEVIALET_LEDS"
+    Load Packages 7
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "supply1"
+    Load Packages 0
+    Load Symbols 3
+    Load DeviceSets 3
+    Load Library "DEVIALET_TRANSISTORS"
+    Load Packages 2
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "supply2"
+    Load Packages 0
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "SparkFun-Sensors"
+    Load Packages 1
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "SparkFun-Aesthetics"
+    Load Packages 3
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "clubrobot"
+    Load Packages 1
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "etienne"
+    Load Packages 12
+    Load Symbols 6
+    Load DeviceSets 6
+    Load Library "holes"
+    Load Packages 10
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "pinhead-2"
+    Load Packages 7
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "dspic33ep"
+    Load Packages 1
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "microchip-dspic"
+    Load Packages 2
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "clubrobot2"
+    Load Packages 1
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Library "con-wago-500"
+    Load Packages 1
+    Load Symbols 2
+    Load DeviceSets 1
+    Load Library "pinhead"
+    Load Packages 2
+    Load Symbols 1
+    Load DeviceSets 1
+    Load Attributes 0
+    Load Classes 1
+    Load Parts 139
+    Load Sheets 1
+EndSection

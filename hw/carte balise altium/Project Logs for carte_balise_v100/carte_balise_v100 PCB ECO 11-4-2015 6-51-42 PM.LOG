@@ -1,0 +1,2 @@
+Removed Pin From Net: NetName=PIC_RA3 Pin=IC1-59
+Added Pin To Net: NetName=PIC_RA3 Pin=PROG1-4

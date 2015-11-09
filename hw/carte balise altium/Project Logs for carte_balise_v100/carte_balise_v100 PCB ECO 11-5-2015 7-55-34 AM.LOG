@@ -1,0 +1,18 @@
+Change Component DesignItemId : Designator=C9 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=NE SMD 0603
+Change Component DesignItemId : Designator=C10 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=NE SMD 0603
+Change Component DesignItemId : Designator=C11 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=NE SMD 0603
+Change Component DesignItemId : Designator=C12 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=NE SMD 0603
+Change Component DesignItemId : Designator=C13 Old DesignItemId=100n/16V X7R SMD 0402 New DesignItemId=NE SMD 0603
+Change Component DesignItemId : Designator=C5 Old DesignItemId=100n/25V X7R SMD 0805 New DesignItemId=NE SMD 0603
+Change Component Footprint: Designator=C9 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C10 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C11 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C12 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C13 Old Footprint=SMD_CA_0402_HD New Footprint=SMD_CA_0603_HD
+Change Component Footprint: Designator=C5 Old Footprint=SMD_CA_0805_HD New Footprint=SMD_CA_0603_HD
+Change Component Comment : Designator=C5 Old Comment=100n/25V/0805 New Comment=100n/0603
+Change Component Comment : Designator=C9 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C10 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C11 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C12 Old Comment=100n/0402 New Comment=100n/0603
+Change Component Comment : Designator=C13 Old Comment=100n/0402 New Comment=100n/0603

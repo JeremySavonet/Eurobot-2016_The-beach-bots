@@ -1,0 +1,3 @@
+Change Component DesignItemId : Designator=R11 Old DesignItemId=10R RC0402FR-0710RL SMD R 0402 New DesignItemId=NE SMD R 0603
+Change Component Footprint: Designator=R11 Old Footprint=SMD_RE_0402_HD New Footprint=SMD_RE_0603_HD
+Change Component Comment : Designator=R11 Old Comment=10R/0402 New Comment=10R/0603

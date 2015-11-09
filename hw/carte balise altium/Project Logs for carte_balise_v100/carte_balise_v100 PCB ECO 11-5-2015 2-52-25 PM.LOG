@@ -1,0 +1,17 @@
+Removed Pin From Net: NetName=PIC_RG2 Pin=IC1-57
+Removed Pin From Net: NetName=PIC_RA2 Pin=IC1-58
+Removed Pin From Net: NetName=PIC_RA4 Pin=IC1-60
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-61
+Added Pin To Net: NetName=PIC_RG2 Pin=IC1-51
+Added Pin To Net: NetName=PIC_RA2 Pin=IC1-52
+Added Pin To Net: NetName=PIC_RA4 Pin=IC1-53
+Added Pin To Net: NetName=PIC_RA5 Pin=IC1-56
+Added Pin To Net: NetName=Z\B\_\R\E\S\E\T\ Pin=IC1-57
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=IC1-58
+Added Pin To Net: NetName=ZB_WAKE Pin=IC1-59
+Added Pin To Net: NetName=NetIC1_60 Pin=IC1-60
+Added Pin To Net: NetName=NetIC1_60 Pin=R19-1
+Added Net: Name=NetIC1_60
+Added Pin To Net: NetName=NetIC1_61 Pin=IC1-61
+Added Pin To Net: NetName=NetIC1_61 Pin=R18-1
+Added Net: Name=NetIC1_61

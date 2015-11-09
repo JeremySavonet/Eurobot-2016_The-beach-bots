@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=Z\B\_\R\E\S\E\T\ Pin=IC1-67
+Removed Pin From Net: NetName=ZB_WAKE Pin=IC1-68
+Removed Pin From Net: NetName=Z\B\_\I\N\T\ Pin=IC1-69
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=IC1-48
+Added Pin To Net: NetName=ZB_WAKE Pin=IC1-49
+Added Pin To Net: NetName=Z\B\_\R\E\S\E\T\ Pin=IC1-50

@@ -1,0 +1,525 @@
+Removed Pin From Net: NetName=+12V Pin=C15-1
+Removed Pin From Net: NetName=GND Pin=IC3-1
+Removed Pin From Net: NetName=ZB_WAKE Pin=IC3-3
+Removed Pin From Net: NetName=ZB_SPI_MOSI Pin=IC3-5
+Removed Pin From Net: NetName=ZB_SPI_SCK Pin=IC3-6
+Removed Pin From Net: NetName=VDD_RADIO Pin=IC3-10
+Removed Pin From Net: NetName=GND Pin=IC3-11
+Removed Pin From Net: NetName=GND Pin=IC3-12
+Removed Pin From Net: NetName=PGED/TX Pin=R7-2
+Removed Pin From Net: NetName=N$4 Pin=U1-P$1
+Removed Pin From Net: NetName=ADXL_SCLK Pin=U1-P$4
+Removed Pin From Net: NetName=ADXL_MOSI Pin=U1-P$6
+Removed Pin From Net: NetName=ADXL_INT2 Pin=U1-P$9
+Removed Pin From Net: NetName=ADXL_INT1 Pin=U1-P$11
+Removed Pin From Net: NetName=GND Pin=U1-P$12
+Removed Pin From Net: NetName=GND Pin=U1-P$13
+Removed Pin From Net: NetName=N$4 Pin=U1-P$14
+Removed Pin From Net: NetName=GND Pin=U1-P$16
+Change Component DesignItemId : Designator=I/OS2 Old DesignItemId=1X08 New DesignItemId=PINHD-1X08_2.54
+Change Component DesignItemId : Designator=PWM_CON Old DesignItemId=1X08 New DesignItemId=PINHD-1X08_2.54
+Change Component DesignItemId : Designator=JP1 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP2 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP3 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP4 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP5 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP6 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP7 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP8 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP9 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP10 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP11 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=JP12 Old DesignItemId=2X03 New DesignItemId=PINHD-2X3
+Change Component DesignItemId : Designator=H1 Old DesignItemId=3,2 New DesignItemId=MOUNT-HOLE3.2
+Change Component DesignItemId : Designator=H2 Old DesignItemId=3,2 New DesignItemId=MOUNT-HOLE3.2
+Change Component DesignItemId : Designator=H3 Old DesignItemId=3,2 New DesignItemId=MOUNT-HOLE3.2
+Change Component DesignItemId : Designator=H4 Old DesignItemId=3,2 New DesignItemId=MOUNT-HOLE3.2
+Change Component DesignItemId : Designator=C1 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C2 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C4 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C5 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C7 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C9 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C10 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C11 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C12 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C14 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C17 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C18 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C19 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C20 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C21 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C22 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=C23 Old DesignItemId=0402K New DesignItemId=C0402K
+Change Component DesignItemId : Designator=R1 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R2 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R3 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R4 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R5 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R6 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R7 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R8 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R10 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R11 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R12 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R13 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R14 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R15 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R17 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R18 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R19 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R21 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R23 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=R24 Old DesignItemId=0402K New DesignItemId=R0402K
+Change Component DesignItemId : Designator=U$3 Old DesignItemId=0603 New DesignItemId=L_603
+Change Component DesignItemId : Designator=C3 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=C6 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=C8 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=C13 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=C15 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=C16 Old DesignItemId=0603K New DesignItemId=C0603K
+Change Component DesignItemId : Designator=LED2 Old DesignItemId=0603K New DesignItemId=LED0603K
+Change Component DesignItemId : Designator=LED3 Old DesignItemId=0603K New DesignItemId=LED0603K
+Change Component DesignItemId : Designator=R9 Old DesignItemId=0603K New DesignItemId=R0603K
+Change Component DesignItemId : Designator=R16 Old DesignItemId=0603K New DesignItemId=R0603K
+Change Component DesignItemId : Designator=R22 Old DesignItemId=0603K New DesignItemId=R0603K
+Change Component DesignItemId : Designator=U$26 Old DesignItemId=805 New DesignItemId=LED_805
+Change Component DesignItemId : Designator=UART1 Old DesignItemId=CON_2.54_3 New DesignItemId=CONNECT_3PINS_CMS
+Change Component DesignItemId : Designator=UART2 Old DesignItemId=CON_2.54_3 New DesignItemId=CONNECT_3PINS_CMS
+Change Component DesignItemId : Designator=U$1 Old DesignItemId=OSHW-LOGO-S New DesignItemId=OSHW-LOGOS
+Change Component DesignItemId : Designator=U$2 Old DesignItemId=PW16 New DesignItemId=SN75C3232_PW
+Change Component DesignItemId : Designator=IC2 Old DesignItemId=SO08 New DesignItemId=MCP2551/SN
+Change Component DesignItemId : Designator=IC4 Old DesignItemId=SO08 New DesignItemId=MCP2551/SN
+Change Component DesignItemId : Designator=M3 Old DesignItemId=SOT23-3 New DesignItemId=DMP2035U
+Change Component DesignItemId : Designator=IC1 Old DesignItemId=TQFP100_14X14MC New DesignItemId=DSPIC33EP512MU810-X_PF
+Change Component Footprint: Designator=U1 Old Footprint=ADXL362 New Footprint=SMD_IC_LGA_16
+Change Component Comment : Designator=R9 Old Comment= New Comment=0R-0603
+Change Component Comment : Designator=R16 Old Comment= New Comment=0R-0603
+Change Component Comment : Designator=R22 Old Comment= New Comment=0R-0603
+Change Component Comment : Designator=U$26 Old Comment= New Comment=3.3v
+Change Component Comment : Designator=C15 Old Comment= New Comment=4u7/16V/0603
+Change Component Comment : Designator=C16 Old Comment= New Comment=4u7/16V/0603
+Change Component Comment : Designator=R23 Old Comment= New Comment=10k-0402
+Change Component Comment : Designator=R1 Old Comment= New Comment=10M-0402
+Change Component Comment : Designator=R5 Old Comment= New Comment=10M-0402
+Change Component Comment : Designator=R13 Old Comment= New Comment=10R - 0402
+Change Component Comment : Designator=R17 Old Comment= New Comment=10R-0402
+Change Component Comment : Designator=C3 Old Comment= New Comment=10u/6V3/0603
+Change Component Comment : Designator=C13 Old Comment= New Comment=10u/6V3/0603
+Change Component Comment : Designator=C17 Old Comment= New Comment=22p-0402
+Change Component Comment : Designator=C18 Old Comment= New Comment=22p-0402
+Change Component Comment : Designator=R4 Old Comment= New Comment=33R-0402
+Change Component Comment : Designator=R18 Old Comment= New Comment=33R-0402
+Change Component Comment : Designator=R19 Old Comment= New Comment=33R-0402
+Change Component Comment : Designator=R21 Old Comment= New Comment=33R-0402
+Change Component Comment : Designator=R24 Old Comment= New Comment=33R-0402
+Change Component Comment : Designator=R10 Old Comment= New Comment=79k3-0402
+Change Component Comment : Designator=R2 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R3 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R6 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R7 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R8 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R14 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=R15 Old Comment= New Comment=100k-0402
+Change Component Comment : Designator=C1 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C2 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C4 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C5 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C7 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C9 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C10 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C11 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C12 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C14 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C19 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C20 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C21 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C22 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=C23 Old Comment= New Comment=100n-0402
+Change Component Comment : Designator=R11 Old Comment= New Comment=330-0402
+Change Component Comment : Designator=C6 Old Comment= New Comment=470n/16V/0603
+Change Component Comment : Designator=X6 Old Comment= New Comment=+12V
+Change Component Comment : Designator=U1 Old Comment= New Comment=ADXL362
+Change Component Comment : Designator=UART1 Old Comment= New Comment=CONNECT_3PINS_CMS
+Change Component Comment : Designator=UART2 Old Comment= New Comment=CONNECT_3PINS_CMS
+Change Component Comment : Designator=CAN1 Old Comment= New Comment=CONNECT_CAN
+Change Component Comment : Designator=CAN2 Old Comment= New Comment=CONNECT_CAN
+Change Component Comment : Designator=M3 Old Comment= New Comment=DMP2035U
+Change Component Comment : Designator=IC1 Old Comment= New Comment=DSPIC33EP512MU810-X_PF
+Change Component Comment : Designator=PROG1 Old Comment= New Comment=FE05-1
+Change Component Comment : Designator=U$3 Old Comment= New Comment=L_603
+Change Component Comment : Designator=IC2 Old Comment= New Comment=MCP2551/SN
+Change Component Comment : Designator=IC4 Old Comment= New Comment=MCP2551/SN
+Change Component Comment : Designator=H1 Old Comment= New Comment=MOUNT-HOLE3.2
+Change Component Comment : Designator=H2 Old Comment= New Comment=MOUNT-HOLE3.2
+Change Component Comment : Designator=H3 Old Comment= New Comment=MOUNT-HOLE3.2
+Change Component Comment : Designator=H4 Old Comment= New Comment=MOUNT-HOLE3.2
+Change Component Comment : Designator=LED2 Old Comment= New Comment=NE (LED0603)
+Change Component Comment : Designator=LED3 Old Comment= New Comment=NE (LED0603)
+Change Component Comment : Designator=R12 Old Comment= New Comment=NE - 0402
+Change Component Comment : Designator=C8 Old Comment= New Comment=NE / 0603
+Change Component Comment : Designator=U$1 Old Comment= New Comment=OSHW-LOGOS
+Change Component Comment : Designator=I/OS2 Old Comment= New Comment=PINHD-1X08_2.54
+Change Component Comment : Designator=PWM_CON Old Comment= New Comment=PINHD-1X08_2.54
+Change Component Comment : Designator=JP1 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP2 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP3 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP4 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP5 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP6 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP7 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP8 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP9 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP10 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP11 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=JP12 Old Comment= New Comment=PINHD-2X3
+Change Component Comment : Designator=U$27 Old Comment= New Comment=PTR08100W
+Change Component Comment : Designator=U$10 Old Comment= New Comment=QUARTZ_CMS
+Change Component Comment : Designator=U$2 Old Comment= New Comment=SN75C3232_PW
+Change Component Description : Designator=CAN1 Old Description= New Description=
+<b>Connecteur CAN</b> (club robot)<p>
+Utilisé pour relier le cable de liaison CAN. Mais peut également être utilisé comme un connecteur à 2 broches (le pas est standard) pour des capteurs par exemple.
+Change Component Description : Designator=CAN2 Old Description= New Description=
+<b>Connecteur CAN</b> (club robot)<p>
+Utilisé pour relier le cable de liaison CAN. Mais peut également être utilisé comme un connecteur à 2 broches (le pas est standard) pour des capteurs par exemple.
+Change Component Description : Designator=UART1 Old Description= New Description=
+<b>Connecteur à 3 broches</b> (club robot)<p>
+Utilisé principalement pour les capteurs ou les servomoteurs.
+Change Component Description : Designator=UART2 Old Description= New Description=
+<b>Connecteur à 3 broches</b> (club robot)<p>
+Utilisé principalement pour les capteurs ou les servomoteurs.
+Change Component Description : Designator=PROG1 Old Description= New Description=
+<b>FEMALE HEADER</b>
+Change Component Description : Designator=IC2 Old Description= New Description=
+<b>High-Speed CAN Transceiver</b>
+Change Component Description : Designator=IC4 Old Description= New Description=
+<b>High-Speed CAN Transceiver</b>
+Change Component Description : Designator=H1 Old Description= New Description=
+<b>MOUNTING HOLE</b> with drill center marker
+Change Component Description : Designator=H2 Old Description= New Description=
+<b>MOUNTING HOLE</b> with drill center marker
+Change Component Description : Designator=H3 Old Description= New Description=
+<b>MOUNTING HOLE</b> with drill center marker
+Change Component Description : Designator=H4 Old Description= New Description=
+<b>MOUNTING HOLE</b> with drill center marker
+Change Component Description : Designator=U$1 Old Description= New Description=
+<b>Open Source Hardware Logo</b> This logo indicates the piece of hardware it is found on incorporates a OSHW license and/or adheres to the definition of open source hardware found here: http://freedomdefined.org/OSHW
+Change Component Description : Designator=I/OS2 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP1 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP2 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP3 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP4 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP5 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP6 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP7 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP8 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP9 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP10 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP11 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=JP12 Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=PWM_CON Old Description= New Description=
+<b>PIN HEADER</b>
+Change Component Description : Designator=U$10 Old Description= New Description=
+<b>Quartz</b> (club robot)
+Change Component Description : Designator=X6 Old Description= New Description=
+<b>WAGO SCREW CLAMP</b>
+Change Component Description : Designator=IC1 Old Description= New Description=
+dsPIC33EP512MU810-X_PF TQFP100 14x14
+Change Component Description : Designator=M3 Old Description= New Description=
+P-CHANNEL ENHANCEMENT MODE MOSFET
+Change Component Description : Designator=C1 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C2 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C3 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C4 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C5 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C6 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C7 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C8 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C9 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C10 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C11 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C12 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C13 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C14 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C15 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C16 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C17 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C18 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C19 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C20 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C21 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C22 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=C23 Old Description= New Description=
+SMD capacitor
+Change Component Description : Designator=LED2 Old Description= New Description=
+SMD led
+Change Component Description : Designator=LED3 Old Description= New Description=
+SMD led
+Change Component Description : Designator=R1 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R2 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R3 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R4 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R5 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R6 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R7 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R8 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R9 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R10 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R11 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R12 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R13 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R14 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R15 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R16 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R17 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R18 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R19 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R21 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R22 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R23 Old Description= New Description=
+SMD resistor
+Change Component Description : Designator=R24 Old Description= New Description=
+SMD resistor
+Change Component Library : Designator=CAN1 Old Library= New Library=clubrobot2.IntLib
+Change Component Library : Designator=CAN2 Old Library= New Library=clubrobot2.IntLib
+Change Component Library : Designator=PROG1 Old Library= New Library=clubrobot.IntLib
+Change Component Library : Designator=X6 Old Library= New Library=con-wago-500.IntLib
+Change Component Library : Designator=C1 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C2 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C3 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C4 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C5 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C6 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C7 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C8 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C9 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C10 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C11 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C12 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C13 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C14 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C15 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C16 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C17 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C18 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C19 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C20 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C21 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C22 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=C23 Old Library= New Library=DEVIALET_CAPACITORS.IntLib
+Change Component Library : Designator=LED2 Old Library= New Library=DEVIALET_LEDS.IntLib
+Change Component Library : Designator=LED3 Old Library= New Library=DEVIALET_LEDS.IntLib
+Change Component Library : Designator=R1 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R2 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R3 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R4 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R5 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R6 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R7 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R8 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R9 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R10 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R11 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R12 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R13 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R14 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R15 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R16 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R17 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R18 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R19 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R21 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R22 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R23 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=R24 Old Library= New Library=DEVIALET_RESISTORS.IntLib
+Change Component Library : Designator=M3 Old Library= New Library=DEVIALET_TRANSISTORS.IntLib
+Change Component Library : Designator=IC1 Old Library= New Library=dspic33ep.IntLib
+Change Component Library : Designator=U$2 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=U$3 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=U$10 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=U$26 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=U$27 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=UART1 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=UART2 Old Library= New Library=etienne.IntLib
+Change Component Library : Designator=H1 Old Library= New Library=holes.IntLib
+Change Component Library : Designator=H2 Old Library= New Library=holes.IntLib
+Change Component Library : Designator=H3 Old Library= New Library=holes.IntLib
+Change Component Library : Designator=H4 Old Library= New Library=holes.IntLib
+Change Component Library : Designator=IC2 Old Library= New Library=microchip-dspic.IntLib
+Change Component Library : Designator=IC4 Old Library= New Library=microchip-dspic.IntLib
+Change Component Library : Designator=I/OS2 Old Library= New Library=pinhead-2.IntLib
+Change Component Library : Designator=PWM_CON Old Library= New Library=pinhead-2.IntLib
+Change Component Library : Designator=JP1 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP2 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP3 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP4 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP5 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP6 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP7 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP8 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP9 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP10 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP11 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=JP12 Old Library= New Library=pinhead.IntLib
+Change Component Library : Designator=U$1 Old Library= New Library=SparkFun-Aesthetics.IntLib
+Added Component: Designator=U?(SMD_MRF24J40MA -tight)
+Added Pin To Net: NetName=+3V3 Pin=IC1-27
+Added Pin To Net: NetName=+3V3 Pin=IC1-29
+Added Pin To Net: NetName=+3V3 Pin=IC1-33
+Added Pin To Net: NetName=+3V3 Pin=IC1-35
+Added Pin To Net: NetName=+3V3 Pin=IC1-39
+Added Pin To Net: NetName=+3V3 Pin=IC1-41
+Added Pin To Net: NetName=+3V3 Pin=IC1-43
+Added Pin To Net: NetName=+3V3 Pin=IC1-47
+Added Pin To Net: NetName=+3V3 Pin=IC1-53
+Added Pin To Net: NetName=+3V3 Pin=IC1-57
+Added Pin To Net: NetName=+3V3 Pin=IC1-59
+Added Pin To Net: NetName=+3V3 Pin=IC1-61
+Added Pin To Net: NetName=+3V3 Pin=JP1-2
+Added Pin To Net: NetName=+3V3 Pin=JP2-2
+Added Pin To Net: NetName=+3V3 Pin=JP3-2
+Added Pin To Net: NetName=+3V3 Pin=JP4-2
+Added Pin To Net: NetName=+3V3 Pin=JP5-2
+Added Pin To Net: NetName=+3V3 Pin=JP6-2
+Added Pin To Net: NetName=+3V3 Pin=JP7-2
+Added Pin To Net: NetName=+3V3 Pin=JP8-2
+Added Pin To Net: NetName=+3V3 Pin=JP9-2
+Added Pin To Net: NetName=+3V3 Pin=JP10-2
+Added Pin To Net: NetName=+3V3 Pin=JP11-2
+Added Pin To Net: NetName=+3V3 Pin=JP12-2
+Added Pin To Net: NetName=PGEC/RX Pin=R7-2
+Added Pin To Net: NetName=N$4 Pin=U1-1
+Added Pin To Net: NetName=GND Pin=U1-3
+Added Pin To Net: NetName=ADXL_SCLK Pin=U1-4
+Added Pin To Net: NetName=GND Pin=U1-5
+Added Pin To Net: NetName=ADXL_MOSI Pin=U1-6
+Added Pin To Net: NetName=ADXL_INT2 Pin=U1-9
+Added Pin To Net: NetName=GND Pin=U1-10
+Added Pin To Net: NetName=ADXL_INT1 Pin=U1-11
+Added Pin To Net: NetName=GND Pin=U1-12
+Added Pin To Net: NetName=GND Pin=U1-13
+Added Pin To Net: NetName=N$4 Pin=U1-14
+Added Pin To Net: NetName=GND Pin=U1-16
+Added Pin To Net: NetName=GND Pin=U?-1
+Added Pin To Net: NetName=ZB_WAKE Pin=U?-3
+Added Pin To Net: NetName=ZB_SPI_MOSI Pin=U?-5
+Added Pin To Net: NetName=ZB_SPI_SCK Pin=U?-6
+Added Pin To Net: NetName=VDD_RADIO Pin=U?-10
+Added Pin To Net: NetName=GND Pin=U?-11
+Added Pin To Net: NetName=GND Pin=U?-12
+Change Net Name : Old Net Name=!MCLR New Net Name=M\C\L\R\
+Change Net Name : Old Net Name=!ZB_3V3_EN New Net Name=Z\B\_\3\V\3\_\E\N\
+Change Net Name : Old Net Name=+3V3 New Net Name=PIC_RA3
+Change Net Name : Old Net Name=N$1 New Net Name=NetC2_1
+Change Net Name : Old Net Name=N$2 New Net Name=NetC2_2
+Change Net Name : Old Net Name=N$3 New Net Name=NetU$2_P$14
+Change Net Name : Old Net Name=N$4 New Net Name=NetC1_2
+Change Net Name : Old Net Name=N$6 New Net Name=NetU$2_P$13
+Change Net Name : Old Net Name=N$8 New Net Name=NetCAN2__L
+Change Net Name : Old Net Name=N$9 New Net Name=NetC7_2
+Change Net Name : Old Net Name=N$10 New Net Name=NetIC1_12
+Change Net Name : Old Net Name=N$11 New Net Name=NetLED2_A
+Change Net Name : Old Net Name=N$12 New Net Name=NetC9_2
+Change Net Name : Old Net Name=N$13 New Net Name=NetLED3_A
+Change Net Name : Old Net Name=N$14 New Net Name=NetC7_1
+Change Net Name : Old Net Name=N$15 New Net Name=NetC11_2
+Change Net Name : Old Net Name=N$16 New Net Name=NetC10_1
+Change Net Name : Old Net Name=N$17 New Net Name=NetC10_2
+Change Net Name : Old Net Name=N$18 New Net Name=NetC12_1
+Change Net Name : Old Net Name=N$19 New Net Name=NetR16_1
+Change Net Name : Old Net Name=N$20 New Net Name=NetCAN1__L
+Change Net Name : Old Net Name=N$21 New Net Name=NetCAN1__H
+Change Net Name : Old Net Name=N$22 New Net Name=NetCAN2__H
+Change Net Name : Old Net Name=N$23 New Net Name=NetR11_2
+Change Net Name : Old Net Name=N$26 New Net Name=NetIC1_71
+Change Net Name : Old Net Name=N$27 New Net Name=NetU$2_P$7
+Change Net Name : Old Net Name=N$28 New Net Name=NetU$2_P$8
+Change Net Name : Old Net Name=N$29 New Net Name=NetC18_2
+Change Net Name : Old Net Name=N$30 New Net Name=NetC17_2
+Change Net Name : Old Net Name=N$31 New Net Name=NetR22_2
+Change Net Name : Old Net Name=N$38 New Net Name=NetIC1_11
+Change Net Name : Old Net Name=N$44 New Net Name=NetIC1_70
+Change Net Name : Old Net Name=N$63 New Net Name=NetR10_1
+Added Pin To Net: NetName=A\D\X\L\_\C\S\ Pin=IC1-9
+Added Pin To Net: NetName=A\D\X\L\_\C\S\ Pin=R14-2
+Added Pin To Net: NetName=A\D\X\L\_\C\S\ Pin=U1-8
+Added Net: Name=A\D\X\L\_\C\S\
+Added Pin To Net: NetName=NetC15_1 Pin=C15-1
+Added Pin To Net: NetName=NetC15_1 Pin=U$27-P$1
+Added Net: Name=NetC15_1
+Added Pin To Net: NetName=NetR4_1 Pin=R4-1
+Added Pin To Net: NetName=NetR4_1 Pin=U?-7
+Added Net: Name=NetR4_1
+Added Pin To Net: NetName=NetR15_2 Pin=R15-2
+Added Pin To Net: NetName=NetR15_2 Pin=U1-7
+Added Net: Name=NetR15_2
+Added Pin To Net: NetName=Z\B\_\C\S\ Pin=IC1-73
+Added Pin To Net: NetName=Z\B\_\C\S\ Pin=R2-1
+Added Pin To Net: NetName=Z\B\_\C\S\ Pin=U?-8
+Added Net: Name=Z\B\_\C\S\
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=IC1-69
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=R3-1
+Added Pin To Net: NetName=Z\B\_\I\N\T\ Pin=U?-4
+Added Net: Name=Z\B\_\I\N\T\
+Added Pin To Net: NetName=Z\B\_\R\E\S\E\T\ Pin=IC1-67
+Added Pin To Net: NetName=Z\B\_\R\E\S\E\T\ Pin=R1-2
+Added Pin To Net: NetName=Z\B\_\R\E\S\E\T\ Pin=U?-2
+Added Net: Name=Z\B\_\R\E\S\E\T\
+Added Class: Name=carte_balise_v100
+Added Room: Name=carte_balise_v100

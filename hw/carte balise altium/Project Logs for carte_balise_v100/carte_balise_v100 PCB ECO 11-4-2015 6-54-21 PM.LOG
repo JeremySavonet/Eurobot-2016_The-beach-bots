@@ -1,0 +1,56 @@
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-27
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-29
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-33
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-35
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-39
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-41
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-43
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-47
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-53
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-57
+Removed Pin From Net: NetName=PIC_RA5 Pin=IC1-61
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP2-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP3-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP4-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP5-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP6-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP7-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP8-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP9-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP10-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP11-2
+Removed Pin From Net: NetName=PIC_RA5 Pin=JP12-2
+Change Net Name : Old Net Name=PIC_RA5 New Net Name=+3V3
+Added Pin To Net: NetName=PIC_RA5 Pin=IC1-61
+Added Pin To Net: NetName=PIC_RA5 Pin=JP2-2
+Added Net: Name=PIC_RA5
+Added Pin To Net: NetName=PIC_RA10 Pin=IC1-29
+Added Pin To Net: NetName=PIC_RA10 Pin=JP10-2
+Added Net: Name=PIC_RA10
+Added Pin To Net: NetName=PIC_RB7 Pin=IC1-27
+Added Pin To Net: NetName=PIC_RB7 Pin=JP9-2
+Added Net: Name=PIC_RB7
+Added Pin To Net: NetName=PIC_RB9 Pin=IC1-33
+Added Pin To Net: NetName=PIC_RB9 Pin=JP11-2
+Added Net: Name=PIC_RB9
+Added Pin To Net: NetName=PIC_RB11 Pin=IC1-35
+Added Pin To Net: NetName=PIC_RB11 Pin=JP12-2
+Added Net: Name=PIC_RB11
+Added Pin To Net: NetName=PIC_RB12 Pin=IC1-41
+Added Pin To Net: NetName=PIC_RB12 Pin=JP6-2
+Added Net: Name=PIC_RB12
+Added Pin To Net: NetName=PIC_RB14 Pin=IC1-43
+Added Pin To Net: NetName=PIC_RB14 Pin=JP7-2
+Added Net: Name=PIC_RB14
+Added Pin To Net: NetName=PIC_RD14 Pin=IC1-47
+Added Pin To Net: NetName=PIC_RD14 Pin=JP8-2
+Added Net: Name=PIC_RD14
+Added Pin To Net: NetName=PIC_RF8 Pin=IC1-53
+Added Pin To Net: NetName=PIC_RF8 Pin=JP4-2
+Added Net: Name=PIC_RF8
+Added Pin To Net: NetName=PIC_RF13 Pin=IC1-39
+Added Pin To Net: NetName=PIC_RF13 Pin=JP5-2
+Added Net: Name=PIC_RF13
+Added Pin To Net: NetName=PIC_RG2 Pin=IC1-57
+Added Pin To Net: NetName=PIC_RG2 Pin=JP3-2
+Added Net: Name=PIC_RG2
