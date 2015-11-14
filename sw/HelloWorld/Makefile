@@ -120,15 +120,15 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
-	   $(CHIBIOS)appl/adcManager.c \
-	   appl/debugManager.c \
-	   appl/esp8266Manager.c \
-	   appl/motorsManager.c \
-	   appl/microshell.c \
-	   appl/usbManager.c \
-	   appl/microrl.c \
-	   system.c \
-	   main.c
+	   comm/debugManager.c \
+	   comm/microrl.c \
+	   comm/microshell.c \
+	   comm/usbManager.c \
+	   modules/esp8266Manager.c \
+	   modules/motorsManager.c \
+       modules/adcManager.c \
+	   main.c \
+	   system.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

@@ -12,8 +12,8 @@
 #include "hal.h"
 #include "test.h"
 
-#include "color.h"
-#include "microshell.h"
+#include "../color.h"
+#include "../comm/microshell.h"
 
 #include "adcManager.h"
 

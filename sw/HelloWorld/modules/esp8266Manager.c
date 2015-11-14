@@ -10,10 +10,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "color.h"
-#include "debugManager.h" 
-#include "esp8266Manager.h"
+#include "ch.h"
+#include "hal.h"
 #include "test.h"
+
+#include "../color.h"
+#include "../comm/debugManager.h"
+
+#include "esp8266Manager.h"
 
 // Private functions
 void sendCommand( char *p );

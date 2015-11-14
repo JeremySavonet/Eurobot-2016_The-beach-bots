@@ -6,6 +6,7 @@
 
 #include "ch.h"
 #include "hal.h"
+#include "test.h"
 
 #include "motorsManager.h"
 

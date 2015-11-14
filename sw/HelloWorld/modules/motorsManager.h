@@ -4,9 +4,6 @@
  *  See : Trajectory Manager module
  */
 
-#include "ch.h"
-#include "hal.h"
-
 #ifndef _MOTORS_H_
 #define _MOTORS_H_
 

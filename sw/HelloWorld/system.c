@@ -4,15 +4,16 @@
  */
 
 #include "system.h"
+#include "color.h"
 
-#include "appl/adcManager.h"
-#include "appl/color.h"
-#include "appl/esp8266Manager.h"
-#include "appl/debugManager.h"
-#include "appl/microrl.h"
-#include "appl/microshell.h"
-#include "appl/motorsManager.h"
-#include "appl/usbManager.h"
+#include "comm/debugManager.h"
+#include "comm/microrl.h"
+#include "comm/microshell.h"
+#include "comm/usbManager.h"
+
+#include "modules/adcManager.h"
+#include "modules/esp8266Manager.h"
+#include "modules/motorsManager.h"
 
 /*===========================================================================*/
 /* Declare here board structurev                                             */

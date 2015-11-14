@@ -14,7 +14,8 @@
 #include "hal.h"
 #include "test.h"
 
-#include "color.h"
+#include "../color.h"
+
 #include "config.h"
 #include "microrl.h"
 #include "microshell.h"

@@ -26,10 +26,11 @@
 
 #include "system.h"
 
-#include "appl/adcManager.h"
-#include "appl/debugManager.h"
-#include "appl/microshell.h"
-#include "appl/motorsManager.h"
+#include "comm/debugManager.h"
+#include "comm/microshell.h"
+
+#include "modules/adcManager.h"
+#include "modules/motorsManager.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
