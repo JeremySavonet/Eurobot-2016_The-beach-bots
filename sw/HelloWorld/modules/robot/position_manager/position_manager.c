@@ -230,7 +230,6 @@ void position_manage( struct robot_position *pos )
     pos->pos_s16.a = a_s16;
 }
 
-
 /*
  * returns current x
  */
@@ -262,6 +261,7 @@ double position_get_x_double( struct robot_position *pos )
 {
     return pos->pos_d.x;
 }
+
 float position_get_x_float( struct robot_position *pos )
 {
     return (float)pos->pos_d.x;

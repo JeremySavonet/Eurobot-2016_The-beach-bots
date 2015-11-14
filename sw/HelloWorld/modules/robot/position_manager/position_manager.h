@@ -193,7 +193,7 @@ void position_use_mot( struct robot_position *pos );
  */
 void position_set_physical_params( struct robot_position *pos, 
                                    double track_mm,
-				                   double distance_imp_per_mm );
+                                   double distance_imp_per_mm );
 
 /*
  * Set related robot_system structure.
