@@ -27,8 +27,8 @@
 #include "test.h"
 
 // Debug includes
-#include "../../color.h"
-#include "../../comm/debugManager.h"
+#include "../../../color.h"
+#include "../../../comm/debugManager.h"
 
 #include "control_system_manager.h"
 
