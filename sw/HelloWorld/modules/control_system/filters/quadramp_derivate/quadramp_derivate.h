@@ -29,7 +29,7 @@ struct quadramp_derivate_filter
     uint32_t var_2nd_ord_neg;
     uint32_t var_1st_ord_pos;
     uint32_t var_1st_ord_neg;
-
+    
     int32_t previous_in_position;
     int32_t previous_out_speed;
     
@@ -121,4 +121,3 @@ void quadramp_derivate_set_divisor( struct quadramp_derivate_filter * q,
 extern int32_t quadramp_derivate_do_filter( void * data, int32_t in );
 
 #endif  // _QUADRAMP_DERIVATE_H_
-

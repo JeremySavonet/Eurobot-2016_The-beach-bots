@@ -124,7 +124,7 @@ CSRC = $(STARTUPSRC) \
 	   comm/microrl.c \
 	   comm/microshell.c \
 	   comm/usbManager.c \
-       modules/adcManager.c \
+	   modules/adcManager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
 	   modules/control_system/filters/biquad/biquad.c \
@@ -136,7 +136,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/motorsManager.c \
 	   modules/robot/robot_system/angle_distance.c \
 	   modules/robot/robot_system/robot_system.c \
-       main.c \
+	   main.c \
 	   system.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

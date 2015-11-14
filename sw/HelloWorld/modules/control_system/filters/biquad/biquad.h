@@ -24,18 +24,18 @@
 // this is the biquad structure
 struct biquad_filter
 {
-	int16_t     b0, b1, b2;
-	int16_t     a1, a2; //never access it directly, use accessors
-  
-	uint8_t     out_shift;
-	uint8_t     recursive_shift;
-
-	int32_t     mem_in_1;
-	int32_t     mem_in_2;
-	int32_t     mem_out_1;
-	int32_t     mem_out_2;
-  
-	struct biquad_filter * son;
+    int16_t     b0, b1, b2;
+    int16_t     a1, a2; //never access it directly, use accessors
+    
+    uint8_t     out_shift;
+    uint8_t     recursive_shift;
+    
+    int32_t     mem_in_1;
+    int32_t     mem_in_2;
+    int32_t     mem_out_1;
+    int32_t     mem_out_2;
+    
+    struct biquad_filter * son;
 };
 
 /* 

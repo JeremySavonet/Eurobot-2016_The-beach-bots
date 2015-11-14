@@ -44,16 +44,16 @@
 static inline uint32_t
 safe_filter( int32_t (*f)( void *, int32_t ), void * param, int32_t value )
 {
-	int32_t (*f_tmp)( void *, int32_t );
-	void * param_tmp;
-	f_tmp = f;
-	param_tmp = param;
-	 
-	if( f_tmp )
+    int32_t (*f_tmp)( void *, int32_t );
+    void * param_tmp;
+    f_tmp = f;
+    param_tmp = param;
+     
+    if( f_tmp )
     {
-		return f_tmp( param_tmp, value);
-	}
-	return value;
+        return f_tmp( param_tmp, value);
+    }
+    return value;
 }
 
 /** Call a processout() pointer : 
@@ -66,16 +66,16 @@ safe_filter( int32_t (*f)( void *, int32_t ), void * param, int32_t value )
 static inline uint32_t
 safe_getprocessout( int32_t (*f)( void * ), void * param )
 {
-	int32_t (*f_tmp)( void * );
-	void * param_tmp;
-	f_tmp = f;
-	param_tmp = param;
-	 
-	if( f_tmp )
+    int32_t (*f_tmp)( void * );
+    void * param_tmp;
+    f_tmp = f;
+    param_tmp = param;
+    
+    if( f_tmp )
     {
-		return f_tmp( param_tmp );
-	}
-	return 0;
+    	return f_tmp( param_tmp );
+    }
+    return 0;
 }
 
 /** Call a processin() pointer : 
@@ -88,15 +88,15 @@ safe_getprocessout( int32_t (*f)( void * ), void * param )
 static inline void
 safe_setprocessin( void (*f)( void *, int32_t ), void * param, int32_t value )
 {
-	void (*f_tmp)( void *, int32_t );
-	void * param_tmp;
-	f_tmp = f;
-	param_tmp = param;
-		 
-	if( f_tmp )
+    void (*f_tmp)( void *, int32_t );
+    void * param_tmp;
+    f_tmp = f;
+    param_tmp = param;
+    	 
+    if( f_tmp )
     {
-		f_tmp(param_tmp, value);
-	}
+    	f_tmp(param_tmp, value);
+    }
 }
 
 /**********************************************/
@@ -105,19 +105,19 @@ void cs_init( struct cs* cs )
 {
     cs->consign_filter = NULL;
     cs->consign_filter_params = NULL;
-
+    
     cs->correct_filter = NULL;
     cs->correct_filter_params = NULL;
-
+    
     cs->feedback_filter = NULL;
     cs->feedback_filter_params = NULL;
-
+    
     cs->process_out = NULL;
     cs->process_out_params = NULL;
-
+    
     cs->process_in = NULL;
     cs->process_in_params = NULL;
-
+    
     cs->consign_value = 0;
     cs->error_value = 0;
     cs->out_value = 0;
@@ -207,7 +207,7 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
         cs->error_value = cs->filtered_consign_value - process_out_value ;
         
         DPRINT( 4, KYEL "%ld ", cs->error_value );
-   
+    
         /* apply the correct filter to error_value and put it into out_value */
         cs->out_value = safe_filter( cs->correct_filter, 
                                      cs->correct_filter_params, 
@@ -223,7 +223,7 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
     {
         cs->out_value = 0;
     }
-
+    
     /* send out_value to process in*/
     safe_setprocessin( cs->process_in, 
                        cs->process_in_params, 
@@ -268,8 +268,8 @@ int32_t cs_get_filtered_feedback( struct cs* cs )
 
 int32_t cs_get_feedback( struct cs* cs ) 
 {
-    return safe_getprocessout( cs->process_out, 
-                               cs->process_out_params );
+     return safe_getprocessout( cs->process_out, 
+                                cs->process_out_params );
 }
 
 void cs_set_consign( struct cs* cs, int32_t v )

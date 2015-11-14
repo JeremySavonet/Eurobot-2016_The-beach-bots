@@ -98,7 +98,7 @@
  */
 struct robot_system
 {
-	uint8_t flags; // Flags currently in use.
+    uint8_t flags; // Flags currently in use.
 
 #ifdef CONFIG_MODULE_ROBOT_SYSTEM_MOT_AND_EXT
     /* Motor encoders. */
@@ -107,64 +107,64 @@ struct robot_system
     
     // Previous position of the real motor encoders.
     struct rs_wheels wmot_prev; 
-
+    
     // Ratio between the motor and external encoders track. 
     float ratio_mot_ext; 
-
+    
     // Callback to get the value of the left motor encoder.
     int32_t (*left_mot_encoder)( void * );
-
+    
     // Data that will be passed to left_mot_encoder.
     void* left_mot_encoder_param;
-
+    
     // Gain on the left motor encoder to compensate for wheel difference.
     float left_mot_gain;
-
+    
     // Callback to get the value of the left motor encoder.
     int32_t (*right_mot_encoder)( void * );
-
+    
     // Data that will be passed to right_mot_encoder.
     void* right_mot_encoder_param;
-
+    
     // Gain on the right motor encoder to compensate for wheel difference.
     float right_mot_gain;
 #endif 
 
-	// External encoders
+    // External encoders
     // Value of the virtual PWM.
-	struct rs_polar virtual_pwm;
+    struct rs_polar virtual_pwm;
     // Value of the virtual encoders.
-	struct rs_polar virtual_encoders;
-
+    struct rs_polar virtual_encoders;
+    
     // Previous value of the virtual encoders.
-	struct rs_polar pext_prev;
+    struct rs_polar pext_prev;
     // Previous value of the real encoders.
-	struct rs_wheels wext_prev;
-
+    struct rs_wheels wext_prev;
+    
     // Callback to get the value of the left encoder.
-	int32_t (*left_ext_encoder)( void * );
+    int32_t (*left_ext_encoder)( void * );
     // Data that will be passed to left_ext_encoder.
-	void* left_ext_encoder_param;
+    void* left_ext_encoder_param;
     // Gain on the left encoder to compensate for wheel difference.
-	double left_ext_gain;
-	
+    double left_ext_gain;
+    
     // Callback to get the value of the right encoder.
-	int32_t (*right_ext_encoder)( void * );
+    int32_t (*right_ext_encoder)( void * );
     // Data that will be passed to right_ext_encoder.
-	void* right_ext_encoder_param;
+    void* right_ext_encoder_param;
     // Gain on the right encoder to compensate for wheel difference.
-	double right_ext_gain;
-
-	// PWM
+    double right_ext_gain;
+    
+    // PWM
     // Callback to set the left motor PWM.
-	void (*left_pwm)( void *, int32_t );
+    void (*left_pwm)( void *, int32_t );
     // Data that will be passed to left_pwm.
-	void *left_pwm_param;
-
+    void *left_pwm_param;
+    
     // Callback to set the right motor PWM.
-	void (*right_pwm)( void *, int32_t );
+    void (*right_pwm)( void *, int32_t );
     // Data that will be passed to right_pwm.
-	void *right_pwm_param;
+    void *right_pwm_param;
 };
 
 /*

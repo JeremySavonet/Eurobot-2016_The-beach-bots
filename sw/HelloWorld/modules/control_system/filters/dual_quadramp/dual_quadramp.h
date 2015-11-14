@@ -14,13 +14,13 @@
  */
 struct dual_quadramp_filter 
 {
-	struct quadramp_filter x_quadramp;  // Filter for the x-axis 
+    struct quadramp_filter x_quadramp;  // Filter for the x-axis 
     struct quadramp_filter y_quadramp;  // Filter for the y-axis
-	int32_t x_pos;                      // Current position
+    int32_t x_pos;                      // Current position
     int32_t y_pos;                      // Current position
-	int32_t x_consign;                  
+    int32_t x_consign;                  
     int32_t y_consign;                  
-	int32_t speed;                      // Max. speed 
+    int32_t speed;                      // Max. speed 
     int32_t acc;                        // Max. acceleration 
 };
 
@@ -68,4 +68,4 @@ void dual_quadramp_set_acc_and_speed( struct dual_quadramp_filter *q,
                                       int32_t speed, 
                                       int32_t acc );
 
-#endif /* DUAL_QUADRAMP_H_ */
+#endif //DUAL_QUADRAMP_H_

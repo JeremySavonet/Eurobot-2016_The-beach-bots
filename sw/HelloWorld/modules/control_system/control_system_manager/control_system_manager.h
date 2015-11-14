@@ -146,5 +146,4 @@ void cs_disable( struct cs* cs );
 /** Enable control system (return the normal operation) **/
 void cs_enable( struct cs* cs );
 
-
-#endif /* #ifndef _CONTROL_SYSTEM_MANAGER_ */
+#endif // _CONTROL_SYSTEM_MANAGER_H

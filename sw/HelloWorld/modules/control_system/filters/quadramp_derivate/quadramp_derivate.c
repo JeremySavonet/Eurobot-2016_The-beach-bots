@@ -29,56 +29,56 @@
 
 void quadramp_derivate_init( struct quadramp_derivate_filter * q )
 {
-	q->var_2nd_ord_pos = 1;
-	q->var_2nd_ord_neg = 1;
-	q->var_1st_ord_pos = 0;
-	q->var_1st_ord_neg = 0;
-	
-	q->previous_in_position = 0;
-	q->previous_out_speed = 0;
-  
-	q-> gain_anticipation= 0;
-	q-> goal_window= 0;
-  
-	q-> divisor = 1;
-  
-	q-> pivot = 0;
+    q->var_2nd_ord_pos = 1;
+    q->var_2nd_ord_neg = 1;
+    q->var_1st_ord_pos = 0;
+    q->var_1st_ord_neg = 0;
+    
+    q->previous_in_position = 0;
+    q->previous_out_speed = 0;
+    
+    q-> gain_anticipation= 0;
+    q-> goal_window= 0;
+    
+    q-> divisor = 1;
+    
+    q-> pivot = 0;
 } 
 
 void quadramp_derivate_set_gain_anticipation( 
         struct quadramp_derivate_filter * q, 
         uint16_t gain_anticipation )
 {
-	q->gain_anticipation = gain_anticipation; 
+    q->gain_anticipation = gain_anticipation; 
 }
 
 void quadramp_derivate_set_goal_window( struct quadramp_derivate_filter * q, 
                                         uint32_t goal_window )
 {
-	q->goal_window = goal_window;	 
+    q->goal_window = goal_window;	 
 }
 
 void quadramp_derivate_set_2nd_order_vars( struct quadramp_derivate_filter * q, 
                                            uint32_t var_2nd_ord_pos, 
                                            uint32_t var_2nd_ord_neg )
 {
-	q->var_2nd_ord_pos = var_2nd_ord_pos;
-	q->var_2nd_ord_neg = var_2nd_ord_neg;	 
+    q->var_2nd_ord_pos = var_2nd_ord_pos;
+    q->var_2nd_ord_neg = var_2nd_ord_neg;	 
 }
 
 void quadramp_derivate_set_1st_order_vars( struct quadramp_derivate_filter * q, 
                                            uint32_t var_1st_ord_pos, 
                                            uint32_t var_1st_ord_neg )
 {
-	q->var_1st_ord_pos = var_1st_ord_pos;
-	q->var_1st_ord_neg = var_1st_ord_neg;
+    q->var_1st_ord_pos = var_1st_ord_pos;
+    q->var_1st_ord_neg = var_1st_ord_neg;
 }
 
 void quadramp_derivate_set_divisor( struct quadramp_derivate_filter * q, 
                                     uint8_t divisor )
 {
-	q->divisor = divisor;
-	q->divisor_counter = 1;	 
+    q->divisor = divisor;
+    q->divisor_counter = 1;	 
 }
 
 /**
@@ -90,151 +90,150 @@ void quadramp_derivate_set_divisor( struct quadramp_derivate_filter * q,
  */
 int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
 {
-	struct quadramp_derivate_filter * q = data;
-	int32_t position_pivot;
+    struct quadramp_derivate_filter * q = data;
+    int32_t position_pivot;
     int32_t speed;
     int32_t var_2nd_ord;
     int32_t acceleration_consign;
     int32_t speed_consign;
-  
-	// sampling divisor
-	// this is a state machine who executes the algorithm only one time out 
+    
+    // sampling divisor
+    // this is a state machine who executes the algorithm only one time out 
     // of "divisor" 
-	if( q->divisor != 1 ) 
+    if( q->divisor != 1 ) 
     {
-		if( --( q->divisor_counter ) != 0 ) 
+    	if( --( q->divisor_counter ) != 0 ) 
         {
-			// if it is not time to exec the algorithm, 
+    		// if it is not time to exec the algorithm, 
             // we just test the goal_window
-			if( (ABS( in_position ) ) < q->goal_window )
+    		if( (ABS( in_position ) ) < q->goal_window )
             {
-				q->previous_out_speed =0;
+    			q->previous_out_speed =0;
             }
-
-			// and return the previous consign
-			return q->previous_out_speed;
-		}
-		
-		q->divisor_counter = q->divisor;
-	}
-	
-	// compensation of the inversion before the input 
-	// (inversion of the control system where error = consign - feedback)
-	in_position = -in_position; 
-  
-	// calculating the actual speed (derivate)
-	speed = in_position - q->previous_in_position;
-  
-	// limitation of this speed, due to overflows, 
+    
+    		// and return the previous consign
+    		return q->previous_out_speed;
+    	}
+    	
+    	q->divisor_counter = q->divisor;
+    }
+    
+    // compensation of the inversion before the input 
+    // (inversion of the control system where error = consign - feedback)
+    in_position = -in_position; 
+    
+    // calculating the actual speed (derivate)
+    speed = in_position - q->previous_in_position;
+    
+    // limitation of this speed, due to overflows, 
     // and calculations based on theoretical max value
-	// and also the peak created when the position_consign changes 
-	if( speed >= 0 ) 
+    // and also the peak created when the position_consign changes 
+    if( speed >= 0 ) 
     {
-		if( q->var_1st_ord_pos )
+    	if( q->var_1st_ord_pos )
         {
-		    // divisor reequilibrates the value.	
+    	    // divisor reequilibrates the value.	
             uint32_t speed_tmp = (uint32_t)speed;
             MAX( speed_tmp , ( q->var_1st_ord_pos * q-> divisor ) ); 
         }
     }
-	else 
+    else 
     {
-		if( q->var_1st_ord_neg )
+    	if( q->var_1st_ord_neg )
         {
-		    // divisor reequilibrates the value.	
+    	    // divisor reequilibrates the value.	
             uint32_t speed_tmp = (uint32_t)speed;
             MIN( speed_tmp , ( -( q->var_1st_ord_neg* q-> divisor ) ) ); 
         }
-	}
-	
-	// calculation of the pivot position.
-	// when this position is atteined, 
+    }
+    
+    // calculation of the pivot position.
+    // when this position is atteined, 
     // it is just the right time to begin to deccelerate.
-	// The length to this position is given by a linear decceleration to 0 : 
+    // The length to this position is given by a linear decceleration to 0 : 
     // x = speed²/ (2 * acceleration)
-  
-	// taking the concerned acc. value
-	if( speed >= 0 ) // why not position ?
+    
+    // taking the concerned acc. value
+    if( speed >= 0 ) // why not position ?
     {
-		var_2nd_ord = q->var_2nd_ord_pos;
+    	var_2nd_ord = q->var_2nd_ord_pos;
     }
-	else
+    else
     {
-		var_2nd_ord = q->var_2nd_ord_neg;
+    	var_2nd_ord = q->var_2nd_ord_neg;
     }
-  
-	// anticipation, proportionnal to speed. 
+    
+    // anticipation, proportionnal to speed. 
     // Gain_anticipation is a fixed point value, with 8 bits shift
-	position_pivot = ( ABS( speed ) * q->gain_anticipation ); // >>8
-
-	// if necessary, compensation of the output units, 
+    position_pivot = ( ABS( speed ) * q->gain_anticipation ); // >>8
+    
+    // if necessary, compensation of the output units, 
     // when using a sampler divisor
-	if( q->divisor != 1 ) 
+    if( q->divisor != 1 ) 
     {
-		var_2nd_ord    *= q-> divisor;
-		position_pivot /= q-> divisor;
-	}
-	
-	// pivot calculation itself
-	position_pivot += speed * speed / ( 2 * var_2nd_ord );
-  
-	// taking the right sign
-	if( speed >= 0 )
-    {
-		position_pivot =  - position_pivot;
+    	var_2nd_ord    *= q-> divisor;
+    	position_pivot /= q-> divisor;
     }
-
-	// mem only for debug
-	q-> pivot = position_pivot;
-
-	// this is the heart of the trajectory generation.
-	// Pretty simple but indeed unstable, 
-	// because of this corresponds to an infinite gain, 
+    
+    // pivot calculation itself
+    position_pivot += speed * speed / ( 2 * var_2nd_ord );
+    
+    // taking the right sign
+    if( speed >= 0 )
+    {
+    	position_pivot =  - position_pivot;
+    }
+    
+    // mem only for debug
+    q-> pivot = position_pivot;
+    
+    // this is the heart of the trajectory generation.
+    // Pretty simple but indeed unstable, 
+    // because of this corresponds to an infinite gain, 
     // in the following equation :
-	// acceleration_consign = ( position_pivot - in_position ) * gain
+    // acceleration_consign = ( position_pivot - in_position ) * gain
       
-	// In fact this unstability is erased by the fact 
+    // In fact this unstability is erased by the fact 
     // that the acc value is nearly always limited
-	if( position_pivot >= in_position )
+    if( position_pivot >= in_position )
     {
-		acceleration_consign = q->var_2nd_ord_pos;
+    	acceleration_consign = q->var_2nd_ord_pos;
     }
-	else
+    else
     {
-		acceleration_consign = -q->var_2nd_ord_neg;
+    	acceleration_consign = -q->var_2nd_ord_neg;
     }
-
-	// integration and limitation of the acceleration to obtain a speed consign 
-	speed_consign = q->previous_out_speed + acceleration_consign;
-
-	if( speed_consign >= 0 ) 
+    
+    // integration and limitation of the acceleration to obtain a speed consign 
+    speed_consign = q->previous_out_speed + acceleration_consign;
+    
+    if( speed_consign >= 0 ) 
     {
-		if( q->var_1st_ord_pos )
+    	if( q->var_1st_ord_pos )
         {
             uint32_t speed_consign_tmp = (uint32_t)speed_consign;
-			MAX( speed_consign_tmp , q->var_1st_ord_pos );
+    		MAX( speed_consign_tmp , q->var_1st_ord_pos );
         }
-	}
-	else 
+    }
+    else 
     {
-		if( q->var_1st_ord_neg )
+    	if( q->var_1st_ord_neg )
         {
             uint32_t speed_consign_tmp = (uint32_t)speed_consign;
-			MIN( speed_consign_tmp , -q->var_1st_ord_neg );
+    		MIN( speed_consign_tmp , -q->var_1st_ord_neg );
         }
-	}
-	
-	// creation of an end arrival window. 
+    }
+    
+    // creation of an end arrival window. 
     // This is done to stop the oscillations when the goal is achieved. 
-	if( ABS( in_position ) < q->goal_window )
+    if( ABS( in_position ) < q->goal_window )
     {
-		speed_consign=0;
+    	speed_consign=0;
     }
-  
-	// refresh the memories 
-	q->previous_in_position = in_position;
-	q->previous_out_speed = speed_consign;
-  
-	return speed_consign ;
-	
+    
+    // refresh the memories 
+    q->previous_in_position = in_position;
+    q->previous_out_speed = speed_consign;
+    
+    return speed_consign ;
 } 

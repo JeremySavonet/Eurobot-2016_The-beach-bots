@@ -38,14 +38,14 @@
  */
 struct quadramp_filter
 {
-	double var_2nd_ord_pos; // Acceleration
-	double var_2nd_ord_neg; // Deceleration
-	double var_1st_ord_pos; // Speed (> 0)
-	double var_1st_ord_neg; // Speed (< 0) 
-
-	double previous_var; // Speed at the previous filter iteration.
-	double previous_out; // Position at the previous filter iteration.
-	int32_t previous_in; // Input at the previous filter iteration.
+    double var_2nd_ord_pos; // Acceleration
+    double var_2nd_ord_neg; // Deceleration
+    double var_1st_ord_pos; // Speed (> 0)
+    double var_1st_ord_neg; // Speed (< 0) 
+    
+    double previous_var; // Speed at the previous filter iteration.
+    double previous_out; // Position at the previous filter iteration.
+    int32_t previous_in; // Input at the previous filter iteration.
 };
 
 /* 

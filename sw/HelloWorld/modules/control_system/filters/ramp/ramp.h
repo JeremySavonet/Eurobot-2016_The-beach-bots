@@ -35,10 +35,10 @@
 // Instance of the ramp filter.
 struct ramp_filter
 {
-	uint32_t var_neg;   // Maximal negative variation.
-	uint32_t var_pos;   // Maximal positive variation. 
+    uint32_t var_neg;   // Maximal negative variation.
+    uint32_t var_pos;   // Maximal positive variation. 
     int32_t prev_speed; // Speed at the previous iteration.
-	int32_t prev_out;   // Previous position output.
+    int32_t prev_out;   // Previous position output.
 };
 
 /*

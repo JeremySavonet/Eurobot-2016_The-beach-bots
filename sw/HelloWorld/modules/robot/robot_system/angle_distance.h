@@ -27,8 +27,8 @@
  */
 struct rs_wheels 
 {
-	int32_t left; // The left encoder value.
-	int32_t right; // The right encoder value.
+    int32_t left; // The left encoder value.
+    int32_t right; // The right encoder value.
 };
 
 /*
@@ -36,8 +36,8 @@ struct rs_wheels
  */
 struct rs_polar 
 {
-	int32_t distance; // The distance encoder value.
-	int32_t angle; // The angle encoder value.
+    int32_t distance; // The distance encoder value.
+    int32_t angle; // The angle encoder value.
 };
 
 /*

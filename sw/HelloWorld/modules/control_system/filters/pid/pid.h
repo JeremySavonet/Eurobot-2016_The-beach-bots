@@ -33,23 +33,23 @@
 /** this is the pid_filter structure*/
 struct pid_filter
 {
-	int16_t gain_P; // Gain of Proportionnal module
-	int16_t gain_I; // Gain of Integral module
-	int16_t gain_D; // Gain of Derivate module
-
-	uint8_t out_shift; // Big common divisor for output
-
-	uint8_t derivate_nb_samples; // Sample count for derivate filter
-	uint8_t index; // Index in circular buffer below
-	int32_t prev_samples[PID_DERIVATE_FILTER_MAX_SIZE]; // Previous in (circular buf)
-	
-	int32_t max_in; // In saturation levels
-	int32_t max_I; // Integral saturation levels
-	int32_t max_out; // Out saturation levels
-
-	int32_t integral; // Previous integral parameter
-	int32_t prev_D;   // Previous derivate paramete
-	int32_t prev_out; // Previous out command (for debug only)
+    int16_t gain_P; // Gain of Proportionnal module
+    int16_t gain_I; // Gain of Integral module
+    int16_t gain_D; // Gain of Derivate module
+    
+    uint8_t out_shift; // Big common divisor for output
+    
+    uint8_t derivate_nb_samples; // Sample count for derivate filter
+    uint8_t index; // Index in circular buffer below
+    int32_t prev_samples[PID_DERIVATE_FILTER_MAX_SIZE]; // Previous in (circular buf)
+    
+    int32_t max_in; // In saturation levels
+    int32_t max_I; // Integral saturation levels
+    int32_t max_out; // Out saturation levels
+    
+    int32_t integral; // Previous integral parameter
+    int32_t prev_D;   // Previous derivate paramete
+    int32_t prev_out; // Previous out command (for debug only)
 };
 
 /** Inits pid */
