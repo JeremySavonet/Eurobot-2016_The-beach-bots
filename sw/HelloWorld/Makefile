@@ -124,6 +124,7 @@ CSRC = $(STARTUPSRC) \
 	   comm/microrl.c \
 	   comm/microshell.c \
 	   comm/usbManager.c \
+	   modules/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
 	   modules/motorsManager.c \
        modules/adcManager.c \
