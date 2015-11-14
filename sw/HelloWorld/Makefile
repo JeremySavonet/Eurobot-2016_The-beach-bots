@@ -124,6 +124,7 @@ CSRC = $(STARTUPSRC) \
 	   comm/microrl.c \
 	   comm/microshell.c \
 	   comm/usbManager.c \
+	   common/vect2.c \
 	   modules/adcManager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
@@ -134,6 +135,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
 	   modules/motorsManager.c \
+	   modules/robot/position_manager/position_manager.c \
 	   modules/robot/robot_system/angle_distance.c \
 	   modules/robot/robot_system/robot_system.c \
 	   main.c \
