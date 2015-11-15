@@ -1,10 +1,10 @@
 /*
- *  Copyright Droids Corporation, Microb Technology, Eirbot (2005)
+ *  Copyright Droids Corporation, Microb Technology, Eirbot ( 2005 )
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  ( at your option ) any later version.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,52 +32,56 @@
 
 #include "trajectory_manager.h"
 
-/** structure initialization */
-void trajectory_init(struct trajectory *traj, double cs_hz)
+// structure initialization
+void trajectory_init( struct trajectory *traj, double cs_hz )
 {
-	memset(traj, 0, sizeof(struct trajectory));
-	traj->cs_hz = cs_hz;
-	traj->state = READY;
-	traj->scheduler_task = -1;
+    memset( traj, 0, sizeof( struct trajectory ) );
+    traj->cs_hz = cs_hz;
+    traj->state = READY;
+    traj->scheduler_task = -1;
 }
 
-/** structure initialization */
-void trajectory_set_cs(struct trajectory *traj, struct cs *cs_d,
-		       struct cs *cs_a)
+// structure initialization
+void trajectory_set_cs( struct trajectory *traj, 
+                        struct cs *cs_d,
+                        struct cs *cs_a )
 {
     traj->csm_distance = cs_d;
     traj->csm_angle = cs_a;
 }
 
-/** structure initialization */
-void trajectory_set_robot_params(struct trajectory *traj,
-				 struct robot_system *rs,
-				 struct robot_position *pos)
+// structure initialization
+void trajectory_set_robot_params( struct trajectory *traj,
+                                  struct robot_system *rs,
+                                  struct robot_position *pos )
 {
-	traj->robot = rs;
-	traj->position = pos;
+    traj->robot = rs;
+    traj->position = pos;
 }
 
-/** set speed consign */
-void trajectory_set_speed(struct trajectory *traj, double d_speed, double a_speed)
+// set speed consign
+void trajectory_set_speed( struct trajectory *traj, 
+                           double d_speed, 
+                           double a_speed )
 {
-	traj->d_speed = d_speed;
-	traj->a_speed = a_speed;
+    traj->d_speed = d_speed;
+    traj->a_speed = a_speed;
 }
 
-/** set acc consign */
-void trajectory_set_acc(struct trajectory *traj, double d_acc, double a_acc)
+// set acc consign
+void trajectory_set_acc( struct trajectory *traj, double d_acc, double a_acc )
 {
-	traj->d_acc = d_acc;
-	traj->a_acc = a_acc;
+    traj->d_acc = d_acc;
+    traj->a_acc = a_acc;
 }
 
-/** set windows for trajectory */
-void trajectory_set_windows(struct trajectory *traj, double d_win,
-			    double a_win_deg, double a_start_deg)
+// set windows for trajectory 
+void trajectory_set_windows( struct trajectory *traj,   
+                             double d_win,
+                             double a_win_deg, 
+                             double a_start_deg )
 {
     traj->d_win = d_win ;
-    traj->a_win_rad = RAD(a_win_deg);
-	traj->a_start_rad = RAD(a_start_deg);
+    traj->a_win_rad = RAD( a_win_deg );
+    traj->a_start_rad = RAD( a_start_deg );
 }
-
