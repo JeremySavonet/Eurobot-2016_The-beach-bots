@@ -25,8 +25,6 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "vect_base.h"
-#include "lines.h"
 #include "polygon.h"
 
 #define DEBUG 0

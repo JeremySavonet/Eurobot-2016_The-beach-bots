@@ -140,9 +140,11 @@ CSRC = $(STARTUPSRC) \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
 	   modules/motorsManager.c \
+	   modules/obstacle_avoidance/obstacle_avoidance.c \
 	   modules/robot/position_manager/position_manager.c \
 	   modules/robot/robot_system/angle_distance.c \
 	   modules/robot/robot_system/robot_system.c \
+	   modules/robot/trajectory_manager/trajectory_manager.c \
 	   main.c \
 	   system.c
 

@@ -19,7 +19,10 @@
  *
  */
 
+#include "../../../common/math/vect2.h"
+
 #include "../robot_system/robot_system.h"
+
 
 #ifndef _ROBOT_POSITION_MANAGER_H_
 #define _ROBOT_POSITION_MANAGER_H_

@@ -19,26 +19,18 @@
  *
  */
 
-/* Trajectory Manager v3 - zer0 - for Eurobot 2010 */
-
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 
-#include <aversive.h>
-#include <aversive/error.h>
-#include <scheduler.h>
-#include <vect2.h>
+#include "../../../common/utils.h"
 
-#include <2wheels/position_manager.h>
-#include <2wheels/robot_system.h>
-#include <control_system_manager.h>
-#include <quadramp.h>
+#include "../position_manager/position_manager.h"
 
-#include <2wheels/trajectory_manager.h>
-#include "trajectory_manager_utils.h"
+#include "../../control_system/control_system_manager/control_system_manager.h"
+#include "../../control_system/filters/quadramp/quadramp.h"
 
-/************ INIT FUNCS */
+#include "trajectory_manager.h"
 
 /** structure initialization */
 void trajectory_init(struct trajectory *traj, double cs_hz)

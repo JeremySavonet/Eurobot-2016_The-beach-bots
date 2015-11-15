@@ -22,6 +22,9 @@
 #ifndef _POLYGON_H_
 #define _POLYGON_H_
 
+#include "vect_base.h"
+#include "lines.h"
+
 /* 
  * A polygon.
  * An array of points, defining the corners of a geometric figure.

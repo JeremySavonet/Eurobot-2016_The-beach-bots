@@ -19,9 +19,8 @@
  *
  */
 
-/** @file trajectory_manager.h
- *
- * @brief Interface to the trajectory manager.
+/*
+ * Interface to the trajectory manager.
  *
  * This module handles the high level trajectory management functions, like
  * going from one point to another in a smooth curve, etc...
@@ -30,48 +29,50 @@
  * position_manager, quadramp, robot_system. It uses the vect2 module.
  */
 
-#ifndef TRAJECTORY_MANAGER
-#define TRAJECTORY_MANAGER
+#ifndef _TRAJECTORY_MANAGER_H_
+#define _TRAJECTORY_MANAGER_H_
 
-#include <aversive.h>
-#include <vect2.h>
-#include <2wheels/robot_system.h>
-#include <vect_base.h>
-#include <lines.h>
+#include "../../../common/math/vect2.h"
+#include "../../../common/math/geometry/vect_base.h"
+#include "../../../common/math/geometry/lines.h"
 
-/** State of the trajectory manager. */
-enum trajectory_state {
-	READY, /**< Ready, waiting for a trajectory. */
+#include "../robot_system/robot_system.h"
 
-	/* simple trajectories */
-	RUNNING_A, /**< Turning without moving. */
-	RUNNING_D, /**< Going straight. */
-	RUNNING_AD, /**< Going forward and turning at the same time. */
+// State of the trajectory manager.
+enum trajectory_state 
+{
+	READY, // Ready, waiting for a trajectory.
 
-	/* trajectories using events */
-	RUNNING_XY_START,        /**< A trajectory order was given, preparing to go. */
-	RUNNING_XY_ANGLE,        /**< Doing a preliminary turn before starting to move. */
-	RUNNING_XY_ANGLE_OK,     /**< Angle is now ok, move forward. */ 
-	RUNNING_XY_F_START,      /**< Same as RUNNING_XY_START but forward only. */ 
-	RUNNING_XY_F_ANGLE,      /**< Same as RUNNING_XY_ANGLE but forward only. */
-	RUNNING_XY_F_ANGLE_OK,   /**< Same as RUNNING_XY_ANGLE_OK but forward only. */
-	RUNNING_XY_B_START,      /**< Same as RUNNING_XY_START but backward only. */
-	RUNNING_XY_B_ANGLE,      /**< Same as RUNNING_XY_ANGLE but backward only. */
-	RUNNING_XY_B_ANGLE_OK,   /**< Same as RUNNING_XY_B_ANGLE_OK but backward only. */
+	// simple trajectories
+	RUNNING_A, //Turning without moving.
+	RUNNING_D, // Going straight.
+	RUNNING_AD, // Going forward and turning at the same time.
 
-	/* circle */
-	RUNNING_CIRCLE,          /**< Running a circle trajectory. */
+	// trajectories using events 
+	RUNNING_XY_START,       // A trajectory order was given, preparing to go.
+	RUNNING_XY_ANGLE,       // Doing a preliminary turn before starting to move.
+	RUNNING_XY_ANGLE_OK,    // Angle is now ok, move forward.
+	RUNNING_XY_F_START,     // Same as RUNNING_XY_START but forward only.
+	RUNNING_XY_F_ANGLE,     // Same as RUNNING_XY_ANGLE but forward only.
+	RUNNING_XY_F_ANGLE_OK,  // Same as RUNNING_XY_ANGLE_OK but forward only.
+	RUNNING_XY_B_START,     // Same as RUNNING_XY_START but backward only.
+	RUNNING_XY_B_ANGLE,     // Same as RUNNING_XY_ANGLE but backward only.
+	RUNNING_XY_B_ANGLE_OK,  // Same as RUNNING_XY_B_ANGLE_OK but backward only.
 
-	/* line */
-	RUNNING_LINE,            /**< Following a line. */
+	// circle 
+	RUNNING_CIRCLE,          // Running a circle trajectory.
 
-	/* clitoid */
-	RUNNING_CLITOID_LINE,    /**< Running a clitoid (line->circle->line) in the line part. */
-	RUNNING_CLITOID_CURVE,   /**< Running a clitoid in the curve part. */
+	// line 
+	RUNNING_LINE,            // Following a line.
+
+	// clitoid
+	RUNNING_CLITOID_LINE,    // Running a clitoid (line->circle->line) in the line part.
+	RUNNING_CLITOID_CURVE,   // Running a clitoid in the curve part.
 };
 
-/** Movement target when running on a circle. */
-struct circle_target {
+// Movement target when running on a circle.
+struct circle_target 
+{
 	vect2_cart center;   /**< center of the circle */
 	double radius;       /**< radius of the circle */
 	int32_t dest_angle;  /**< dst angle in inc */
@@ -495,4 +496,4 @@ void circle_get_da_speed_from_radius(struct trajectory *traj,
 void trajectory_line_abs(struct trajectory *traj, double x1, double y1,
 			 double x2, double y2, double advance);
 
-#endif //TRAJECTORY_MANAGER
+#endif // _TRAJECTORY_MANAGER_H_
