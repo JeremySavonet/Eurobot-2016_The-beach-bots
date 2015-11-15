@@ -71,12 +71,6 @@ void initSystem( void )
     
     adcManagerInit();
 
-    // Inits all the trajectory stuff, PID, odometry, etc...
-#if 1
-    DPRINT( 1, KGRN "Main control system init\r\n" );
-    versatile_cs_init();
-#endif
-
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
 
@@ -84,5 +78,12 @@ void initSystem( void )
     palClearPad( GPIOC, GPIOC_LED );
    
     systemPrintBootMsg();
+    
+    // Inits all the trajectory stuff, PID, odometry, etc...
+#if 1
+    versatile_cs_init();
+    DPRINT( 1, "Main control system ready\r\n" );
+#endif
+
     DPRINT( 1, "System ready\r\n" );
 }

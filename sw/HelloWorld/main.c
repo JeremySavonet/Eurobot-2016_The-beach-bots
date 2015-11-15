@@ -178,11 +178,10 @@ int main( void )
 
             // Start killer thread
             chThdCreateStatic( waThread2,
-                    sizeof( waThread2 ),
-                    NORMALPRIO,
-                    Thread2,
-                    NULL );
-
+                               sizeof( waThread2 ),
+                               NORMALPRIO,
+                               Thread2,
+                               NULL );
             running = true;
         }
 

@@ -15,6 +15,9 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "color.h"
+#include "comm/debugManager.h"
+
 //#include <cvra_dc.h>
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
 
@@ -208,7 +211,7 @@ void versatile_cs_init( void )
 THD_FUNCTION( ControlSys, arg )
 {
     (void)arg;
-    chRegSetThreadName( "versatiel cs manage" );
+    chRegSetThreadName( "versatile cs manage\r\n" );
     while( true )
     {
         rs_update( &robot.rs );
@@ -250,10 +253,11 @@ THD_FUNCTION( ControlSys, arg )
 THD_FUNCTION( Odometry, arg )
 {
     (void)arg;
-    chRegSetThreadName( "odometry manage" );
     while( true )
     {
+        palTogglePad( GPIOC, GPIOC_LED );
         position_manage(&robot.pos);
+        
         // Wait 20 milliseconds (50 Hz)
         chThdSleepMilliseconds( 20 ); 
     }
