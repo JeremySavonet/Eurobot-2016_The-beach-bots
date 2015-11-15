@@ -4,14 +4,12 @@
  * Author: Antoine Albertelli (CVRA)
  */
 
-#ifndef DUAL_QUADRAMP_H_
-#define DUAL_QUADRAMP_H_
+#ifndef _DUAL_QUADRAMP_H_
+#define _DUAL_QUADRAMP_H_
 
 #include "../quadramp/quadramp.h"
 
-/*
- * Struct for quadramp filter in two dimensions.
- */
+// Struct for quadramp filter in two dimensions.
 struct dual_quadramp_filter 
 {
     struct quadramp_filter x_quadramp;  // Filter for the x-axis 
@@ -61,11 +59,9 @@ void dual_quadramp_set_pos( struct dual_quadramp_filter *q,
                             int32_t x, 
                             int32_t y );
 
-/*
- * Regle l'acceleration et la vitesse. 
- */
+// Regle l'acceleration et la vitesse. 
 void dual_quadramp_set_acc_and_speed( struct dual_quadramp_filter *q, 
                                       int32_t speed, 
                                       int32_t acc );
 
-#endif //DUAL_QUADRAMP_H_
+#endif // _DUAL_QUADRAMP_H_

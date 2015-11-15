@@ -81,11 +81,11 @@ void quadramp_derivate_set_divisor( struct quadramp_derivate_filter * q,
     q->divisor_counter = 1;	 
 }
 
-/**
+/*
  * Process the ramp
  * 
- * \param data should be a (struct quadramp_derivate_filter *) pointer
- * \param in is the input of the filter
+ * data should be a (struct quadramp_derivate_filter *) pointer
+ * in is the input of the filter
  * 
  */
 int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
@@ -97,15 +97,19 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
     int32_t acceleration_consign;
     int32_t speed_consign;
     
-    // sampling divisor
-    // this is a state machine who executes the algorithm only one time out 
-    // of "divisor" 
+    /*
+     * sampling divisor
+     * this is a state machine who executes the algorithm only one time out 
+     * of "divisor" 
+     */
     if( q->divisor != 1 ) 
     {
     	if( --( q->divisor_counter ) != 0 ) 
         {
-    		// if it is not time to exec the algorithm, 
-            // we just test the goal_window
+    		/*
+             * if it is not time to exec the algorithm, 
+             * we just test the goal_window
+             */
     		if( (ABS( in_position ) ) < q->goal_window )
             {
     			q->previous_out_speed =0;
@@ -118,16 +122,20 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
     	q->divisor_counter = q->divisor;
     }
     
-    // compensation of the inversion before the input 
-    // (inversion of the control system where error = consign - feedback)
+    /* 
+     * compensation of the inversion before the input 
+     * (inversion of the control system where error = consign - feedback)
+     */
     in_position = -in_position; 
     
     // calculating the actual speed (derivate)
     speed = in_position - q->previous_in_position;
     
-    // limitation of this speed, due to overflows, 
-    // and calculations based on theoretical max value
-    // and also the peak created when the position_consign changes 
+    /*
+     * limitation of this speed, due to overflows, 
+     * and calculations based on theoretical max value
+     * and also the peak created when the position_consign changes 
+     */
     if( speed >= 0 ) 
     {
     	if( q->var_1st_ord_pos )
@@ -147,11 +155,13 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
         }
     }
     
-    // calculation of the pivot position.
-    // when this position is atteined, 
-    // it is just the right time to begin to deccelerate.
-    // The length to this position is given by a linear decceleration to 0 : 
-    // x = speed²/ (2 * acceleration)
+    /*
+     * calculation of the pivot position.
+     * when this position is atteined, 
+     * it is just the right time to begin to deccelerate.
+     * The length to this position is given by a linear decceleration to 0 : 
+     * x = speed²/ (2 * acceleration)
+     */
     
     // taking the concerned acc. value
     if( speed >= 0 ) // why not position ?
@@ -163,12 +173,16 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
     	var_2nd_ord = q->var_2nd_ord_neg;
     }
     
-    // anticipation, proportionnal to speed. 
-    // Gain_anticipation is a fixed point value, with 8 bits shift
+    /*
+     * anticipation, proportionnal to speed. 
+     * Gain_anticipation is a fixed point value, with 8 bits shift
+     */
     position_pivot = ( ABS( speed ) * q->gain_anticipation ); // >>8
     
-    // if necessary, compensation of the output units, 
-    // when using a sampler divisor
+    /*
+     * if necessary, compensation of the output units, 
+     * when using a sampler divisor
+     */
     if( q->divisor != 1 ) 
     {
     	var_2nd_ord    *= q-> divisor;
@@ -187,14 +201,18 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
     // mem only for debug
     q-> pivot = position_pivot;
     
-    // this is the heart of the trajectory generation.
-    // Pretty simple but indeed unstable, 
-    // because of this corresponds to an infinite gain, 
-    // in the following equation :
-    // acceleration_consign = ( position_pivot - in_position ) * gain
+    /*
+     * this is the heart of the trajectory generation.
+     * Pretty simple but indeed unstable, 
+     * because of this corresponds to an infinite gain, 
+     * in the following equation :
+     * acceleration_consign = ( position_pivot - in_position ) * gain
+     */
       
-    // In fact this unstability is erased by the fact 
-    // that the acc value is nearly always limited
+    /* 
+     * In fact this unstability is erased by the fact 
+     * that the acc value is nearly always limited
+     */
     if( position_pivot >= in_position )
     {
     	acceleration_consign = q->var_2nd_ord_pos;
@@ -224,8 +242,10 @@ int32_t quadramp_derivate_do_filter( void * data, int32_t in_position )
         }
     }
     
-    // creation of an end arrival window. 
-    // This is done to stop the oscillations when the goal is achieved. 
+    /*
+     * creation of an end arrival window. 
+     * This is done to stop the oscillations when the goal is achieved. 
+     */
     if( ABS( in_position ) < q->goal_window )
     {
     	speed_consign=0;

@@ -30,7 +30,7 @@
 
 #include "pid.h"
 
-/** this function will initialize all fieds of pid structure to 0 */
+// this function will initialize all fieds of pid structure to 0
 void pid_init( struct pid_filter *p )
 {
     memset( p, 0, sizeof( *p ) );
@@ -38,8 +38,10 @@ void pid_init( struct pid_filter *p )
     p->derivate_nb_samples = 1;
 }
 
-/** this function will initialize all fieds of pid structure to 0,
- *  except configuration */
+/*
+ * this function will initialize all fieds of pid structure to 0,
+ *  except configuration 
+ */
 void pid_reset( struct pid_filter *p )
 {
     memset( p->prev_samples, 0, sizeof( p->prev_samples ) );
@@ -150,7 +152,7 @@ int32_t pid_get_value_out( struct pid_filter *p )
     return p->prev_out;
 }
 
-/* first parameter should be a (struct pid_filter *) */
+// first parameter should be a (struct pid_filter *)
 int32_t pid_do_filter( void * data, int32_t in )
 {
     int32_t derivate ;
@@ -180,7 +182,7 @@ int32_t pid_do_filter( void * data, int32_t in )
     	prev_index = 0;
     }
     
-    /* saturate input... it influences integral an derivate */
+    // saturate input... it influences integral an derivate
     if( p->max_in )
     {
     	S_MAX(in, p->max_in) ;
@@ -194,7 +196,7 @@ int32_t pid_do_filter( void * data, int32_t in )
     	S_MAX(p->integral, p->max_I) ;
     }
     
-    /* so, command = P.coef_P + I.coef_I + D.coef_D */
+    // so, command = P.coef_P + I.coef_I + D.coef_D
     command = in * p->gain_P + 
     	      p->integral * p->gain_I +
     	      ( derivate * p->gain_D ) / p->derivate_nb_samples ;

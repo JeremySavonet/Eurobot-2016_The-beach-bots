@@ -84,7 +84,8 @@ void biquad_set_series_son( struct biquad_filter *p, struct biquad_filter *son )
     p->son = son;	 
 } 
 
-/* filter processing, 1 iteration.
+/* 
+ * filter processing, 1 iteration.
  * This function is not protected against writing in the structure 
  * while execution is ongoing! 
  */
@@ -103,7 +104,7 @@ int32_t biquad_do_filter( void * data , int32_t in )
     output += p->a1 * p->mem_out_1; // minus, placed on the accessor
     output += p->a2 * p->mem_out_2; // minus, placed on the accessor
     
-    /* update of the memories for next iteration */
+    // update of the memories for next iteration
     p->mem_in_2 = p->mem_in_1;
     p->mem_in_1 = in;
     
@@ -115,7 +116,7 @@ int32_t biquad_do_filter( void * data , int32_t in )
     // output division with shifting
     output >>= p->out_shift;
     
-    /* execute series filter */
+    // execute series filter
     if( p->son != NULL )
     {
     	output = biquad_do_filter( p->son, output );

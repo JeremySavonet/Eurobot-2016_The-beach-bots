@@ -24,13 +24,14 @@
 
 #include <stdlib.h>
 
-/* The derivate term can be filtered to remove the noise. This value
+/* 
+ * The derivate term can be filtered to remove the noise. This value
  * is the maxium sample count to keep in memory to do this
  * filtering. For an instance of pid, this count is defined
  */
 #define PID_DERIVATE_FILTER_MAX_SIZE 4
 
-/** this is the pid_filter structure*/
+// this is the pid_filter structure
 struct pid_filter
 {
     int16_t gain_P; // Gain of Proportionnal module
@@ -52,38 +53,40 @@ struct pid_filter
     int32_t prev_out; // Previous out command (for debug only)
 };
 
-/** Inits pid */
+// Inits pid
 void pid_init( struct pid_filter *p );
 
-/** Resets state (derivate and integral state) */
+// Resets state (derivate and integral state)
 void pid_reset( struct pid_filter *p );
 
-/** Set the Kp, Gi and Gd gains */
+// Set the Kp, Gi and Gd gains
 void pid_set_gains( struct pid_filter *p, 
                     int16_t gp, 
                     int16_t gi, 
                     int16_t gd );
 
-/** Sets the maximums of the PID */
+// Sets the maximums of the PID
 void pid_set_maximums( struct pid_filter *p, 
                        int32_t max_in, 
                        int32_t max_I, 
                        int32_t max_out );
 
-/** Sets the output shift value.
+/*
+ * Sets the output shift value.
  *
  * At the end of the PID computation, the value is shifted : value >>= out_shift;
  * Default value is 0. 
  */
 void pid_set_out_shift( struct pid_filter *p, uint8_t out_shift );
 
-/** Sets the number of samples to use for the derivate filter.
+/*
+ * Sets the number of samples to use for the derivate filter.
  * 
  * Default value is 1 
  */
 int8_t pid_set_derivate_filter( struct pid_filter *p, uint8_t nb_samples );
 
-/* accessors of all parameter of pid structure*/
+// accessors of all parameter of pid structure
 int16_t pid_get_gain_P( struct pid_filter *p );
 int16_t pid_get_gain_I( struct pid_filter *p );
 int16_t pid_get_gain_D( struct pid_filter *p );
@@ -93,19 +96,19 @@ int32_t pid_get_max_out( struct pid_filter *p );
 uint8_t pid_get_out_shift( struct pid_filter *p );
 uint8_t pid_get_derivate_filter( struct pid_filter *p );
 
-/** get the sum of all nput samples since the filter initialisation */
+// get the sum of all nput samples since the filter initialisation
 int32_t pid_get_value_I( struct pid_filter *p );
 
-/** get previous input value */
+// get previous input value
 int32_t pid_get_value_in( struct pid_filter *p );
 
-/** get previous derivate value (without gain) */
+// get previous derivate value (without gain)
 int32_t pid_get_value_D( struct pid_filter *p );
 
-/** get previous output value */
+// get previous output value
 int32_t pid_get_value_out( struct pid_filter *p );
 
-/** PID process */
+// PID process
 int32_t pid_do_filter( void *p, int32_t in );
         
 #endif // _PID_H_

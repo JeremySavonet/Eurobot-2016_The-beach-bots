@@ -40,9 +40,7 @@
  * of the motor)
  */
 
-/*
- * Stores the Control System and other values for blocking detection.
- */
+// Stores the Control System and other values for blocking detection.
 struct blocking_detection 
 {
     struct cs *cs;      // Control system

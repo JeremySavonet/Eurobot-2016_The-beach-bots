@@ -56,7 +56,8 @@ safe_filter( int32_t (*f)( void *, int32_t ), void * param, int32_t value )
     return value;
 }
 
-/** Call a processout() pointer : 
+/*
+ * Call a processout() pointer : 
  * - lock the interrupts
  * - read the pointer to the processout function
  * - unlock the interrupts
@@ -78,7 +79,8 @@ safe_getprocessout( int32_t (*f)( void * ), void * param )
     return 0;
 }
 
-/** Call a processin() pointer : 
+/*
+ * Call a processin() pointer : 
  * - lock the interrupts
  * - read the pointer to the processin function
  * - unlock the interrupts
@@ -177,25 +179,25 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
     
     if( cs->enabled )
     {
-        /* save the consign value into the structure */
+        // save the consign value into the structure
         cs->consign_value = consign;
         
         DPRINT( 4, KYEL "%d %ld ", i++, consign );
     
-        /* if the consign filter exist */
+        // if the consign filter exist
         cs->filtered_consign_value = safe_filter( cs->consign_filter, 
                                                   cs->consign_filter_params, 
                                                   consign );
     	
         DPRINT( 4, KYEL "%ld ", cs->filtered_consign_value );
     
-        /* read the process out if defined */
+        // read the process out if defined
         process_out_value = safe_getprocessout( cs->process_out, 
                                                 cs->process_out_params );
     
         DPRINT( 4, KYEL "%ld ", process_out_value );
     
-        /* apply the feedback filter if defined */
+        // apply the feedback filter if defined
         process_out_value = safe_filter( cs->feedback_filter, 
                                          cs->feedback_filter_params, 
                                          process_out_value );
@@ -203,12 +205,12 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
     
         DPRINT( 4, KYEL "%ld ", process_out_value );
     
-        /* substract consign and process out and put it into error */
+        // substract consign and process out and put it into error
         cs->error_value = cs->filtered_consign_value - process_out_value ;
         
         DPRINT( 4, KYEL "%ld ", cs->error_value );
     
-        /* apply the correct filter to error_value and put it into out_value */
+        // apply the correct filter to error_value and put it into out_value
         cs->out_value = safe_filter( cs->correct_filter, 
                                      cs->correct_filter_params, 
                                      cs->error_value );
@@ -224,12 +226,12 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
         cs->out_value = 0;
     }
     
-    /* send out_value to process in*/
+    // send out_value to process in
     safe_setprocessin( cs->process_in, 
                        cs->process_in_params, 
                        cs->out_value );
     
-    /* return the out value */
+    // return the out value
     return cs->out_value;
 }
 
