@@ -148,7 +148,8 @@ CSRC = $(STARTUPSRC) \
        modules/robot/trajectory_manager/trajectory_manager_core.c \
        modules/robot/trajectory_manager/trajectory_manager_utils.c \
 	   main.c \
-	   system.c
+	   system.c \
+	   versatile_cs.c 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -242,7 +243,7 @@ UINCDIR =
 ULIBDIR =
 
 # List all user libraries here
-ULIBS =
+ULIBS = -lm
 
 #
 # End of user defines

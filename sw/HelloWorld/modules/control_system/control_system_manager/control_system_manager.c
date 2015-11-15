@@ -236,8 +236,6 @@ void cs_manage(void * data)
     cs_do_process( cs, cs->consign_value );
 }
 
-// TODO: CREATE ChibiOS task to run cs_do_process()
-
 int32_t cs_get_out( struct cs* cs )
 {
     return cs->out_value;

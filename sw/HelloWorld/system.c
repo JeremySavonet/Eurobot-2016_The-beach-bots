@@ -15,6 +15,8 @@
 #include "modules/esp8266Manager.h"
 #include "modules/motorsManager.h"
 
+#include "versatile_cs.h"
+
 /*===========================================================================*/
 /* Declare here board structurev                                             */
 /*===========================================================================*/
@@ -68,6 +70,12 @@ void initSystem( void )
     motorsManagerInit();
     
     adcManagerInit();
+
+    // Inits all the trajectory stuff, PID, odometry, etc...
+#if 1
+    DPRINT( 1, KGRN "Main control system init\r\n" );
+    versatile_cs_init();
+#endif
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
