@@ -80,8 +80,6 @@
   |     |     |     |     |     |     |     |     |     |
   | p0  | p1  | p0  | p1  | p2  | p3  | p0  | p1  | p2  |
   |_____|_____|_____|_____|_____|_____|_____|_____|_____|
- 
- 
    ^            ^                       ^
    |            |                       |
    -polygon 0   -polygon 1              -polygon 2
@@ -129,7 +127,6 @@ void oa_start_end_points( int32_t st_x, int32_t st_y, int32_t en_x, int32_t en_y
  */ 
 poly_t *oa_new_poly( uint8_t size );
 
-
 // Dump status of the obstacle avoidance.
 void oa_dump( void );
 
@@ -140,7 +137,6 @@ void oa_dump( void );
  * [in] i The index of the point.
  */
 void oa_poly_set_point( poly_t *pol, int32_t x, int32_t y, uint8_t i );
-
 
 /*
  * Processes the path.
@@ -155,7 +151,6 @@ int8_t oa_process( void );
  * Returns: An array of points, giving the path from start to end.
  */
 point_t * oa_get_path( void );
-
 
 /*
  * Checks if a segment is intersecting any obstacle. 

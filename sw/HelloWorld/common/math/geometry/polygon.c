@@ -25,14 +25,17 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "../../../color.h"
+#include "../../../comm/debugManager.h"
+
 #include "polygon.h"
 
-#define DEBUG 0
+#define DEBUG_PL 0
 
-#if DEBUG == 1
-#define debug_printf(args...) printf(args)
+#if DEBUG_PL == 1
+#define DEBUG_POLY_PRINTF( lvl, args... ) DPRINT( lvl, KYEL args, ##__VA_ARGS__ )
 #else
-#define debug_printf(args...)
+#define DEBUG_POLY_PRINTF( args... )
 #endif
 
 // default bounding box is (0,0) (100,100)
@@ -133,19 +136,19 @@ uint8_t is_crossing_poly( point_t p1,
     uint8_t ret1, ret2;
     uint8_t cpt=0;
     
-    debug_printf("%" PRIi32 " %" PRIi32 " -> %" PRIi32 " %" PRIi32 " crossing poly %p ?\n", 
-           p1.x, p1.y, p2.x, p2.y, pol);
-    debug_printf("poly is : ");
+    DEBUG_POLY_PRINTF( 3,"%" PRIi32 " %" PRIi32 " -> %" PRIi32 " %" PRIi32 " crossing poly %p ?\n", 
+           p1.x, p1.y, p2.x, p2.y, pol );
+    DEBUG_POLY_PRINTF( 3,"poly is : " );
     for (i=0; i<pol->l; i++) {
-        debug_printf("%" PRIi32 ",%" PRIi32 " ", pol->pts[i].x, pol->pts[i].y);
+        DEBUG_POLY_PRINTF( 3,"%" PRIi32 ",%" PRIi32 " ", pol->pts[i].x, pol->pts[i].y );
     }
-    debug_printf("\n");
+    DEBUG_POLY_PRINTF( 3,"\n");
 
     for (i=0;i<pol->l;i++) {
         ret = intersect_segment(&p1, &p2, &pol->pts[i], &pol->pts[(i+1)%pol->l], &p);
-        debug_printf("%" PRIi32 ",%" PRIi32 " -> %" PRIi32 ",%" PRIi32 
+        DEBUG_POLY_PRINTF( 3,"%" PRIi32 ",%" PRIi32 " -> %" PRIi32 ",%" PRIi32 
                  " return %d\n", pol->pts[i].x, pol->pts[i].y, 
-               pol->pts[(i+1)%pol->l].x, pol->pts[(i+1)%pol->l].y, ret);
+               pol->pts[(i+1)%pol->l].x, pol->pts[(i+1)%pol->l].y, ret );
 
         switch(ret) {
         case 0:
@@ -175,9 +178,9 @@ uint8_t is_crossing_poly( point_t p1,
     ret1 = is_in_poly(&p1, pol);
     ret2 = is_in_poly(&p2, pol);
 
-    debug_printf("is in poly: p1 %d p2: %d cpt %d\r\n", ret1, ret2, cpt);
+    DEBUG_POLY_PRINTF( 3,"is in poly: p1 %d p2: %d cpt %d\r\n", ret1, ret2, cpt );
 
-    debug_printf("p intersect: %"PRIi32" %"PRIi32"\r\n", p.x, p.y);
+    DEBUG_POLY_PRINTF( 3,"p intersect: %"PRIi32" %"PRIi32"\r\n", p.x, p.y );
 
     if (cpt==0) {
         if (ret1==1 || ret2==1)
@@ -234,9 +237,9 @@ uint8_t calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
      */
     
     for (i=0; i<npolys; i++) {
-        debug_printf("%s(): poly num %d/%d\n", __FUNCTION__, i, npolys);
+        DEBUG_POLY_PRINTF( 3,"%s(): poly num %d/%d\n", __FUNCTION__, i, npolys );
         for (ii=0; ii<polys[i].l; ii++) {
-            debug_printf("%s() line num %d/%d\n", __FUNCTION__, ii, polys[i].l);
+            DEBUG_POLY_PRINTF( 3,"%s() line num %d/%d\n", __FUNCTION__, ii, polys[i].l );
             if (! is_in_boundingbox(&polys[i].pts[ii]))
                 continue;
             is_ok = 1;
@@ -255,7 +258,7 @@ uint8_t calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
                 if (is_crossing_poly(polys[i].pts[ii], polys[i].pts[n], NULL, 
                              &polys[index]) == 1) {
                     is_ok = 0;
-                    debug_printf("is_crossing_poly() returned 1\n");
+                    DEBUG_POLY_PRINTF( 3,"is_crossing_poly() returned 1\n" );
                     break;
                 }                   
             }

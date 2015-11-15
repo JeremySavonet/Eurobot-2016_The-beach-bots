@@ -27,15 +27,18 @@
 
 #include "../../utils.h"
 
+#include "../../../color.h"
+#include "../../../comm/debugManager.h"
+
 #include "vect_base.h"
 #include "lines.h"
 
-#define DEBUG 0
+#define DEBUG_LN 0
 
-#if DEBUG == 1
-#define debug_printf(args...) printf(args)
+#if DEBUG_LN == 1
+#define DEBUG_LINES_PRINTF( lvl, args... ) DPRINT( lvl, KYEL args, ##__VA_ARGS__ )
 #else
-#define debug_printf(args...)
+#define DEBUG_LINES_PRINTF( args... )
 #endif
 
 /* 
@@ -51,8 +54,8 @@ uint8_t intersect_line( const line_t *l1, const line_t *l2, point_t *p )
 {
     float tmp1, tmp2;
 
-    debug_printf("l1:%2.2f,%2.2f,%2.2f l2:%2.2f,%2.2f,%2.2f\n",
-             l1->a, l1->b, l1->c, l2->a, l2->b, l2->c);
+    DEBUG_LINES_PRINTF( 3,"l1:%2.2f,%2.2f,%2.2f l2:%2.2f,%2.2f,%2.2f\n",
+             l1->a, l1->b, l1->c, l2->a, l2->b, l2->c );
     
     // if dummy lines
     if ((l1->a == 0 && l1->b == 0) || (l2->a == 0 && l2->b == 0))
@@ -108,8 +111,8 @@ void pts2line( const point_t *p1, const point_t *p2, line_t *l )
     l->b =  (p2x - p1x);
     l->c = -(l->a * p1x + l->b * p1y);
 
-    debug_printf("%s: %2.2f, %2.2f, %2.2f\r\n",
-             __FUNCTION__, l->a, l->b, l->c);
+    DEBUG_LINES_PRINTF( 3,"%s: %2.2f, %2.2f, %2.2f\r\n",
+             __FUNCTION__, l->a, l->b, l->c );
 }
 
 void proj_pt_line( const point_t * p, const line_t * l, point_t * p_out )
@@ -146,10 +149,10 @@ uint8_t intersect_segment( const point_t *s1,
     int8_t u1, u2;
     vect_t v, w;
 
-    debug_printf("s1:%"PRIi32",%"PRIi32" s2:%"PRIi32",%"PRIi32" "
+    DEBUG_LINES_PRINTF( 3,"s1:%"PRIi32",%"PRIi32" s2:%"PRIi32",%"PRIi32" "
              "t1:%"PRIi32",%"PRIi32" t2:%"PRIi32",%"PRIi32"\r\n",
              s1->x, s1->y, s2->x, s2->y,
-             t1->x, t1->y, t2->x, t2->y);
+             t1->x, t1->y, t2->x, t2->y );
 
     pts2line(s1, s2, &l1);
     pts2line(t1, t2, &l2);
@@ -194,7 +197,7 @@ uint8_t intersect_segment( const point_t *s1,
         return 2;
     }
 
-    debug_printf("px=%" PRIi32 " py=%" PRIi32 "\n", p->x, p->y);
+    DEBUG_LINES_PRINTF( 3,"px=%" PRIi32 " py=%" PRIi32 "\n", p->x, p->y );
 
     // Consider as parallel if intersection is too far
     if (ABS(p->x) > (1L << 15) || ABS(p->y) > (1L << 15))
@@ -213,7 +216,7 @@ uint8_t intersect_segment( const point_t *s1,
     w.y = p->y-t2->y;
     u2 = vect_pscal_sign(&v, &w);
 
-    debug_printf("u1=%d u2=%d\n", u1, u2);
+    DEBUG_LINES_PRINTF( 3,"u1=%d u2=%d\n", u1, u2 );
 
     if (u1>0 || u2>0)
         return 0;
