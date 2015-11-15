@@ -22,6 +22,9 @@
 #ifndef _CONTROL_SYSTEM_MANAGER_
 #define _CONTROL_SYSTEM_MANAGER_
 
+// Platform includes
+#include "ch.h"
+
 typedef int32_t (*cs_feedback_filter) ( void*, int32_t );
 typedef int32_t (*cs_correct_filter) ( void*, int32_t );
 typedef int32_t (*cs_consign_filter) ( void*, int32_t );

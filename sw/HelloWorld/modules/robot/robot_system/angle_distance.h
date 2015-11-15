@@ -22,6 +22,9 @@
 #ifndef _ANGLE_DISTANCE_H_
 #define _ANGLE_DISTANCE_H_
 
+// Platform includes
+#include "ch.h"
+
 /*
  * Stores the state of two encoders or pwm in the left / right format. 
  */

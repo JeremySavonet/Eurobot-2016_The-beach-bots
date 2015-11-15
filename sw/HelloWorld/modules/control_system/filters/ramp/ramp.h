@@ -32,6 +32,9 @@
 #ifndef _RAMP_H_
 #define _RAMP_H_
 
+// Platform includes
+#include "ch.h"
+
 // Instance of the ramp filter.
 struct ramp_filter
 {

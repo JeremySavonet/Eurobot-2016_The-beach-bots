@@ -21,11 +21,6 @@
 
 #include <stdio.h>
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 // Debug includes
 #include "../../../color.h"
 #include "../../../comm/debugManager.h"

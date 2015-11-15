@@ -18,11 +18,6 @@
  *
  */
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "ramp.h"
 
 void ramp_init( struct ramp_filter *r ) 

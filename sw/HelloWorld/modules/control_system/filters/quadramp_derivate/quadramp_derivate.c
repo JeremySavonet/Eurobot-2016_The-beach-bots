@@ -18,11 +18,6 @@
  *
  */
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "../../../../common/utils.h"
 
 #include "quadramp_derivate.h"

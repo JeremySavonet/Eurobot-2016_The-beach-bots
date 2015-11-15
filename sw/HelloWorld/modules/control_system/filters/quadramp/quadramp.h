@@ -22,6 +22,9 @@
 #ifndef _QUADRAMP_H_
 #define _QUADRAMP_H_
 
+// Platform includes
+#include "ch.h"
+
 /*
  * This module is responsible for making speed ramps to avoid large 
  * accelerations.

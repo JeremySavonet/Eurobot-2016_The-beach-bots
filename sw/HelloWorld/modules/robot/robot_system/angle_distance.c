@@ -19,11 +19,6 @@
  *
  */
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "angle_distance.h"
 
 /*

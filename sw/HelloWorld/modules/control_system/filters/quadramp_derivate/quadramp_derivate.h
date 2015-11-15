@@ -23,6 +23,9 @@
 
 #include <stdio.h>
 
+// Platform includes
+#include "ch.h"
+
 struct quadramp_derivate_filter
 {
     uint32_t var_2nd_ord_pos;

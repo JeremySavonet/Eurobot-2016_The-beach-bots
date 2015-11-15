@@ -24,6 +24,9 @@
 
 #include <stdlib.h>
 
+// Platform includes
+#include "ch.h"
+
 /* 
  * The derivate term can be filtered to remove the noise. This value
  * is the maxium sample count to keep in memory to do this

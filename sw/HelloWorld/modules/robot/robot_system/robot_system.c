@@ -29,11 +29,6 @@
 #include <string.h>
 #include <stdio.h>
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "angle_distance.h"
 #include "robot_system.h"
 

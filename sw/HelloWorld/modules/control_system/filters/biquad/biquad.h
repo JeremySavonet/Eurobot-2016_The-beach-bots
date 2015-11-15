@@ -21,6 +21,9 @@
 #ifndef _BIQUAD_H_
 #define _BIQUAD_H_
 
+//Platform includes
+#include "ch.h"
+
 // this is the biquad structure
 struct biquad_filter
 {

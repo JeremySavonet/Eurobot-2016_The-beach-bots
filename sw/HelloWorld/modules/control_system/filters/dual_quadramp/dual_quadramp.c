@@ -4,11 +4,6 @@
  * Author: Antoine Albertelli (CVRA)
  */
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "dual_quadramp.h"
 
 #define abs(x) ((x)<0 ? -(x) : (x))

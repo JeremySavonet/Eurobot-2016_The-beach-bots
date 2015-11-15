@@ -20,11 +20,6 @@
 
 #include <string.h>
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "biquad.h"
 
 // init sets an unity filter, as usual

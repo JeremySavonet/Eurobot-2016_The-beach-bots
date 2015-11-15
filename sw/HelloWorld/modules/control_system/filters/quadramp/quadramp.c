@@ -23,11 +23,6 @@
 #include <string.h>
 #include <math.h>
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "quadramp.h"
 
 void quadramp_init( struct quadramp_filter *q )

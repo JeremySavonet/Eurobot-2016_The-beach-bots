@@ -22,11 +22,6 @@
 #include <string.h>
 #include <math.h>
 
-// Platform includes
-#include "ch.h"
-#include "hal.h"
-#include "test.h"
-
 #include "../../../common/math/vect2.h"
 
 #include "position_manager.h"
