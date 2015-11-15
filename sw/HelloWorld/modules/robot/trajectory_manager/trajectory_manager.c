@@ -23,13 +23,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "../../../common/utils.h"
-
 #include "../position_manager/position_manager.h"
 
 #include "../../control_system/control_system_manager/control_system_manager.h"
 #include "../../control_system/filters/quadramp/quadramp.h"
 
+#include "trajectory_manager_utils.h"
 #include "trajectory_manager.h"
 
 // structure initialization

@@ -60,8 +60,4 @@ do {                                     \
             __val;              \
         })
 
-#define M_2PI (2*M_PI)
-#define DEG(x) ((x) * (180.0 / M_PI))
-#define RAD(x) ((x) * (M_PI / 180.0))
-
 #endif // _UTILS_H_

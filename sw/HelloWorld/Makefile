@@ -145,6 +145,8 @@ CSRC = $(STARTUPSRC) \
 	   modules/robot/robot_system/angle_distance.c \
 	   modules/robot/robot_system/robot_system.c \
 	   modules/robot/trajectory_manager/trajectory_manager.c \
+       modules/robot/trajectory_manager/trajectory_manager_core.c \
+       modules/robot/trajectory_manager/trajectory_manager_utils.c \
 	   main.c \
 	   system.c
 
