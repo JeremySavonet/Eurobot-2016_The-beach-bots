@@ -128,6 +128,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/adcManager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
+	   modules/blocking_detection_manager/blocking_detection_manager.c \
 	   modules/control_system/filters/biquad/biquad.c \
 	   modules/control_system/filters/pid/pid.c \
 	   modules/control_system/filters/dual_quadramp/dual_quadramp.c \
