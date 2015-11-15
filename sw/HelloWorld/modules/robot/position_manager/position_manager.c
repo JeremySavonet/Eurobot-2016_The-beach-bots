@@ -27,7 +27,7 @@
 #include "hal.h"
 #include "test.h"
 
-#include "../../../common/vect2.h"
+#include "../../../common/math/vect2.h"
 
 #include "position_manager.h"
 

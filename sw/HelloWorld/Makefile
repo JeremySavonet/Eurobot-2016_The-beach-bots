@@ -124,7 +124,11 @@ CSRC = $(STARTUPSRC) \
 	   comm/microrl.c \
 	   comm/microshell.c \
 	   comm/usbManager.c \
-	   common/vect2.c \
+	   common/math/vect2.c \
+	   common/math/geometry/circles.c \
+	   common/math/geometry/lines.c \
+	   common/math/geometry/polygon.c \
+	   common/math/geometry/vect_base.c \
 	   modules/adcManager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
