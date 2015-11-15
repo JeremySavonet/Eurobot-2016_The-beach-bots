@@ -37,14 +37,13 @@
 #define debug_printf(args...)
 #endif
 
-/* default bounding box is (0,0) (100,100) */
+// default bounding box is (0,0) (100,100)
 static int32_t bbox_x1 = 0;
 static int32_t bbox_y1 = 0;
 static int32_t bbox_x2 = 100;
 static int32_t bbox_y2 = 100;
 
-
-void polygon_set_boundingbox(int32_t x1, int32_t y1, int32_t x2, int32_t y2)
+void polygon_set_boundingbox( int32_t x1, int32_t y1, int32_t x2, int32_t y2 )
 {
     bbox_x1 = x1;
     bbox_y1 = y1;
@@ -52,23 +51,25 @@ void polygon_set_boundingbox(int32_t x1, int32_t y1, int32_t x2, int32_t y2)
     bbox_y2 = y2;
 }
 
-uint8_t is_in_boundingbox(const point_t *p)
+uint8_t is_in_boundingbox( const point_t *p )
 {
-    if (p->x >= bbox_x1 &&
+    if( p->x >= bbox_x1 &&
         p->x <= bbox_x2 &&
         p->y >= bbox_y1 &&
-        p->y <= bbox_y2)
+        p->y <= bbox_y2 )
+    {
         return 1;
+    }
     return 0;
 }
 
-/* Test if a point is in a polygon (including edges)
+/* 
+ * Test if a point is in a polygon (including edges)
  *  0 not inside
  *  1 inside
  *  2 on edge
  */
-uint8_t 
-is_in_poly(const point_t *p, poly_t *pol)
+uint8_t is_in_poly( const point_t *p, poly_t *pol )
 {
     uint8_t i;
     uint8_t ii;
@@ -76,48 +77,57 @@ is_in_poly(const point_t *p, poly_t *pol)
     uint8_t ret=1;
     vect_t v, w;
 
-    for (i=0;i<pol->l;i++) {
-        /* is a polygon point */
-        if (p->x == pol->pts[i].x && p->y == pol->pts[i].y)
+    for( i = 0; i < pol->l; i++ ) 
+    {
+        // is a polygon point
+        if( p->x == pol->pts[i].x && p->y == pol->pts[i].y )
+        {
             return 2;
+        }
     }
 
-    for (i=0;i<pol->l;i++) {
-
-        ii = (i+1)%pol->l;
+    for( i = 0; i < pol->l; i++ ) 
+    {
+        ii = (i+1) % pol->l;
         v.x = pol->pts[ii].x-p->x;
         v.y = pol->pts[ii].y-p->y;
         w.x = pol->pts[i].x-p->x;
         w.y = pol->pts[i].y-p->y;
-        z = vect_pvect_sign(&v, &w );
-        if (z>0)
+        z = vect_pvect_sign( &v, &w );
+        if( z > 0 )
+        {
             return 0;
-        if (z==0)
-            ret=2;
+        }
+        if( 0 == z )
+        {
+            ret = 2;
+        }
     }
 
     return ret;
 }
 
-/* public wrapper for is_in_poly() */
-uint8_t is_point_in_poly(poly_t *pol, int16_t x, int16_t y)
+// public wrapper for is_in_poly() 
+uint8_t is_point_in_poly( poly_t *pol, int16_t x, int16_t y )
 {
     point_t p;
     p.x = x;
     p.y = y;
-    return is_in_poly(&p, pol);
+    return is_in_poly( &p, pol );
 }
 
-/* Is segment crossing polygon? (including edges)
+/* 
+ * Is segment crossing polygon? (including edges)
  *  0 don't cross
  *  1 cross
  *  2 on a side
  *  3 touch out (a segment boundary is on a polygon edge, 
  *  and the second segment boundary is out of the polygon)
  */
-uint8_t 
-is_crossing_poly(point_t p1, point_t p2, point_t *intersect_pt,
-         poly_t *pol)
+uint8_t is_crossing_poly( point_t p1, 
+                          point_t p2, 
+                          point_t *intersect_pt,
+                          poly_t *pol )
 {
     uint8_t i;
     uint8_t ret;
@@ -138,7 +148,6 @@ is_crossing_poly(point_t p1, point_t p2, point_t *intersect_pt,
         debug_printf("%" PRIi32 ",%" PRIi32 " -> %" PRIi32 ",%" PRIi32 
                  " return %d\n", pol->pts[i].x, pol->pts[i].y, 
                pol->pts[(i+1)%pol->l].x, pol->pts[(i+1)%pol->l].y, ret);
-
 
         switch(ret) {
         case 0:
@@ -172,13 +181,11 @@ is_crossing_poly(point_t p1, point_t p2, point_t *intersect_pt,
 
     debug_printf("p intersect: %"PRIi32" %"PRIi32"\r\n", p.x, p.y);
 
-
     if (cpt==0) {
         if (ret1==1 || ret2==1)
             return 1;
         return 0;
     }
-
 
     if (cpt==1) {
         if (ret1==1 || ret2==1)
@@ -196,7 +203,8 @@ is_crossing_poly(point_t p1, point_t p2, point_t *intersect_pt,
     return 1;
 }
 
-/* Giving the list of poygons, compute the graph of "visibility rays".
+/* 
+ * Giving the list of poygons, compute the graph of "visibility rays".
  * This rays array is composed of indexes representing 2 polygon
  * vertices that can "see" each others:
  *
@@ -211,9 +219,7 @@ is_crossing_poly(point_t p1, point_t p2, point_t *intersect_pt,
  *  point, the polygon is NOT an ocluding polygon (but its vertices
  *  are used to compute visibility to start/stop points)
  */
-
-uint8_t 
-calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
+uint8_t calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
 {
     uint8_t i, ii, index;
     uint8_t ray_n=0;
@@ -221,9 +227,10 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
     uint8_t n;
     uint8_t pt1, pt2;
 
-    /* !\\first poly is the start stop point */
+    // first poly is the start stop point
 
-    /* 1: calc inner polygon rays 
+    /* 
+     * 1: calc inner polygon rays 
      * compute for each polygon edges, if the vertices can see each others 
      * (usefull if interlaced polygons)
      */
@@ -241,10 +248,10 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
                 continue;
 
 
-            /* check if a polygon cross our ray */
+            // check if a polygon cross our ray
             for (index=1; index<npolys; index++) {
                 
-                /* don't check polygon against itself */
+                // don't check polygon against itself
                 if (index == i) continue;
                 
                 if (is_crossing_poly(polys[i].pts[ii], polys[i].pts[n], NULL, 
@@ -254,7 +261,7 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
                     break;
                 }                   
             }
-            /* if ray is not crossed, add it */
+            // if ray is not crossed, add it
             if (is_ok) {
                 rays[ray_n++] = i;
                 rays[ray_n++] = ii;
@@ -264,18 +271,19 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
         }
     }
 
+    /*
+     * 2: calc inter polygon rays.
+     * Visibility of inter-polygon vertices.
+     */
 
-    /* 2: calc inter polygon rays.
-     * Visibility of inter-polygon vertices.*/
-
-    /* For all poly */
+    // For all poly
     for (i=0; i<npolys-1; i++) {
         for (pt1=0;pt1<polys[i].l;pt1++) {
 
             if (!(is_in_boundingbox(&polys[i].pts[pt1])))
                 continue;
 
-            /* for next poly */
+            // for next poly
             for (ii=i+1; ii<npolys; ii++) {
                 for (pt2=0;pt2<polys[ii].l;pt2++) {
 
@@ -283,7 +291,7 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
                         continue;
 
                     is_ok=1;
-                    /* test if a poly cross */
+                    // test if a poly cross
                     for (index=1;index<npolys;index++) {
                         if (is_crossing_poly(polys[i].pts[pt1], 
                                      polys[ii].pts[pt2], NULL,
@@ -292,7 +300,7 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
                             break;
                         }
                     }
-                    /* if not crossed, we found a vilisity ray */
+                    // if not crossed, we found a vilisity ray
                     if (is_ok) {
                         rays[ray_n++] = i;
                         rays[ray_n++] = pt1;
@@ -304,7 +312,6 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
         }   
     }
     
-    
     return ray_n;
 }
 
@@ -313,10 +320,13 @@ calc_rays(poly_t *polys, uint8_t npolys, uint8_t *rays)
  *
  * Note the +1 is a little hack to introduce a preference between to
  * possiblity path: If we have 3 checpoint aligned in a path (say A,
- * B, C) the algorithm will prefer (A, C) instead of (A, B, C) */
-void 
-calc_rays_weight(poly_t *polys, __attribute__((unused)) uint8_t npolys,
-         uint8_t *rays, uint8_t ray_n, uint16_t *weight)
+ * B, C) the algorithm will prefer (A, C) instead of (A, B, C) 
+ */
+void calc_rays_weight( poly_t *polys, 
+                       __attribute__( (unused ) ) uint8_t npolys,
+                       uint8_t *rays, 
+                       uint8_t ray_n, 
+                       uint16_t *weight )
 {
     uint8_t i;
     vect_t v;

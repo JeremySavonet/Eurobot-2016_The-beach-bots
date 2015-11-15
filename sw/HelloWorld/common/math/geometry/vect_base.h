@@ -1,10 +1,10 @@
 /*
- *  Copyright Droids Corporation (2009)
+ *  Copyright Droids Corporation ( 2009 )
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  ( at your option ) any later version.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,96 +27,102 @@
 #include "hal.h"
 #include "test.h"
 
-/** \addtogroup Geometrie
- * @{ */
-
-/** A 2D-vector
- * @sa _point_t
- */
-typedef struct _vect_t {
-  float x;  /**< x-coordinate */
-  float y;  /**< y-coordinate */
+// A 2D-vector
+typedef struct _vect_t 
+{
+    float x;  // x-coordinate
+    float y;  // y-coordinate
 } vect_t;
 
-/** A 2D-point
- * @sa _vect_t
- */
-typedef struct _point_t {
-  float x;  /**< x-coordinate */
-  float y;  /**< y-coordinate */
+// A 2D-point
+typedef struct _point_t 
+{
+    float x;  // x-coordinate
+    float y;  // y-coordinate
 } point_t;
 
-/** Computes dot product between 2 vectors.
- * @param [in] *v First vector
- * @param [in] *w Second vector
- * @return Dot product
+/*
+ * Computes dot product between 2 vectors.
+ * [in] *v First vector
+ * [in] *w Second vector
+ * Return Dot product
  */
-float vect_pscal(vect_t *v, vect_t *w);
+float vect_pscal( vect_t *v, vect_t *w );
 
-/** Returns the Z component of a cross product.
- * @param [in] *v First vector
- * @param [in] *w Second vector
- * @return Cross product
+/*
+ * Returns the Z component of a cross product.
+ * [in] *v First vector
+ * [in] *w Second vector
+ * Return Cross product
  */
-float vect_pvect(vect_t *v, vect_t *w);
+float vect_pvect( vect_t *v, vect_t *w );
 
-/** Returns the sign of the dot product.
- * @param [in] *v First vector
- * @param [in] *w Second vector
- * @return Sign of the dot product (z > 0 ? 1 : -1)
+/*
+ * Returns the sign of the dot product.
+ * [in] *v First vector
+ * [in] *w Second vector
+ * Return Sign of the dot product ( z > 0 ? 1 : -1 )
  */
-int8_t vect_pscal_sign(vect_t *v, vect_t *w);
+int8_t vect_pscal_sign( vect_t *v, vect_t *w );
 
-/** Returns the sign of the Z component of the cross product.
- * @param [in] *v First vector
- * @param [in] *w Second vector
- * @return Sign of the cross product (z > 0 ? 1 : -1)
+/*
+ * Returns the sign of the Z component of the cross product.
+ * [in] *v First vector
+ * [in] *w Second vector
+ * Return Sign of the cross product ( z > 0 ? 1 : -1 )
  */
-int8_t vect_pvect_sign(vect_t *v, vect_t *w);
+int8_t vect_pvect_sign( vect_t *v, vect_t *w );
 
-/** Computes the norm of a vector, given the raw coordinates of a start and an end point.
- * @param [in] x1 x-coordinate of the start point 
- * @param [in] y1 y-coordinate of the start point
- * @param [in] x2 x-coordinate of the end point 
- * @param [in] y2 y-coordinate of the end point
- * @return Norm of the vector
+/*
+ * Computes the norm of a vector, given the raw coordinates of a start and an end point.
+ * [in] x1 x-coordinate of the start point 
+ * [in] y1 y-coordinate of the start point
+ * [in] x2 x-coordinate of the end point 
+ * [in] y2 y-coordinate of the end point
+ * Return Norm of the vector
  */ 
-float xy_norm(float x1, float y1, float x2, float y2);
+float xy_norm( float x1, float y1, float x2, float y2 );
 
-/** Computes the norm of a vector, given the start and end points.
- * @param [in] *p1 Start point
- * @param [in] *p2 End point
- * @return Norm of the vector
+/*
+ * Computes the norm of a vector, given the start and end points.
+ * [in] *p1 Start point
+ * [in] *p2 End point
+ * Return Norm of the vector
  */
-float pt_norm(const point_t *p1, const point_t *p2);
+float pt_norm( const point_t *p1, const point_t *p2 );
 
-/** Computes the norm of a vector.
- * @param [in] *v Vector
- * @return Norm of the vector
+/*
+ * Computes the norm of a vector.
+ * [in] *v Vector
+ * Return Norm of the vector
  */
-float vect_norm(const vect_t *v);
+float vect_norm( const vect_t *v );
 
-/** Rotates a vector by 90 deg CCW
- * @param [in,out] *v Vector to rotate
+/* 
+ * Rotates a vector by 90 deg CCW
+ * [in,out] *v Vector to rotate
  */
-void vect_rot_trigo(vect_t *v);
+void vect_rot_trigo( vect_t *v );
 
-/** Rotates a vector by 90 deg CW.
- * @param [in,out] *v Vector to rotate
+/*
+ * Rotates a vector by 90 deg CW.
+ * [in,out] *v Vector to rotate
  */
-void vect_rot_retro(vect_t *v);
+void vect_rot_retro( vect_t *v );
 
-/** Returns the angle between two vectors.
- * @param [in] *v Fist vector
- * @param [in] *w Second vector 
- * @return Angle in radian
+/*
+ * Returns the angle between two vectors.
+ * [in] *v Fist vector
+ * [in] *w Second vector 
+ * Return Angle in radian
  */
-float vect_get_angle(vect_t *v, vect_t *w);
+float vect_get_angle( vect_t *v, vect_t *w );
 
-/** Scales a vector by a factor.
- * @param [in,out] *v Vector to scale
- * @param [in] l factor
+/*
+ * Scales a vector by a factor.
+ * [in,out] *v Vector to scale
+ * [in] l factor
  */
-void vect_resize(vect_t *v, float l);
-/** @} */
-#endif /* _VECT_BASE_H_ */
+void vect_resize( vect_t *v, float l );
+
+#endif // _VECT_BASE_H_

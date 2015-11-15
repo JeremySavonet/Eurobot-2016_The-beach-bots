@@ -38,7 +38,8 @@
 #define debug_printf(args...)
 #endif
 
-/* return values :
+/* 
+ * return values :
  *  0 dont cross
  *  1 cross
  *  2 parallel crossing
@@ -46,13 +47,14 @@
  *  p argument is the crossing point coordinates (dummy for 0 or 2
  *  result)
  */
-uint8_t intersect_line(const line_t *l1, const line_t *l2, point_t *p)
+uint8_t intersect_line( const line_t *l1, const line_t *l2, point_t *p )
 {
     float tmp1, tmp2;
 
     debug_printf("l1:%2.2f,%2.2f,%2.2f l2:%2.2f,%2.2f,%2.2f\n",
              l1->a, l1->b, l1->c, l2->a, l2->b, l2->c);
-    /* if dummy lines */
+    
+    // if dummy lines
     if ((l1->a == 0 && l1->b == 0) || (l2->a == 0 && l2->b == 0))
         return 0;
 
@@ -63,12 +65,6 @@ uint8_t intersect_line(const line_t *l1, const line_t *l2, point_t *p)
             return 0;
         }
 
-        /*       by  + c  = 0
-         * a'x + b'y + c' = 0 */
-        /*
-          p->y = -l1->c/l1->b;
-          p->x = -(l2->b*p->y + l2->c)/l2->a;
-        */
         p->y = -l1->c/l1->b;
         p->x = -(l2->b*(-l1->c) + l2->c*l1->b)/(l2->a*l1->b);
         return 1;
@@ -80,28 +76,18 @@ uint8_t intersect_line(const line_t *l1, const line_t *l2, point_t *p)
                 return 2;
             return 0;
         }
-        /* ax        + c  = 0
-         * a'x + b'y + c' = 0 */
-
-        /*
-          p->x = -l1->c/l1->a;
-          p->y = -(l2->a*p->x + l2->c)/l2->b;
-        */
+        
         p->x = -l1->c/l1->a;
         p->y = -(l2->a*(-l1->c) + l2->c*(l1->a))/(l2->b*l1->a);
         return 1;
     }
 
-    /* parallel lines */
+    // parallel lines
     if (l2->a*l1->b-l1->a*l2->b == 0) {
         if (l1->a*l2->c == l2->a*l1->c)
             return 2;
         return 0;
     }
-    /*
-      p->y = (l1->a*l2->c - l1->c*l2->a)/(l2->a*l1->b - l1->a*l2->b);
-      p->x = -(l1->b*p->y+l1->c)/l1->a;
-    */
     tmp1 = (l1->a*l2->c - l1->c*l2->a);
     tmp2 = (l2->a*l1->b - l1->a*l2->b);
     p->y = tmp1 / tmp2;
@@ -109,7 +95,7 @@ uint8_t intersect_line(const line_t *l1, const line_t *l2, point_t *p)
     return 1;
 }
 
-void pts2line(const point_t *p1, const point_t *p2, line_t *l)
+void pts2line( const point_t *p1, const point_t *p2, line_t *l )
 {
     float p1x, p1y, p2x, p2y;
 
@@ -117,7 +103,6 @@ void pts2line(const point_t *p1, const point_t *p2, line_t *l)
     p1y = p1->y;
     p2x = p2->x;
     p2y = p2->y;
-
 
     l->a = -(p2y - p1y);
     l->b =  (p2x - p1x);
@@ -127,7 +112,7 @@ void pts2line(const point_t *p1, const point_t *p2, line_t *l)
              __FUNCTION__, l->a, l->b, l->c);
 }
 
-void proj_pt_line(const point_t * p, const line_t * l, point_t * p_out)
+void proj_pt_line( const point_t * p, const line_t * l, point_t * p_out )
 {
     line_t l_tmp;
 
@@ -140,9 +125,8 @@ void proj_pt_line(const point_t * p, const line_t * l, point_t * p_out)
 
 }
 
-
-
-/* return values:
+/* 
+ * return values:
  *  0 dont cross
  *  1 cross
  *  2 cross on point
@@ -151,10 +135,11 @@ void proj_pt_line(const point_t * p, const line_t * l, point_t * p_out)
  *  p argument is the crossing point coordinates (dummy for 0 1 or 3
  *  result)
  */
-uint8_t
-intersect_segment(const point_t *s1, const point_t *s2,
-          const point_t *t1, const point_t *t2,
-          point_t *p)
+uint8_t intersect_segment( const point_t *s1, 
+                           const point_t *s2,
+                           const point_t *t1, 
+                           const point_t *t2,
+                           point_t *p)
 {
     line_t l1, l2;
     uint8_t ret;
@@ -191,8 +176,7 @@ intersect_segment(const point_t *s1, const point_t *s2,
         return 0;
     }
 
-
-    /* if points equal */
+    // if points equal
     if (s1->x == t1->x && s1->y == t1->y) {
         *p = *s1;
         return 2;
@@ -212,11 +196,11 @@ intersect_segment(const point_t *s1, const point_t *s2,
 
     debug_printf("px=%" PRIi32 " py=%" PRIi32 "\n", p->x, p->y);
 
-    /* Consider as parallel if intersection is too far */
+    // Consider as parallel if intersection is too far
     if (ABS(p->x) > (1L << 15) || ABS(p->y) > (1L << 15))
         return 0;
 
-    /* if prod scal neg: cut in middle of segment */
+    // if prod scal neg: cut in middle of segment
     v.x = p->x-s1->x;
     v.y = p->y-s1->y;
     w.x = p->x-s2->x;
@@ -238,9 +222,9 @@ intersect_segment(const point_t *s1, const point_t *s2,
         return 2;
 
     return 1;
-
 }
-void line_translate(line_t *l, vect_t *v)
+
+void line_translate( line_t *l, vect_t *v )
 {
-    l->c -= (l->a * v->x + l->b * v->y);
+    l->c -= ( l->a * v->x + l->b * v->y );
 }
