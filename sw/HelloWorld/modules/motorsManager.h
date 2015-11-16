@@ -16,4 +16,7 @@ void MotorDisablePwm( unsigned motor );
 void MotorSetSpeed( unsigned motor, pwmcnt_t speed );
 pwmcnt_t MotorGetSpeed( unsigned motor );
 
+void versatile_dc_set_pwm( void *device, int32_t value );
+void versatile_dc_set_pwm_negative( void *device, int32_t value );
+
 #endif /* _MOTORS_H_ */

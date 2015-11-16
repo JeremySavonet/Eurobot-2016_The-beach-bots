@@ -10,6 +10,8 @@
 
 #include "motorsManager.h"
 
+#define DC_PWM_MAX_VALUE 4095
+
 static PWMConfig pwmcfg = 
 {
     1000000, // 1MHz PWM clock frequency
@@ -28,15 +30,16 @@ static PWMConfig pwmcfg =
     0
 };
 
+int32_t motor_pwms[ NUM_MOTORS ];
 pwmcnt_t motor_speeds[ NUM_MOTORS ];
 
 void motorsManagerInit( void )
 {   
-    palSetPadMode(GPIOD, 12, PAL_MODE_ALTERNATE(2));
-    palSetPadMode(GPIOD, 13, PAL_MODE_ALTERNATE(2));
-    palSetPadMode(GPIOD, 14, PAL_MODE_ALTERNATE(2));
-    palSetPadMode(GPIOD, 15, PAL_MODE_ALTERNATE(2));
-    pwmStart(&PWMD4, &pwmcfg);
+    palSetPadMode( GPIOD, 12, PAL_MODE_ALTERNATE( 2 ) );
+    palSetPadMode( GPIOD, 13, PAL_MODE_ALTERNATE( 2 ) );
+    palSetPadMode( GPIOD, 14, PAL_MODE_ALTERNATE( 2 ) );
+    palSetPadMode( GPIOD, 15, PAL_MODE_ALTERNATE( 2 ) );
+    pwmStart( &PWMD4, &pwmcfg );
 
     unsigned i;
     for( i = 0; i < NUM_MOTORS; ++i )
@@ -54,6 +57,56 @@ void MotorDisablePwm( unsigned motor )
     motor_speeds[ motor ] = 0;
     pwmDisableChannel( &PWMD4, 
                        motor );
+}
+
+//TODO: this is temp function need to properly name those two functions
+void versatile_dc_set_pwm( void *device, int32_t value )
+{
+    if( value < -DC_PWM_MAX_VALUE )
+    {
+        value = -DC_PWM_MAX_VALUE;
+    }
+
+    if( value > DC_PWM_MAX_VALUE )
+    {
+        value = DC_PWM_MAX_VALUE;
+    }
+
+    int motor = (int) device;
+    if( motor >= NUM_MOTORS )
+    {
+        return;
+    }
+    motor_pwms[ motor ] = value;
+    pwmEnableChannel( &PWMD4,
+                      motor,
+                      (pwmcnt_t)value );
+}
+
+void versatile_dc_set_pwm_negative( void *device, int32_t value )
+{
+    if( value < -DC_PWM_MAX_VALUE )
+    {
+        value = -DC_PWM_MAX_VALUE;
+    }
+
+    if( value > DC_PWM_MAX_VALUE )
+    {
+        value = DC_PWM_MAX_VALUE;
+    }
+
+    int motor = (int) device;
+    if( motor >= NUM_MOTORS )
+    {
+        return;
+    }
+
+    value = -value;
+
+    motor_pwms[ motor ] = value;
+    pwmEnableChannel( &PWMD4,
+                      motor,
+                      (pwmcnt_t)value );
 }
 
 void MotorSetSpeed( unsigned motor, pwmcnt_t speed )

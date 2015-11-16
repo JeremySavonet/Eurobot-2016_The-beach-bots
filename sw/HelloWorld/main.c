@@ -26,11 +26,14 @@
 
 #include "system.h"
 
+#include "versatile_cs.h"
+
 #include "comm/debugManager.h"
 #include "comm/microshell.h"
 
 #include "modules/adcManager.h"
 #include "modules/motorsManager.h"
+#include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
@@ -114,10 +117,10 @@ static THD_FUNCTION( Thread2, arg )
     // Wait here all thread to terminate properly
     chThdWait( tp );
 
-    MotorSetSpeed( 0, 0 );
-    MotorSetSpeed( 1, 0 );
-    MotorSetSpeed( 2, 0 );
-    MotorSetSpeed( 3, 0 );
+    // Stop trajectory manager => stop the robot
+    // Probably we will need to stop cs qnd odometry thread...
+    trajectory_hardstop( &robot.traj );
+ 
     DPRINT( 1, "Stop...\r\n" );
     palSetPad( GPIOC, GPIOC_LED );
 }

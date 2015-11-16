@@ -18,11 +18,11 @@
 #include "color.h"
 #include "comm/debugManager.h"
 
-//#include <cvra_dc.h>
+#include "modules/motorsManager.h"
+ 
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
 
 #include "versatile_cs.h"
-//#include "hardware.h"
 
 #define   CS_TASK_PRIORITY            21
 #define   ODOMETRY_TASK_PRIORITY      22
@@ -65,16 +65,17 @@ void versatile_cs_init( void )
     /*************************f************************************************/
     /*                         Encoders & PWMs                                */
     /**************************************************************************/
-/*
+
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot.rs, 
-                     cvra_dc_set_pwm1, 
-                     HEXMOTORCONTROLLER_BASE );
+                     versatile_dc_set_pwm, 
+                      0 ); // MOTOR 0 on PWM4 channel
 
     rs_set_right_pwm( &robot.rs, 
-                      cvra_dc_set_pwm2_negative, 
-                      HEXMOTORCONTROLLER_BASE );
+                      versatile_dc_set_pwm_negative, 
+                      1 ); // MOTOR 1 on PWM4 channel inverted
 
+/*
     rs_set_left_ext_encoder( &robot.rs, 
                              cvra_dc_get_encoder4, 
                              HEXMOTORCONTROLLER_BASE, 
@@ -94,8 +95,9 @@ void versatile_cs_init( void )
                               cvra_dc_get_encoder2, 
                               HEXMOTORCONTROLLER_BASE,
                               -1. );
-#endif
 */
+#endif
+    
     /****************************************************************************/
     /*                          Position manager                                */
     /****************************************************************************/
