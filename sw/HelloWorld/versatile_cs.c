@@ -41,7 +41,7 @@ struct _rob robot;
 
 void versatile_cs_init( void )
 {
-    robot.mode = BOARD_MODE_ANGLE_DISTANCE;
+    robot.mode = BOARD_MODE_FREE;//BOARD_MODE_ANGLE_DISTANCE;
 
     /**************************************************************************/
     /*                                 Motors                                 */
@@ -65,7 +65,7 @@ void versatile_cs_init( void )
     /*************************f************************************************/
     /*                         Encoders & PWMs                                */
     /**************************************************************************/
-
+    
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot.rs,
                      versatile_dc_set_pwm0,
@@ -74,7 +74,6 @@ void versatile_cs_init( void )
     rs_set_right_pwm( &robot.rs,
                       versatile_dc_set_pwm_negative1,
                       MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1 inverted
-
 /*
     rs_set_left_ext_encoder( &robot.rs,
                              cvra_dc_get_encoder4,
@@ -228,7 +227,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_angle( &robot.rs, 0 ); // Sets a null angle PWM
+                rs_set_angle( &robot.rs, 100 ); // Sets a null angle PWM
             }
 
             if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
@@ -238,7 +237,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_distance( &robot.rs, 0 ); // Sets a distance angle PWM
+                rs_set_distance( &robot.rs, 125 ); // Sets a distance angle PWM
             }
         }
 
@@ -257,7 +256,6 @@ THD_FUNCTION( Odometry, arg )
     (void)arg;
     while( true )
     {
-        palTogglePad( GPIOC, GPIOC_LED );
         position_manage(&robot.pos);
 
         // Wait 20 milliseconds (50 Hz)

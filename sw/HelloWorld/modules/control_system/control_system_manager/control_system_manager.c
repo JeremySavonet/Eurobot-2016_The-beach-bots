@@ -214,7 +214,7 @@ int32_t cs_do_process( struct cs* cs, int32_t consign )
                                      cs->output_filter_params, 
                                      cs->out_value );
      
-        DPRINT( 4, KYEL "%ld\n", cs->out_value );
+        DPRINT( 4, KYEL "%ld\n\r", cs->out_value );
     }
     else
     {
