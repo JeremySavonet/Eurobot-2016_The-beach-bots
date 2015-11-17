@@ -86,4 +86,7 @@ void initSystem( void )
 #endif
 
     DPRINT( 1, "System ready\r\n" );
+    
+    //DPRINT( 1, KRED "MOTOR PWM VALUES: %d - %d\r\n", robot.rs.left_pwm_param,
+    //robot.rs.right_pwm_param );
 }

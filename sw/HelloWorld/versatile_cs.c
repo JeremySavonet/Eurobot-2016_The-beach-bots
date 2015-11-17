@@ -27,6 +27,8 @@
 #define   CS_TASK_PRIORITY            21
 #define   ODOMETRY_TASK_PRIORITY      22
 
+#define COMPILE_ON_ROBOT
+
 //=================== VERSATILE CS/ODOMETRY TASKS DEFINTION ==================//
 
 static THD_WORKING_AREA( waControlSys, 2048 );
@@ -41,7 +43,7 @@ struct _rob robot;
 
 void versatile_cs_init( void )
 {
-    robot.mode = BOARD_MODE_ANGLE_DISTANCE;
+    robot.mode = BOARD_MODE_FREE;//BOARD_MODE_ANGLE_DISTANCE;
 
     /**************************************************************************/
     /*                                 Motors                                 */
@@ -65,7 +67,7 @@ void versatile_cs_init( void )
     /*************************f************************************************/
     /*                         Encoders & PWMs                                */
     /**************************************************************************/
-
+    
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot.rs,
                      versatile_dc_set_pwm0,
@@ -75,18 +77,17 @@ void versatile_cs_init( void )
                       versatile_dc_set_pwm_negative1,
                       MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1 inverted
 
-/*
     rs_set_left_ext_encoder( &robot.rs,
-                             cvra_dc_get_encoder4,
-                             HEXMOTORCONTROLLER_BASE,
-                             1. );
+                             versatile_dc_get_encoder0,
+                             MOTOR_ENCODER_BASE,
+                             1. ); // last arg = gain
 
     rs_set_right_ext_encoder( &robot.rs,
-                              cvra_dc_get_encoder3,
-                              HEXMOTORCONTROLLER_BASE,
-                              -1. );
-
-    rs_set_left_mot_encoder( &robot.rs,
+                              versatile_dc_get_encoder1,
+                              MOTOR_ENCODER_BASE,
+                              -1. ); // last arg = gain
+/*
+   rs_set_left_mot_encoder( &robot.rs,
                              cvra_dc_get_encoder1,
                              HEXMOTORCONTROLLER_BASE,
                              -1. );
@@ -228,7 +229,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_angle( &robot.rs, 0 ); // Sets a null angle PWM
+                rs_set_angle( &robot.rs, 100 ); // Sets a null angle PWM
             }
 
             if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
@@ -238,7 +239,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_distance( &robot.rs, 0 ); // Sets a distance angle PWM
+                rs_set_distance( &robot.rs, 125 ); // Sets a distance angle PWM
             }
         }
 
@@ -257,7 +258,6 @@ THD_FUNCTION( Odometry, arg )
     (void)arg;
     while( true )
     {
-        palTogglePad( GPIOC, GPIOC_LED );
         position_manage(&robot.pos);
 
         // Wait 20 milliseconds (50 Hz)

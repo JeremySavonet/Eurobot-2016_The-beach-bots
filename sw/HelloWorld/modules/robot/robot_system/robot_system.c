@@ -29,6 +29,9 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "../../../color.h"
+#include "../../../comm/debugManager.h"
+
 #include "angle_distance.h"
 #include "robot_system.h"
 
@@ -49,7 +52,7 @@ void safe_setpwm( void (*f)( void *, int32_t ), void * param, int32_t value )
     param_tmp = param;
     if( f_tmp ) 
     {
-    	f_tmp( param_tmp, value );
+        f_tmp( param_tmp, value );
     }
 }
 

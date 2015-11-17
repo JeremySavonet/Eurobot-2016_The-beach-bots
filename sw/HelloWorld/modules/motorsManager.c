@@ -76,19 +76,20 @@ void versatile_dc_set_pwm( void *device, int channel, int32_t value )
         value = DC_PWM_MAX_VALUE;
     }
 
-    pwmEnableChannel( (PWMDriver *)device,
+    pwmEnableChannel( device,
                       channel,
                       (pwmcnt_t) value );
 }
 
-//int32_t cvra_dc_get_encoder(void *device, int channel) {
-//    if( channel < 0 || channel > 5 )
-//    {
-//        return -1;
-//    }
-//
-//    return qeiUpdateI( (QEIDriver *) device );
-//}
+int32_t versatile_dc_get_encoder( void *device, int channel ) 
+{
+    if( channel < 0 || channel > 5 )
+    {
+        return -1;
+    }
+
+    return qeiUpdateI( (QEIDriver *) device );
+}
 
 //TODO: this is temp function need to properly name those two functions
 void versatile_dc_set_pwm0( void *device, int32_t value )
@@ -111,13 +112,15 @@ void versatile_dc_set_pwm_negative1( void *device, int32_t value )
     versatile_dc_set_pwm( device, 1, -value );
 }
 
-//int32_t versatile_dc_get_encoder0( void *device )
-//{
-//}
-//
-//int32_t versatile_dc_get_encoder1( void *device )
-//{
-//}
+int32_t versatile_dc_get_encoder0( void *device )
+{
+    return versatile_dc_get_encoder( device, 0 );
+}
+
+int32_t versatile_dc_get_encoder1( void *device )
+{
+    return versatile_dc_get_encoder( device, 1 );
+}
 
 void MotorSetSpeed( unsigned motor, pwmcnt_t speed )
 {
