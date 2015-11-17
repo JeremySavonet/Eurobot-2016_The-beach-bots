@@ -27,6 +27,8 @@
 #define   CS_TASK_PRIORITY            21
 #define   ODOMETRY_TASK_PRIORITY      22
 
+#define COMPILE_ON_ROBOT
+
 //=================== VERSATILE CS/ODOMETRY TASKS DEFINTION ==================//
 
 static THD_WORKING_AREA( waControlSys, 2048 );
@@ -74,18 +76,18 @@ void versatile_cs_init( void )
     rs_set_right_pwm( &robot.rs,
                       versatile_dc_set_pwm_negative1,
                       MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1 inverted
-/*
+
     rs_set_left_ext_encoder( &robot.rs,
-                             cvra_dc_get_encoder4,
-                             HEXMOTORCONTROLLER_BASE,
-                             1. );
+                             versatile_dc_get_encoder0,
+                             MOTOR_ENCODER_BASE,
+                             1. ); // last arg = gain
 
     rs_set_right_ext_encoder( &robot.rs,
-                              cvra_dc_get_encoder3,
-                              HEXMOTORCONTROLLER_BASE,
-                              -1. );
-
-    rs_set_left_mot_encoder( &robot.rs,
+                              versatile_dc_get_encoder1,
+                              MOTOR_ENCODER_BASE,
+                              -1. ); // last arg = gain
+/*
+   rs_set_left_mot_encoder( &robot.rs,
                              cvra_dc_get_encoder1,
                              HEXMOTORCONTROLLER_BASE,
                              -1. );
