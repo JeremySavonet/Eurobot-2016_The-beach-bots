@@ -52,6 +52,9 @@ endif
 ifneq ($(findstring HAL_USE_PWM TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/pwm_lld.c
 endif
+ifneq ($(findstring HAL_USE_QEI TRUE,$(HALCONF)),)
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/qei_lld.c
+endif
 ifneq ($(findstring HAL_USE_SERIAL TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv1/serial_lld.c
 endif

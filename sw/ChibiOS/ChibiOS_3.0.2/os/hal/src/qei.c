@@ -87,11 +87,11 @@ void qeiObjectInit(QEIDriver *qeip) {
  */
 void qeiStart(QEIDriver *qeip, const QEIConfig *config) {
 
-	chDbgCheck((qeip != NULL) && (config != NULL), "qeiStart");
+    //chDbgCheck((qeip != NULL) && (config != NULL), "qeiStart");
 
 	chSysLock();
-	chDbgAssert((qeip->state == QEI_STOP) || (qeip->state == QEI_READY),
-			"qeiStart(), #1", "invalid state");
+    //chDbgAssert((qeip->state == QEI_STOP) || (qeip->state == QEI_READY),
+    //"qeiStart(), #1", "invalid state");
 	qeip->config = config;
 	qei_lld_start(qeip);
 	qeip->state = QEI_READY;
@@ -107,11 +107,11 @@ void qeiStart(QEIDriver *qeip, const QEIConfig *config) {
  */
 void qeiStop(QEIDriver *qeip) {
 
-	chDbgCheck(qeip != NULL, "qeiStop");
+    //chDbgCheck(qeip != NULL, "qeiStop");
 
 	chSysLock();
-	chDbgAssert((qeip->state == QEI_STOP) || (qeip->state == QEI_READY),
-			"qeiStop(), #1", "invalid state");
+    //chDbgAssert((qeip->state == QEI_STOP) || (qeip->state == QEI_READY),
+    //"qeiStop(), #1", "invalid state");
 	qei_lld_stop(qeip);
 	qeip->state = QEI_STOP;
 	chSysUnlock();
@@ -126,10 +126,10 @@ void qeiStop(QEIDriver *qeip) {
  */
 void qeiEnable(QEIDriver *qeip) {
 
-	chDbgCheck(qeip != NULL, "qeiEnable");
+    //chDbgCheck(qeip != NULL, "qeiEnable");
 
 	chSysLock();
-	chDbgAssert(qeip->state == QEI_READY, "qeiEnable(), #1", "invalid state");
+    //chDbgAssert(qeip->state == QEI_READY, "qeiEnable(), #1", "invalid state");
 	qei_lld_enable(qeip);
 	qeip->state = QEI_ACTIVE;
 	chSysUnlock();
@@ -144,11 +144,11 @@ void qeiEnable(QEIDriver *qeip) {
  */
 void qeiDisable(QEIDriver *qeip) {
 
-	chDbgCheck(qeip != NULL, "qeiDisable");
+    //chDbgCheck(qeip != NULL, "qeiDisable");
 
 	chSysLock();
-	chDbgAssert((qeip->state == QEI_READY) || (qeip->state == QEI_ACTIVE),
-			"qeiDisable(), #1", "invalid state");
+    //chDbgAssert((qeip->state == QEI_READY) || (qeip->state == QEI_ACTIVE),
+    //"qeiDisable(), #1", "invalid state");
 	qei_lld_disable(qeip);
 	qeip->state = QEI_READY;
 	chSysUnlock();
@@ -202,10 +202,10 @@ qeidelta_t qeiUpdateI(QEIDriver *qeip) {
 	qeicnt_t cnt;
 	qeidelta_t delta;
 
-	chDbgCheckClassI();
-	chDbgCheck(qeip != NULL, "qeiUpdate");
-	chDbgAssert((qeip->state == QEI_READY) || (qeip->state == QEI_ACTIVE),
-			"qeiUpdate(), #1", "invalid state");
+    //chDbgCheckClassI();
+    //chDbgCheck(qeip != NULL, "qeiUpdate");
+    //chDbgAssert((qeip->state == QEI_READY) || (qeip->state == QEI_ACTIVE),
+    //"qeiUpdate(), #1", "invalid state");
 
 	cnt = qei_lld_get_count(qeip);
 	delta = cnt - qeip->last;
