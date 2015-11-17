@@ -12,7 +12,7 @@
 
 #define DC_PWM_MAX_VALUE 4095
 
-static PWMConfig pwmcfg = 
+static PWMConfig pwmcfg =
 {
     1000000, // 1MHz PWM clock frequency
     20000,   // Initial PWM period 20ms ( 50hz (20ms) for standard servo/ESC, 400hz for fast servo/ESC (2.5ms = 2500) )
@@ -34,7 +34,7 @@ int32_t motor_pwms[ NUM_MOTORS ];
 pwmcnt_t motor_speeds[ NUM_MOTORS ];
 
 void motorsManagerInit( void )
-{   
+{
     palSetPadMode( GPIOD, 12, PAL_MODE_ALTERNATE( 2 ) );
     palSetPadMode( GPIOD, 13, PAL_MODE_ALTERNATE( 2 ) );
     palSetPadMode( GPIOD, 14, PAL_MODE_ALTERNATE( 2 ) );
@@ -50,69 +50,79 @@ void motorsManagerInit( void )
 
 void MotorDisablePwm( unsigned motor )
 {
-    if( motor >= NUM_MOTORS ) 
-    { 
+    if( motor >= NUM_MOTORS )
+    {
         return;
     }
     motor_speeds[ motor ] = 0;
-    pwmDisableChannel( &PWMD4, 
+    pwmDisableChannel( &PWMD4,
                        motor );
 }
 
+void versatile_dc_set_pwm( void *device, int channel, int32_t value )
+{
+    if( channel < 0 || channel > 5 )
+    {
+        return;
+    }
+
+    if( value < -DC_PWM_MAX_VALUE )
+    {
+        value = -DC_PWM_MAX_VALUE;
+    }
+
+    if( value > DC_PWM_MAX_VALUE )
+    {
+        value = DC_PWM_MAX_VALUE;
+    }
+
+    pwmEnableChannel( (PWMDriver *)device,
+                      channel,
+                      (pwmcnt_t) value );
+}
+
+//int32_t cvra_dc_get_encoder(void *device, int channel) {
+//    if( channel < 0 || channel > 5 )
+//    {
+//        return -1;
+//    }
+//
+//    return qeiUpdateI( (QEIDriver *) device );
+//}
+
 //TODO: this is temp function need to properly name those two functions
-void versatile_dc_set_pwm( void *device, int32_t value )
+void versatile_dc_set_pwm0( void *device, int32_t value )
 {
-    if( value < -DC_PWM_MAX_VALUE )
-    {
-        value = -DC_PWM_MAX_VALUE;
-    }
-
-    if( value > DC_PWM_MAX_VALUE )
-    {
-        value = DC_PWM_MAX_VALUE;
-    }
-
-    int motor = (int) device;
-    if( motor >= NUM_MOTORS )
-    {
-        return;
-    }
-    motor_pwms[ motor ] = value;
-    pwmEnableChannel( &PWMD4,
-                      motor,
-                      (pwmcnt_t)value );
+    versatile_dc_set_pwm( device, 0, value );
 }
 
-void versatile_dc_set_pwm_negative( void *device, int32_t value )
+void versatile_dc_set_pwm1( void *device, int32_t value )
 {
-    if( value < -DC_PWM_MAX_VALUE )
-    {
-        value = -DC_PWM_MAX_VALUE;
-    }
-
-    if( value > DC_PWM_MAX_VALUE )
-    {
-        value = DC_PWM_MAX_VALUE;
-    }
-
-    int motor = (int) device;
-    if( motor >= NUM_MOTORS )
-    {
-        return;
-    }
-
-    value = -value;
-
-    motor_pwms[ motor ] = value;
-    pwmEnableChannel( &PWMD4,
-                      motor,
-                      (pwmcnt_t)value );
+    versatile_dc_set_pwm( device, 1, value );
 }
+
+void versatile_dc_set_pwm_negative0( void *device, int32_t value )
+{
+    versatile_dc_set_pwm( device, 0, -value );
+}
+
+void versatile_dc_set_pwm_negative1( void *device, int32_t value )
+{
+    versatile_dc_set_pwm( device, 1, -value );
+}
+
+//int32_t versatile_dc_get_encoder0( void *device )
+//{
+//}
+//
+//int32_t versatile_dc_get_encoder1( void *device )
+//{
+//}
 
 void MotorSetSpeed( unsigned motor, pwmcnt_t speed )
 {
-    if( motor >= NUM_MOTORS ) 
-    { 
+    if( motor >= NUM_MOTORS )
+    {
         return;
     }
     if( speed > MAX_MOTOR_SPEED )
@@ -121,15 +131,15 @@ void MotorSetSpeed( unsigned motor, pwmcnt_t speed )
     }
 
     motor_speeds[ motor ] = speed;
-    pwmEnableChannel( &PWMD4, 
-            motor, 
+    pwmEnableChannel( &PWMD4,
+            motor,
             PWM_PERCENTAGE_TO_WIDTH( &PWMD4, speed ) );
 }
 
 pwmcnt_t MotorGetSpeed( unsigned motor )
 {
-    if( motor >= NUM_MOTORS ) 
-    { 
+    if( motor >= NUM_MOTORS )
+    {
         return 0;
     }
 

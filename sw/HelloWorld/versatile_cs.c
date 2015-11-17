@@ -19,7 +19,7 @@
 #include "comm/debugManager.h"
 
 #include "modules/motorsManager.h"
- 
+
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
 
 #include "versatile_cs.h"
@@ -49,7 +49,7 @@ void versatile_cs_init( void )
 /*
 #ifdef COMPILE_ON_ROBOT
     int i;
-    for( i = 0; i < 8; i++ ) 
+    for( i = 0; i < 8; i++ )
     {
         cvra_dc_set_encoder( HEXMOTORCONTROLLER_BASE, i, 0 );
         cvra_dc_set_pwm( HEXMOTORCONTROLLER_BASE, i, 0 );
@@ -67,42 +67,42 @@ void versatile_cs_init( void )
     /**************************************************************************/
 
 #ifdef COMPILE_ON_ROBOT
-    rs_set_left_pwm( &robot.rs, 
-                     versatile_dc_set_pwm, 
-                      0 ); // MOTOR 0 on PWM4 channel
+    rs_set_left_pwm( &robot.rs,
+                     versatile_dc_set_pwm0,
+                     MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM4 channel 0
 
-    rs_set_right_pwm( &robot.rs, 
-                      versatile_dc_set_pwm_negative, 
-                      1 ); // MOTOR 1 on PWM4 channel inverted
+    rs_set_right_pwm( &robot.rs,
+                      versatile_dc_set_pwm_negative1,
+                      MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1 inverted
 
 /*
-    rs_set_left_ext_encoder( &robot.rs, 
-                             cvra_dc_get_encoder4, 
-                             HEXMOTORCONTROLLER_BASE, 
+    rs_set_left_ext_encoder( &robot.rs,
+                             cvra_dc_get_encoder4,
+                             HEXMOTORCONTROLLER_BASE,
                              1. );
 
-    rs_set_right_ext_encoder( &robot.rs, 
-                              cvra_dc_get_encoder3, 
+    rs_set_right_ext_encoder( &robot.rs,
+                              cvra_dc_get_encoder3,
                               HEXMOTORCONTROLLER_BASE,
                               -1. );
-    
-    rs_set_left_mot_encoder( &robot.rs, 
-                             cvra_dc_get_encoder1, 
-                             HEXMOTORCONTROLLER_BASE, 
+
+    rs_set_left_mot_encoder( &robot.rs,
+                             cvra_dc_get_encoder1,
+                             HEXMOTORCONTROLLER_BASE,
                              -1. );
-    
-    rs_set_right_mot_encoder( &robot.rs, 
-                              cvra_dc_get_encoder2, 
+
+    rs_set_right_mot_encoder( &robot.rs,
+                              cvra_dc_get_encoder2,
                               HEXMOTORCONTROLLER_BASE,
                               -1. );
 */
 #endif
-    
+
     /****************************************************************************/
     /*                          Position manager                                */
     /****************************************************************************/
     position_init( &robot.pos );
-    
+
     // Links the position manager to the robot system.
     position_set_related_robot_system( &robot.pos, &robot.rs );
 
@@ -120,22 +120,22 @@ void versatile_cs_init( void )
     quadramp_init( &robot.angle_qr );
 
     cs_init( &robot.angle_cs ); // Initialise le control system.
-    cs_set_consign_filter( &robot.angle_cs, 
-                           quadramp_do_filter, 
+    cs_set_consign_filter( &robot.angle_cs,
+                           quadramp_do_filter,
                            &robot.angle_qr ); // Met un filtre en acceleration.
 
-    cs_set_correct_filter( &robot.angle_cs, 
-                           pid_do_filter, 
+    cs_set_correct_filter( &robot.angle_cs,
+                           pid_do_filter,
                            &robot.angle_pid ); // Met le PID.
- 
-    cs_set_process_in( &robot.angle_cs, 
-                       rs_set_angle, 
+
+    cs_set_process_in( &robot.angle_cs,
+                       rs_set_angle,
                        &robot.rs ); // Met la sortie sur le pwm virtuel de l'angle.
 
-    cs_set_process_out( &robot.angle_cs, 
-                        rs_get_ext_angle, 
+    cs_set_process_out( &robot.angle_cs,
+                        rs_get_ext_angle,
                         &robot.rs ); // lecture codeur virtuel de l'angle
-    
+
     cs_set_consign( &robot.angle_cs, 0 ); // Met une consigne nulle.
 
     /****************************************************************************/
@@ -148,23 +148,23 @@ void versatile_cs_init( void )
 
     quadramp_init( &robot.distance_qr ); // Demarre le filtre en acceleration.
 
-    cs_init( &robot.distance_cs); 
-    cs_set_consign_filter( &robot.distance_cs, 
+    cs_init( &robot.distance_cs);
+    cs_set_consign_filter( &robot.distance_cs,
                            quadramp_do_filter,
-                           &robot.distance_qr ); 
+                           &robot.distance_qr );
 
-    cs_set_correct_filter( &robot.distance_cs, 
-                           pid_do_filter, 
+    cs_set_correct_filter( &robot.distance_cs,
+                           pid_do_filter,
                            &robot.distance_pid );
- 
-    cs_set_process_in( &robot.distance_cs, 
-                       rs_set_distance, 
+
+    cs_set_process_in( &robot.distance_cs,
+                       rs_set_distance,
                        &robot.rs ); // Met la sortie sur le pwm virtuel de la distance.
-    
-    cs_set_process_out( &robot.distance_cs, 
-                        rs_get_ext_distance, 
+
+    cs_set_process_out( &robot.distance_cs,
+                        rs_get_ext_distance,
                         &robot.rs ); // lecture codeur virtuel de la distance
-    
+
     cs_set_consign( &robot.distance_cs, 0 ); //Met une consigne nulle.
 
     /****************************************************************************/
@@ -174,7 +174,7 @@ void versatile_cs_init( void )
     trajectory_set_cs( &robot.traj, &robot.distance_cs, &robot.angle_cs );
     trajectory_set_robot_params( &robot.traj, &robot.rs, &robot.pos );
 
-    // distance window, angle window, angle start 
+    // distance window, angle window, angle start
     trajectory_set_windows( &robot.traj, 15., 5.0, 10. ); // Prod
 
     // Angle BDM
@@ -219,35 +219,35 @@ THD_FUNCTION( ControlSys, arg )
         rs_update( &robot.rs );
 
         // Gestion de l'asservissement.
-        if( robot.mode != BOARD_MODE_SET_PWM ) 
+        if( robot.mode != BOARD_MODE_SET_PWM )
         {
-            if( robot.mode == BOARD_MODE_ANGLE_DISTANCE || 
-                robot.mode == BOARD_MODE_ANGLE_ONLY ) 
+            if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
+                robot.mode == BOARD_MODE_ANGLE_ONLY )
             {
                 cs_manage( &robot.angle_cs );
-            } 
-            else 
+            }
+            else
             {
                 rs_set_angle( &robot.rs, 0 ); // Sets a null angle PWM
             }
 
-            if( robot.mode == BOARD_MODE_ANGLE_DISTANCE || 
-                robot.mode == BOARD_MODE_DISTANCE_ONLY ) 
+            if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
+                robot.mode == BOARD_MODE_DISTANCE_ONLY )
             {
                 cs_manage( &robot.distance_cs );
-            } 
-            else 
+            }
+            else
             {
                 rs_set_distance( &robot.rs, 0 ); // Sets a distance angle PWM
             }
         }
 
-        // Gestion du blocage 
+        // Gestion du blocage
         bd_manage( &robot.angle_bd );
         bd_manage( &robot.distance_bd );
 
         // Wait 10 milliseconds (100 Hz)
-        chThdSleepMilliseconds( 10 ); 
+        chThdSleepMilliseconds( 10 );
     }
 }
 
@@ -259,8 +259,8 @@ THD_FUNCTION( Odometry, arg )
     {
         palTogglePad( GPIOC, GPIOC_LED );
         position_manage(&robot.pos);
-        
+
         // Wait 20 milliseconds (50 Hz)
-        chThdSleepMilliseconds( 20 ); 
+        chThdSleepMilliseconds( 20 );
     }
 }
