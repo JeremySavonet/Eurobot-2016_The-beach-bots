@@ -26,13 +26,13 @@
 #include "ch.h"
 
 /*
- * This module is responsible for making speed ramps to avoid large 
+ * This module is responsible for making speed ramps to avoid large
  * accelerations.
  * Its functions are compatible with control_system_manager.
  *
  */
 
-/* 
+/*
  * A quadram instance.
  *
  * The role of this filter is to limit the speed and acceleration of a value.
@@ -44,53 +44,53 @@ struct quadramp_filter
     double var_2nd_ord_pos; // Acceleration
     double var_2nd_ord_neg; // Deceleration
     double var_1st_ord_pos; // Speed (> 0)
-    double var_1st_ord_neg; // Speed (< 0) 
-    
+    double var_1st_ord_neg; // Speed (< 0)
+
     double previous_var; // Speed at the previous filter iteration.
     double previous_out; // Position at the previous filter iteration.
     int32_t previous_in; // Input at the previous filter iteration.
 };
 
-/* 
+/*
  * Initialization of the filter.
  * [in] q The quadramp instance.
  */
-void quadramp_init( struct quadramp_filter *q );
+void quadramp_init( struct quadramp_filter* q );
 
 /*
- * Resets the filter output to zero and stops any ramp. 
+ * Resets the filter output to zero and stops any ramp.
  * [in] q The quadramp instance.
  */
-void quadramp_reset( struct quadramp_filter *q );
+void quadramp_reset( struct quadramp_filter* q );
 
 /*
- * Set acceleration. 
+ * Set acceleration.
  * [in] q The quadramp instance.
  * [in] var_2nd_ord_pos The positive acceleration.
  * [in] var_2nd_ord_neg The negative acceleration.
  */
-void quadramp_set_2nd_order_vars( struct quadramp_filter *q,
-				                  double var_2nd_ord_pos,
-				                  double var_2nd_ord_neg );
+void quadramp_set_2nd_order_vars( struct quadramp_filter* q,
+                                  double var_2nd_ord_pos,
+                                  double var_2nd_ord_neg );
 
 /*
- * Set speed. 
+ * Set speed.
  * [in] q The quadramp instance.
  * [in] var_1st_ord_pos The positive speed.
  * [in] var_1st_ord_neg The negative speed.
  */
-void quadramp_set_1st_order_vars( struct quadramp_filter *q,
-				                  double var_1st_ord_pos,
-				                  double var_1st_ord_neg );
+void quadramp_set_1st_order_vars( struct quadramp_filter* q,
+                                  double var_1st_ord_pos,
+                                  double var_1st_ord_neg );
 
 /*
  * Set position.
  *
- * the new position and sets the speed to zero. 
+ * the new position and sets the speed to zero.
  * [in] q The quadramp instance.
  * [in] pos The new position.
  */
-void quadramp_set_position( struct quadramp_filter *q, int32_t pos );
+void quadramp_set_position( struct quadramp_filter* q, int32_t pos );
 
 /*
  * Is the ramp finished.
@@ -98,7 +98,7 @@ void quadramp_set_position( struct quadramp_filter *q, int32_t pos );
  * Returns 1 when filter_input == filter_output && speed==0.
  * [in] q The quadramp instance.
  */
-uint8_t quadramp_is_finished( struct quadramp_filter *q );
+uint8_t quadramp_is_finished( struct quadramp_filter* q );
 
 /*
  * Process the ramp.
@@ -108,6 +108,6 @@ uint8_t quadramp_is_finished( struct quadramp_filter *q );
  *
  * Returns The output of the filter.
  */
-int32_t quadramp_do_filter( void *data, int32_t in );
+int32_t quadramp_do_filter( void* data, int32_t in );
 
 #endif // _QUADRAMP_H_

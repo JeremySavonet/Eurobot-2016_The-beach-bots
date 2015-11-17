@@ -20,23 +20,21 @@
 #include "esp8266Manager.h"
 
 // Private functions
-void sendCommand( char *p );
+void sendCommand( char* p );
 
-
-// Struct to config serial module 
-static SerialConfig sd6Cfg =
-{
-    115200,              
+// Struct to config serial module
+static SerialConfig sd6Cfg = {
+    115200,
     0,
     0,
     0
-}; 
+};
 
 // Periodic thread to handle modwifi uart
 static THD_WORKING_AREA( waRead, 128 );
 static THD_FUNCTION( esp8266, arg )
 {
-    (void)arg;
+    ( void )arg;
     chRegSetThreadName( "esp8266" );
     event_listener_t serialListener;
 
@@ -45,49 +43,48 @@ static THD_FUNCTION( esp8266, arg )
      * the thread.
      */
     chEvtRegisterMaskWithFlags(
-        (struct event_source_t *)chnGetEventSource( &SD6 ),
-        &serialListener,
+        ( struct event_source_t* )chnGetEventSource( & SD6 ),
+        & serialListener,
         EVENT_MASK( 1 ),
-        SD_FRAMING_ERROR | SD_PARITY_ERROR |
-        CHN_INPUT_AVAILABLE );
+        SD_FRAMING_ERROR | SD_PARITY_ERROR | CHN_INPUT_AVAILABLE );
 
     while( true )
     {
         // Waiting for any of the events we're registered on.
         eventmask_t evt = chEvtWaitAny( ALL_EVENTS );
- 
+
         // Serving events.
-        if( evt & EVENT_MASK(1) ) 
+        if( evt & EVENT_MASK( 1 ) )
         {
-          /* Event from the serial interface, getting serial
-           * flags as first thing.
-           */
-          eventflags_t flags = chEvtGetAndClearFlags( &serialListener );
- 
-            //Handling errors first.
-            if( flags & (SD_FRAMING_ERROR | SD_PARITY_ERROR) )
-            {   
+            /* Event from the serial interface, getting serial
+             * flags as first thing.
+             */
+            eventflags_t flags = chEvtGetAndClearFlags( & serialListener );
+
+            // Handling errors first.
+            if( flags & ( SD_FRAMING_ERROR | SD_PARITY_ERROR ) )
+            {
                 DPRINT( 4, KRED "FRAMING/PARITY ERROR" );
             }
             if( flags & CHN_INPUT_AVAILABLE )
             {
-                char c; 
-                c = sdGet( &SD6 );
-                sdPut( &SD3, c );
-            }   
-        }  
+                char c;
+                c = sdGet( & SD6 );
+                sdPut( & SD3, c );
+            }
+        }
     }
 }
 
 void esp8266ManagerInit( void )
 {
-    // Used function : USART6_TX 
-    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
-    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) ); 
-    
-    sdStart( &SD6, &sd6Cfg );
-    
-    chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, esp8266, NULL );
+    // Used function : USART6_TX
+    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) );
+    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) );
+
+    sdStart( & SD6, & sd6Cfg );
+
+    chThdCreateStatic( waRead, sizeof( waRead ), NORMALPRIO, esp8266, NULL );
 }
 
 void esp8266RequestVersion( void )
@@ -125,7 +122,8 @@ void esp8266ConfigureServer( void )
     sendCommand( "AT+CIPSERVER=1\r\n" );
 }
 
-void sendCommand( char *p ) 
+void sendCommand( char* p )
 {
-    while (*p) chSequentialStreamPut( &SD6, *p++ );
+    while( *p )
+        chSequentialStreamPut( & SD6, *p++ );
 }

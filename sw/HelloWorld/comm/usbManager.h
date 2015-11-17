@@ -9,9 +9,9 @@
 #define _USBCONFIG_H_
 
 // Endpoints to be used for USBD2.
-#define USBD2_DATA_REQUEST_EP           1
-#define USBD2_DATA_AVAILABLE_EP         1
-#define USBD2_INTERRUPT_REQUEST_EP      2
+#define USBD2_DATA_REQUEST_EP 1
+#define USBD2_DATA_AVAILABLE_EP 1
+#define USBD2_INTERRUPT_REQUEST_EP 2
 
 // Serial over USB Driver structure.
 extern SerialUSBDriver SDU2;

@@ -15,7 +15,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- *  Revision : $Id: control_system_manager.h,v 1.7.4.5 2008-03-02 17:18:34 zer0 Exp $
+ *  Revision : $Id: control_system_manager.h,v 1.7.4.5 2008-03-02 17:18:34 zer0
+ * Exp $
  *
  */
 
@@ -25,49 +26,47 @@
 // Platform includes
 #include "ch.h"
 
-typedef int32_t (*cs_feedback_filter) ( void*, int32_t );
-typedef int32_t (*cs_correct_filter) ( void*, int32_t );
-typedef int32_t (*cs_consign_filter) ( void*, int32_t );
-typedef void   (*cs_process_in) ( void*, int32_t );
-typedef int32_t (*cs_process_out) ( void* );
-
+typedef int32_t ( *cs_feedback_filter )( void*, int32_t );
+typedef int32_t ( *cs_correct_filter )( void*, int32_t );
+typedef int32_t ( *cs_consign_filter )( void*, int32_t );
+typedef void ( *cs_process_in )( void*, int32_t );
+typedef int32_t ( *cs_process_out )( void* );
 
 // Data structure used by the control_system_manager module
 struct cs
 {
-    int32_t (*consign_filter)( void *, int32_t );
+    int32_t ( *consign_filter )( void*, int32_t );
     void* consign_filter_params;
-    
-    int32_t (*correct_filter)( void*, int32_t );
+
+    int32_t ( *correct_filter )( void*, int32_t );
     void* correct_filter_params;
 
-    int32_t (*feedback_filter)( void*, int32_t );
+    int32_t ( *feedback_filter )( void*, int32_t );
     void* feedback_filter_params;
 
-    /* 
-     * Callback function for the output filter, 
+    /*
+     * Callback function for the output filter,
      * eg: torque limiter or inertia adapter.
      * Note: This may not be the best way to do it.
      */
-    int32_t (*output_filter)(void*, int32_t); 
-    void* output_filter_params; // Parameter for output_filter, 
-                                // will be passed as 1st param. 
+    int32_t ( *output_filter )( void*, int32_t );
+    void* output_filter_params; // Parameter for output_filter,
+                                // will be passed as 1st param.
 
-    int32_t (*process_out)( void* );
+    int32_t ( *process_out )( void* );
     void* process_out_params;
 
-    void (*process_in)( void*, int32_t );
+    void ( *process_in )( void*, int32_t );
     void* process_in_params;
 
     int32_t consign_value;
     int32_t error_value;
     int32_t out_value;
-    
+
     int32_t filtered_feedback_value;
     int32_t filtered_consign_value;
-    
-    int enabled; // 1 if the control system is enabled, 0 otherwise.
 
+    int enabled; // 1 if the control system is enabled, 0 otherwise.
 };
 
 // Initiate the control_system structure by setting all fields to NULL
@@ -75,34 +74,33 @@ void cs_init( struct cs* cs );
 
 // Set the cs consign_filter fields in the cs structure
 void cs_set_consign_filter( struct cs* cs,
-                            int32_t (*consign_filter)( void*, int32_t ),
+                            int32_t ( *consign_filter )( void*, int32_t ),
                             void* consign_filter_params );
 
 // Set the cs correct_filter fields in the cs structure
-void  cs_set_correct_filter( struct cs* cs,
-                             int32_t (*correct_filter)( void*, int32_t ),
-                             void* correct_filer_params );
+void cs_set_correct_filter( struct cs* cs,
+                            int32_t ( *correct_filter )( void*, int32_t ),
+                            void* correct_filer_params );
 
-// Set the cs feedback_filter fields in the cs structure 
-void  cs_set_feedback_filter( struct cs* cs,
-                              int32_t (*feedback_filter)( void*, int32_t ),
-                              void* feedback_filer_params);
+// Set the cs feedback_filter fields in the cs structure
+void cs_set_feedback_filter( struct cs* cs,
+                             int32_t ( *feedback_filter )( void*, int32_t ),
+                             void* feedback_filer_params );
 
 // Set the cs output_filter fields in the cs structure
-void  cs_set_output_filter( struct cs* cs,
-                            int32_t (*output_filter)( void*, int32_t ),
-                            void* output_filer_params);
+void cs_set_output_filter( struct cs* cs,
+                           int32_t ( *output_filter )( void*, int32_t ),
+                           void* output_filer_params );
 
 // Set the cs process_in fields in the cs structure
 void cs_set_process_in( struct cs* cs,
-                        void (*process_in)( void*, int32_t ),
+                        void ( *process_in )( void*, int32_t ),
                         void* process_in_params );
 
 // Set the cs process_out fields in the cs structure
 void cs_set_process_out( struct cs* cs,
-                         int32_t (*process_out)( void* ),
+                         int32_t ( *process_out )( void* ),
                          void* process_out_params );
-
 
 /*
  * This function do the main loop of the control system process.
@@ -115,15 +113,15 @@ void cs_set_process_out( struct cs* cs,
  * - Save the result in error_value and apply the correct filter.
  * - Save the filtered result and send it to process_in().
  * - Return this result.
- * 
+ *
  */
 int32_t cs_do_process( struct cs* cs, int32_t consign );
 
 /*
- * Apply cs_do_process() to the structure cs 
+ * Apply cs_do_process() to the structure cs
  * cs should be a (struct cs*)
  */
-void cs_manage( void * cs );
+void cs_manage( void* cs );
 
 // Return the last output sent to process
 int32_t cs_get_out( struct cs* cs );

@@ -1,6 +1,6 @@
-/*  
+/*
  *  Copyright Droids Corporation, Microb Technology, Eirbot (2005)
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -29,7 +29,7 @@
  * To calculate the value for the virtual encoders, we simply set angle
  * = right-left and distance = left + right. There is not unit manipulation
  * at this level, everything is done in encoder ticks.
- * 
+ *
  * To mix the value sent to the motor, we do something like left = distance +
  * angle and right = distance - angle.
  *
@@ -64,7 +64,7 @@
  * The difference of diameter can seem very small, but if we do a straight
  * line of x=3 meters we will have a deviation in angle of
  * \f$\theta = \frac{1}{100} rd\f$
- * 
+ *
  * The lateral displacement will be :
  * \f$\Delta Y = 2 \theta X = 0.06\f$
  *
@@ -102,69 +102,69 @@ struct robot_system
 
 #ifdef CONFIG_MODULE_ROBOT_SYSTEM_MOT_AND_EXT
     /* Motor encoders. */
-    // Previous position of the virtual motor encoders. 
-    struct rs_polar pmot_prev; 
-    
+    // Previous position of the virtual motor encoders.
+    struct rs_polar pmot_prev;
+
     // Previous position of the real motor encoders.
-    struct rs_wheels wmot_prev; 
-    
-    // Ratio between the motor and external encoders track. 
-    float ratio_mot_ext; 
-    
+    struct rs_wheels wmot_prev;
+
+    // Ratio between the motor and external encoders track.
+    float ratio_mot_ext;
+
     // Callback to get the value of the left motor encoder.
-    int32_t (*left_mot_encoder)( void * );
-    
+    int32_t ( *left_mot_encoder )( void* );
+
     // Data that will be passed to left_mot_encoder.
     void* left_mot_encoder_param;
-    
+
     // Gain on the left motor encoder to compensate for wheel difference.
     float left_mot_gain;
-    
+
     // Callback to get the value of the left motor encoder.
-    int32_t (*right_mot_encoder)( void * );
-    
+    int32_t ( *right_mot_encoder )( void* );
+
     // Data that will be passed to right_mot_encoder.
     void* right_mot_encoder_param;
-    
+
     // Gain on the right motor encoder to compensate for wheel difference.
     float right_mot_gain;
-#endif 
+#endif
 
     // External encoders
     // Value of the virtual PWM.
     struct rs_polar virtual_pwm;
     // Value of the virtual encoders.
     struct rs_polar virtual_encoders;
-    
+
     // Previous value of the virtual encoders.
     struct rs_polar pext_prev;
     // Previous value of the real encoders.
     struct rs_wheels wext_prev;
-    
+
     // Callback to get the value of the left encoder.
-    int32_t (*left_ext_encoder)( void * );
+    int32_t ( *left_ext_encoder )( void* );
     // Data that will be passed to left_ext_encoder.
     void* left_ext_encoder_param;
     // Gain on the left encoder to compensate for wheel difference.
     double left_ext_gain;
-    
+
     // Callback to get the value of the right encoder.
-    int32_t (*right_ext_encoder)( void * );
+    int32_t ( *right_ext_encoder )( void* );
     // Data that will be passed to right_ext_encoder.
     void* right_ext_encoder_param;
     // Gain on the right encoder to compensate for wheel difference.
     double right_ext_gain;
-    
+
     // PWM
     // Callback to set the left motor PWM.
-    void (*left_pwm)( void *, int32_t );
+    void ( *left_pwm )( void*, int32_t );
     // Data that will be passed to left_pwm.
-    void *left_pwm_param;
-    
+    void* left_pwm_param;
+
     // Callback to set the right motor PWM.
-    void (*right_pwm)( void *, int32_t );
+    void ( *right_pwm )( void*, int32_t );
     // Data that will be passed to right_pwm.
-    void *right_pwm_param;
+    void* right_pwm_param;
 };
 
 /*
@@ -173,7 +173,7 @@ struct robot_system
  * Sets all the fields to 0.
  * [in] rs The robot_system instance.
  */
-void rs_init( struct robot_system *rs );
+void rs_init( struct robot_system* rs );
 
 #ifdef CONFIG_MODULE_ROBOT_SYSTEM_MOT_AND_EXT
 /*
@@ -185,7 +185,7 @@ void rs_init( struct robot_system *rs );
  * [in] rs The robot_system instance.
  * [in] ratio The ratio mot_track / ext_track.
  */
-void rs_set_ratio( struct robot_system * rs, double ratio );
+void rs_set_ratio( struct robot_system* rs, double ratio );
 #endif
 
 /*
@@ -197,9 +197,9 @@ void rs_set_ratio( struct robot_system * rs, double ratio );
  * [in] *left_pwm The function that will be stored as left PWM callback.
  * [in] left_pwm_param The data that will be passed to left_pwm.
  */
-void rs_set_left_pwm( struct robot_system * rs, 
-                      void (*left_pwm)( void *, int32_t ), 
-                      void *left_pwm_param );
+void rs_set_left_pwm( struct robot_system* rs,
+                      void ( *left_pwm )( void*, int32_t ),
+                      void* left_pwm_param );
 
 /*
  * Define right pwn.
@@ -210,9 +210,9 @@ void rs_set_left_pwm( struct robot_system * rs,
  * [in] *right_pwm The function that will be stored as right PWM callback.
  * [in] right_pwm_param The data that will be passed to right_pwm.
  */
-void rs_set_right_pwm( struct robot_system * rs, 
-                       void (*right_pwm)( void *, int32_t ), 
-                       void *right_pwm_param );
+void rs_set_right_pwm( struct robot_system* rs,
+                       void ( *right_pwm )( void*, int32_t ),
+                       void* right_pwm_param );
 
 #ifdef CONFIG_MODULE_ROBOT_SYSTEM_MOT_AND_EXT
 /*
@@ -225,9 +225,9 @@ void rs_set_right_pwm( struct robot_system * rs,
  * [in] left_mot_encoder_param The data that will be passed to left_mot_encoder.
  * gain The gain that will be used for diameter compensation.
  */
-void rs_set_left_mot_encoder( struct robot_system * rs, 
-                              int32_t (*left_mot_encoder)( void * ),
-                              void *left_mot_encoder_param, 
+void rs_set_left_mot_encoder( struct robot_system* rs,
+                              int32_t ( *left_mot_encoder )( void* ),
+                              void* left_mot_encoder_param,
                               double gain );
 
 /*
@@ -237,12 +237,13 @@ void rs_set_left_mot_encoder( struct robot_system * rs,
  *
  * [in] rs The robot_system instance.
  * [in] *right_mot_encoder The function that will be used as right pwm callback.
- * [in] right_mot_encoder_param The data that will be passed to right_mot_encoder.
+ * [in] right_mot_encoder_param The data that will be passed to
+ * right_mot_encoder.
  * gain The gain that will be used for diameter compensation.
  */
-void rs_set_right_mot_encoder( struct robot_system * rs, 
-                               int32_t (*right_mot_encoder)( void * ),
-                               void *right_mot_encoder_param, 
+void rs_set_right_mot_encoder( struct robot_system* rs,
+                               int32_t ( *right_mot_encoder )( void* ),
+                               void* right_mot_encoder_param,
                                double gain );
 #endif
 
@@ -256,9 +257,9 @@ void rs_set_right_mot_encoder( struct robot_system * rs,
  * [in] left_ext_encoder_param The data that will be passed to left_ext_encoder.
  * gain The gain that will be used for diameter compensation.
  */
-void rs_set_left_ext_encoder( struct robot_system * rs, 
-                              int32_t (*left_ext_encoder)( void * ), 
-			                  void *left_ext_encoder_param, 
+void rs_set_left_ext_encoder( struct robot_system* rs,
+                              int32_t ( *left_ext_encoder )( void* ),
+                              void* left_ext_encoder_param,
                               double gain );
 
 /*
@@ -268,15 +269,14 @@ void rs_set_left_ext_encoder( struct robot_system * rs,
  *
  * [in] rs The robot_system instance.
  * [in] *right_ext_encoder The function that will be used as right pwm callback.
- * [in] right_ext_encoder_param The data that will be passed to 
+ * [in] right_ext_encoder_param The data that will be passed to
  *      right_ext_encoder.
  * gain The gain that will be used for diameter compensation.
  */
-void rs_set_right_ext_encoder( struct robot_system * rs, 
-                               int32_t (*right_ext_encoder)( void * ), 
-			                   void *right_ext_encoder_param, 
+void rs_set_right_ext_encoder( struct robot_system* rs,
+                               int32_t ( *right_ext_encoder )( void* ),
+                               void* right_ext_encoder_param,
                                double gain );
-
 
 /*
  * Sets the angle PWM.
@@ -287,18 +287,18 @@ void rs_set_right_ext_encoder( struct robot_system * rs,
  * [in] rs The robot_system instance.
  * [in] angle The value of the angle PWM.
  */
-void rs_set_angle( void * rs, int32_t angle );
+void rs_set_angle( void* rs, int32_t angle );
 
- /*
- * Sets the distance PWM.
- *
- * This function sets the real PWMs according to the existing angle PWM and
- * the given distance PWM.
- *
- * [in] rs The robot_system instance.
- * [in] distance The value of the angle PWM.
- */
-void rs_set_distance( void * rs, int32_t distance );
+/*
+* Sets the distance PWM.
+*
+* This function sets the real PWMs according to the existing angle PWM and
+* the given distance PWM.
+*
+* [in] rs The robot_system instance.
+* [in] distance The value of the angle PWM.
+*/
+void rs_set_distance( void* rs, int32_t distance );
 
 /*
  * Get the angle encoder value.
@@ -312,43 +312,43 @@ void rs_set_distance( void * rs, int32_t distance );
  * [in] rs The robot_system instance.
  * Return The computed value for angle.
  */
-int32_t rs_get_angle( void * rs );
+int32_t rs_get_angle( void* rs );
 
 /*
  * Get the distance encoder value.
  *
- * This function returns the computed distance encoder value 
+ * This function returns the computed distance encoder value
  * based on real encoders value and gains.
  *
- * This value is computed as distance=(right+left)/2, which means positive 
+ * This value is computed as distance=(right+left)/2, which means positive
  * angle is counter clockwise.
  *
  * [in] rs The robot_system instance.
  * Return The computed value for distance.
  */
-int32_t rs_get_distance( void * rs );
+int32_t rs_get_distance( void* rs );
 
 /*
  * Gets the angle based on external encoders.
- * 
+ *
  * This function does the same as rs_get_angle() but forces usage of external
  * encoders.
  *
  * [in] rs The robot_system instance.
  * Returns The angle value according to external encoders.
  */
-int32_t rs_get_ext_angle( void * rs );
+int32_t rs_get_ext_angle( void* rs );
 
 /*
  * Gets the distance based on external encoders.
- * 
+ *
  * This function does the same as rs_get_distance() but forces usage of external
  * encoders.
  *
  * [in] rs The robot_system instance.
  * Returns The angle distance according to external encoders.
  */
-int32_t rs_get_ext_distance( void * rs );
+int32_t rs_get_ext_distance( void* rs );
 
 #ifdef CONFIG_MODULE_ROBOT_SYSTEM_MOT_AND_EXT
 /*
@@ -360,7 +360,7 @@ int32_t rs_get_ext_distance( void * rs );
  * [in] rs The robot_system instance.
  * Returns The angle value according to motor encoders.
  */
-int32_t rs_get_mot_angle( void * rs );
+int32_t rs_get_mot_angle( void* rs );
 
 /** @brief Gets the distance based on motor encoders.
  *
@@ -372,7 +372,7 @@ int32_t rs_get_mot_angle( void * rs );
  * @param [in] rs The robot_system instance.
  * @returns The distance according to motro encoders.
  */
-int32_t rs_get_mot_distance( void * rs );
+int32_t rs_get_mot_distance( void* rs );
 #endif
 
 /******************************************************************************/
@@ -386,7 +386,7 @@ int32_t rs_get_mot_distance( void * rs );
  *
  * Return The left external encoder value.
  */
-int32_t rs_get_ext_left( void * rs );
+int32_t rs_get_ext_left( void* rs );
 
 /*
  * Gets right external encoder value
@@ -395,7 +395,7 @@ int32_t rs_get_ext_left( void * rs );
  *
  * Return The right external encoder value.
  */
-int32_t rs_get_ext_right( void * rs );
+int32_t rs_get_ext_right( void* rs );
 
 /*
  * Update the encoder values.
@@ -403,11 +403,11 @@ int32_t rs_get_ext_right( void * rs );
  * Read the encoders, and update internal virtual counters. Call this
  * function is needed before reading the virtual encoders. The program
  * will decide if it the external encoders or the motor encoders are
- * taken in account. 
+ * taken in account.
  *
  * [in] rs The robot_system instance.
  */
-void rs_update( void * rs );
+void rs_update( void* rs );
 
 /*
  * Sets the flags.
@@ -417,6 +417,6 @@ void rs_update( void * rs );
  * to apply gain.
  *
  */
-void rs_set_flags( struct robot_system * rs, uint8_t flags );
+void rs_set_flags( struct robot_system* rs, uint8_t flags );
 
 #endif // _ROBOT_SYSTEM_H_

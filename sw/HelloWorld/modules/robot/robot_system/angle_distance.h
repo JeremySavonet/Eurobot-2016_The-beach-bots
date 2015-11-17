@@ -1,6 +1,6 @@
-/*  
+/*
  *  Copyright Droids Corporation, Microb Technology, Eirbot (2005)
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -26,21 +26,21 @@
 #include "ch.h"
 
 /*
- * Stores the state of two encoders or pwm in the left / right format. 
+ * Stores the state of two encoders or pwm in the left / right format.
  */
-struct rs_wheels 
+struct rs_wheels
 {
-    int32_t left; // The left encoder value.
+    int32_t left;  // The left encoder value.
     int32_t right; // The right encoder value.
 };
 
 /*
- * Stores the state of two encoders or pwm in the distance / angle format. 
+ * Stores the state of two encoders or pwm in the distance / angle format.
  */
-struct rs_polar 
+struct rs_polar
 {
     int32_t distance; // The distance encoder value.
-    int32_t angle; // The angle encoder value.
+    int32_t angle;    // The angle encoder value.
 };
 
 /*
@@ -52,18 +52,19 @@ struct rs_polar
  * @param [in] w_src The source state, in left / right format.
  * @param [out] p_dst The destination state, in distance / angle format.
  */
-void rs_get_polar_from_wheels( struct rs_polar *p_dst, 
-                               struct rs_wheels *w_src);
+void rs_get_polar_from_wheels( struct rs_polar* p_dst,
+                               struct rs_wheels* w_src );
 
 /*
  * Converts the state of two encoders or pwm.
  *
- * This function converts the angle / distance representation to 
+ * This function converts the angle / distance representation to
  * an left-right representation.
  *
  * [in] p_src The source state in distance / angle format.
  * [out] The destination state in left / right format.
  */
-void rs_get_wheels_from_polar( struct rs_wheels *w_dst, struct rs_polar *p_src);
+void rs_get_wheels_from_polar( struct rs_wheels* w_dst,
+                               struct rs_polar* p_src );
 
 #endif

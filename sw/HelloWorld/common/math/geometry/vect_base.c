@@ -19,46 +19,41 @@
  *
  */
 
-#include <stdint.h>
 #include <math.h>
+#include <stdint.h>
 
 #include "vect_base.h"
 
 // Return scalar product
-float
-vect_pscal( vect_t *v, vect_t *w )
+float vect_pscal( vect_t* v, vect_t* w )
 {
     return v->x * w->x + v->y * w->y;
 }
 
 // Return Z of vectorial product
-float
-vect_pvect( vect_t *v, vect_t *w )
+float vect_pvect( vect_t* v, vect_t* w )
 {
     return v->x * w->y - v->y * w->x;
 }
 
 // Return sign of scalar product
-int8_t
-vect_pscal_sign( vect_t *v, vect_t *w )
+int8_t vect_pscal_sign( vect_t* v, vect_t* w )
 {
     float z;
     z = vect_pscal( v, w );
     if( 0 == z )
     {
         return 0;
-    
     }
     return z > 0 ? 1 : -1;
 }
 
 // Return sign of vectorial product
-int8_t
-vect_pvect_sign( vect_t *v, vect_t *w )
+int8_t vect_pvect_sign( vect_t* v, vect_t* w )
 {
     float z;
     z = vect_pvect( v, w );
-    if ( 0 == z )
+    if( 0 == z )
     {
         return 0;
     }
@@ -72,7 +67,7 @@ float xy_norm( float x1, float y1, float x2, float y2 )
     return sqrtf( x * x + y * y );
 }
 
-float pt_norm( const point_t *p1, const point_t *p2 )
+float pt_norm( const point_t* p1, const point_t* p2 )
 {
     float x = p2->x - p1->x;
     float y = p2->y - p1->y;
@@ -80,12 +75,12 @@ float pt_norm( const point_t *p1, const point_t *p2 )
 }
 
 // norm of a vector
-float vect_norm( const vect_t *v )
+float vect_norm( const vect_t* v )
 {
     return sqrtf( v->x * v->x + v->y * v->y );
 }
 
-void vect_rot_trigo( vect_t *v )
+void vect_rot_trigo( vect_t* v )
 {
     float s;
 
@@ -94,7 +89,7 @@ void vect_rot_trigo( vect_t *v )
     v->y = s;
 }
 
-void vect_rot_retro( vect_t *v )
+void vect_rot_retro( vect_t* v )
 {
     float s;
 
@@ -103,7 +98,7 @@ void vect_rot_retro( vect_t *v )
     v->y = -s;
 }
 
-float vect_get_angle( vect_t *v, vect_t *w )
+float vect_get_angle( vect_t* v, vect_t* w )
 {
     float ps;
     float n;
@@ -111,10 +106,10 @@ float vect_get_angle( vect_t *v, vect_t *w )
     ps = vect_pscal( v, w );
     n = vect_norm( v ) * vect_norm( w );
 
-    return acosf( (float)ps / n );
+    return acosf( ( float )ps / n );
 }
 
-void vect_resize( vect_t *v, float l )
+void vect_resize( vect_t* v, float l )
 {
     float old_l = vect_norm( v );
     float x = v->x, y = v->y;

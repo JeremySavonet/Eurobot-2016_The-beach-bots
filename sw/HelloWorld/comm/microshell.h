@@ -13,16 +13,16 @@
 
 extern SerialUSBDriver SDU2;
 
-#define chprint(...) chprintf( ( BaseSequentialStream * )&SDU2, __VA_ARGS__ )
+#define chprint( ... ) chprintf( ( BaseSequentialStream* )& SDU2, __VA_ARGS__ )
 
 void start_shell( void );
 
-typedef void (*shellcmd_t)( int argc, char * argv[] );
+typedef void ( *shellcmd_t )( int argc, char* argv[] );
 
-typedef struct 
+typedef struct
 {
-    const char        *sc_name;
-    shellcmd_t        sc_function;
+    const char* sc_name;
+    shellcmd_t sc_function;
 } ShellCommand;
 
 #endif // _MICROSHELL_H

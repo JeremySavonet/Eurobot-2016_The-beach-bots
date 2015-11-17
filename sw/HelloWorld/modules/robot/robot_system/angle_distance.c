@@ -1,6 +1,6 @@
-/*  
+/*
  *  Copyright Droids Corporation, Microb Technology, Eirbot (2005)
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -25,17 +25,17 @@
  * convert the values of wheels encoders (left, right) into (distance,
  * angle)
  */
-void rs_get_polar_from_wheels( struct rs_polar *p_dst, struct rs_wheels *w_src )
+void rs_get_polar_from_wheels( struct rs_polar* p_dst, struct rs_wheels* w_src )
 {
     p_dst->distance = ( w_src->right + w_src->left ) / 2;
-    p_dst->angle    = ( w_src->right - w_src->left ) / 2;
+    p_dst->angle = ( w_src->right - w_src->left ) / 2;
 }
 
 /*
  * convert (distance, angle) into (left, right)
  */
-void rs_get_wheels_from_polar( struct rs_wheels *w_dst, struct rs_polar *p_src )
+void rs_get_wheels_from_polar( struct rs_wheels* w_dst, struct rs_polar* p_src )
 {
-    w_dst->left  = p_src->distance - p_src->angle;
+    w_dst->left = p_src->distance - p_src->angle;
     w_dst->right = p_src->distance + p_src->angle;
 }

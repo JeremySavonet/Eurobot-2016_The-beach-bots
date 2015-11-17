@@ -1,6 +1,6 @@
-/*  
+/*
  *  Copyright Droids Corporation, Microb Technology, Eirbot (2005)
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -39,7 +39,7 @@
 struct ramp_filter
 {
     uint32_t var_neg;   // Maximal negative variation.
-    uint32_t var_pos;   // Maximal positive variation. 
+    uint32_t var_pos;   // Maximal positive variation.
     int32_t prev_speed; // Speed at the previous iteration.
     int32_t prev_out;   // Previous position output.
 };
@@ -50,7 +50,7 @@ struct ramp_filter
  * This function initializes the ramp filter, setting all values to 0.
  * [in,out] r The ramp instance to initialize.
  */
-void ramp_init( struct ramp_filter * r );
+void ramp_init( struct ramp_filter* r );
 
 /*
  * Set acceleration.
@@ -60,7 +60,7 @@ void ramp_init( struct ramp_filter * r );
  * [in] neg Maximal deceleration.
  * [in] pos Maximal acceleration.
  */
-void ramp_set_vars( struct ramp_filter * r, uint32_t neg, uint32_t pos );
+void ramp_set_vars( struct ramp_filter* r, uint32_t neg, uint32_t pos );
 
 /*
  * Do filter.
@@ -71,6 +71,6 @@ void ramp_set_vars( struct ramp_filter * r, uint32_t neg, uint32_t pos );
  * [in] in The speed consign.
  * Returns The computed position consign.
  */
-int32_t ramp_do_filter( void * r, int32_t in );
+int32_t ramp_do_filter( void* r, int32_t in );
 
 #endif // _RAMP_H_

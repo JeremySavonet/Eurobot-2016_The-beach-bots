@@ -25,11 +25,11 @@
 #include "vect_base.h"
 
 // Coordinates and radius of a circle
-typedef struct _circle 
+typedef struct _circle
 {
-    float x;    // x-coordinate
-    float y;    // y-coordinate
-    float r;    // radius
+    float x; // x-coordinate
+    float y; // y-coordinate
+    float r; // radius
 } circle_t;
 
 /*
@@ -38,21 +38,21 @@ typedef struct _circle
  * [in] *c Circle
  * Return: 1 if p is inside c, 0 otherwise.
  */
-int pt_is_inside_circle( const point_t *p, circle_t *c );
+int pt_is_inside_circle( const point_t* p, circle_t* c );
 
 /*
- * Checks if 2 circles are intersecting. 
+ * Checks if 2 circles are intersecting.
   * Return: The number of intersection points (0, 1 or 2)
   * [in] *c1 The first circle.
-  * [in] *c2 The second circle. 
+  * [in] *c2 The second circle.
   * [out] *p1 The first intersection point.
   * [out] *p2 The second intersection point.
-  * 
+  *
   * Note: If the 2 circles intersect on 1 point, then p1 == p2.
   */
-int circle_intersect( const circle_t *c1, 
-                      const circle_t *c2,
-                      point_t *p1, 
-                      point_t *p2 );
+int circle_intersect( const circle_t* c1,
+                      const circle_t* c2,
+                      point_t* p1,
+                      point_t* p2 );
 
 #endif // _CIRCLES_H_

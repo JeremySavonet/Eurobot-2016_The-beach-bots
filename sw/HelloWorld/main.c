@@ -39,13 +39,13 @@
 /* Defines                                                                   */
 /*===========================================================================*/
 
-#define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE( 2048 )
+#define SHELL_WA_SIZE THD_WORKING_AREA_SIZE( 2048 )
 
 /*===========================================================================*/
 /* Global static functions                                                   */
 /*===========================================================================*/
 
-static void runGame( void *p );
+static void runGame( void* p );
 
 /*===========================================================================*/
 /* Global static variables                                                   */
@@ -53,7 +53,7 @@ static void runGame( void *p );
 
 static bool running = false;
 static int gameTick = 0;
-static thread_t *tp = NULL;
+static thread_t* tp = NULL;
 static virtual_timer_t gameTimer;
 
 /*===========================================================================*/
@@ -61,14 +61,14 @@ static virtual_timer_t gameTimer;
 /*===========================================================================*/
 ShellCommand user_commands[] = {
 
-    {"measure", cmd_measure},
-    {"measureAnalog", cmd_measureA},
-    {"vref", cmd_Vref},
-    {"temperature", cmd_Temperature},
-    {"measureDirect", cmd_measureDirect},
-    {"measureContinuous", cmd_measureCont},
-    {"readContinuousData", cmd_measureRead},
-    {"stopContinuous", cmd_measureStop},
+    { "measure", cmd_measure },
+    { "measureAnalog", cmd_measureA },
+    { "vref", cmd_Vref },
+    { "temperature", cmd_Temperature },
+    { "measureDirect", cmd_measureDirect },
+    { "measureContinuous", cmd_measureCont },
+    { "readContinuousData", cmd_measureRead },
+    { "stopContinuous", cmd_measureStop },
     { NULL, NULL }
 };
 
@@ -76,11 +76,11 @@ ShellCommand user_commands[] = {
 /* Application threads                                                       */
 /*===========================================================================*/
 
-//Shell thread
+// Shell thread
 static THD_WORKING_AREA( waShell, 2048 );
 static THD_FUNCTION( Shell, arg )
 {
-    (void) arg;
+    ( void )arg;
     chRegSetThreadName( "shell" );
     start_shell();
 }
@@ -89,7 +89,7 @@ static THD_FUNCTION( Shell, arg )
 static THD_WORKING_AREA( waThread1, 128 );
 static THD_FUNCTION( Thread1, arg )
 {
-    (void)arg;
+    ( void )arg;
     chRegSetThreadName( "blinker" );
     while( true )
     {
@@ -111,7 +111,7 @@ static THD_FUNCTION( Thread1, arg )
 static THD_WORKING_AREA( waThread2, 128 );
 static THD_FUNCTION( Thread2, arg )
 {
-    (void)arg;
+    ( void )arg;
     chRegSetThreadName( "killer" );
 
     // Wait here all thread to terminate properly
@@ -119,15 +119,15 @@ static THD_FUNCTION( Thread2, arg )
 
     // Stop trajectory manager => stop the robot
     // Probably we will need to stop cs qnd odometry thread...
-    trajectory_hardstop( &robot.traj );
- 
+    trajectory_hardstop( & robot.traj );
+
     DPRINT( 1, "Stop...\r\n" );
     palSetPad( GPIOC, GPIOC_LED );
 }
 
 int main( void )
 {
-    static thread_t *shelltp = NULL;
+    static thread_t* shelltp = NULL;
 
     /*
      * System initializations.
@@ -139,13 +139,13 @@ int main( void )
     halInit();
     chSysInit();
 
-    //init all managers
+    // init all managers
     initSystem();
-        
+
     // Global main loop
     while( true )
     {
-        if( !shelltp && ( SDU2.config->usbp->state == USB_ACTIVE ) )
+        if( ! shelltp && ( SDU2.config->usbp->state == USB_ACTIVE ) )
         {
             shelltp = chThdCreateStatic( waShell,
                                          sizeof( waShell ),
@@ -155,15 +155,15 @@ int main( void )
         }
         else if( chThdTerminatedX( shelltp ) )
         {
-            chThdRelease( shelltp );  // Recovers memory of the previous shell.
-            shelltp = NULL;           // Triggers spawning of a new shell.
+            chThdRelease( shelltp ); // Recovers memory of the previous shell.
+            shelltp = NULL;          // Triggers spawning of a new shell.
         }
 
         // Wait start button
-        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false )
+        if( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false )
         {
             // Start game timer
-            chVTSet( &gameTimer, MS2ST( 1000 ), runGame, NULL );
+            chVTSet( & gameTimer, MS2ST( 1000 ), runGame, NULL );
 
             // Creates the blinker thread.
             tp = chThdCreateStatic( waThread1,
@@ -197,12 +197,14 @@ int main( void )
 /*===========================================================================*/
 
 // Game running loop
-void runGame( void *p )
+void runGame( void* p )
 {
     // Restarts the timer
     chSysLockFromISR();
-    chVTSetI( &gameTimer, MS2ST( 1000 ), runGame, p );
+    chVTSetI( & gameTimer, MS2ST( 1000 ), runGame, p );
     chSysUnlockFromISR();
 
-    if( ++gameTick < 90 ) {}
+    if( ++gameTick < 90 )
+    {
+    }
 }

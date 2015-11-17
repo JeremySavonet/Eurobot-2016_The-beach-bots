@@ -1,6 +1,6 @@
 /*
  *  ESP8266 module driver.
- *  Talks to a ESP8266 mod-WiFi module over serial 
+ *  Talks to a ESP8266 mod-WiFi module over serial
  */
 
 #ifndef _ESP8266_H_

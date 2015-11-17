@@ -17,11 +17,12 @@
 #define DEBUG
 #define DLEVEL 3
 #ifdef DEBUG
-#define DPRINT( level, ... ) \
-    do { \
-        if( DLEVEL >= (level) ) \
-            chprintf( (BaseSequentialStream * )&SD3, __VA_ARGS__); \
-   } while (0)
+#define DPRINT( level, ... )                                         \
+    do                                                               \
+    {                                                                \
+        if( DLEVEL >= ( level ) )                                    \
+            chprintf( ( BaseSequentialStream* )& SD3, __VA_ARGS__ ); \
+    } while( 0 )
 #else
 #define DPRINT( level, ... )
 #endif
