@@ -67,7 +67,7 @@ void versatile_cs_init( void )
     /*************************f************************************************/
     /*                         Encoders & PWMs                                */
     /**************************************************************************/
-    
+
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot.rs,
                      versatile_dc_set_pwm0,
@@ -229,7 +229,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_angle( &robot.rs, 100 ); // Sets a null angle PWM
+                rs_set_angle( &robot.rs, 4095 ); // Sets a null angle PWM
             }
 
             if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
@@ -239,7 +239,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_distance( &robot.rs, 125 ); // Sets a distance angle PWM
+                rs_set_distance( &robot.rs, 4095 ); // Sets a distance angle PWM
             }
         }
 

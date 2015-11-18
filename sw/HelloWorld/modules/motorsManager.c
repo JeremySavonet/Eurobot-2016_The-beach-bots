@@ -8,6 +8,9 @@
 #include "hal.h"
 #include "test.h"
 
+#include "../color.h"
+#include "../comm/debugManager.h"
+
 #include "motorsManager.h"
 
 #define DC_PWM_MAX_VALUE 4095
@@ -79,9 +82,11 @@ void versatile_dc_set_pwm( void *device, int channel, int32_t value )
     pwmEnableChannel( device,
                       channel,
                       (pwmcnt_t) value );
+    DPRINT( 3, KBLU "SAT PWM TO %d IN DC SET PWM FOR CHANNEL %d\r\n", value,
+                                                                      channel );
 }
 
-int32_t versatile_dc_get_encoder( void *device, int channel ) 
+int32_t versatile_dc_get_encoder( void *device, int channel )
 {
     if( channel < 0 || channel > 5 )
     {
