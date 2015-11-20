@@ -43,7 +43,7 @@ struct _rob robot;
 
 void versatile_cs_init( void )
 {
-    robot.mode = BOARD_MODE_FREE;//BOARD_MODE_ANGLE_DISTANCE;
+    robot.mode = BOARD_MODE_ANGLE_DISTANCE;
 
     /**************************************************************************/
     /*                                 Motors                                 */
@@ -74,8 +74,8 @@ void versatile_cs_init( void )
                      MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM4 channel 0
 
     rs_set_right_pwm( &robot.rs,
-                      versatile_dc_set_pwm_negative1,
-                      MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1 inverted
+                      versatile_dc_set_pwm1,
+                      MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1
 
     rs_set_left_ext_encoder( &robot.rs,
                              versatile_dc_get_encoder0,
@@ -229,7 +229,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_angle( &robot.rs, 4095 ); // Sets a null angle PWM
+                rs_set_angle( &robot.rs, 0 ); // Sets a null angle PWM
             }
 
             if( robot.mode == BOARD_MODE_ANGLE_DISTANCE ||
@@ -239,7 +239,7 @@ THD_FUNCTION( ControlSys, arg )
             }
             else
             {
-                rs_set_distance( &robot.rs, 4095 ); // Sets a distance angle PWM
+                rs_set_distance( &robot.rs, 0 ); // Sets a distance angle PWM
             }
         }
 

@@ -13,7 +13,7 @@
 
 #include "motorsManager.h"
 
-#define DC_PWM_MAX_VALUE 4095
+#define DC_PWM_MAX_VALUE 20000
 
 static PWMConfig pwmcfg =
 {

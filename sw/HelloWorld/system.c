@@ -52,7 +52,7 @@ void systemPrintBootMsg( void )
         DPRINT( 1, KGRN "Build time:   %s%s%s\r\n", __DATE__, " - ", __TIME__ );
     #endif
     #endif
-    
+
     // Set color cursor to normal
     DPRINT( 1, KNRM "" );
 }
@@ -62,13 +62,13 @@ void initSystem( void )
 {
     // First, init all managers
     usbManagerInit();
-    
+
     debugManagerInit();
-    
+
     esp8266ManagerInit();
-    
+
     motorsManagerInit();
-    
+
     adcManagerInit();
 
     // Init IOs
@@ -76,9 +76,9 @@ void initSystem( void )
 
     // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED );
-   
+
     systemPrintBootMsg();
-    
+
     // Inits all the trajectory stuff, PID, odometry, etc...
 #if 1
     versatile_cs_init();
@@ -86,7 +86,7 @@ void initSystem( void )
 #endif
 
     DPRINT( 1, "System ready\r\n" );
-    
+
     //DPRINT( 1, KRED "MOTOR PWM VALUES: %d - %d\r\n", robot.rs.left_pwm_param,
     //robot.rs.right_pwm_param );
 }
