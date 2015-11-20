@@ -28,6 +28,7 @@
 
 #include "versatile_cs.h"
 
+#include "color.h"
 #include "comm/debugManager.h"
 #include "comm/microshell.h"
 
@@ -93,7 +94,7 @@ static THD_FUNCTION( Thread1, arg )
     chRegSetThreadName( "blinker" );
     while( true )
     {
-        DPRINT( 3, "Running...\r\n" );
+        DPRINT( 3, KBLU "Running...\r\n" );
 
         palTogglePad( GPIOC, GPIOC_LED );
         chThdSleepMilliseconds( 500 );
@@ -187,7 +188,6 @@ int main( void )
                                NULL );
             running = true;
         }
-
         chThdSleepMilliseconds( 100 ); /* Iddle thread */
     }
 }

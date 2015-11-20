@@ -60,14 +60,18 @@ void systemPrintBootMsg( void )
 // Init all peripherals
 void initSystem( void )
 {
-    // First, init all managers
+    // Init motors and QEI first to avoid logic level issues 
+    // on motors at startup
+    motorsManagerInit();
+    
+    qeiManagerInit(); 
+    
+    // then, init other managers
     usbManagerInit();
 
     debugManagerInit();
 
     esp8266ManagerInit();
-
-    motorsManagerInit();
 
     adcManagerInit();
 

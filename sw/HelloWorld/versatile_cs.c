@@ -71,20 +71,20 @@ void versatile_cs_init( void )
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot.rs,
                      versatile_dc_set_pwm0,
-                     MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM4 channel 0
+                     MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM9 channel 0
 
     rs_set_right_pwm( &robot.rs,
                       versatile_dc_set_pwm1,
-                      MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM4 channel 1
+                      MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM9 channel 1
 
     rs_set_left_ext_encoder( &robot.rs,
-                             versatile_dc_get_encoder0,
-                             MOTOR_ENCODER_BASE,
+                             versatile_dc_get_encoder,
+                             MOTOR_ENCODER_BASE_LEFT,
                              1. ); // last arg = gain
 
     rs_set_right_ext_encoder( &robot.rs,
-                              versatile_dc_get_encoder1,
-                              MOTOR_ENCODER_BASE,
+                              versatile_dc_get_encoder,
+                              MOTOR_ENCODER_BASE_RIGHT,
                               -1. ); // last arg = gain
 /*
    rs_set_left_mot_encoder( &robot.rs,
