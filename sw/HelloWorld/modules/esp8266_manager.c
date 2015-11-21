@@ -91,37 +91,37 @@ void esp8266_manager_init( void )
 
 void esp8266_request_version( void )
 {
-    sendCommand( "AT+GMR\r\n" );
+    send_command( "AT+GMR\r\n" );
 }
 
 void esp8266_list_AP( void )
 {
-    sendCommand( "AT+CWLAP\r\n" );
+    send_command( "AT+CWLAP\r\n" );
 }
 
 void esp8266_set_mode( void )
 {
-    sendCommand( "AT+CWMODE=3\r\n" );
+    send_command( "AT+CWMODE=3\r\n" );
 }
 
 void esp8266_join_AP( void )
 {
-    sendCommand( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
+    send_command( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
 }
 
 void esp8266_setAP( void )
 {
-    sendCommand( "AT+CWSAP=\"esp_123\",\"1234567890\",5,3\r\n" );
+    send_command( "AT+CWSAP=\"esp_123\",\"1234567890\",5,3\r\n" );
 }
 
 void esp8266_enable_multiple_connection( void )
 {
-    sendCommand( "AT+CIPMUX=1\r\n" );
+    send_command( "AT+CIPMUX=1\r\n" );
 }
 
 void esp8266_configure_server( void )
 {
-    sendCommand( "AT+CIPSERVER=1\r\n" );
+    send_command( "AT+CIPSERVER=1\r\n" );
 }
 
 void send_command( char *p ) 
