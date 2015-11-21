@@ -102,6 +102,7 @@ void cmd_print_ir_distance( int argc, char *argv[] )
     if( argc > 0 )
     {
         chprint( "Usage: ir\r\n" );
+        return;
     }
 
     chprint( "Infrared distances: d0 = %f, d1 = %f,  d2 = %f\r\n", dIR0, 

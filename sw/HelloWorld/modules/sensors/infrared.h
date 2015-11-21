@@ -47,6 +47,6 @@ void infrared_get_data( infrared_data_t *data );
  * Number of arguments for this command.
  * List of arguments.
  */
-void cmd_print_ir_distance( int argc, char *argv[]);
+void cmd_print_ir_distance( int argc, char *argv[] );
 
 #endif // _INFRARED_H_
