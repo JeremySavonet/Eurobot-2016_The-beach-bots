@@ -127,4 +127,22 @@ extern struct _rob robot;
  */
 void versatile_cs_init( void );
 
+// Command to start asserv
+void cmd_start_asserv( int argc, char *argv[] );
+
+// Command to stop asserv
+void cmd_stop_asserv( int argc, char *argv[] ); 
+
+// Command to set robot modes
+void cmd_set_robot_mode_angle( int argc, char *argv[] );
+void cmd_set_robot_mode_distance( int argc, char *argv[] );
+void cmd_set_robot_mode_free( int argc, char *argv[] );
+void cmd_set_robot_mode_all( int argc, char *argv[] );
+void cmd_set_robot_mode_pwm( int argc, char *argv[] );
+
+// Command to get robot values
+void cmd_get_robot_position( int argc, char *argv[] );
+void cmd_get_encoder( int argc, char *argv[] );
+void cmd_set_pwm( int argc, char* argv[] );
+
 #endif // _VERSATILE__CS_H_ 

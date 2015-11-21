@@ -13,8 +13,6 @@
 
 #include "motor_manager.h"
 
-#define DC_PWM_MAX_VALUE 20000
-
 /*===========================================================================*/
 /* PWM related.                                                              */
 /*===========================================================================*/
@@ -55,9 +53,6 @@ static const QEIConfig motor_right_qei_cfg =
     QEI_DIRINV_TRUE
 };
 
-int32_t motor_pwms[ NUM_MOTORS ];
-pwmcnt_t motor_speeds[ NUM_MOTORS ];
-
 void qei_manager_init( void )
 {
     // Left encoder
@@ -86,24 +81,24 @@ void motor_manager_init( void )
     unsigned i;
     for( i = 0; i < NUM_MOTORS; ++i )
     {
-        motor_set_speed( i, 0 );
+        versatile_dc_set_pwm( MOTOR_CONTROLLER_BASE, i, 0 );
     }
 }
 
-void motor_disable_pwm( unsigned motor )
+void versatile_dc_disable_pwm( void *device, int channel )
 {
-    if( motor >= NUM_MOTORS )
+    if( channel < 0 || channel > NUM_MOTORS )
     {
         return;
     }
-    motor_speeds[ motor ] = 0;
-    pwmDisableChannel( &MOTOR_PWM_DRIVER,
-                       motor );
+    
+    pwmDisableChannel( device,
+                       channel );
 }
 
 void versatile_dc_set_pwm( void *device, int channel, int32_t value )
 {
-    if( channel < 0 || channel > 5 )
+    if( channel < 0 || channel > NUM_MOTORS )
     {
         return;
     }
@@ -117,7 +112,6 @@ void versatile_dc_set_pwm( void *device, int channel, int32_t value )
     {
         value = DC_PWM_MAX_VALUE;
     }
-
     pwmEnableChannel( device,
                       channel,
                       (pwmcnt_t) value );
@@ -133,6 +127,7 @@ int32_t versatile_dc_get_encoder( void *device )
 void versatile_dc_set_pwm0( void *device, int32_t value )
 {
     versatile_dc_set_pwm( device, 0, value );
+    DPRINT( 2, "pwm 0: %d\r\n", value );
 }
 
 void versatile_dc_set_pwm1( void *device, int32_t value )
@@ -148,31 +143,4 @@ void versatile_dc_set_pwm_negative0( void *device, int32_t value )
 void versatile_dc_set_pwm_negative1( void *device, int32_t value )
 {
     versatile_dc_set_pwm( device, 1, -value );
-}
-
-void motor_set_speed( unsigned motor, pwmcnt_t speed )
-{
-    if( motor >= NUM_MOTORS )
-    {
-        return;
-    }
-    if( speed > MAX_MOTOR_SPEED )
-    {
-        speed = MAX_MOTOR_SPEED;
-    }
-
-    motor_speeds[ motor ] = speed;
-    pwmEnableChannel( &MOTOR_PWM_DRIVER,
-            motor,
-            PWM_PERCENTAGE_TO_WIDTH( &MOTOR_PWM_DRIVER, speed ) );
-}
-
-pwmcnt_t motor_get_speed( unsigned motor )
-{
-    if( motor >= NUM_MOTORS )
-    {
-        return 0;
-    }
-
-    return motor_speeds[ motor ];
 }

@@ -62,6 +62,16 @@ static virtual_timer_t game_timer;
 /*===========================================================================*/
 ShellCommand user_commands[] = {
 
+    { "angle", cmd_set_robot_mode_angle },
+    { "distance", cmd_set_robot_mode_distance },
+    { "free", cmd_set_robot_mode_free },
+    { "all", cmd_set_robot_mode_all },
+    { "mode_pwm", cmd_set_robot_mode_pwm },
+    { "position", cmd_get_robot_position },
+    { "encoder", cmd_get_encoder },
+    { "pwm", cmd_set_pwm },
+    { "start", cmd_start_asserv },
+    { "stop", cmd_stop_asserv },
     { "ir", cmd_print_ir_distance },
     { NULL, NULL }
 };
@@ -167,11 +177,9 @@ int main( void )
                                     NULL );
 
             // Set motors speed to 50% duty cycle
-            pwmcnt_t speedM4 = 5000;
-            motor_set_speed( 0, speedM4 );
-            motor_set_speed( 1, speedM4 );
-            motor_set_speed( 2, speedM4 );
-            motor_set_speed( 3, speedM4 );
+            int32_t pwm_value = 5000;
+            versatile_dc_set_pwm( MOTOR_CONTROLLER_BASE, 0, pwm_value );
+            versatile_dc_set_pwm( MOTOR_CONTROLLER_BASE, 1, pwm_value );
 
             // Start killer thread
             chThdCreateStatic( wa_killer,

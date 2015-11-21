@@ -15,7 +15,13 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "ch.h"
+#include "chprintf.h"
+#include "hal.h"
+
 #include "color.h"
+
+#include "comm/microshell.h"
 #include "comm/debug_manager.h"
 
 #include "modules/motor_manager.h"
@@ -262,5 +268,170 @@ THD_FUNCTION( Odometry, arg )
 
         // Wait 20 milliseconds (50 Hz)
         chThdSleepMilliseconds( 20 );
+    }
+}
+
+void cmd_start_asserv( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: start\r\n" );
+        return;
+    }
+}
+
+void cmd_stop_asserv( int argc, char *argv[] ) 
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: stop\r\n" );
+        return;
+    }
+}
+
+void cmd_set_robot_mode_angle( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: angle\r\n" );
+        return;
+    }
+    
+    robot.mode = BOARD_MODE_ANGLE_ONLY; 
+}
+
+void cmd_set_robot_mode_distance( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: distance\r\n" );
+        return;
+    }
+    
+    robot.mode = BOARD_MODE_DISTANCE_ONLY; 
+}
+
+void cmd_set_robot_mode_free( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: free\r\n" );
+        return;
+    }
+    robot.mode = BOARD_MODE_FREE; 
+}
+
+void cmd_set_robot_mode_all( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: all\r\n" );
+        return;
+    }
+    robot.mode = BOARD_MODE_ANGLE_DISTANCE; 
+}
+
+void cmd_set_robot_mode_pwm( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: mode_pwm\r\n" );
+        return;
+    }
+    robot.mode = BOARD_MODE_SET_PWM; 
+}
+
+void cmd_get_robot_position( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: position\r\n" );
+        return;
+    }
+    chprint( "Position X: %d\r\n", position_get_x_float( &robot.pos ) );
+    chprint( "Position Y: %d\r\n", position_get_y_float( &robot.pos ) );
+    chprint( "Position A[rad]: %d\r\n", position_get_a_rad_float( &robot.pos ) );
+}
+
+void cmd_get_encoder( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc != 1 )
+    {
+        chprint( "Usage: encoder channel\r\n" );
+        return;
+    }
+   
+    int channel = atoi( argv[0] );
+    
+    if( 0 == channel )
+    {
+        chprint( "Encoder %d: %d\r\n", channel, 
+            versatile_dc_get_encoder( MOTOR_ENCODER_BASE_LEFT ) );
+    }
+    else if( 1 == channel )
+    {
+        chprint( "Encoder %d: %d\r\n", channel, 
+            versatile_dc_get_encoder( MOTOR_ENCODER_BASE_RIGHT ) );
+    }
+    else
+    {
+        chprint( "Not a valid encoder channel\r\n" );
+    }
+}
+
+void cmd_set_pwm( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc != 2 )
+    {
+        chprint( "Usage: pwm channel value\r\n" );
+        return;
+    }
+
+    int channel = atoi( argv[0] );
+    int32_t value = atoi( argv[1] );
+
+    if( 0 == channel )
+    {
+        chprint( "Set pwm on channel %d to value: %d\r\n", channel, value );
+        versatile_dc_set_pwm0( MOTOR_CONTROLLER_BASE, value );
+    }
+    else if( 1 == channel )
+    {
+        chprint( "Set pwm on channel %d to value: %d\r\n", channel, value );
+        versatile_dc_set_pwm1( MOTOR_CONTROLLER_BASE, value );
+    }
+    else
+    {
+        chprint( "Not a valid motor channel\r\n" );
     }
 }
