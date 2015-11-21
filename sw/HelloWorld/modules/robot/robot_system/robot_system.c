@@ -30,7 +30,7 @@
 #include <stdio.h>
 
 #include "../../../color.h"
-#include "../../../comm/debugManager.h"
+#include "../../../comm/debug_manager.h"
 
 #include "angle_distance.h"
 #include "robot_system.h"

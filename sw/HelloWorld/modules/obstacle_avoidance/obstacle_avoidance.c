@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include "../../color.h"
-#include "../../comm/debugManager.h"
+#include "../../comm/debug_manager.h"
 
 #include "obstacle_avoidance.h"
 

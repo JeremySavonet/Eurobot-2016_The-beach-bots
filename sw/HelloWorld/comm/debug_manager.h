@@ -26,6 +26,6 @@
 #define DPRINT( level, ... )
 #endif
 
-void debugManagerInit( void );
+void debug_manager_init( void );
 
 #endif // _DEBUGMANAGER_H_

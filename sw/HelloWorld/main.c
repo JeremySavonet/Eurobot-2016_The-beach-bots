@@ -29,11 +29,11 @@
 #include "versatile_cs.h"
 
 #include "color.h"
-#include "comm/debugManager.h"
+#include "comm/debug_manager.h"
 #include "comm/microshell.h"
 
 #include "modules/sensors/infrared.h" //for command : move this in system
-#include "modules/motorsManager.h"
+#include "modules/motor_manager.h"
 #include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 /*===========================================================================*/
@@ -46,16 +46,16 @@
 /* Global static functions                                                   */
 /*===========================================================================*/
 
-static void runGame( void *p );
+static void run_game( void *p );
 
 /*===========================================================================*/
 /* Global static variables                                                   */
 /*===========================================================================*/
 
 static bool running = false;
-static int gameTick = 0;
+static int game_tick = 0;
 static thread_t *tp = NULL;
-static virtual_timer_t gameTimer;
+static virtual_timer_t game_timer;
 
 /*===========================================================================*/
 /* User commands for CLI                                                     */
@@ -71,20 +71,20 @@ ShellCommand user_commands[] = {
 /*===========================================================================*/
 
 //Shell thread
-static THD_WORKING_AREA( waShell, 2048 );
-static THD_FUNCTION( Shell, arg )
+static THD_WORKING_AREA( wa_cli, 2048 );
+static THD_FUNCTION( CLI, arg )
 {
     (void) arg;
-    chRegSetThreadName( "shell" );
+    chRegSetThreadName( "CLI" );
     start_shell();
 }
 
 // Green LED blinker thread, times are in milliseconds.
-static THD_WORKING_AREA( waThread1, 128 );
-static THD_FUNCTION( Thread1, arg )
+static THD_WORKING_AREA( wa_alive, 128 );
+static THD_FUNCTION( Alive, arg )
 {
     (void)arg;
-    chRegSetThreadName( "blinker" );
+    chRegSetThreadName( "alive" );
     while( true )
     {
         DPRINT( 3, KBLU "Running...\r\n" );
@@ -93,7 +93,7 @@ static THD_FUNCTION( Thread1, arg )
         chThdSleepMilliseconds( 500 );
 
         // Wait 90s and stop all the thread properly
-        if( gameTick >= 5 )
+        if( game_tick >= 5 )
         {
             msg_t msg = NULL;
             chThdExit( msg );
@@ -102,8 +102,8 @@ static THD_FUNCTION( Thread1, arg )
 }
 
 // Killer thread : wait for all sigterm signals
-static THD_WORKING_AREA( waThread2, 128 );
-static THD_FUNCTION( Thread2, arg )
+static THD_WORKING_AREA( wa_killer, 128 );
+static THD_FUNCTION( Killer, arg )
 {
     (void)arg;
     chRegSetThreadName( "killer" );
@@ -134,17 +134,17 @@ int main( void )
     chSysInit();
 
     //init all managers
-    initSystem();
+    system_init();
         
     // Global main loop
     while( true )
     {
         if( !shelltp && ( SDU2.config->usbp->state == USB_ACTIVE ) )
         {
-            shelltp = chThdCreateStatic( waShell,
-                                         sizeof( waShell ),
+            shelltp = chThdCreateStatic( wa_cli,
+                                         sizeof( wa_cli ),
                                          NORMALPRIO,
-                                         Shell,
+                                         CLI,
                                          NULL );
         }
         else if( chThdTerminatedX( shelltp ) )
@@ -157,27 +157,27 @@ int main( void )
         if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false )
         {
             // Start game timer
-            chVTSet( &gameTimer, MS2ST( 1000 ), runGame, NULL );
+            chVTSet( &game_timer, MS2ST( 1000 ), run_game, NULL );
 
             // Creates the blinker thread.
-            tp = chThdCreateStatic( waThread1,
-                                    sizeof( waThread1 ),
+            tp = chThdCreateStatic( wa_alive,
+                                    sizeof( wa_alive ),
                                     NORMALPRIO,
-                                    Thread1,
+                                    Alive,
                                     NULL );
 
             // Set motors speed to 50% duty cycle
             pwmcnt_t speedM4 = 5000;
-            MotorSetSpeed( 0, speedM4 );
-            MotorSetSpeed( 1, speedM4 );
-            MotorSetSpeed( 2, speedM4 );
-            MotorSetSpeed( 3, speedM4 );
+            motor_set_speed( 0, speedM4 );
+            motor_set_speed( 1, speedM4 );
+            motor_set_speed( 2, speedM4 );
+            motor_set_speed( 3, speedM4 );
 
             // Start killer thread
-            chThdCreateStatic( waThread2,
-                               sizeof( waThread2 ),
+            chThdCreateStatic( wa_killer,
+                               sizeof( wa_killer ),
                                NORMALPRIO,
-                               Thread2,
+                               Killer,
                                NULL );
             running = true;
         }
@@ -190,12 +190,12 @@ int main( void )
 /*===========================================================================*/
 
 // Game running loop
-void runGame( void *p )
+void run_game( void *p )
 {
     // Restarts the timer
     chSysLockFromISR();
-    chVTSetI( &gameTimer, MS2ST( 1000 ), runGame, p );
+    chVTSetI( &game_timer, MS2ST( 1000 ), run_game, p );
     chSysUnlockFromISR();
 
-    if( ++gameTick < 90 ) {}
+    if( ++game_tick < 90 ) {}
 }

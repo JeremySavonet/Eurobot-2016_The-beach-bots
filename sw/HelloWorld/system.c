@@ -6,14 +6,14 @@
 #include "system.h"
 #include "color.h"
 
-#include "comm/debugManager.h"
+#include "comm/debug_manager.h"
 #include "comm/microrl.h"
 #include "comm/microshell.h"
-#include "comm/usbManager.h"
+#include "comm/usb_manager.h"
 
 #include "modules/sensors/infrared.h"
-#include "modules/esp8266Manager.h"
-#include "modules/motorsManager.h"
+#include "modules/esp8266_manager.h"
+#include "modules/motor_manager.h"
 
 #include "lwipthread.h"
 #include "modules/web/web.h"
@@ -25,7 +25,7 @@
 /*===========================================================================*/
 SYSTEM sys;
 
-void systemPrintBootMsg( void )
+void system_print_boot_msg( void )
 {
     //Display boot sys info:
     DPRINT( 1, KNRM "__   __                          _     _   _          ___    ___ \r\n" );
@@ -63,13 +63,13 @@ void systemPrintBootMsg( void )
 infrared_data_t *ir;
 
 // Init all peripherals
-void initSystem( void )
+void system_init( void )
 {
     // Init motors and QEI first to avoid logic level issues 
     // on motors at startup
-    motorsManagerInit();
+    motor_manager_init();
     
-    qeiManagerInit(); 
+    qei_manager_init(); 
     
     // then, init other managers
     lwipInit( NULL );
@@ -81,11 +81,11 @@ void initSystem( void )
                        http_server, 
                        NULL );
 
-    usbManagerInit();
+    usb_manager_init();
 
-    debugManagerInit();
+    debug_manager_init();
 
-    esp8266ManagerInit();
+    esp8266_manager_init();
 
     infrared_init( ir );
 
@@ -95,7 +95,7 @@ void initSystem( void )
     // Init done => Board ready
     palClearPad( GPIOC, GPIOC_LED );
 
-    systemPrintBootMsg();
+    system_print_boot_msg();
 
     // Inits all the trajectory stuff, PID, odometry, etc...
 #if 1
@@ -104,7 +104,4 @@ void initSystem( void )
 #endif
 
     DPRINT( 1, "System ready\r\n" );
-
-    //DPRINT( 1, KRED "MOTOR PWM VALUES: %d - %d\r\n", robot.rs.left_pwm_param,
-    //robot.rs.right_pwm_param );
 }

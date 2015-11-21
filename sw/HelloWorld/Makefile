@@ -120,17 +120,17 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
-	   comm/debugManager.c \
+	   comm/debug_manager.c \
 	   comm/microrl.c \
 	   comm/microshell.c \
-	   comm/usbManager.c \
+	   comm/usb_manager.c \
 	   common/math/vect2.c \
 	   common/math/geometry/circles.c \
 	   common/math/geometry/lines.c \
 	   common/math/geometry/polygon.c \
 	   common/math/geometry/vect_base.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
-	   modules/esp8266Manager.c \
+	   modules/esp8266_manager.c \
 	   modules/blocking_detection_manager/blocking_detection_manager.c \
 	   modules/control_system/filters/biquad/biquad.c \
 	   modules/control_system/filters/pid/pid.c \
@@ -138,7 +138,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/control_system/filters/quadramp/quadramp.c \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
-	   modules/motorsManager.c \
+	   modules/motor_manager.c \
 	   modules/obstacle_avoidance/obstacle_avoidance.c \
 	   modules/robot/position_manager/position_manager.c \
 	   modules/robot/robot_system/angle_distance.c \

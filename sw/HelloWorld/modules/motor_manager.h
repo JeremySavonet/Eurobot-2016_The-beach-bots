@@ -24,12 +24,12 @@
 #define MOTOR_LEFT_QEI_DRIVER QEID3
 #define MOTOR_RIGHT_QEI_DRIVER QEID4
 
-void qeiManagerInit( void );
-void motorsManagerInit( void );
+void qei_manager_init( void );
+void motor_manager_init( void );
 
-void MotorDisablePwm( unsigned motor );
-void MotorSetSpeed( unsigned motor, pwmcnt_t speed );
-pwmcnt_t MotorGetSpeed( unsigned motor );
+void motor_disable_pwm( unsigned motor );
+void motor_set_speed( unsigned motor, pwmcnt_t speed );
+pwmcnt_t motor_get_speed( unsigned motor );
 
 void versatile_dc_set_pwm( void *device, int channel, int32_t value );
 

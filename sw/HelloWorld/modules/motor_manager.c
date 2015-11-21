@@ -9,9 +9,9 @@
 #include "test.h"
 
 #include "../color.h"
-#include "../comm/debugManager.h"
+#include "../comm/debug_manager.h"
 
-#include "motorsManager.h"
+#include "motor_manager.h"
 
 #define DC_PWM_MAX_VALUE 20000
 
@@ -19,7 +19,7 @@
 /* PWM related.                                                              */
 /*===========================================================================*/
 
-static PWMConfig motorPwmConfig =
+static PWMConfig motor_pwm_cfg =
 {
     1000000, // 1MHz PWM clock frequency
     20000,   // Initial PWM period 20ms ( 50hz (20ms) for standard servo/ESC, 400hz for fast servo/ESC (2.5ms = 2500) )
@@ -41,14 +41,14 @@ static PWMConfig motorPwmConfig =
 /* QEI related.                                                              */
 /*===========================================================================*/
 
-static const QEIConfig motorLeftQeiConfig = 
+static const QEIConfig motor_left_qei_cfg = 
 {
     QEI_MODE_QUADRATURE,
     QEI_BOTH_EDGES,
     QEI_DIRINV_FALSE
 };
 
-static const QEIConfig motorRightQeiConfig = 
+static const QEIConfig motor_right_qei_cfg = 
 {
     QEI_MODE_QUADRATURE,
     QEI_BOTH_EDGES,
@@ -58,7 +58,7 @@ static const QEIConfig motorRightQeiConfig =
 int32_t motor_pwms[ NUM_MOTORS ];
 pwmcnt_t motor_speeds[ NUM_MOTORS ];
 
-void qeiManagerInit( void )
+void qei_manager_init( void )
 {
     // Left encoder
     palSetPadMode( GPIOB, 4, PAL_MODE_ALTERNATE( 2 ) );
@@ -68,29 +68,29 @@ void qeiManagerInit( void )
     palSetPadMode( GPIOD, 12, PAL_MODE_ALTERNATE( 2 ) );
     palSetPadMode( GPIOD, 13, PAL_MODE_ALTERNATE( 2 ) );
     
-    qeiStart( &MOTOR_LEFT_QEI_DRIVER, &motorLeftQeiConfig );
+    qeiStart( &MOTOR_LEFT_QEI_DRIVER, &motor_left_qei_cfg );
     qeiEnable( &MOTOR_LEFT_QEI_DRIVER );
 
-    qeiStart( &MOTOR_RIGHT_QEI_DRIVER, &motorRightQeiConfig );
+    qeiStart( &MOTOR_RIGHT_QEI_DRIVER, &motor_right_qei_cfg );
     qeiEnable( &MOTOR_RIGHT_QEI_DRIVER );
 }
 
-void motorsManagerInit( void )
+void motor_manager_init( void )
 {
     // Left/Right motors
     palSetPadMode( GPIOE, 5, PAL_MODE_ALTERNATE( 3 ) );
     palSetPadMode( GPIOE, 6, PAL_MODE_ALTERNATE( 3 ) );
     
-    pwmStart( &MOTOR_PWM_DRIVER, &motorPwmConfig );
+    pwmStart( &MOTOR_PWM_DRIVER, &motor_pwm_cfg );
 
     unsigned i;
     for( i = 0; i < NUM_MOTORS; ++i )
     {
-        MotorSetSpeed( i, 0 );
+        motor_set_speed( i, 0 );
     }
 }
 
-void MotorDisablePwm( unsigned motor )
+void motor_disable_pwm( unsigned motor )
 {
     if( motor >= NUM_MOTORS )
     {
@@ -150,7 +150,7 @@ void versatile_dc_set_pwm_negative1( void *device, int32_t value )
     versatile_dc_set_pwm( device, 1, -value );
 }
 
-void MotorSetSpeed( unsigned motor, pwmcnt_t speed )
+void motor_set_speed( unsigned motor, pwmcnt_t speed )
 {
     if( motor >= NUM_MOTORS )
     {
@@ -167,7 +167,7 @@ void MotorSetSpeed( unsigned motor, pwmcnt_t speed )
             PWM_PERCENTAGE_TO_WIDTH( &MOTOR_PWM_DRIVER, speed ) );
 }
 
-pwmcnt_t MotorGetSpeed( unsigned motor )
+pwmcnt_t motor_get_speed( unsigned motor )
 {
     if( motor >= NUM_MOTORS )
     {

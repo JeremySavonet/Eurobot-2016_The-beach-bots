@@ -15,16 +15,15 @@
 #include "test.h"
 
 #include "../color.h"
-#include "../comm/debugManager.h"
+#include "../comm/debug_manager.h"
 
-#include "esp8266Manager.h"
+#include "esp8266_manager.h"
 
 // Private functions
-void sendCommand( char *p );
-
+void send_command( char *p );
 
 // Struct to config serial module 
-static SerialConfig sd6Cfg =
+static SerialConfig sd6_cfg =
 {
     115200,              
     0,
@@ -79,53 +78,53 @@ static THD_FUNCTION( esp8266, arg )
     }
 }
 
-void esp8266ManagerInit( void )
+void esp8266_manager_init( void )
 {
     // Used function : USART6_TX 
     palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
     palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) ); 
     
-    sdStart( &SD6, &sd6Cfg );
+    sdStart( &SD6, &sd6_cfg );
     
     chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, esp8266, NULL );
 }
 
-void esp8266RequestVersion( void )
+void esp8266_request_version( void )
 {
     sendCommand( "AT+GMR\r\n" );
 }
 
-void esp8266ListAccessPoint( void )
+void esp8266_list_AP( void )
 {
     sendCommand( "AT+CWLAP\r\n" );
 }
 
-void esp8266SetMode( void )
+void esp8266_set_mode( void )
 {
     sendCommand( "AT+CWMODE=3\r\n" );
 }
 
-void esp8266JoinAccessPoint( void )
+void esp8266_join_AP( void )
 {
     sendCommand( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
 }
 
-void esp8266SetAccessPoint( void )
+void esp8266_setAP( void )
 {
     sendCommand( "AT+CWSAP=\"esp_123\",\"1234567890\",5,3\r\n" );
 }
 
-void esp8266EnableMultipleConnection( void )
+void esp8266_enable_multiple_connection( void )
 {
     sendCommand( "AT+CIPMUX=1\r\n" );
 }
 
-void esp8266ConfigureServer( void )
+void esp8266_configure_server( void )
 {
     sendCommand( "AT+CIPSERVER=1\r\n" );
 }
 
-void sendCommand( char *p ) 
+void send_command( char *p ) 
 {
     while (*p) chSequentialStreamPut( &SD6, *p++ );
 }

@@ -43,7 +43,7 @@ typedef struct
 
 extern SYSTEM sys;
 
-void systemPrintBootMsg( void );
-void initSystem( void );
+void system_print_boot_msg( void );
+void system_init( void );
 
 #endif // _SYSTEM_h

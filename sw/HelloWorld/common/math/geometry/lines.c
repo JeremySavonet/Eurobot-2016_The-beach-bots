@@ -28,7 +28,7 @@
 #include "../../utils.h"
 
 #include "../../../color.h"
-#include "../../../comm/debugManager.h"
+#include "../../../comm/debug_manager.h"
 
 #include "vect_base.h"
 #include "lines.h"

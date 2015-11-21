@@ -16,9 +16,9 @@
 #include <stdio.h>
 
 #include "color.h"
-#include "comm/debugManager.h"
+#include "comm/debug_manager.h"
 
-#include "modules/motorsManager.h"
+#include "modules/motor_manager.h"
 
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
 
@@ -31,8 +31,8 @@
 
 //=================== VERSATILE CS/ODOMETRY TASKS DEFINTION ==================//
 
-static THD_WORKING_AREA( waControlSys, 2048 );
-static THD_WORKING_AREA( waOdometry, 2048 );
+static THD_WORKING_AREA( wa_control_sys, 2048 );
+static THD_WORKING_AREA( wa_odometry, 2048 );
 
 static THD_FUNCTION( ControlSys, arg );
 static THD_FUNCTION( Odometry, arg );
@@ -193,15 +193,15 @@ void versatile_cs_init( void )
 
 #if 1
     // Creates the control task.
-    chThdCreateStatic( waControlSys,
-                       sizeof( waControlSys ),
+    chThdCreateStatic( wa_control_sys,
+                       sizeof( wa_control_sys ),
                        NORMALPRIO, //CS_TASK_PRIO
                        ControlSys,
                        NULL );
 
     // Creates the control task.
-    chThdCreateStatic( waOdometry,
-                   sizeof( waOdometry ),
+    chThdCreateStatic( wa_odometry,
+                   sizeof( wa_odometry ),
                    NORMALPRIO, //ODOMETRY_TASK_PRIO
                    Odometry,
                    NULL );
