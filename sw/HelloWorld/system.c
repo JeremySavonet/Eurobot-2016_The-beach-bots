@@ -11,9 +11,12 @@
 #include "comm/microshell.h"
 #include "comm/usbManager.h"
 
-#include "modules/adcManager.h"
+#include "modules/sensors/infrared.h"
 #include "modules/esp8266Manager.h"
 #include "modules/motorsManager.h"
+
+#include "lwipthread.h"
+#include "modules/web/web.h"
 
 #include "versatile_cs.h"
 
@@ -57,6 +60,8 @@ void systemPrintBootMsg( void )
     DPRINT( 1, KNRM "" );
 }
 
+infrared_data_t *ir;
+
 // Init all peripherals
 void initSystem( void )
 {
@@ -67,13 +72,22 @@ void initSystem( void )
     qeiManagerInit(); 
     
     // then, init other managers
+    lwipInit( NULL );
+
+    // Creates the HTTP thread (it changes priority internally).
+    chThdCreateStatic( wa_http_server, 
+                       sizeof(wa_http_server), 
+                       NORMALPRIO + 1,
+                       http_server, 
+                       NULL );
+
     usbManagerInit();
 
     debugManagerInit();
 
     esp8266ManagerInit();
 
-    adcManagerInit();
+    infrared_init( ir );
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );

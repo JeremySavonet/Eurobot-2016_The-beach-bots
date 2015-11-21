@@ -129,7 +129,6 @@ CSRC = $(STARTUPSRC) \
 	   common/math/geometry/lines.c \
 	   common/math/geometry/polygon.c \
 	   common/math/geometry/vect_base.c \
-	   modules/adcManager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/esp8266Manager.c \
 	   modules/blocking_detection_manager/blocking_detection_manager.c \
@@ -147,6 +146,8 @@ CSRC = $(STARTUPSRC) \
 	   modules/robot/trajectory_manager/trajectory_manager.c \
        modules/robot/trajectory_manager/trajectory_manager_core.c \
        modules/robot/trajectory_manager/trajectory_manager_utils.c \
+	   modules/sensors/infrared.c \
+	   modules/web/web.c \
 	   main.c \
 	   system.c \
 	   versatile_cs.c 

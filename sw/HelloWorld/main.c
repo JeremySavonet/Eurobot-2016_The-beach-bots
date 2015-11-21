@@ -32,7 +32,7 @@
 #include "comm/debugManager.h"
 #include "comm/microshell.h"
 
-#include "modules/adcManager.h"
+#include "modules/sensors/infrared.h" //for command : move this in system
 #include "modules/motorsManager.h"
 #include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
@@ -62,14 +62,7 @@ static virtual_timer_t gameTimer;
 /*===========================================================================*/
 ShellCommand user_commands[] = {
 
-    {"measure", cmd_measure},
-    {"measureAnalog", cmd_measureA},
-    {"vref", cmd_Vref},
-    {"temperature", cmd_Temperature},
-    {"measureDirect", cmd_measureDirect},
-    {"measureContinuous", cmd_measureCont},
-    {"readContinuousData", cmd_measureRead},
-    {"stopContinuous", cmd_measureStop},
+    { "ir", cmd_print_ir_distance },
     { NULL, NULL }
 };
 
