@@ -25,9 +25,15 @@ void cmd_stop_asserv( int argc, char *argv[] );
 void cmd_set_robot_mode( int argc, char *argv[] );
 
 // Command to get robot values
-void cmd_get_robot_position( int argc, char *argv[] );
+void cmd_robot_position( int argc, char *argv[] );
 void cmd_get_encoder( int argc, char *argv[] );
 void cmd_set_pwm( int argc, char* argv[] );
+
+// Command to play with the robot
+void cmd_go_forward( int argc, char* argv[] );
+void cmd_turn_angle( int argc, char* argv[] );
+
+// Command to get/set pid gains
 
 // Command to get sensors values
 

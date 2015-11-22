@@ -4,6 +4,7 @@
  * Rev: 1.0
  */
 
+#include <math.h>
 #include <string.h>
 
 // for system structure
@@ -21,9 +22,12 @@
 ShellCommand user_commands[] = {
 
     { "mode", cmd_set_robot_mode },
-    { "position", cmd_get_robot_position },
+    { "position", cmd_robot_position },
     { "encoder", cmd_get_encoder },
     { "pwm", cmd_set_pwm },
+    { "god", cmd_go_forward },
+    { "goa", cmd_turn_angle },
+
     { "start", cmd_start_asserv },
     { "stop", cmd_stop_asserv },
     { "ir", cmd_print_ir_distance },
@@ -97,19 +101,31 @@ void cmd_set_robot_mode( int argc, char *argv[] )
     trajectory_hardstop( &sys.controls.robot.traj );
 }
 
-void cmd_get_robot_position( int argc, char *argv[] )
+void cmd_robot_position( int argc, char *argv[] )
 {
     (void)argc;
     (void)argv;
 
-    if( argc > 0 )
+    if( 0 == argc )
     {
-        chprint( "Usage: position\r\n" );
-        return;
+        chprint( "Position X: %d\r\n", position_get_x_float( &sys.controls.robot.pos ) );
+        chprint( "Position Y: %d\r\n", position_get_y_float( &sys.controls.robot.pos ) );
+        chprint( "Position A[rad]: %d\r\n", position_get_a_rad_float( &sys.controls.robot.pos ) );
     }
-    chprint( "Position X: %d\r\n", position_get_x_float( &sys.controls.robot.pos ) );
-    chprint( "Position Y: %d\r\n", position_get_y_float( &sys.controls.robot.pos ) );
-    chprint( "Position A[rad]: %d\r\n", position_get_a_rad_float( &sys.controls.robot.pos ) );
+    else if( 3 == argc )
+    {
+        float x, y, a;
+        x = atof( argv[0] );
+        y = atof( argv[1] );
+        a = atof( argv[2] );
+
+        position_set( &sys.controls.robot.pos, x, y, a );
+    }
+    else
+    {
+        chprint( "Usage: position (to get the actual position)\r\n" );
+        chprint( "Usage: position x y a[deg] (to set the position)\r\n" );
+    }
 }
 
 void cmd_get_encoder( int argc, char *argv[] )
@@ -169,6 +185,36 @@ void cmd_set_pwm( int argc, char* argv[] )
     {
         chprint( "Not a valid motor channel\r\n" );
     }
+}
+
+void cmd_go_forward( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc != 1 )
+    {
+        chprint( "Usage: god distance\r\n" );
+        return;
+    }
+    int distance = atoi( argv[0] );
+    trajectory_d_rel( &sys.controls.robot.traj, distance );
+    chprint( "Trajectory: go forward= %d\r\n", distance );
+}
+
+void cmd_turn_angle( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc != 1 )
+    {
+        chprint( "Usage: goa angle[deg]\r\n" );
+        return;
+    }
+    int angle = atoi( argv[0] );
+    trajectory_a_rel( &sys.controls.robot.traj, angle );
+    chprint( "Trajectory: turn angle= %d\r\n", angle );
 }
 
 void cmd_print_ir_distance( int argc, char *argv[] ) 
