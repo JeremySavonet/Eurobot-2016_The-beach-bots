@@ -29,6 +29,7 @@ ShellCommand user_commands[] = {
     { "stop", cmd_stop_asserv },
     { "ir", cmd_print_ir_distance },
     { "temp", cmd_print_temp },
+    { "batt_level", cmd_print_battery_level },
     { NULL, NULL }
 };
 
@@ -208,7 +209,7 @@ void cmd_print_ir_distance( int argc, char *argv[] )
         return;
     }
         
-    chprint( "Infrared distances: d0 = %f, d1 = %f,  d2 = %f\r\n", 
+    chprint( "Infrared distances: d0 = %.3f, d1 = %.3f,  d2 = %.3f\r\n", 
         sys.sensors.ir_sensors.ir_d0, 
         sys.sensors.ir_sensors.ir_d1,
         sys.sensors.ir_sensors.ir_d2 );
@@ -225,5 +226,19 @@ void cmd_print_temp( int argc, char *argv[] )
         return;
     }
         
-    chprint( "Temp: t = %f\r\n", sys.sensors.temp_sensors.temp0 ); 
+    chprint( "Temp: t = %.3f\r\n", sys.sensors.temp_sensors.temp0 ); 
+}
+
+void cmd_print_battery_level( int argc, char *argv[] ) 
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: batt_level\r\n" );
+        return;
+    }
+        
+    chprint( "Battery level: v = %.3f\r\n", sys.sensors.batt_sensor.batt_level ); 
 }

@@ -147,6 +147,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/robot/trajectory_manager/trajectory_manager.c \
        modules/robot/trajectory_manager/trajectory_manager_core.c \
        modules/robot/trajectory_manager/trajectory_manager_utils.c \
+	   modules/sensors/battery.c \
 	   modules/sensors/infrared.c \
 	   modules/sensors/temperature.c \
 	   modules/web/web.c \

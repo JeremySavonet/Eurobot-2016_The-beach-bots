@@ -11,6 +11,7 @@
 #include "versatile_cs.h"
 
 // For robot sensor modules
+#include "modules/sensors/battery.h"
 #include "modules/sensors/infrared.h"
 #include "modules/sensors/temperature.h"
 
@@ -26,6 +27,7 @@ typedef enum
 typedef struct
 {
     //Add here all sensor strctures
+    battery_data_t batt_sensor;
     infrared_data_t ir_sensors;
     temperature_data_t temp_sensors;
     

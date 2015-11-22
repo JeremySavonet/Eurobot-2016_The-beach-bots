@@ -109,11 +109,11 @@ void infrared_init( infrared_data_t * ir_data )
     adcStart( &ADCD3, NULL );
 
     // Infrared distance sensor 0 is connected to pin PF6 (IN4).   
-    palSetGroupMode( GPIOF, PAL_PORT_BIT( 6 ), 0, PAL_MODE_INPUT_ANALOG);
+    palSetGroupMode( GPIOF, PAL_PORT_BIT( 6 ), 0, PAL_MODE_INPUT_ANALOG );
     
     // Infrared distance sensor 1 is connected to pin PF7 (IN5).   
-    palSetGroupMode( GPIOF, PAL_PORT_BIT( 7 ), 0, PAL_MODE_INPUT_ANALOG);
+    palSetGroupMode( GPIOF, PAL_PORT_BIT( 7 ), 0, PAL_MODE_INPUT_ANALOG );
 
     // Infrared distance sensor 2 is connected to pin PF8 (IN6).   
-    palSetGroupMode( GPIOF, PAL_PORT_BIT( 8 ), 0, PAL_MODE_INPUT_ANALOG);
+    palSetGroupMode( GPIOF, PAL_PORT_BIT( 8 ), 0, PAL_MODE_INPUT_ANALOG );
 }

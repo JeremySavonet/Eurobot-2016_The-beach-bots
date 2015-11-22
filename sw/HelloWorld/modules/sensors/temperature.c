@@ -79,7 +79,7 @@ void temperature_read( void )
 void temperature_init( temperature_data_t * temp_data )
 {
     // memset of temp structure
-    memset( temp_data, 0, sizeof( temp_data ) );
+    memset( temp_data, 0, sizeof( temperature_data_t ) );
 
     // Initializes the ADC driver 1 in order to access the analog values from the onboard temperature sensor.
     adcStart( &ADCD1, NULL );

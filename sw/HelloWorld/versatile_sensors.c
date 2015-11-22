@@ -6,6 +6,7 @@
  * Rev: 1.0
  */
 
+#include "modules/sensors/battery.h"
 #include "modules/sensors/infrared.h"
 #include "modules/sensors/temperature.h"
 
@@ -19,6 +20,7 @@ static THD_FUNCTION( Sensors, arg );
 void versatile_sensors_init( system_sensors_t * sensors )
 {
     // Maybe good to have sensor mode ??   
+    battery_init( &sensors->batt_sensor );
     infrared_init( &sensors->ir_sensors );
     temperature_init( &sensors->temp_sensors );
 
@@ -39,6 +41,7 @@ THD_FUNCTION( Sensors, arg )
     while( true )
     {
         // Update the structure
+        battery_get_data( &sys.sensors.batt_sensor );
         infrared_get_data( &sys.sensors.ir_sensors );
         temperature_get_data( &sys.sensors.temp_sensors );
 
