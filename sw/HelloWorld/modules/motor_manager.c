@@ -127,7 +127,6 @@ int32_t versatile_dc_get_encoder( void *device )
 void versatile_dc_set_pwm0( void *device, int32_t value )
 {
     versatile_dc_set_pwm( device, 0, value );
-    DPRINT( 2, "pwm 0: %d\r\n", value );
 }
 
 void versatile_dc_set_pwm1( void *device, int32_t value )

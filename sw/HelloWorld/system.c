@@ -23,6 +23,19 @@
 /*===========================================================================*/
 system_t sys;
 
+// Green LED blinker thread, times are in milliseconds.
+static THD_WORKING_AREA( wa_alive, 128 );
+static THD_FUNCTION( Alive, arg )
+{
+    (void)arg;
+    chRegSetThreadName( "alive" );
+    while( true )
+    {
+        palTogglePad( GPIOC, GPIOC_LED );
+        chThdSleepMilliseconds( 500 );
+    }
+}
+
 void system_print_boot_msg( void )
 {
     //Display boot sys info:
@@ -101,7 +114,12 @@ void system_init( void )
 #endif
 
     // Init done => Board ready
-    palClearPad( GPIOC, GPIOC_LED );
+    // Creates the blinker thread.
+    chThdCreateStatic( wa_alive,
+                       sizeof( wa_alive ),
+                       NORMALPRIO,
+                       Alive,
+                       NULL );
     
     DPRINT( 1, "System ready\r\n" );
 }

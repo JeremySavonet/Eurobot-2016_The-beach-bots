@@ -4,11 +4,14 @@
  * Rev: 1.0
  */
 
+#include <string.h>
+
 // for system structure
 #include "system.h" 
 
-// for specifics commands
+// for specifics commands or actions
 #include "../modules/motor_manager.h"
+#include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 #include "commands.h"
 
@@ -17,11 +20,7 @@
 /*===========================================================================*/
 ShellCommand user_commands[] = {
 
-    { "mode_angle", cmd_set_robot_mode_angle },
-    { "mode_distance", cmd_set_robot_mode_distance },
-    { "mode_free", cmd_set_robot_mode_free },
-    { "mode_all", cmd_set_robot_mode_all },
-    { "mode_pwm", cmd_set_robot_mode_pwm },
+    { "mode", cmd_set_robot_mode },
     { "position", cmd_get_robot_position },
     { "encoder", cmd_get_encoder },
     { "pwm", cmd_set_pwm },
@@ -57,71 +56,45 @@ void cmd_stop_asserv( int argc, char *argv[] )
     }
 }
 
-void cmd_set_robot_mode_angle( int argc, char *argv[] )
+void cmd_set_robot_mode( int argc, char *argv[] )
 {
     (void)argc;
     (void)argv;
 
-    if( argc > 0 )
+    if( argc != 1 )
     {
-        chprint( "Usage: mode_angle\r\n" );
+        chprint( "Usage: mode args ( angle distance free all pwm )\r\n" );
+        return;
+    }
+
+    if( !strcmp( "angle", argv[0] ) )
+    {
+        sys.controls.robot.mode = BOARD_MODE_ANGLE_ONLY;
+    }
+    else if( !strcmp( "distance", argv[0] ) )
+    {
+        sys.controls.robot.mode = BOARD_MODE_DISTANCE_ONLY;
+    }
+    else if( !strcmp( "free", argv[0] ) )
+    {
+        sys.controls.robot.mode = BOARD_MODE_FREE;
+    }
+    else if( !strcmp( "all", argv[0]  ) )
+    {
+        sys.controls.robot.mode = BOARD_MODE_ANGLE_DISTANCE;
+    }
+    else if( !strcmp( "pwm", argv[0] ) )
+    {
+        sys.controls.robot.mode = BOARD_MODE_SET_PWM;
+    }
+    else
+    {
+        chprint( "Usage: mode args ( angle distance free all pwm )\r\n" );
         return;
     }
     
-    sys.controls.robot.mode = BOARD_MODE_ANGLE_ONLY; 
-}
-
-void cmd_set_robot_mode_distance( int argc, char *argv[] )
-{
-    (void)argc;
-    (void)argv;
-
-    if( argc > 0 )
-    {
-        chprint( "Usage: mode_distance\r\n" );
-        return;
-    }
-    
-    sys.controls.robot.mode = BOARD_MODE_DISTANCE_ONLY; 
-}
-
-void cmd_set_robot_mode_free( int argc, char *argv[] )
-{
-    (void)argc;
-    (void)argv;
-
-    if( argc > 0 )
-    {
-        chprint( "Usage: mode_free\r\n" );
-        return;
-    }
-    sys.controls.robot.mode = BOARD_MODE_FREE; 
-}
-
-void cmd_set_robot_mode_all( int argc, char *argv[] )
-{
-    (void)argc;
-    (void)argv;
-
-    if( argc > 0 )
-    {
-        chprint( "Usage: mode_all\r\n" );
-        return;
-    }
-    sys.controls.robot.mode = BOARD_MODE_ANGLE_DISTANCE; 
-}
-
-void cmd_set_robot_mode_pwm( int argc, char *argv[] )
-{
-    (void)argc;
-    (void)argv;
-
-    if( argc > 0 )
-    {
-        chprint( "Usage: mode_pwm\r\n" );
-        return;
-    }
-    sys.controls.robot.mode = BOARD_MODE_SET_PWM; 
+    // Ending the start to avoid problems
+    trajectory_hardstop( &sys.controls.robot.traj );
 }
 
 void cmd_get_robot_position( int argc, char *argv[] )

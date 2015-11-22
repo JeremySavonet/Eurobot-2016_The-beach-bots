@@ -22,11 +22,7 @@ void cmd_start_asserv( int argc, char *argv[] );
 void cmd_stop_asserv( int argc, char *argv[] ); 
 
 // Command to set robot modes
-void cmd_set_robot_mode_angle( int argc, char *argv[] );
-void cmd_set_robot_mode_distance( int argc, char *argv[] );
-void cmd_set_robot_mode_free( int argc, char *argv[] );
-void cmd_set_robot_mode_all( int argc, char *argv[] );
-void cmd_set_robot_mode_pwm( int argc, char *argv[] );
+void cmd_set_robot_mode( int argc, char *argv[] );
 
 // Command to get robot values
 void cmd_get_robot_position( int argc, char *argv[] );

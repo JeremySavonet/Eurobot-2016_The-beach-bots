@@ -33,7 +33,7 @@
 #include "comm/microshell.h"
 
 // Needed by thread declared here but move this
-#include "modules/motor_manager.h"
+//#include "modules/motor_manager.h"
 #include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 /*===========================================================================*/
@@ -54,7 +54,6 @@ static void run_game( void *p );
 
 static bool running = false;
 static int game_tick = 0;
-static thread_t *tp = NULL;
 static virtual_timer_t game_timer;
 
 /*===========================================================================*/
@@ -70,28 +69,6 @@ static THD_FUNCTION( CLI, arg )
     start_shell();
 }
 
-// Green LED blinker thread, times are in milliseconds.
-static THD_WORKING_AREA( wa_alive, 128 );
-static THD_FUNCTION( Alive, arg )
-{
-    (void)arg;
-    chRegSetThreadName( "alive" );
-    while( true )
-    {
-        DPRINT( 3, KBLU "Running...\r\n" );
-
-        palTogglePad( GPIOC, GPIOC_LED );
-        chThdSleepMilliseconds( 500 );
-
-        // Wait 90s and stop all the thread properly
-        if( game_tick >= 5 )
-        {
-            msg_t msg = NULL;
-            chThdExit( msg );
-        }
-    }
-}
-
 // Killer thread : wait for all sigterm signals
 static THD_WORKING_AREA( wa_killer, 128 );
 static THD_FUNCTION( Killer, arg )
@@ -99,8 +76,8 @@ static THD_FUNCTION( Killer, arg )
     (void)arg;
     chRegSetThreadName( "killer" );
 
-    // Wait here all thread to terminate properly
-    chThdWait( tp );
+    //// Wait here all thread to terminate properly
+    //chThdWait( tp );
 
     // Stop trajectory manager => stop the robot
     // Probably we will need to stop cs qnd odometry thread...
@@ -124,7 +101,7 @@ int main( void )
     halInit();
     chSysInit();
 
-    //init all managers
+    // Init system
     system_init();
         
     // Global main loop
@@ -150,17 +127,8 @@ int main( void )
             // Start game timer
             chVTSet( &game_timer, MS2ST( 1000 ), run_game, NULL );
 
-            // Creates the blinker thread.
-            tp = chThdCreateStatic( wa_alive,
-                                    sizeof( wa_alive ),
-                                    NORMALPRIO,
-                                    Alive,
-                                    NULL );
-
-            // Set motors speed to 50% duty cycle
-            int32_t pwm_value = 5000;
-            versatile_dc_set_pwm( MOTOR_CONTROLLER_BASE, 0, pwm_value );
-            versatile_dc_set_pwm( MOTOR_CONTROLLER_BASE, 1, pwm_value );
+            // Init strat here
+            // strat_init();
 
             // Start killer thread
             chThdCreateStatic( wa_killer,
