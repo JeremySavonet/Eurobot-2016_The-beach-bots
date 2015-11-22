@@ -151,7 +151,8 @@ CSRC = $(STARTUPSRC) \
 	   modules/web/web.c \
 	   main.c \
 	   system.c \
-	   versatile_cs.c 
+	   versatile_cs.c \
+	   versatile_sensors.c 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

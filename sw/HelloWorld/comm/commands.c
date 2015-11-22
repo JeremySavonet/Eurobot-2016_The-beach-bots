@@ -7,6 +7,9 @@
 // for system structure
 #include "system.h" 
 
+// for specifics commands
+#include "../modules/motor_manager.h"
+
 #include "commands.h"
 
 /*===========================================================================*/
@@ -191,4 +194,21 @@ void cmd_set_pwm( int argc, char* argv[] )
     {
         chprint( "Not a valid motor channel\r\n" );
     }
+}
+
+void cmd_print_ir_distance( int argc, char *argv[] ) 
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: ir\r\n" );
+        return;
+    }
+        
+    chprint( "Infrared distances: d0 = %f, d1 = %f,  d2 = %f\r\n", 
+        sys.sensors.ir_sensors.ir_d0, 
+        sys.sensors.ir_sensors.ir_d1,
+        sys.sensors.ir_sensors.ir_d2 );
 }

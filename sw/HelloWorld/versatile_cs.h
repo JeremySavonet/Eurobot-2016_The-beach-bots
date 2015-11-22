@@ -104,6 +104,7 @@ typedef struct
     //arm_t left_arm;                 // Structure representant le bras gauche.
     //arm_t right_arm;                // Structure representant le bras droit.
 } versatile_robot_t; 
+
 /*
  * Inits all the regulation related modules.
  * This function inits and setups the following modules :

@@ -7,18 +7,18 @@
 #include "color.h"
 
 #include "comm/debug_manager.h"
-#include "comm/microrl.h"
-#include "comm/microshell.h"
 #include "comm/usb_manager.h"
 
-#include "modules/sensors/infrared.h"
 #include "modules/esp8266_manager.h"
 #include "modules/motor_manager.h"
+
+#include "modules/sensors/infrared.h"
 
 #include "lwipthread.h"
 #include "modules/web/web.h"
 
 #include "versatile_cs.h"
+#include "versatile_sensors.h"
 
 /*===========================================================================*/
 /* Declare here board structure                                              */
@@ -85,9 +85,7 @@ void system_init( void )
 
     esp8266_manager_init();
 
-    DPRINT( 1, "BEFORE\r\n" );
     infrared_init( &sys.sensors.ir_sensors );
-    DPRINT( 1, "AFTER\r\n" );
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
@@ -101,6 +99,12 @@ void system_init( void )
 #if 1
     versatile_cs_init( &sys.controls.robot );
     DPRINT( 1, "Main control system ready\r\n" );
+#endif
+
+    // Inits all the sensors stuff, IR, US, ADXL, etc...
+#if 1
+    versatile_sensors_init( &sys.sensors );
+    DPRINT( 1, "Sensors system ready\r\n" );
 #endif
 
     DPRINT( 1, "System ready\r\n" );

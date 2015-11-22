@@ -18,10 +18,9 @@ typedef struct infrared_data infrared_data_t;
  */
 struct infrared_data
 {
-    int8_t address;
-    int distance;
-
-    infrared_data_t *next;
+    float ir_d0;
+    float ir_d1;
+    float ir_d2;
 };
 
 // This method initializes the infrared sensors struct.
@@ -38,15 +37,5 @@ thread_t* infrared_get_thread( void );
  * Pointer to a data structure to return data.
  */
 void infrared_get_data( infrared_data_t *data );
-
-/*
- * This method enables interactive access to the data
- * read from the infrarred sensor and allows the user
- * to print the last read data.
- *
- * Number of arguments for this command.
- * List of arguments.
- */
-void cmd_print_ir_distance( int argc, char *argv[] );
 
 #endif // _INFRARED_H_

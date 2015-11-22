@@ -72,42 +72,17 @@ void infrared_get_data( infrared_data_t * data )
             switch( i ) 
             {
                 case 0:
-                    curr->address = i;
-                    curr->distance = (int)dIR0;
-                break;
+                    curr->ir_d0 = dIR0;
+                    break;
                 case 1:
-                    curr->address = i;
-                    curr->distance = (int)dIR1;
-                break;
+                    curr->ir_d1 = dIR1;
+                    break;
                 case 2:
-                    curr->address = i;
-                    curr->distance = (int)dIR2;
-                break;
+                    curr->ir_d2 = dIR2;
+                    break;
             }
-            
-            if( NULL == curr->next )
-            {
-                break;
-            }
-            curr = curr->next;
         }
     }
-}
-
-void cmd_print_ir_distance( int argc, char *argv[] ) 
-{
-    (void)argc;
-    (void)argv;
-
-    if( argc > 0 )
-    {
-        chprint( "Usage: ir\r\n" );
-        return;
-    }
-
-    chprint( "Infrared distances: d0 = %f, d1 = %f,  d2 = %f\r\n", dIR0, 
-                                                                   dIR1, 
-                                                                   dIR2 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

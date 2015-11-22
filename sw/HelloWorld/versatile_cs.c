@@ -12,16 +12,10 @@
  * manager and the blocking detection system.
  */
 
-#include <string.h>
-#include <stdio.h>
-
 #include "ch.h"
-#include "chprintf.h"
 #include "hal.h"
 
 #include "color.h"
-
-#include "comm/microshell.h"
 #include "comm/debug_manager.h"
 
 #include "modules/motor_manager.h"

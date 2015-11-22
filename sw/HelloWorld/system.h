@@ -10,15 +10,16 @@
 // For robot structure
 #include "versatile_cs.h"
 
+// For robot sensor modules
 #include "modules/sensors/infrared.h"
 
 // Enum of state of the system
 typedef enum
 {
-    state_system_unknown,         // System is in unknown state
-    state_system_init,            // System is about to initialize
-    state_system_working,         // System is about to working
-    state_system_crash            // System is crashed
+    SYSTEM_UNKNOWN,         // System is in unknown state
+    SYSTEM_INIT,            // System is about to initialize
+    SYSTEM_WORKING,         // System is about to working
+    SYSTEM_CRASH            // System is crashed
 } system_state_t;
 
 typedef struct
