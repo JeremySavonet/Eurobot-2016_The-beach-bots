@@ -12,8 +12,6 @@
 #include "modules/esp8266_manager.h"
 #include "modules/motor_manager.h"
 
-#include "modules/sensors/infrared.h"
-
 #include "lwipthread.h"
 #include "modules/web/web.h"
 
@@ -85,13 +83,8 @@ void system_init( void )
 
     esp8266_manager_init();
 
-    infrared_init( &sys.sensors.ir_sensors );
-
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
-
-    // Init done => Board ready
-    palClearPad( GPIOC, GPIOC_LED );
 
     system_print_boot_msg();
 
@@ -107,5 +100,8 @@ void system_init( void )
     DPRINT( 1, "Sensors system ready\r\n" );
 #endif
 
+    // Init done => Board ready
+    palClearPad( GPIOC, GPIOC_LED );
+    
     DPRINT( 1, "System ready\r\n" );
 }

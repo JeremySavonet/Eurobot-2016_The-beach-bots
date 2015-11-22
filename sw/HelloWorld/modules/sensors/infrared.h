@@ -12,10 +12,8 @@
 #include "hal.h"
 
 typedef struct infrared_data infrared_data_t;
-/*
- * This structure holds everything we need in order to manage IR sensors data
- *
- */
+
+// This structure holds everything we need in order to manage IR sensors data
 struct infrared_data
 {
     float ir_d0;
@@ -25,9 +23,6 @@ struct infrared_data
 
 // This method initializes the infrared sensors struct.
 void infrared_init( infrared_data_t *ir_data );
-
-// Return the associated thread for handling the infrared sensors.
-thread_t* infrared_get_thread( void );
 
 /*
  * This method transfers the distances measured

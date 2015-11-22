@@ -28,6 +28,7 @@ ShellCommand user_commands[] = {
     { "start", cmd_start_asserv },
     { "stop", cmd_stop_asserv },
     { "ir", cmd_print_ir_distance },
+    { "temp", cmd_print_temp },
     { NULL, NULL }
 };
 
@@ -211,4 +212,18 @@ void cmd_print_ir_distance( int argc, char *argv[] )
         sys.sensors.ir_sensors.ir_d0, 
         sys.sensors.ir_sensors.ir_d1,
         sys.sensors.ir_sensors.ir_d2 );
+}
+
+void cmd_print_temp( int argc, char *argv[] ) 
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: temp\r\n" );
+        return;
+    }
+        
+    chprint( "Temp: t = %f\r\n", sys.sensors.temp_sensors.temp0 ); 
 }

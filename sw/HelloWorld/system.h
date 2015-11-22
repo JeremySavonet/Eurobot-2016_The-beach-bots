@@ -12,6 +12,7 @@
 
 // For robot sensor modules
 #include "modules/sensors/infrared.h"
+#include "modules/sensors/temperature.h"
 
 // Enum of state of the system
 typedef enum
@@ -25,7 +26,8 @@ typedef enum
 typedef struct
 {
     //Add here all sensor strctures
-    infrared_data_t ir_sensors; 
+    infrared_data_t ir_sensors;
+    temperature_data_t temp_sensors;
     
 } system_sensors_t;
 

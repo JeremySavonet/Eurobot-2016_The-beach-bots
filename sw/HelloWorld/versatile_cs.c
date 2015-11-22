@@ -43,7 +43,7 @@ static THD_FUNCTION( Odometry, arg );
 
 void versatile_cs_init( versatile_robot_t * robot )
 {
-    robot->mode = BOARD_MODE_ANGLE_DISTANCE;
+    robot->mode = BOARD_MODE_SET_PWM;
 
     /**************************************************************************/
     /*                                 Motors                                 */
@@ -184,14 +184,14 @@ void versatile_cs_init( versatile_robot_t * robot )
     // Creates the control task.
     chThdCreateStatic( wa_control_sys,
                        sizeof( wa_control_sys ),
-                       NORMALPRIO, //CS_TASK_PRIO
+                       NORMALPRIO, // CS_TASK_PRIO
                        ControlSys,
                        NULL );
 
     // Creates the control task.
     chThdCreateStatic( wa_odometry,
                    sizeof( wa_odometry ),
-                   NORMALPRIO, //ODOMETRY_TASK_PRIO
+                   NORMALPRIO, // ODOMETRY_TASK_PRIO
                    Odometry,
                    NULL );
 #endif

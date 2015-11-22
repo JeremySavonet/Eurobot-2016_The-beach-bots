@@ -44,5 +44,6 @@ void cmd_set_pwm( int argc, char* argv[] );
  * List of arguments.
  */
 void cmd_print_ir_distance( int argc, char *argv[] );
+void cmd_print_temp( int argc, char *argv[] ); 
 
 #endif // _COMMANDS_H_
