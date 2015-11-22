@@ -120,6 +120,7 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
+	   comm/commands.c \
 	   comm/debug_manager.c \
 	   comm/microrl.c \
 	   comm/microshell.c \

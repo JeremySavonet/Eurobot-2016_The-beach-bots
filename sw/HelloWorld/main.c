@@ -32,7 +32,7 @@
 #include "comm/debug_manager.h"
 #include "comm/microshell.h"
 
-#include "modules/sensors/infrared.h" //for command : move this in system
+// Needed by thread declared here but move this
 #include "modules/motor_manager.h"
 #include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
@@ -56,25 +56,6 @@ static bool running = false;
 static int game_tick = 0;
 static thread_t *tp = NULL;
 static virtual_timer_t game_timer;
-
-/*===========================================================================*/
-/* User commands for CLI                                                     */
-/*===========================================================================*/
-ShellCommand user_commands[] = {
-
-    { "angle", cmd_set_robot_mode_angle },
-    { "distance", cmd_set_robot_mode_distance },
-    { "free", cmd_set_robot_mode_free },
-    { "all", cmd_set_robot_mode_all },
-    { "mode_pwm", cmd_set_robot_mode_pwm },
-    { "position", cmd_get_robot_position },
-    { "encoder", cmd_get_encoder },
-    { "pwm", cmd_set_pwm },
-    { "start", cmd_start_asserv },
-    { "stop", cmd_stop_asserv },
-    { "ir", cmd_print_ir_distance },
-    { NULL, NULL }
-};
 
 /*===========================================================================*/
 /* Application threads                                                       */
@@ -123,7 +104,7 @@ static THD_FUNCTION( Killer, arg )
 
     // Stop trajectory manager => stop the robot
     // Probably we will need to stop cs qnd odometry thread...
-    trajectory_hardstop( &robot.traj );
+    trajectory_hardstop( &sys.controls.robot.traj );
  
     DPRINT( 1, "Stop...\r\n" );
     palSetPad( GPIOC, GPIOC_LED );

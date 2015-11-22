@@ -21,9 +21,9 @@
 #include "versatile_cs.h"
 
 /*===========================================================================*/
-/* Declare here board structurev                                             */
+/* Declare here board structure                                              */
 /*===========================================================================*/
-SYSTEM sys;
+system_t sys;
 
 void system_print_boot_msg( void )
 {
@@ -60,8 +60,6 @@ void system_print_boot_msg( void )
     DPRINT( 1, KNRM "" );
 }
 
-infrared_data_t *ir;
-
 // Init all peripherals
 void system_init( void )
 {
@@ -87,7 +85,9 @@ void system_init( void )
 
     esp8266_manager_init();
 
-    infrared_init( ir );
+    DPRINT( 1, "BEFORE\r\n" );
+    infrared_init( &sys.sensors.ir_sensors );
+    DPRINT( 1, "AFTER\r\n" );
 
     // Init IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
@@ -99,7 +99,7 @@ void system_init( void )
 
     // Inits all the trajectory stuff, PID, odometry, etc...
 #if 1
-    versatile_cs_init();
+    versatile_cs_init( &sys.controls.robot );
     DPRINT( 1, "Main control system ready\r\n" );
 #endif
 

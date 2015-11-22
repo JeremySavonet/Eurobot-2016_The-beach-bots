@@ -78,7 +78,7 @@ enum trajectory_type_t
  * This is a clean way to group all vars in one place. 
  * It also serve as a namespace.
  */
-struct _rob 
+typedef struct 
 {
     struct robot_system rs;                 // Robot system (angle & distance).
     struct robot_position pos;              // Position manager.
@@ -103,15 +103,7 @@ struct _rob
 
     //arm_t left_arm;                 // Structure representant le bras gauche.
     //arm_t right_arm;                // Structure representant le bras droit.
-};
-
-/*
- * Contient toutes les variables globales.
- * Cette structure sert en quelque sorte de namespace pour les variables globales,
- * qui peuvent ensuite etre accedees en faisant robot.color par exemple.
- */
-extern struct _rob robot;
-
+} versatile_robot_t; 
 /*
  * Inits all the regulation related modules.
  * This function inits and setups the following modules :
@@ -125,24 +117,6 @@ extern struct _rob robot;
  * - blocking_detection_manager
  * - couple_limiter
  */
-void versatile_cs_init( void );
-
-// Command to start asserv
-void cmd_start_asserv( int argc, char *argv[] );
-
-// Command to stop asserv
-void cmd_stop_asserv( int argc, char *argv[] ); 
-
-// Command to set robot modes
-void cmd_set_robot_mode_angle( int argc, char *argv[] );
-void cmd_set_robot_mode_distance( int argc, char *argv[] );
-void cmd_set_robot_mode_free( int argc, char *argv[] );
-void cmd_set_robot_mode_all( int argc, char *argv[] );
-void cmd_set_robot_mode_pwm( int argc, char *argv[] );
-
-// Command to get robot values
-void cmd_get_robot_position( int argc, char *argv[] );
-void cmd_get_encoder( int argc, char *argv[] );
-void cmd_set_pwm( int argc, char* argv[] );
+void versatile_cs_init( versatile_robot_t * robot );
 
 #endif // _VERSATILE__CS_H_ 
