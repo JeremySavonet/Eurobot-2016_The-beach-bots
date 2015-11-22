@@ -33,6 +33,7 @@ ShellCommand user_commands[] = {
 
     { "start", cmd_start_strat },
     { "stop", cmd_stop_strat },
+    { "uptime", cmd_get_uptime },
     { "game_elapsed", cmd_get_game_elapsed_time },
     { "ir", cmd_print_ir_distance },
     { "temp", cmd_print_temp },
@@ -67,6 +68,20 @@ void cmd_stop_strat( int argc, char *argv[] )
     
     strat_stop(); 
     trajectory_hardstop( &sys.controls.robot.traj );
+}
+
+void cmd_get_uptime( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: uptime\r\n" );
+        return;
+    }
+    int now = ST2MS( chVTGetSystemTimeX() );  
+    chprint( "System uptime: %ds\r\n", now / 1000 );
 }
 
 void cmd_get_game_elapsed_time( int argc, char *argv[] )

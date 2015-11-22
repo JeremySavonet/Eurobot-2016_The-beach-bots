@@ -21,6 +21,7 @@ void cmd_start_strat( int argc, char *argv[] );
 // Command to stop asserv
 void cmd_stop_strat( int argc, char *argv[] ); 
 
+void cmd_get_uptime( int argc, char *argv[] );
 void cmd_get_game_elapsed_time( int argc, char *argv[] );
 
 // Command to set robot modes
