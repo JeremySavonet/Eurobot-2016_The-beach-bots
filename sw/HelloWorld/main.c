@@ -28,33 +28,17 @@
 
 #include "versatile_cs.h"
 
+#include "strat.h"
+
 #include "color.h"
 #include "comm/debug_manager.h"
 #include "comm/microshell.h"
-
-// Needed by thread declared here but move this
-//#include "modules/motor_manager.h"
-#include "modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 /*===========================================================================*/
 /* Defines                                                                   */
 /*===========================================================================*/
 
 #define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE( 2048 )
-
-/*===========================================================================*/
-/* Global static functions                                                   */
-/*===========================================================================*/
-
-static void run_game( void *p );
-
-/*===========================================================================*/
-/* Global static variables                                                   */
-/*===========================================================================*/
-
-static bool running = false;
-static int game_tick = 0;
-static virtual_timer_t game_timer;
 
 /*===========================================================================*/
 /* Application threads                                                       */
@@ -67,24 +51,6 @@ static THD_FUNCTION( CLI, arg )
     (void) arg;
     chRegSetThreadName( "CLI" );
     start_shell();
-}
-
-// Killer thread : wait for all sigterm signals
-static THD_WORKING_AREA( wa_killer, 128 );
-static THD_FUNCTION( Killer, arg )
-{
-    (void)arg;
-    chRegSetThreadName( "killer" );
-
-    //// Wait here all thread to terminate properly
-    //chThdWait( tp );
-
-    // Stop trajectory manager => stop the robot
-    // Probably we will need to stop cs qnd odometry thread...
-    trajectory_hardstop( &sys.controls.robot.traj );
- 
-    DPRINT( 1, "Stop...\r\n" );
-    palSetPad( GPIOC, GPIOC_LED );
 }
 
 int main( void )
@@ -122,37 +88,12 @@ int main( void )
         }
 
         // Wait start button
-        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 && running == false )
+        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 )
         {
-            // Start game timer
-            chVTSet( &game_timer, MS2ST( 1000 ), run_game, NULL );
-
             // Init strat here
-            // strat_init();
-
-            // Start killer thread
-            chThdCreateStatic( wa_killer,
-                               sizeof( wa_killer ),
-                               NORMALPRIO,
-                               Killer,
-                               NULL );
-            running = true;
+            strat_begin();
         }
+        
         chThdSleepMilliseconds( 100 ); /* Iddle thread */
     }
-}
-
-/*===========================================================================*/
-/* Functions                                                                 */
-/*===========================================================================*/
-
-// Game running loop
-void run_game( void *p )
-{
-    // Restarts the timer
-    chSysLockFromISR();
-    chVTSetI( &game_timer, MS2ST( 1000 ), run_game, p );
-    chSysUnlockFromISR();
-
-    if( ++game_tick < 90 ) {}
 }

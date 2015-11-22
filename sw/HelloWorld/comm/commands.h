@@ -16,10 +16,12 @@
 #include "microshell.h"
 
 // Command to start asserv
-void cmd_start_asserv( int argc, char *argv[] );
+void cmd_start_strat( int argc, char *argv[] );
 
 // Command to stop asserv
-void cmd_stop_asserv( int argc, char *argv[] ); 
+void cmd_stop_strat( int argc, char *argv[] ); 
+
+void cmd_get_game_elapsed_time( int argc, char *argv[] );
 
 // Command to set robot modes
 void cmd_set_robot_mode( int argc, char *argv[] );

@@ -152,6 +152,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/sensors/temperature.c \
 	   modules/web/web.c \
 	   main.c \
+	   strat.c \
 	   system.c \
 	   versatile_cs.c \
 	   versatile_sensors.c 

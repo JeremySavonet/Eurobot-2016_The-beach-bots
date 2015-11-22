@@ -14,6 +14,9 @@
 #include "../modules/motor_manager.h"
 #include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
 
+// for strat
+#include "../strat.h"
+
 #include "commands.h"
 
 /*===========================================================================*/
@@ -28,15 +31,16 @@ ShellCommand user_commands[] = {
     { "god", cmd_go_forward },
     { "goa", cmd_turn_angle },
 
-    { "start", cmd_start_asserv },
-    { "stop", cmd_stop_asserv },
+    { "start", cmd_start_strat },
+    { "stop", cmd_stop_strat },
+    { "game_elapsed", cmd_get_game_elapsed_time },
     { "ir", cmd_print_ir_distance },
     { "temp", cmd_print_temp },
     { "batt_level", cmd_print_battery_level },
     { NULL, NULL }
 };
 
-void cmd_start_asserv( int argc, char *argv[] )
+void cmd_start_strat( int argc, char *argv[] )
 {
     (void)argc;
     (void)argv;
@@ -46,9 +50,11 @@ void cmd_start_asserv( int argc, char *argv[] )
         chprint( "Usage: start\r\n" );
         return;
     }
+    
+    strat_begin();
 }
 
-void cmd_stop_asserv( int argc, char *argv[] ) 
+void cmd_stop_strat( int argc, char *argv[] ) 
 {
     (void)argc;
     (void)argv;
@@ -57,6 +63,32 @@ void cmd_stop_asserv( int argc, char *argv[] )
     {
         chprint( "Usage: stop\r\n" );
         return;
+    }
+    
+    strat_stop(); 
+    trajectory_hardstop( &sys.controls.robot.traj );
+}
+
+void cmd_get_game_elapsed_time( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: game_elapsed\r\n" );
+        return;
+    }
+    
+    int running_time = get_game_elapsed_time();
+    if( running_time != 0 )
+    {
+        chprint( "End game in %ds\r\n", 
+            GAME_RUNNING_TIME - get_game_elapsed_time() ); 
+    }
+    else
+    {
+        chprint( "Game not started\r\n" );
     }
 }
 
