@@ -30,6 +30,8 @@ ShellCommand user_commands[] = {
     { "pwm", cmd_set_pwm },
     { "god", cmd_go_forward },
     { "goa", cmd_turn_angle },
+    { "pida", cmd_set_or_get_pida_gains },
+    { "pidd", cmd_set_or_get_pidd_gains },
 
     { "start", cmd_start_strat },
     { "stop", cmd_stop_strat },
@@ -155,9 +157,12 @@ void cmd_robot_position( int argc, char *argv[] )
 
     if( 0 == argc )
     {
-        chprint( "Position X: %d\r\n", position_get_x_float( &sys.controls.robot.pos ) );
-        chprint( "Position Y: %d\r\n", position_get_y_float( &sys.controls.robot.pos ) );
-        chprint( "Position A[rad]: %d\r\n", position_get_a_rad_float( &sys.controls.robot.pos ) );
+        chprint( "Position X: %d\r\n", 
+            position_get_x_float( &sys.controls.robot.pos ) );
+        chprint( "Position Y: %d\r\n", 
+            position_get_y_float( &sys.controls.robot.pos ) );
+        chprint( "Position A[rad]: %d\r\n", 
+            position_get_a_rad_float( &sys.controls.robot.pos ) );
     }
     else if( 3 == argc )
     {
@@ -264,6 +269,62 @@ void cmd_turn_angle( int argc, char* argv[] )
     chprint( "Trajectory: turn angle= %d\r\n", angle );
 }
 
+void cmd_set_or_get_pida_gains( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+    
+    if( argc == 0 )
+    {
+        chprint( "pida gains:\r\n" );
+        chprint( "kp: %d\r\n", sys.controls.robot.angle_pid.gain_P );
+        chprint( "ki: %d\r\n", sys.controls.robot.angle_pid.gain_I );
+        chprint( "kd: %d\r\n", sys.controls.robot.angle_pid.gain_D );
+    }
+    else if( argc == 3 )
+    {
+        chprint( "Set pida gains..." );
+        sys.controls.robot.angle_pid.gain_P = atoi( argv[0] );
+        sys.controls.robot.angle_pid.gain_I = atoi( argv[1] );
+        sys.controls.robot.angle_pid.gain_D = atoi( argv[2] );
+        chprint( "Done\r\n" );
+    }
+    else
+    {
+        chprint( "Usage get: pida\r\n" );
+        chprint( "Usage set: pida kp ki kd\r\n" );
+        return;
+    }
+}
+
+void cmd_set_or_get_pidd_gains( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc == 0 )
+    {
+        chprint( "pidd gains:\r\n" );
+        chprint( "kp: %d\r\n", sys.controls.robot.distance_pid.gain_P );
+        chprint( "ki: %d\r\n", sys.controls.robot.distance_pid.gain_I );
+        chprint( "kd: %d\r\n", sys.controls.robot.distance_pid.gain_D );
+    }
+    else if( argc == 3 )
+    {
+        chprint( "Set pidd gains..." );
+        sys.controls.robot.distance_pid.gain_P = atoi( argv[0] );
+        sys.controls.robot.distance_pid.gain_I = atoi( argv[1] );
+        sys.controls.robot.distance_pid.gain_D = atoi( argv[2] );
+        chprint( "Done\r\n" );
+    }
+    else
+    {
+        chprint( "Usage get: pidd\r\n" );
+        chprint( "Usage set: pidd kp ki kd\r\n" );
+        return;
+    }
+}
+
 void cmd_print_ir_distance( int argc, char *argv[] ) 
 {
     (void)argc;
@@ -274,7 +335,7 @@ void cmd_print_ir_distance( int argc, char *argv[] )
         chprint( "Usage: ir\r\n" );
         return;
     }
-        
+
     chprint( "Infrared distances: d0 = %.3f, d1 = %.3f,  d2 = %.3f\r\n", 
         sys.sensors.ir_sensors.ir_d0, 
         sys.sensors.ir_sensors.ir_d1,

@@ -37,6 +37,8 @@ void cmd_go_forward( int argc, char* argv[] );
 void cmd_turn_angle( int argc, char* argv[] );
 
 // Command to get/set pid gains
+void cmd_set_or_get_pida_gains( int argc, char* argv[] );
+void cmd_set_or_get_pidd_gains( int argc, char* argv[] );
 
 // Command to get sensors values
 
