@@ -11,6 +11,7 @@
 
 #include "modules/esp8266_manager.h"
 #include "modules/motor_manager.h"
+#include "modules/mrf24j40/mrf24j40.h"
 
 #include "lwipthread.h"
 #include "modules/web/web.h"
@@ -74,6 +75,10 @@ void system_print_boot_msg( void )
 // Init all peripherals
 void system_init( void )
 {
+     // Init IOs
+    palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
+    palSetPadMode( GPIOE, 7, PAL_MODE_OUTPUT_PUSHPULL ); //reset pin for zigbee
+    
     // Init motors and QEI first to avoid logic level issues 
     // on motors at startup
     motor_manager_init();
@@ -96,8 +101,13 @@ void system_init( void )
 
     esp8266_manager_init();
 
-    // Init IOs
-    palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
+    // Init zigbee module
+    
+    mrf24j40_init();
+    mrf24j40_set_pan( 0xcafe );
+    
+    // This is _our_ address
+    mrf24j40_address16_write( 0x6001 ); 
 
     system_print_boot_msg();
 

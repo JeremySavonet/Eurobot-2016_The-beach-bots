@@ -130,16 +130,18 @@ CSRC = $(STARTUPSRC) \
 	   common/math/geometry/lines.c \
 	   common/math/geometry/polygon.c \
 	   common/math/geometry/vect_base.c \
-	   modules/control_system/control_system_manager/control_system_manager.c \
-	   modules/esp8266_manager.c \
+	   modules/beacon/beacon.c \
 	   modules/blocking_detection_manager/blocking_detection_manager.c \
+	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/control_system/filters/biquad/biquad.c \
 	   modules/control_system/filters/pid/pid.c \
 	   modules/control_system/filters/dual_quadramp/dual_quadramp.c \
 	   modules/control_system/filters/quadramp/quadramp.c \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
+	   modules/esp8266_manager.c \
 	   modules/motor_manager.c \
+	   modules/mrf24j40/mrf24j40.c \
 	   modules/obstacle_avoidance/obstacle_avoidance.c \
 	   modules/robot/position_manager/position_manager.c \
 	   modules/robot/robot_system/angle_distance.c \
