@@ -29,6 +29,7 @@ void strat_begin( void  )
     // start game strat 
     if( !running )
     {
+        running = true;
         DPRINT( 1, KBLU "Start\r\n" ); 
         chThdCreateStatic( wa_strat,
                            sizeof( wa_strat ),
@@ -70,5 +71,8 @@ int get_game_elapsed_time( void )
 
 void strat_stop( void )
 {
-    game_tick = GAME_RUNNING_TIME;
+    if( 0 != game_tick )
+    {
+        game_tick = GAME_RUNNING_TIME;
+    }
 }
