@@ -42,10 +42,6 @@ volatile uint8_t flag_got_tx;
 static rx_info_t rx_info;
 static tx_info_t tx_info;
 
-// SPI TX and RX buffers.
-static uint8_t txbuf[ 512 ];
-static uint8_t rxbuf[ 512 ];
-
 // SPI1 configuration structure.
 static const SPIConfig spi1_config = {
     NULL,           // callback
