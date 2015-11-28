@@ -26,6 +26,7 @@
 
 // Platform includes
 #include "ch.h"
+#include "hal.h"
 
 #include "trajectory_manager.h"
 
@@ -133,8 +134,9 @@ void trajectory_manager_xy_event( struct trajectory *traj );
 // trajectory event for circles
 void trajectory_manager_circle_event( struct trajectory *traj );
 
-// trajectory event
-void trajectory_manager_event( void * param );
+// trajectory event thread
+extern THD_WORKING_AREA( wa_trajectory_manager_event, 2048 );
+THD_FUNCTION( TrajectoryManagerEvent, param );
 
 //===============================  CIRCLE ===================================//
 

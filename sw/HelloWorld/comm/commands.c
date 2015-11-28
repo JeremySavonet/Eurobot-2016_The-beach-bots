@@ -68,7 +68,7 @@ void cmd_stop_strat( int argc, char *argv[] )
         return;
     }
     
-    strat_stop(); 
+    strat_timer_reset(); 
     trajectory_hardstop( &sys.controls.robot.traj );
 }
 
@@ -97,11 +97,11 @@ void cmd_get_game_elapsed_time( int argc, char *argv[] )
         return;
     }
     
-    int running_time = get_game_elapsed_time();
+    int running_time = strat_get_time();
     if( running_time != 0 )
     {
         chprint( "End game in %ds\r\n", 
-            GAME_RUNNING_TIME - get_game_elapsed_time() ); 
+            GAME_RUNNING_TIME - strat_get_time() ); 
     }
     else
     {

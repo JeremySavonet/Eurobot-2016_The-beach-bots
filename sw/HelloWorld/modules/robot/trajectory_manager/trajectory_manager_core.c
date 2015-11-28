@@ -646,15 +646,15 @@ static void trajectory_manager_line_event(struct trajectory *traj)
     }
 }
 
-
-// trajectory event 
-void trajectory_manager_event(void * param)
+// trajectory event
+THD_FUNCTION( TrajectoryManagerEvent, param )
 {
     struct trajectory *traj = (struct trajectory *)param;
 
-
-    while(1) {
-        switch (traj->state) {
+    while( 1 ) 
+    {
+        switch( traj->state ) 
+        {
             case RUNNING_XY_START:
             case RUNNING_XY_ANGLE:
             case RUNNING_XY_ANGLE_OK:
@@ -664,22 +664,22 @@ void trajectory_manager_event(void * param)
             case RUNNING_XY_B_START:
             case RUNNING_XY_B_ANGLE:
             case RUNNING_XY_B_ANGLE_OK:
-                trajectory_manager_xy_event(traj);
+                trajectory_manager_xy_event( traj );
                 break;
 
             case RUNNING_CIRCLE:
-                trajectory_manager_circle_event(traj);
+                trajectory_manager_circle_event( traj );
                 break;
 
             case RUNNING_LINE:
             case RUNNING_CLITOID_LINE:
-                trajectory_manager_line_event(traj);
+                trajectory_manager_line_event( traj );
                 break;
 
             default:
                 break;
         }
-        //TODO=>>>> /*OSTimeDlyHMSM(0, 0, 0, TRAJ_EVT_PERIOD);*/
+        chThdSleepMilliseconds( TRAJ_EVT_PERIOD );
     }
 }
 

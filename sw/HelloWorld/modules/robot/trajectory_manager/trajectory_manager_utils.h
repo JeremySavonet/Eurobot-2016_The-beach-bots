@@ -26,12 +26,14 @@
 
 #include "trajectory_manager.h"
 
-#define M_2PI ( 2*M_PI )
+#define M_PI 3.141592
+
+#define M_2PI ( 2 * M_PI )
 
 #define DEG( x ) ( (x ) * ( 180.0 / M_PI ) )
 #define RAD( x ) ( ( x ) * ( M_PI / 180.0 ) )
 
-/* 25 ms */
+// 25 ms
 #define TRAJ_EVT_PERIOD 25
 #define TRAJ_EVT_PRIO 23
 

@@ -25,6 +25,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+// Platform includes
+#include "ch.h"
+#include "hal.h"
+
 #include "../../../common/utils.h"
 
 #include "../position_manager/position_manager.h"
@@ -83,20 +87,18 @@ void delete_event( struct trajectory *traj )
     //OSTaskDel( TRAJ_EVT_PRIO );
 }
 
+THD_WORKING_AREA( wa_trajectory_manager_event, 2048 );
+
 // schedule the trajectory event 
 void schedule_event( struct trajectory *traj )
 {
-    /*
     traj->scheduler_task = TRAJ_EVT_PRIO;
-    OSTaskCreateExt( trajectory_manager_event,
-                    ( void* )traj,
-                    &traj->task_stk[2047],
-                    TRAJ_EVT_PRIO,
-                    TRAJ_EVT_PRIO,
-                    &traj->task_stk[0],
-                    2048,
-                    NULL, NULL );
-    */
+    
+    chThdCreateStatic( wa_trajectory_manager_event,
+                       sizeof( wa_trajectory_manager_event ),
+                       NORMALPRIO, //TODO: change for TRAJ_EVT_PRIO
+                       TrajectoryManagerEvent,
+                       (void *) traj );
 }
 
 // do a modulo 2.pi -> [-Pi,+Pi], knowing that 'a' is in [-3Pi,+3Pi] 
