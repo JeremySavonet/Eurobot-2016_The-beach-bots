@@ -64,9 +64,9 @@ void qei_manager_init( void )
     palSetPadMode( GPIOD, 13, PAL_MODE_ALTERNATE( 2 ) );
     
     qeiStart( &MOTOR_LEFT_QEI_DRIVER, &motor_left_qei_cfg );
-    qeiEnable( &MOTOR_LEFT_QEI_DRIVER );
-
     qeiStart( &MOTOR_RIGHT_QEI_DRIVER, &motor_right_qei_cfg );
+    
+    qeiEnable( &MOTOR_LEFT_QEI_DRIVER );
     qeiEnable( &MOTOR_RIGHT_QEI_DRIVER );
 }
 

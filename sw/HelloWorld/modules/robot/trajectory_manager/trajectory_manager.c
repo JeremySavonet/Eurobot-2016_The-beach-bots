@@ -37,7 +37,7 @@ void trajectory_init( struct trajectory *traj, double cs_hz )
     memset( traj, 0, sizeof( struct trajectory ) );
     traj->cs_hz = cs_hz;
     traj->state = READY;
-    traj->scheduler_task = -1;
+    traj->scheduler_task = NULL;
 }
 
 // structure initialization

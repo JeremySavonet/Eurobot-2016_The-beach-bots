@@ -414,7 +414,6 @@ void trajectory_manager_xy_event(struct trajectory *traj)
                       (traj->position->phys.distance_imp_per_mm) *
                       (traj->position->phys.track_mm) / 2.2);
         a_consign += rs_get_angle(traj->robot);
-
         break;
 
     default:
@@ -650,7 +649,7 @@ static void trajectory_manager_line_event(struct trajectory *traj)
 THD_FUNCTION( TrajectoryManagerEvent, param )
 {
     struct trajectory *traj = (struct trajectory *)param;
-
+    
     while( 1 ) 
     {
         switch( traj->state ) 
@@ -680,6 +679,15 @@ THD_FUNCTION( TrajectoryManagerEvent, param )
                 break;
         }
         chThdSleepMilliseconds( TRAJ_EVT_PERIOD );
+        
+        /* 
+         * Thread de-initialization before terminating, here you put the critical
+         * thread finalization code.
+         */
+        if( chThdShouldTerminateX() )
+        {
+            chThdExit( 0 );
+        }
     }
 }
 

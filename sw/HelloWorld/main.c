@@ -69,7 +69,7 @@ int main( void )
 
     // Init system
     system_init();
-        
+
     // Global main loop
     while( true )
     {
@@ -87,13 +87,9 @@ int main( void )
             shelltp = NULL;           // Triggers spawning of a new shell.
         }
 
-        // Wait start button
-        if ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) != 0 )
-        {
-            // Init strat here
-            strat_begin();
-        }
-        
-        chThdSleepMilliseconds( 100 ); /* Iddle thread */
+        // TODO: Wait for call to start over CLI or add a button
+        // ( this one is not the starter pull)
+
+        chThdSleepMilliseconds( 100 ); // Iddle thread
     }
 }

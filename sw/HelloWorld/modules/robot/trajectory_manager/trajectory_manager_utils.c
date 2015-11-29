@@ -80,11 +80,15 @@ void set_quadramp_acc( struct trajectory *traj, double d_acc, double a_acc )
 // remove event if any
 void delete_event( struct trajectory *traj )
 {
-
     set_quadramp_speed( traj, traj->d_speed, traj->a_speed );
     set_quadramp_acc( traj, traj->d_acc, traj->a_acc );
-    //TODO : delete the task -> see chibiOS
-    //OSTaskDel( TRAJ_EVT_PRIO );
+    
+    if( NULL != traj->scheduler_task )
+    {
+        chThdTerminate( traj->scheduler_task );
+        chThdWait( traj->scheduler_task );
+        traj->scheduler_task = NULL;
+    }
 }
 
 THD_WORKING_AREA( wa_trajectory_manager_event, 2048 );
@@ -92,13 +96,12 @@ THD_WORKING_AREA( wa_trajectory_manager_event, 2048 );
 // schedule the trajectory event 
 void schedule_event( struct trajectory *traj )
 {
-    traj->scheduler_task = TRAJ_EVT_PRIO;
-    
-    chThdCreateStatic( wa_trajectory_manager_event,
-                       sizeof( wa_trajectory_manager_event ),
-                       NORMALPRIO, //TODO: change for TRAJ_EVT_PRIO
-                       TrajectoryManagerEvent,
-                       (void *) traj );
+    traj->scheduler_task = 
+        chThdCreateStatic( wa_trajectory_manager_event,
+                           sizeof( wa_trajectory_manager_event ),
+                           NORMALPRIO, //TODO: change for TRAJ_EVT_PRIO
+                           TrajectoryManagerEvent,
+                           (void *) traj );
 }
 
 // do a modulo 2.pi -> [-Pi,+Pi], knowing that 'a' is in [-3Pi,+3Pi] 

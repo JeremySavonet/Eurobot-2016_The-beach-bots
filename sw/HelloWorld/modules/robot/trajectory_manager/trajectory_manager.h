@@ -128,7 +128,7 @@ struct trajectory
     
     double cs_hz;   // The frequency of the control system associated with this manager. 
     
-    int8_t scheduler_task;    // id of current task ( -1 if no running task ) 
+    thread_t *scheduler_task;    // id of current task ( -1 if no running task ) 
 };
 
 /* 

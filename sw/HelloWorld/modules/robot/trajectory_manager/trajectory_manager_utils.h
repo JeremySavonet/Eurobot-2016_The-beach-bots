@@ -24,9 +24,9 @@
 #ifndef _TRAJECTORY_MANAGER_UTILS_H_
 #define _TRAJECTORY_MANAGER_UTILS_H_
 
-#include "trajectory_manager.h"
+#include <math.h>
 
-#define M_PI 3.141592
+#include "trajectory_manager.h"
 
 #define M_2PI ( 2 * M_PI )
 

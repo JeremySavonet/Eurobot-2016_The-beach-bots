@@ -5,6 +5,8 @@
 #ifndef _VECT2_H_
 #define _VECT2_H_
 
+#include <math.h>
+
 // Definition of reals used in vector 2d
 #define TO_RAD(x) (((double)x)*(M_PI/180.0))
 #define TO_DEG(x) (((double)x)*(180.0/M_PI))

@@ -68,8 +68,7 @@ void cmd_stop_strat( int argc, char *argv[] )
         return;
     }
     
-    strat_timer_reset(); 
-    trajectory_hardstop( &sys.controls.robot.traj );
+    strat_timer_stop(); 
 }
 
 void cmd_get_uptime( int argc, char *argv[] )

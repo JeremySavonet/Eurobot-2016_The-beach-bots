@@ -43,21 +43,19 @@ static THD_FUNCTION( Odometry, arg );
 
 void versatile_cs_init( versatile_robot_t * robot )
 {
-    robot->mode = BOARD_MODE_SET_PWM;
+    robot->mode = BOARD_MODE_ANGLE_DISTANCE;
 
     /**************************************************************************/
     /*                                 Motors                                 */
     /**************************************************************************/
-/*
 #ifdef COMPILE_ON_ROBOT
-    int i;
-    for( i = 0; i < 8; i++ )
-    {
-        cvra_dc_set_encoder( HEXMOTORCONTROLLER_BASE, i, 0 );
-        cvra_dc_set_pwm( HEXMOTORCONTROLLER_BASE, i, 0 );
-    }
+    // Init motors and QEI first to avoid logic level issues 
+    // on motors at startup
+    motor_manager_init();
+    
+    qei_manager_init(); 
 #endif
-*/
+
     /**************************************************************************/
     /*                             Robot system                               */
     /**************************************************************************/

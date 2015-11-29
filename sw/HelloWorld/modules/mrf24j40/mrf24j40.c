@@ -122,11 +122,8 @@ void mrf24j40_init( void )
             PAL_STM32_OSPEED_HIGHEST ); // MOSI
     palSetPad( GPIOE, 3 );
 
-    DPRINT( 3, KYEL "Init chibios SPI1 driver... done\r\n" );
-    
     // Then, init mrf24j40 module through SPI
     mrf24j40_initialize();
-    DPRINT( 3, KYEL "Init hardware zigbee... done\r\n" );
 }
 
 void mrf24j40_reset( void )

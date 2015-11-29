@@ -17,29 +17,95 @@
 #include "system.h"
 
 #include "strat.h"
+#include "strat_high_level.h"
+
+strat_info_t strat_info;
 
 static int game_tick = 0;
 static bool running = false;
 
-static THD_WORKING_AREA( wa_strat, 128 );
-static THD_FUNCTION( Strat, arg );
+static THD_WORKING_AREA( wa_game_timer, 128 );
+static THD_FUNCTION( GameTimer, arg );
 
-void do_job( void )
+static THD_WORKING_AREA( wa_strat_executor, 512 );
+static THD_FUNCTION( StratExecutor, arg );
+
+void do_strat( void )
 {
-    DPRINT( 1, KBLU "Running...\r\n" ); 
+    static thread_t *timer = NULL;
+    
+    bd_set_thresholds( &sys.controls.robot.distance_bd, 6000, 1 );
+
+    // Init arms position
+    setup_arm_position();
+    
+    strat_set_speed( FAST );
+    
+    // Check color
+    if( palReadPad( GPIOD, 1 ) == 0 )
+    {
+        strat_info.color = YELLOW;
+    }
+    else
+    {
+        strat_info.color = RED;
+    }
+
+    // Wait start button
+    DPRINT( 1, KBLU "Wait starter pull\r\n" ); 
+    while ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) == 0 );
+    
+    DPRINT( 1, KBLU "Start\r\n" ); 
+    
+    // Start the timer
+    if( !timer )
+    {
+        timer = chThdCreateStatic( wa_game_timer,
+                                   sizeof( wa_game_timer ),
+                                   NORMALPRIO,
+                                   GameTimer,
+                                   NULL );
+    }
+    
+    DPRINT( 1, KNRM "Start color => %d\r\n", strat_info.color );
+    
+    trajectory_goto_forward_xy_abs( &sys.controls.robot.traj, 
+                                    690, 
+                                    COLOR_Y( 1050 ) );
+    
+    while( position_get_x_float( &sys.controls.robot.pos ) < 500 && running ) 
+    {
+        test_traj_end( TRAJ_FLAGS_STD );
+        trajectory_goto_forward_xy_abs( &sys.controls.robot.traj, 
+                                        690, 
+                                        COLOR_Y( 1050 ) );
+    }
+    
+    while( running );
+    
+    trajectory_hardstop( &sys.controls.robot.traj );
+    DPRINT( 1, KBLU "HARD STOP\r\n" ); 
+
+    // If we reach this, then the match is finished. Reset the timer thread
+    if( NULL != timer )
+    {
+        chThdRelease( timer );
+        timer = NULL;
+    }
 }
 
-void strat_begin( void  )
+void strat_begin( void )
 {
     // start game strat 
     if( !running )
     {
         running = true;
-        DPRINT( 1, KBLU "Start\r\n" ); 
-        chThdCreateStatic( wa_strat,
-                           sizeof( wa_strat ),
+        strat_timer_stop(); // reset the timer
+        // Start the strat thread : avoid blocking the main loop and the cli
+        chThdCreateStatic( wa_strat_executor,
+                           sizeof( wa_strat_executor ),
                            NORMALPRIO,
-                           Strat,
+                           StratExecutor,
                            NULL );
     }
     else
@@ -48,18 +114,25 @@ void strat_begin( void  )
     }
 }
 
-// Strat thread
-static THD_FUNCTION( Strat, arg )
+// Strat job thread
+static THD_FUNCTION( StratExecutor, arg )
 {
     (void)arg;
     chRegSetThreadName( "strat" );
+    do_strat();
+}
+
+// Timer thread
+static THD_FUNCTION( GameTimer, arg )
+{
+    (void)arg;
+    chRegSetThreadName( "timer" );
     
     systime_t time = chVTGetSystemTimeX();   
  
     while( ++game_tick < GAME_RUNNING_TIME ) 
     {
-        time += MS2ST( 1000); // Next deadline
-        do_job();
+        time += MS2ST( 1000 ); // Next deadline in 1s
         chThdSleepUntil( time );
     }
     
@@ -74,7 +147,7 @@ int strat_get_time( void )
     return game_tick;
 }
 
-void strat_timer_reset( void )
+void strat_timer_stop( void )
 {
     if( 0 != game_tick )
     {
@@ -85,12 +158,6 @@ void strat_timer_reset( void )
 //============================================================================//
 //================================== UTILS ===================================//
 //============================================================================//
-
-void strat_autopos( int16_t x, int16_t y, int16_t a, int16_t epaisseurRobot )
-{
-    //TODO
-}
-
 int test_traj_end( int why )
 {
     if( ( why & END_TRAJ ) && trajectory_finished( &sys.controls.robot.traj ) )
@@ -132,7 +199,15 @@ int test_traj_end( int why )
 
 int wait_traj_end_debug( int why, char *file, int line )
 {
-    //TODO
+    int ret;
+    do 
+    {
+        ret = test_traj_end( why );
+    } while( ret == 0 );
+
+    DPRINT( 1, "%s:%d got %d", file, line, ret );
+
+    return ret;
 }
 
 void strat_wait_ms( int ms )

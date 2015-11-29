@@ -32,20 +32,20 @@
 typedef enum {YELLOW=0, RED} strat_color_t;
 
 // This structure holds all the configuration data and state of the strategy
-struct strat_info 
+typedef struct  
 {
     strat_color_t color; // Color of our robot
-    int time_start;      // Time since the beginning of the match, in seconds
-};
+    // More to come...
+} strat_info_t;
 
 // This global var holds everything related to the strat
-extern struct strat_info strat;
+extern strat_info_t strat_info;
 
 // Computes the symmetrical position depending on color
-#define COLOR_Y(x) (strat.color == YELLOW ? (x) : 2000 - (x))
+#define COLOR_Y(x) (strat_info.color == YELLOW ? (x) : 2000 - (x))
 
 // Computes the symmetrical angle depending on color
-#define COLOR_A(x) (strat.color == YELLOW ? (x) : -(x))
+#define COLOR_A(x) (strat_info.color == YELLOW ? (x) : -(x))
 
 #define wait_traj_end(why) wait_traj_end_debug(why, __FILE__, __LINE__)
 
@@ -58,27 +58,14 @@ enum speed_e
     FAST
 };
 
-
 void strat_begin( void );
 int get_game_elapsed_time( void );
 int strat_get_time( void );
-void strat_timer_reset( void );
+void strat_timer_stop( void );
 
 //============================================================================//
 //================================== UTILS ===================================//
 //============================================================================//
-
-/*
- * Auto positions the robot before the match.
- *
- * This function positions the robot using the border as references. The
- * color is assumed to be already configured.
- *
- * [in] x, y The starting coordinates, in mm.
- * [in] a The starting angle relative to the X-axis, in degrees.
- * epaisseurRobot The distance between the back of the robot and the wheel axis.
- */
-void strat_autopos( int16_t x, int16_t y, int16_t a, int16_t epaisseurRobot );
 
 /*
  * Tests for end of trajectory.
@@ -103,6 +90,5 @@ int wait_traj_end_debug( int why, char *file, int line );
 void strat_wait_ms( int ms );
 
 void strat_set_speed( enum speed_e speed );
-
 
 #endif // _STRAT_H_
