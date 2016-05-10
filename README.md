@@ -14,7 +14,7 @@ WiFi IoT module : https://www.olimex.com/Products/IoT/MOD-WIFI-ESP8266/open-sour
 <h4>SW description:</h4>
 ----
 
-Need to test those to RTOS:<br>
+Need to test those two RTOS:<br>
 
 <li>Freertos : https://github.com/frtos-wpan/freertos-201309/tree/master/FreeRTOS/Demo/E407</li>
 <li>ChibiOS : http://chibios.org/dokuwiki/doku.php?id=chibios:documentation:start</li>
