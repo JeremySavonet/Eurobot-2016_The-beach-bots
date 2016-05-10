@@ -1,8 +1,10 @@
 /*
- * Simple demo program
+ * Base software for non-holonome robot
  *
  * Description:
- * A simple HelloWorld program that create a task that blinks a led
+ * All the stuff related to make a non-holonome robot working.
+ * See: system.c for board management
+ * See: versatile_cs.c for robot control system stuff
  *
  * Added support for:
  * 90s timer to stop all the thread
@@ -11,10 +13,11 @@
  * PWM on port D pin 12/13/14/15
  * ESP8266 API
  * CLI on USB2 OTG
+ * MRF Zigbee chip
  *
- * Author: JS
+ * Author: Jeremy S.
  * Date: 2015-10-03
- * Version: V0.1
+ * Version: V1.0
  */
 
 #include <stdio.h>

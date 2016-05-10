@@ -1,6 +1,11 @@
 /*
  * Color defines
+ *
+ * Author: Jeremy S.
+ * Date: 2015-10-03
+ * Version: V1.0
  */
+
 #ifndef _COLOR_H
 #define _COLOR_H
 

@@ -1,7 +1,7 @@
 /*
  * Simple module to manage temperature sensors
  * Author: Jeremy S.
- * Rev : 1.0 
+ * Rev : 1.0
  */
 
 #include <string.h>
@@ -22,11 +22,11 @@ void temperature_read( void );
 #define AVG_SLOPE                           25.0
 
 // Buffer for the data samples.
-static adcsample_t temperature_samples[ TEMPERATURE_ADC_GRP_NUM_CHANNELS * 
+static adcsample_t temperature_samples[ TEMPERATURE_ADC_GRP_NUM_CHANNELS *
                                         TEMPERATURE_ADC_GRP_BUF_DEPTH ];
 static float temp = 0;
 
-static const ADCConversionGroup temperature_sensors_adc_cfg = 
+static const ADCConversionGroup temperature_sensors_adc_cfg =
 {
     FALSE, // No circular buffer mode.
     TEMPERATURE_ADC_GRP_NUM_CHANNELS, // Number of the analog channels.
@@ -47,7 +47,7 @@ void temperature_get_data( temperature_data_t *data )
     temperature_read();
 
     // Update structure
-    if( NULL != data ) 
+    if( NULL != data )
     {
         data->temp0 = temp;
     }
@@ -55,14 +55,14 @@ void temperature_get_data( temperature_data_t *data )
 
 void temperature_read( void )
 {
-    adcConvert( &ADCD1, 
-                &temperature_sensors_adc_cfg, 
-                temperature_samples, 
+    adcConvert( &ADCD1,
+                &temperature_sensors_adc_cfg,
+                temperature_samples,
                 TEMPERATURE_ADC_GRP_BUF_DEPTH );
 
     int i = 0;
     int temperature = 0;
-    for( ; i < TEMPERATURE_ADC_GRP_NUM_CHANNELS * TEMPERATURE_ADC_GRP_BUF_DEPTH; i++ ) 
+    for( ; i < TEMPERATURE_ADC_GRP_NUM_CHANNELS * TEMPERATURE_ADC_GRP_BUF_DEPTH; i++ )
     {
         temperature += (int) temperature_samples[i];
     }

@@ -22,14 +22,14 @@
 // Private functions
 void send_command( char *p );
 
-// Struct to config serial module 
+// Struct to config serial module
 static SerialConfig sd6_cfg =
 {
-    115200,              
+    115200,
     0,
     0,
     0
-}; 
+};
 
 // Periodic thread to handle modwifi uart
 static THD_WORKING_AREA( waRead, 128 );
@@ -54,38 +54,38 @@ static THD_FUNCTION( esp8266, arg )
     {
         // Waiting for any of the events we're registered on.
         eventmask_t evt = chEvtWaitAny( ALL_EVENTS );
- 
+
         // Serving events.
-        if( evt & EVENT_MASK(1) ) 
+        if( evt & EVENT_MASK(1) )
         {
           /* Event from the serial interface, getting serial
            * flags as first thing.
            */
           eventflags_t flags = chEvtGetAndClearFlags( &serialListener );
- 
+
             //Handling errors first.
             if( flags & (SD_FRAMING_ERROR | SD_PARITY_ERROR) )
-            {   
+            {
                 DPRINT( 4, KRED "FRAMING/PARITY ERROR" );
             }
             if( flags & CHN_INPUT_AVAILABLE )
             {
-                char c; 
+                char c;
                 c = sdGet( &SD6 );
                 sdPut( &SD3, c );
-            }   
-        }  
+            }
+        }
     }
 }
 
 void esp8266_manager_init( void )
 {
-    // Used function : USART6_TX 
-    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) ); 
-    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) ); 
-    
+    // Used function : USART6_TX
+    palSetPadMode( GPIOC, 6, PAL_MODE_ALTERNATE( 8 ) );
+    palSetPadMode( GPIOC, 7, PAL_MODE_ALTERNATE( 8 ) );
+
     sdStart( &SD6, &sd6_cfg );
-    
+
     chThdCreateStatic( waRead, sizeof(waRead), NORMALPRIO, esp8266, NULL );
 }
 
@@ -106,7 +106,7 @@ void esp8266_set_mode( void )
 
 void esp8266_join_AP( void )
 {
-    send_command( "AT+CWJAP=\"ssid\",\"passord\"\r\n" );
+    send_command( "AT+CWJAP=\"ssid\",\"password\"\r\n" );
 }
 
 void esp8266_setAP( void )
@@ -124,7 +124,7 @@ void esp8266_configure_server( void )
     send_command( "AT+CIPSERVER=1\r\n" );
 }
 
-void send_command( char *p ) 
+void send_command( char *p )
 {
     while (*p) chSequentialStreamPut( &SD6, *p++ );
 }

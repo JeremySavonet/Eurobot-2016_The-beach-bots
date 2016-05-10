@@ -1,6 +1,9 @@
 /*
  * Manage board structure here
  *
+ * Author: Jeremy S.
+ * Date: 2015-10-03
+ * Version: V1.0
  */
 
 #include "system.h"
@@ -75,7 +78,7 @@ void system_init( void )
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
     palSetPadMode( GPIOD, 1, PAL_MODE_INPUT_PULLUP ); // strat color pin
     palSetPadMode( GPIOE, 7, PAL_MODE_OUTPUT_PUSHPULL ); //reset pin for zigbee
-      
+
     // Inits debug
     debug_manager_init();
 
@@ -98,7 +101,7 @@ void system_init( void )
     usb_manager_init();
     DPRINT( 1, "[*] usb OTG system ready\r\n" );
 
-    
+
     // Inits WiFi IoT
     esp8266_manager_init();
     DPRINT( 1, "[*] ESP8266 system ready\r\n" );
@@ -107,7 +110,7 @@ void system_init( void )
     mrf24j40_init();
     mrf24j40_set_pan( 0xcafe );
     // This is _our_ address
-    mrf24j40_address16_write( 0x6001 ); 
+    mrf24j40_address16_write( 0x6001 );
     DPRINT( 1, "[*] Zigbee beacon system ready\r\n" );
 
     // Init done => Board ready

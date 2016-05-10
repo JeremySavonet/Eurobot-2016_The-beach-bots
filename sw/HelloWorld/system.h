@@ -1,7 +1,9 @@
 /*
- * Manage board structure
- * Author: Jermy S.
- * Rev: 1.0
+ * Manage board structure here
+ *
+ * Author: Jeremy S.
+ * Date: 2015-10-03
+ * Version: V1.0
  */
 
 #ifndef _SYSTEM_H_
@@ -26,35 +28,33 @@ typedef enum
 
 typedef struct
 {
-    //Add here all sensor strctures
+    // Add here all sensor strctures
     battery_data_t batt_sensor;
     infrared_data_t ir_sensors;
     temperature_data_t temp_sensors;
-    
+
 } system_sensors_t;
 
 typedef struct
 {
-    //Add here all comm structure ( can_proto, spi_proto, i2c_proto... )
+    // Add here all comm structure ( can_proto, spi_proto, i2c_proto... )
 } system_comm_t;
 
 typedef struct
 {
-    /* 
-     * Contains the robot variables:
+    /*
+     * Contains the robot global variables:
      * - robot_sys
      * - encoders
      * - position_manager
      * - control_sys
      * - pid...
-     */
-    /*
-     * Contient toutes les variables globales.
-     * Cette structure sert en quelque sorte de namespace pour les variables globales,
-     * qui peuvent ensuite etre accedees en faisant robot.color par exemple.
+     *
+     * This struct acts like a namespace for global variables.
+     * They can be access by robot.color for example...
      */
     versatile_robot_t robot;
-    
+
     /*
      * Contains the io variables:
      * - buttons

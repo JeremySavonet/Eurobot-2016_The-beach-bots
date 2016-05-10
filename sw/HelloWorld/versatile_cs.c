@@ -1,13 +1,15 @@
 /*
  * This files implements the control system loop wrappers.
- * The file provides all the implementation of the Control System Management (CSM).
+ * The file provides all the implementation of the
+ * Control System Management (CSM).
  * A CSM is made of 3 parts : acceleration / deceleration ramp generator
  * (Quadramp), a position regulator (PID), and I/O interfaces (PWM & quadratures
  * encoders).
- * The quadramp tells the PID what position the wheel should be, depending on the
- * acceleration and time. This value is then fed as the consign value to the PID
- * regulator, with the encoder value as the measured position. The output of the
- * PID is then applied to the motor via the PWM.
+ * The quadramp tells the PID what position the wheel should be,
+ * depending on the acceleration and time.
+ * This value is then fed as the consign value to the PID regulator,
+ * with the encoder value as the measured position. The output of the PID is
+ * then applied to the motor via the PWM.
  * The others functions computed here are the position manager, the trajectory
  * manager and the blocking detection system.
  */
@@ -49,11 +51,11 @@ void versatile_cs_init( versatile_robot_t * robot )
     /*                                 Motors                                 */
     /**************************************************************************/
 #ifdef COMPILE_ON_ROBOT
-    // Init motors and QEI first to avoid logic level issues 
+    // Init motors and QEI first to avoid logic level issues
     // on motors at startup
     motor_manager_init();
-    
-    qei_manager_init(); 
+
+    qei_manager_init();
 #endif
 
     /**************************************************************************/
@@ -94,7 +96,9 @@ void versatile_cs_init( versatile_robot_t * robot )
     // Links the position manager to the robot system.
     position_set_related_robot_system( &robot->pos, &robot->rs );
 
-    position_set_physical_params( &robot->pos, 193.82313537598, 162.9746617261 );
+    position_set_physical_params( &robot->pos,
+                                  193.82313537598,
+                                  162.9746617261 );
     position_use_ext( &robot->pos );
 
     /**************************************************************************/

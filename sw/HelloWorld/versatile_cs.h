@@ -1,7 +1,9 @@
 /*
- * Init the robot structure and control system 
- * author: Jeremy S
- * 
+ * Init the robot structure and control system
+ *
+ * Author: Jeremy S.
+ * Date: 2015-10-03
+ * Rev: 1.0
 */
 
 #ifndef _VERSATILE_CS_H_
@@ -46,7 +48,7 @@
  * - BOARD_MODE_FREE
  * - BOARD_MODE_OTHER
  */
-enum board_mode_t 
+enum board_mode_t
 {
     BOARD_MODE_ANGLE_DISTANCE, // Angle & Distance regulated
     BOARD_MODE_ANGLE_ONLY,     // Angle regulated only
@@ -61,7 +63,7 @@ enum board_mode_t
  * This enum is used to store informations about the trajectory type, like "x,y
  * forward only" or "angle only", etc...
  */
-enum trajectory_type_t 
+enum trajectory_type_t
 {
     TRAJECTORY_TYPE_XY_ALL,                 // Chemin direct, en avant ou en arriere
     TRAJECTORY_TYPE_XY_FORWARD,             // Chemin direct, en avant
@@ -74,11 +76,11 @@ enum trajectory_type_t
 
 /*
  * contains all global vars.
- * This structure contains all vars that should be global. 
- * This is a clean way to group all vars in one place. 
+ * This structure contains all vars that should be global.
+ * This is a clean way to group all vars in one place.
  * It also serve as a namespace.
  */
-typedef struct 
+typedef struct
 {
     struct robot_system rs;                 // Robot system (angle & distance).
     struct robot_position pos;              // Position manager.
@@ -103,7 +105,7 @@ typedef struct
 
     //arm_t left_arm;                 // Structure representant le bras gauche.
     //arm_t right_arm;                // Structure representant le bras droit.
-} versatile_robot_t; 
+} versatile_robot_t;
 
 /*
  * Inits all the regulation related modules.
@@ -120,4 +122,4 @@ typedef struct
  */
 void versatile_cs_init( versatile_robot_t * robot );
 
-#endif // _VERSATILE__CS_H_ 
+#endif // _VERSATILE__CS_H_

@@ -39,14 +39,14 @@ static PWMConfig motor_pwm_cfg =
 /* QEI related.                                                              */
 /*===========================================================================*/
 
-static const QEIConfig motor_left_qei_cfg = 
+static const QEIConfig motor_left_qei_cfg =
 {
     QEI_MODE_QUADRATURE,
     QEI_BOTH_EDGES,
     QEI_DIRINV_FALSE
 };
 
-static const QEIConfig motor_right_qei_cfg = 
+static const QEIConfig motor_right_qei_cfg =
 {
     QEI_MODE_QUADRATURE,
     QEI_BOTH_EDGES,
@@ -62,10 +62,10 @@ void qei_manager_init( void )
     // Right encoder
     palSetPadMode( GPIOD, 12, PAL_MODE_ALTERNATE( 2 ) );
     palSetPadMode( GPIOD, 13, PAL_MODE_ALTERNATE( 2 ) );
-    
+
     qeiStart( &MOTOR_LEFT_QEI_DRIVER, &motor_left_qei_cfg );
     qeiStart( &MOTOR_RIGHT_QEI_DRIVER, &motor_right_qei_cfg );
-    
+
     qeiEnable( &MOTOR_LEFT_QEI_DRIVER );
     qeiEnable( &MOTOR_RIGHT_QEI_DRIVER );
 }
@@ -75,7 +75,7 @@ void motor_manager_init( void )
     // Left/Right motors
     palSetPadMode( GPIOE, 5, PAL_MODE_ALTERNATE( 3 ) );
     palSetPadMode( GPIOE, 6, PAL_MODE_ALTERNATE( 3 ) );
-    
+
     pwmStart( &MOTOR_PWM_DRIVER, &motor_pwm_cfg );
 
     unsigned i;
@@ -91,7 +91,7 @@ void versatile_dc_disable_pwm( void *device, int channel )
     {
         return;
     }
-    
+
     pwmDisableChannel( device,
                        channel );
 }
@@ -123,7 +123,6 @@ int32_t versatile_dc_get_encoder( void *device )
     return qei;
 }
 
-//TODO: this is temp function need to properly name those two functions
 void versatile_dc_set_pwm0( void *device, int32_t value )
 {
     versatile_dc_set_pwm( device, 0, value );

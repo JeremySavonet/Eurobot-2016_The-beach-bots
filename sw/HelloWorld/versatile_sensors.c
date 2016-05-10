@@ -3,6 +3,7 @@
  * Run the thread to update sensor structures
  *
  * Author Jeremy S.
+ * Date: 2015-10-03
  * Rev: 1.0
  */
 
@@ -19,7 +20,7 @@ static THD_FUNCTION( Sensors, arg );
 
 void versatile_sensors_init( system_sensors_t * sensors )
 {
-    // Maybe good to have sensor mode ??   
+    // Maybe good to have sensor mode ??
     battery_init( &sensors->batt_sensor );
     infrared_init( &sensors->ir_sensors );
     temperature_init( &sensors->temp_sensors );

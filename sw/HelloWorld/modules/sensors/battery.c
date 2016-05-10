@@ -1,7 +1,7 @@
 /*
  * Simple module to manage battery level
  * Author: Jeremy S.
- * Rev : 1.0 
+ * Rev : 1.0
  */
 
 #include <string.h>
@@ -20,11 +20,11 @@ void battery_read( void );
 #define BATTERY_ADC_GRP_BUF_DEPTH       8
 
 // Buffer for the data samples.
-static adcsample_t battery_samples[ BATTERY_ADC_GRP_NUM_CHANNELS * 
+static adcsample_t battery_samples[ BATTERY_ADC_GRP_NUM_CHANNELS *
                                     BATTERY_ADC_GRP_BUF_DEPTH ];
 static float batt_level = 0;
 
-static const ADCConversionGroup battery_sensor_adc_cfg = 
+static const ADCConversionGroup battery_sensor_adc_cfg =
 {
     FALSE, // No circular buffer mode.
     BATTERY_ADC_GRP_NUM_CHANNELS, // Number of the analog channels.
@@ -45,7 +45,7 @@ void battery_get_data( battery_data_t *data )
     battery_read();
 
     // Update structure
-    if( NULL != data ) 
+    if( NULL != data )
     {
         data->batt_level = batt_level;
     }
@@ -53,14 +53,14 @@ void battery_get_data( battery_data_t *data )
 
 void battery_read( void )
 {
-    adcConvert( &ADCD3, 
-                &battery_sensor_adc_cfg, 
-                battery_samples, 
+    adcConvert( &ADCD3,
+                &battery_sensor_adc_cfg,
+                battery_samples,
                 BATTERY_ADC_GRP_BUF_DEPTH );
 
     int i = 0;
     int level = 0;
-    for( ; i < BATTERY_ADC_GRP_NUM_CHANNELS * BATTERY_ADC_GRP_BUF_DEPTH; i++ ) 
+    for( ; i < BATTERY_ADC_GRP_NUM_CHANNELS * BATTERY_ADC_GRP_BUF_DEPTH; i++ )
     {
         level += (int) battery_samples[i];
     }
@@ -75,10 +75,10 @@ void battery_init( battery_data_t * batt_data )
     // memset of temp structure
     memset( batt_data, 0, sizeof( battery_data_t ) );
 
-    // Initializes the ADC driver 1 in order to access the analog values from the onboard temperature sensor.
+    // Initializes the ADC driver 1 in order to access the analog values
     adcStart( &ADCD3, NULL );
 
     // Battery sensor initialization.
-    palSetGroupMode( GPIOF, PAL_PORT_BIT( 9 ), 0, PAL_MODE_INPUT_ANALOG ); 
+    palSetGroupMode( GPIOF, PAL_PORT_BIT( 9 ), 0, PAL_MODE_INPUT_ANALOG );
 }
 

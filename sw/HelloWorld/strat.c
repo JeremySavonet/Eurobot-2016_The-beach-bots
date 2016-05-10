@@ -1,6 +1,7 @@
 /*
  * Start module: Here is the fsm of the robot
  * Author: Jeremy S.
+ * Date: 2015-10-03
  * Rev: 1.0
  */
 
@@ -33,14 +34,14 @@ static THD_FUNCTION( StratExecutor, arg );
 void do_strat( void )
 {
     static thread_t *timer = NULL;
-    
+
     bd_set_thresholds( &sys.controls.robot.distance_bd, 6000, 1 );
 
     // Init arms position
     setup_arm_position();
-    
+
     strat_set_speed( FAST );
-    
+
     // Check color
     if( palReadPad( GPIOD, 1 ) == 0 )
     {
@@ -52,11 +53,11 @@ void do_strat( void )
     }
 
     // Wait start button
-    DPRINT( 1, KBLU "Wait starter pull\r\n" ); 
+    DPRINT( 1, KBLU "Wait starter pull\r\n" );
     while ( palReadPad( GPIOA, GPIOA_BUTTON_WKUP ) == 0 );
-    
-    DPRINT( 1, KBLU "Start\r\n" ); 
-    
+
+    DPRINT( 1, KBLU "Start\r\n" );
+
     // Start the timer
     if( !timer )
     {
@@ -66,25 +67,25 @@ void do_strat( void )
                                    GameTimer,
                                    NULL );
     }
-    
+
     DPRINT( 1, KNRM "Start color => %d\r\n", strat_info.color );
-    
-    trajectory_goto_forward_xy_abs( &sys.controls.robot.traj, 
-                                    690, 
+
+    trajectory_goto_forward_xy_abs( &sys.controls.robot.traj,
+                                    690,
                                     COLOR_Y( 1050 ) );
-    
-    while( position_get_x_float( &sys.controls.robot.pos ) < 500 && running ) 
+
+    while( position_get_x_float( &sys.controls.robot.pos ) < 500 && running )
     {
         test_traj_end( TRAJ_FLAGS_STD );
-        trajectory_goto_forward_xy_abs( &sys.controls.robot.traj, 
-                                        690, 
+        trajectory_goto_forward_xy_abs( &sys.controls.robot.traj,
+                                        690,
                                         COLOR_Y( 1050 ) );
     }
-    
+
     while( running );
-    
+
     trajectory_hardstop( &sys.controls.robot.traj );
-    DPRINT( 1, KBLU "HARD STOP\r\n" ); 
+    DPRINT( 1, KBLU "HARD STOP\r\n" );
 
     // If we reach this, then the match is finished. Reset the timer thread
     if( NULL != timer )
@@ -96,7 +97,7 @@ void do_strat( void )
 
 void strat_begin( void )
 {
-    // start game strat 
+    // start game strat
     if( !running )
     {
         running = true;
@@ -127,19 +128,19 @@ static THD_FUNCTION( GameTimer, arg )
 {
     (void)arg;
     chRegSetThreadName( "timer" );
-    
-    systime_t time = chVTGetSystemTimeX();   
- 
-    while( ++game_tick < GAME_RUNNING_TIME ) 
+
+    systime_t time = chVTGetSystemTimeX();
+
+    while( ++game_tick < GAME_RUNNING_TIME )
     {
         time += MS2ST( 1000 ); // Next deadline in 1s
         chThdSleepUntil( time );
     }
-    
+
     running = false;
     game_tick = 0;
-    
-    DPRINT( 1, KBLU "Stop\r\n" ); 
+
+    DPRINT( 1, KBLU "Stop\r\n" );
 }
 
 int strat_get_time( void )
@@ -164,23 +165,25 @@ int test_traj_end( int why )
     {
         return END_TRAJ;
     }
-    if( why & END_NEAR ) 
+    if( why & END_NEAR )
     {
         int16_t d_near = 100; // mm
         /* XXX Change distance depending on speed. */
-        if( trajectory_in_window( &sys.controls.robot.traj, d_near, RAD( 5.0 ) ) )
+        if( trajectory_in_window( &sys.controls.robot.traj,
+                                  d_near,
+                                  RAD( 5.0 ) ) )
         {
             return END_NEAR;
         }
     }
-    if( ( why & END_BLOCKING ) && bd_get( &sys.controls.robot.distance_bd ) ) 
+    if( ( why & END_BLOCKING ) && bd_get( &sys.controls.robot.distance_bd ) )
     {
         trajectory_hardstop( &sys.controls.robot.traj );
         bd_reset( &sys.controls.robot.distance_bd );
         bd_reset( &sys.controls.robot.angle_bd );
         return END_BLOCKING;
     }
-    if( ( why & END_BLOCKING ) && bd_get( &sys.controls.robot.angle_bd ) ) 
+    if( ( why & END_BLOCKING ) && bd_get( &sys.controls.robot.angle_bd ) )
     {
         trajectory_hardstop( &sys.controls.robot.traj );
         bd_reset( &sys.controls.robot.distance_bd );
@@ -188,7 +191,7 @@ int test_traj_end( int why )
         return END_BLOCKING;
     }
 
-    if( ( why & END_TIMER ) && strat_get_time() >= GAME_RUNNING_TIME ) 
+    if( ( why & END_TIMER ) && strat_get_time() >= GAME_RUNNING_TIME )
     {
         trajectory_hardstop( &sys.controls.robot.traj );
         return END_TIMER;
@@ -200,7 +203,7 @@ int test_traj_end( int why )
 int wait_traj_end_debug( int why, char *file, int line )
 {
     int ret;
-    do 
+    do
     {
         ret = test_traj_end( why );
     } while( ret == 0 );
@@ -220,7 +223,7 @@ void strat_set_speed( enum speed_e speed )
     int speed_d, speed_a;
     int acc_d, acc_a;
 
-    switch( speed ) 
+    switch( speed )
     {
         case SLOW:
             speed_d = 400;
