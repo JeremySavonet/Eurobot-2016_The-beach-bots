@@ -23,7 +23,6 @@
 #define TEST_WA_SIZE    THD_WORKING_AREA_SIZE( 256 )
 
 extern SerialUSBDriver SDU2;
-extern ShellCommand user_commands[];
 
 // array for completion
 char * compl_world [32];
@@ -38,15 +37,15 @@ void print( const char * str )
 /* TODO : Nice to have little macro to add new cli function                  */
 /*===========================================================================*/
 
-static void usage( char *p ) 
+static void usage( char *p )
 {
     chprint( KYEL "Usage: %s\r\n", p );
 }
 
-static void cmd_systime( int argc, char * argv[] ) 
+static void cmd_systime( int argc, char * argv[] )
 {
     (void)argv;
-    if( argc > 0 ) 
+    if( argc > 0 )
     {
         usage( "systime" );
         return;
@@ -124,7 +123,7 @@ static void cmd_benchmark( int argc, char *argv[] )
 void cmd_info( int argc, char * argv[] )
 {
     (void)argv;
-    if( argc > 0 ) 
+    if( argc > 0 )
     {
         usage( "info" );
         return;
@@ -172,11 +171,11 @@ static void list_commands( const ShellCommand *scp )
 }
 
 static int cmdexec( ShellCommand *scp,
-                    char *name, int argc, char * argv[] ) 
+                    char *name, int argc, char * argv[] )
 {
-    while( scp->sc_name != NULL ) 
+    while( scp->sc_name != NULL )
     {
-        if( strcasecmp( scp->sc_name, name ) == 0 ) 
+        if( strcasecmp( scp->sc_name, name ) == 0 )
         {
             scp->sc_function( argc, argv );
             return FALSE;
@@ -189,7 +188,6 @@ static int cmdexec( ShellCommand *scp,
                 return FALSE;
             }
             list_commands( local_commands );
-            list_commands( user_commands );
             chprint( "\r\n" );
             return FALSE;
         }
@@ -201,9 +199,6 @@ static int cmdexec( ShellCommand *scp,
 static int exec( int argc, char ** argv )
 {
     if( ( cmdexec( local_commands, argv[0],
-                   argc - 1,
-                   (char **)&argv[1] ) ) &&
-        ( cmdexec( user_commands, argv[0],
                    argc - 1,
                    (char **)&argv[1] ) ) )
     {
@@ -224,12 +219,12 @@ void sigint( microrl_t * this )
 char ** complete( int argc, char ** argv )
 {
     int j = 0;
-    
+
     compl_world [0] = NULL;
     ShellCommand * scp;
-    
+
     // if there is token in cmdline
-    if( argc == 1 ) 
+    if( argc == 1 )
     {
         // get last entered token
         char * bit = (char *)argv[0];
@@ -238,80 +233,14 @@ char ** complete( int argc, char ** argv )
         for( j = 0; scp->sc_name != NULL; scp++ )
         {
             // if token is matched (text is part of our token starting from 0 char)
-            if( strstr( scp->sc_name, bit ) == scp->sc_name ) 
+            if( strstr( scp->sc_name, bit ) == scp->sc_name )
             {
                 // add it to completion set
                 compl_world[j++] = (char *)scp->sc_name;
             }
         }
-        
-        scp = user_commands;
-        for( ; scp->sc_name != NULL; scp++ )
-        {
-            // if token is matched (text is part of our token starting from 0 char)
-            if( strstr( scp->sc_name, bit ) == scp->sc_name ) 
-            {
-                // add it to completion set
-                compl_world [j++] = (char *)scp->sc_name;
-            }
-        }
     }
-    
-    // if command needs subcommands
-    //  else if (argc > 1)
-    //  {
-    //      int last = 0;
-    //      char * bit = (char *) argv[0];
-    //      // iterate through our available token and match it
-    //      scp = local_commands;
-    //      for(j = 0; scp->sc_name != NULL; scp++)
-    //      {
-    //          // if token is matched (text is part of our token starting from 0 char)
-    //          if (strstr(scp->sc_name, bit) == scp->sc_name) {
-    //              // add it to completion set
-    //              compl_world [j++] = scp->sc_name;
-    //              last = 1;
-    //          }
-    //      }
-    //
-    //      scp = user_commands;
-    //      for( ; scp->sc_name != NULL; scp++)
-    //      {
-    //          // if token is matched (text is part of our token starting from 0 char)
-    //          if (strstr(scp->sc_name, bit) == scp->sc_name) {
-    //              // add it to completion set
-    //              compl_world [j++] = scp->sc_name;
-    //              last = 2;
-    //          }
-    //      }
-    //
-    //      /* if only 1 result is found */
-    //      if (j == 1)
-    //      {
-    //          /* foun in default commands */
-    //          if (last == 1)
-    //          {
-    //              scp = local_commands;
-    //          }
-    //          /* found in user commands */
-    //          else
-    //          {
-    //              scp = user_commands;
-    //          }
-    //
-    //          // iterate through subcommand for command _CMD_VER array
-    //          for (int i = 0; scp->sc_keys[i] != NULL; i++) {
-    //              if (strstr (scp->sc_keys[i], argv[argc-1]) == scp->sc_keys[i]) {
-    //                  compl_world [j++] = scp->sc_keys[i];
-    //              }
-    //          }
-    //
-    //      }
-    //
-    //
-    //  }
-    
-    else 
+    else
     {   // if there is no token in cmdline, just print all available token
         /* list system default commands */
         scp = local_commands;
@@ -319,15 +248,8 @@ char ** complete( int argc, char ** argv )
         {
             compl_world[j] = (char *)scp->sc_name;
         }
-        
-        /* list user defined commands */
-        scp = user_commands;
-        for( ; scp->sc_name != NULL; scp++, j++ )
-        {
-            compl_world[j] = (char *)scp->sc_name;
-        }
     }
-    
+
     // note! last ptr in array always must be NULL!!!
     compl_world [j] = NULL;
     // return set of variants
@@ -339,12 +261,12 @@ void start_shell( void )
 {
     microrl_t rl;
     msg_t c;
-    
+
     microrl_init( &rl, print );
     microrl_set_execute_callback( &rl, exec );
     microrl_set_complete_callback( &rl, complete );
     microrl_set_sigint_callback( &rl, sigint );
-    while( true ) 
+    while( true )
     {
         c = sdGet( &SDU2 );
         microrl_insert_char( &rl, (int)c );
