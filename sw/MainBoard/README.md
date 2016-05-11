@@ -1,5 +1,11 @@
-HELLO WORLD:
+MAIN BOARD:
 ====
+
+This project is a base project for our robot. It uses ChibiOS.
+We have ported the control system management of Microb Tech originally develop
+for AVR platform.
+
+We also work with module as it's easier to understand and manage for the futur.
 
 Here we describe the mapping use for this project for OLIMEX E407 Rev.E board:
 
