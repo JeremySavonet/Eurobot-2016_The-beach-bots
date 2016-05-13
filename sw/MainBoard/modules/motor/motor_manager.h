@@ -11,7 +11,8 @@
 #include "ch.h"
 #include "hal.h"
 
-#define DC_PWM_MAX_VALUE 20000
+#define DC_PWM_MIN_VALUE 700
+#define DC_PWM_MAX_VALUE 2000
 
 #define NUM_MOTORS 2
 #define MAX_MOTOR_SPEED 10000

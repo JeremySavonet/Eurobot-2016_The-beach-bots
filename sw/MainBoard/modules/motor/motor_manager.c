@@ -103,15 +103,16 @@ void versatile_dc_set_pwm( void *device, int channel, int32_t value )
         return;
     }
 
-    if( value < -DC_PWM_MAX_VALUE )
+    if( value < DC_PWM_MIN_VALUE )
     {
-        value = -DC_PWM_MAX_VALUE;
+        value = DC_PWM_MIN_VALUE;
     }
 
     if( value > DC_PWM_MAX_VALUE )
     {
         value = DC_PWM_MAX_VALUE;
     }
+
     pwmEnableChannel( device,
                       channel,
                       (pwmcnt_t) value );
