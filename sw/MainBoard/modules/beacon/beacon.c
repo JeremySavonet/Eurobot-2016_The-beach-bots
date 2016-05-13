@@ -11,7 +11,7 @@
 #include "hal.h"
 
 // Use our API
-#include "../mrf24j40/mrf24j40.h"
+#include "../rf/mrf24j40/mrf24j40.h"
 
 #include "beacon.h"
 

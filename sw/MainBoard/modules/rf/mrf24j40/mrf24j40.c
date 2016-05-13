@@ -17,8 +17,8 @@
 #include "mrf24J40_registers.h"
 
 // Debug includes
-#include "../../color.h"
-#include "../../comm/debug_manager.h"
+#include "../../../color.h"
+#include "../../../comm/debug_manager.h"
 
 //====================  Chibios SPI HAL Configuration  =======================//
 //============================================================================//
