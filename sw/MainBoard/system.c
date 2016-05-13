@@ -12,8 +12,8 @@
 #include "comm/debug_manager.h"
 #include "comm/usb_manager.h"
 
-#include "modules/esp8266_manager.h"
 #include "modules/mrf24j40/mrf24j40.h"
+#include "modules/rf/esp8266/esp8266_manager.h"
 
 #include "versatile_cs.h"
 #include "versatile_sensors.h"

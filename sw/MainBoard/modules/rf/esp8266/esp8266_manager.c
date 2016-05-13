@@ -14,8 +14,8 @@
 #include "hal.h"
 #include "test.h"
 
-#include "../color.h"
-#include "../comm/debug_manager.h"
+#include "../../../color.h"
+#include "../../../comm/debug_manager.h"
 
 #include "esp8266_manager.h"
 
