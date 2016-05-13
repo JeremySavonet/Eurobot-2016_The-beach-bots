@@ -11,7 +11,7 @@
 #include "system.h" 
 
 // for specifics commands or actions
-#include "../modules/motor_manager.h"
+#include "../modules/motor/motor_manager.h"
 #include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 // for strat

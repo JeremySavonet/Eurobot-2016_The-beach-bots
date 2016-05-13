@@ -8,8 +8,8 @@
 #include "hal.h"
 #include "test.h"
 
-#include "../color.h"
-#include "../comm/debug_manager.h"
+#include "../../color.h"
+#include "../../comm/debug_manager.h"
 
 #include "motor_manager.h"
 

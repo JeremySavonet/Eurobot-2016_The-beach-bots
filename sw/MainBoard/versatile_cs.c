@@ -20,7 +20,7 @@
 #include "color.h"
 #include "comm/debug_manager.h"
 
-#include "modules/motor_manager.h"
+#include "modules/motor/motor_manager.h"
 
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
 

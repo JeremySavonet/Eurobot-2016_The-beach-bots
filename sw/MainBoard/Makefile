@@ -139,7 +139,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/control_system/filters/quadramp/quadramp.c \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
-	   modules/motor_manager.c \
+	   modules/motor/motor_manager.c \
 	   modules/obstacle_avoidance/obstacle_avoidance.c \
 	   modules/rf/esp8266/esp8266_manager.c \
 	   modules/rf/mrf24j40/mrf24j40.c \
