@@ -72,6 +72,10 @@ void system_init( void )
     // Welcome the user
     system_print_boot_msg();
 
+    // Inits USB CLI
+    usb_manager_init();
+    DPRINT( 1, "[*] usb OTG system ready\r\n" );
+
     // Creates the blinker thread.
     chThdCreateStatic( wa_alive,
                        sizeof( wa_alive ),
