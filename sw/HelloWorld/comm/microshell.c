@@ -259,7 +259,7 @@ char ** complete( int argc, char ** argv )
 
 void start_shell( void )
 {
-    uint8_t c;
+    char c;
     microrl_t rl;
 
     microrl_init( &rl, print );
@@ -269,7 +269,11 @@ void start_shell( void )
 
     while( true ) 
     {
-        chSequentialStreamRead( (BaseSequentialStream *) &SDU2, &c, 1 );
-        microrl_insert_char( &rl, c );  
+        if( chSequentialStreamRead( (BaseSequentialStream *) &SDU2, 
+                                    (uint8_t *) &c, 
+                                    1 ) != 0 )
+        {
+            microrl_insert_char( &rl, c );  
+        }
     }
 }
