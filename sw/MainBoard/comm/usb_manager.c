@@ -300,7 +300,6 @@ void usb_manager_init( void )
      * after a reset.
      */
     usbDisconnectBus( serusbcfg.usbp );
-    chThdSleepMilliseconds( 1500 );
     usbStart( serusbcfg.usbp, &usbcfg );
     usbConnectBus( serusbcfg.usbp );
 }
