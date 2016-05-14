@@ -259,16 +259,17 @@ char ** complete( int argc, char ** argv )
 
 void start_shell( void )
 {
+    uint8_t c;
     microrl_t rl;
-    msg_t c;
 
     microrl_init( &rl, print );
     microrl_set_execute_callback( &rl, exec );
     microrl_set_complete_callback( &rl, complete );
     microrl_set_sigint_callback( &rl, sigint );
-    while( true )
+
+    while( true ) 
     {
-        c = sdGet( &SDU2 );
-        microrl_insert_char( &rl, (int)c );
+        chSequentialStreamRead( (BaseSequentialStream *) &SDU2, &c, 1 );
+        microrl_insert_char( &rl, c );  
     }
 }
