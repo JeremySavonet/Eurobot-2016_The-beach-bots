@@ -55,6 +55,9 @@ endif
 ifneq ($(findstring HAL_USE_SERIAL TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv1/serial_lld.c
 endif
+ifneq ($(findstring HAL_USE_QEI TRUE,$(HALCONF)),)
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/qei_lld.c
+endif
 ifneq ($(findstring HAL_USE_UART TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv1/uart_lld.c
 endif
@@ -80,6 +83,7 @@ PLATFORMSRC := $(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/pwm_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/TIMv1/st_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv1/serial_lld.c \
+               $(CHIBIOS)/os/hal/ports/STM32/LLD/qei_lld.c \
                $(CHIBIOS)/os/hal/ports/STM32/LLD/USARTv1/uart_lld.c
 endif
 
