@@ -36,7 +36,6 @@ void print( const char * str )
 /* CLI functions here                                                        */
 /* TODO : Nice to have little macro to add new cli function                  */
 /*===========================================================================*/
-
 static void usage( char *p )
 {
     chprint( KYEL "Usage: %s\r\n", p );
@@ -267,9 +266,9 @@ void start_shell( void )
     microrl_set_complete_callback( &rl, complete );
     microrl_set_sigint_callback( &rl, sigint );
 
-    while( true ) 
+    while( true )
     {
         chSequentialStreamRead( (BaseSequentialStream *) &SDU2, &c, 1 );
-        microrl_insert_char( &rl, c );  
+        microrl_insert_char( &rl, c );
     }
 }

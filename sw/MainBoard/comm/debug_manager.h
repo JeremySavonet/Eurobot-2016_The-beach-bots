@@ -26,6 +26,18 @@
 #define DPRINT( level, ... )
 #endif
 
+#define DEBUG
+#define DLEVEL 3
+#ifdef DEBUG
+#define CLI_PRINT( level, ... ) \
+    do { \
+        if( DLEVEL >= (level) ) \
+            chprintf( (BaseSequentialStream * )&SDU2, __VA_ARGS__); \
+   } while (0)
+#else
+#define CLI_PRINT( level, ... )
+#endif
+
 void debug_manager_init( void );
 
 #endif // _DEBUGMANAGER_H_

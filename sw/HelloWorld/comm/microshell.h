@@ -19,7 +19,7 @@ void start_shell( void );
 
 typedef void (*shellcmd_t)( int argc, char * argv[] );
 
-typedef struct 
+typedef struct
 {
     const char        *sc_name;
     shellcmd_t        sc_function;
