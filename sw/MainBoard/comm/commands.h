@@ -54,4 +54,10 @@ void cmd_print_ir_distance( int argc, char *argv[] );
 void cmd_print_temp( int argc, char *argv[] ); 
 void cmd_print_battery_level( int argc, char *argv[] ); 
 
+// Command related to fatFS
+void cmd_tree( int argc, char *argv[] );
+void cmd_cat( int argc, char *argv[] );
+
+char* fresult_str( FRESULT stat );
+
 #endif // _COMMANDS_H_

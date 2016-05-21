@@ -12,6 +12,7 @@
 #include "comm/debug_manager.h"
 #include "comm/usb_manager.h"
 
+#include "modules/fatfs/fatfs_manager.h"
 #include "modules/rf/esp8266/esp8266_manager.h"
 #include "modules/rf/mrf24j40/mrf24j40.h"
 
@@ -32,7 +33,7 @@ static THD_FUNCTION( Alive, arg )
     while( true )
     {
         palTogglePad( GPIOC, GPIOC_LED );
-        chThdSleepMilliseconds( 500 );
+        chThdSleepMilliseconds( is_fs_ready() ? 125 : 500 );
     }
 }
 
@@ -141,13 +142,10 @@ void system_init( void )
     esp8266_manager_init();
     DPRINT( 1, "[*] ESP8266 system ready\r\n" );
 
-    // Inits zigbee module
-    mrf24j40_init();
-    mrf24j40_set_pan( 0xcafe );
-    // This is _our_ address
-    mrf24j40_address16_write( 0x6001 );
-    DPRINT( 1, "[*] Zigbee beacon system ready\r\n" );
-
+    // Inits WiFi IoT
+    init_fatfs();
+    DPRINT( 1, "[*] FatFs system ready\r\n" );
+    
     // Init done => Board ready
     // Creates the blinker thread.
     chThdCreateStatic( wa_alive,

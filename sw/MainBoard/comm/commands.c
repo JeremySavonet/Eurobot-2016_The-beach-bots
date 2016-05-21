@@ -11,6 +11,7 @@
 #include "system.h" 
 
 // for specifics commands or actions
+#include "../modules/fatfs/fatfs_manager.h"
 #include "../modules/motor/motor_manager.h"
 #include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
 
@@ -40,6 +41,9 @@ ShellCommand user_commands[] = {
     { "ir", cmd_print_ir_distance },
     { "temp", cmd_print_temp },
     { "batt_level", cmd_print_battery_level },
+    
+    { "tree", cmd_tree },
+    { "cat", cmd_cat },
     { NULL, NULL }
 };
 
@@ -367,4 +371,149 @@ void cmd_print_battery_level( int argc, char *argv[] )
     }
         
     chprint( "Battery level: v = %.3f\r\n", sys.sensors.batt_sensor.batt_level ); 
+}
+
+void cmd_tree( int argc, char *argv[] )
+{
+    FRESULT err;
+    uint32_t clusters;
+    FATFS *fsp;
+   
+    /* Generic large buffer.*/
+    static char fbuff[ 1024 ];
+
+    (void)argc;
+    (void)argv;
+    
+    if( argc > 0 ) 
+    {
+        chprint( "Usage: tree\r\n" );
+        return;
+    }
+    
+    if( ! is_fs_ready() ) 
+    {
+        chprint( "File System not mounted\r\n" );
+        return;
+    }
+
+    err = f_getfree( "/", &clusters, &fsp );
+    
+    if( err != FR_OK ) 
+    {
+        chprint( "FS: f_getfree() failed\r\n" );
+        return;
+    }
+
+    fbuff[ 0 ] = 0;
+    scan_files( (char *)fbuff );
+}
+
+void cmd_cat( int argc, char *argv[] )
+{
+    FRESULT err;
+    FIL fsrc;   // file object
+    char buffer[ 255 ];
+    UINT byte_to_read = sizeof( buffer );
+    UINT byte_read;
+    
+    (void)argc;
+    (void)argv;
+    
+    if( argc > 1 )
+    {
+        chprint( "Usage: cat file_name\r\n" );
+        return;
+    }
+    
+    // Attempt to open the file, error out if it fails.
+    err = f_open( &fsrc, argv[ 0 ], FA_READ );
+    
+    if( err != FR_OK ) 
+    {
+        chprint( "FS: f_open(%s) failed.\r\n", argv[ 0 ] );
+        chprint( "\t%s.\r\n", fresult_str( err ) );
+        return;
+    }
+    
+    /*
+     * Do while the number of bytes read is equal to the number of bytes to read
+     * (the buffer is filled)
+     */
+    do 
+    {
+        // Clear the buffer.
+        memset( buffer, 0, sizeof( buffer ) );
+        
+        // Read the file.
+        err = f_read( &fsrc, buffer, byte_to_read, &byte_read );
+        if( err != FR_OK ) 
+        {
+            chprint( "FS: f_read() failed\r\n" );
+            chprint( "\t%s.\r\n", fresult_str( err ) );
+            f_close( &fsrc );
+            return;
+        }
+    
+    	chprint( "%s", buffer );
+    } while( byte_read >= byte_to_read );
+    
+    chprint( "\r\n" );
+    
+    // Close the file.
+    f_close( &fsrc );
+}
+
+char* fresult_str( FRESULT stat ) 
+{
+    char str[ 255 ];
+    memset( str, 0, sizeof( str ) );
+    
+    switch( stat ) 
+    {
+    case FR_OK:
+    	return "Succeeded";
+    case FR_DISK_ERR:
+    	return "A hard error occurred in the low level disk I/O layer";
+    case FR_INT_ERR:
+    	return "Assertion failed";
+    case FR_NOT_READY:
+    	return "The physical drive cannot work";
+    case FR_NO_FILE:
+    	return "Could not find the file";
+    case FR_NO_PATH:
+    	return "Could not find the path";
+    case FR_INVALID_NAME:
+    	return "The path name format is invalid";
+    case FR_DENIED:
+    	return "Access denied due to prohibited access or directory full";
+    case FR_EXIST:
+    	return "Access denied due to prohibited access";
+    case FR_INVALID_OBJECT:
+    	return "The file/directory object is invalid";
+    case FR_WRITE_PROTECTED:
+    	return "The physical drive is write protected";
+    case FR_INVALID_DRIVE:
+    	return "The logical drive number is invalid";
+    case FR_NOT_ENABLED:
+    	return "The volume has no work area";
+    case FR_NO_FILESYSTEM:
+    	return "There is no valid FAT volume";
+    case FR_MKFS_ABORTED:
+    	return "The f_mkfs() aborted due to any parameter error";
+    case FR_TIMEOUT:
+    	return "Could not get a grant to access the volume within defined period";
+    case FR_LOCKED:
+    	return "The operation is rejected according to the file sharing policy";
+    case FR_NOT_ENOUGH_CORE:
+    	return "LFN working buffer could not be allocated";
+    case FR_TOO_MANY_OPEN_FILES:
+    	return "Number of open files > _FS_SHARE";
+    case FR_INVALID_PARAMETER:
+    	return "Given parameter is invalid";
+    default:
+    	return "Unknown";
+    }
+     
+    return "";
 }

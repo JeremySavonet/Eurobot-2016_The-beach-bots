@@ -14,6 +14,8 @@
 #include "hal.h"
 #include "test.h"
 
+#include "usb_manager.h"
+
 #define DEBUG
 #define DLEVEL 3
 #ifdef DEBUG

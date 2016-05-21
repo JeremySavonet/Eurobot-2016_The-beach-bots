@@ -37,6 +37,8 @@
 #include "comm/debug_manager.h"
 #include "comm/microshell.h"
 
+#include "modules/fatfs/fatfs_manager.h"
+
 /*===========================================================================*/
 /* Defines                                                                   */
 /*===========================================================================*/
@@ -89,6 +91,8 @@ int main( void )
             chThdRelease( shelltp );  // Recovers memory of the previous shell.
             shelltp = NULL;           // Triggers spawning of a new shell.
         }
+        
+        fatfs_dispatch_event();
 
         // TODO: Wait for call to start over CLI or add a button
         // ( this one is not the starter pull)
