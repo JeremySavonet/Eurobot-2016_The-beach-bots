@@ -420,7 +420,7 @@ void cmd_cat( int argc, char *argv[] )
     (void)argc;
     (void)argv;
     
-    if( argc > 1 )
+    if( argc != 1 )
     {
         chprint( "Usage: cat file_name\r\n" );
         return;
