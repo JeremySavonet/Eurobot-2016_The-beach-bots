@@ -20,7 +20,7 @@
 #include "color.h"
 #include "comm/debug_manager.h"
 
-#include "modules/motor/dc_motor_manager.h"
+#include "modules/motor/brushless_motor_manager.h"
 #include "modules/motor/qei_manager.h"
 
 #include "modules/robot/trajectory_manager/trajectory_manager_utils.h"
@@ -54,7 +54,7 @@ void versatile_cs_init( versatile_robot_t * robot )
 #ifdef COMPILE_ON_ROBOT
     // Init motors and QEI first to avoid logic level issues
     // on motors at startup
-    dc_motor_manager_init();
+    brushless_motor_manager_init();
 
     qei_manager_init();
 #endif
@@ -71,12 +71,12 @@ void versatile_cs_init( versatile_robot_t * robot )
 
 #ifdef COMPILE_ON_ROBOT
     rs_set_left_pwm( &robot->rs,
-                     versatile_dc_set_pwm0,
-                     DC_MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM9 channel 0
+                     versatile_esc_set_ppm0,
+                     BRUSHLESS_MOTOR_CONTROLLER_BASE ); // MOTOR 0 on PWM9 channel 0
 
     rs_set_right_pwm( &robot->rs,
-                      versatile_dc_set_pwm1,
-                      DC_MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM9 channel 1
+                      versatile_esc_set_ppm1,
+                      BRUSHLESS_MOTOR_CONTROLLER_BASE ); // MOTOR 1 on PWM9 channel 1
 
     rs_set_left_ext_encoder( &robot->rs,
                              versatile_qei_get_encoder,

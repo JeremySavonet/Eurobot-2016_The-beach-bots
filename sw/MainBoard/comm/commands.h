@@ -31,6 +31,7 @@ void cmd_set_robot_mode( int argc, char *argv[] );
 void cmd_robot_position( int argc, char *argv[] );
 void cmd_get_encoder( int argc, char *argv[] );
 void cmd_set_pwm( int argc, char* argv[] );
+void cmd_set_ppm( int argc, char* argv[] );
 
 // Command to play with the robot
 void cmd_go_forward( int argc, char* argv[] );

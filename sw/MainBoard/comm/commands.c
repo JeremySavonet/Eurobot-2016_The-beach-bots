@@ -12,6 +12,7 @@
 
 // for specifics commands or actions
 #include "../modules/fatfs/fatfs_manager.h"
+#include "../modules/motor/brushless_motor_manager.h"
 #include "../modules/motor/dc_motor_manager.h"
 #include "../modules/motor/qei_manager.h"
 #include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
@@ -30,6 +31,7 @@ ShellCommand user_commands[] = {
     { "position", cmd_robot_position },
     { "encoder", cmd_get_encoder },
     { "pwm", cmd_set_pwm },
+    { "ppm", cmd_set_ppm },
     { "god", cmd_go_forward },
     { "goa", cmd_turn_angle },
     { "pida", cmd_set_or_get_pida_gains },
@@ -236,6 +238,36 @@ void cmd_set_pwm( int argc, char* argv[] )
     {
         chprint( "Set pwm on channel %d to value: %d\r\n", channel, value );
         versatile_dc_set_pwm1( DC_MOTOR_CONTROLLER_BASE, value );
+    }
+    else
+    {
+        chprint( "Not a valid motor channel\r\n" );
+    }
+}
+
+void cmd_set_ppm( int argc, char* argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc != 2 )
+    {
+        chprint( "Usage: ppm channel value\r\n" );
+        return;
+    }
+
+    int channel = atoi( argv[0] );
+    int32_t value = atoi( argv[1] );
+
+    if( 0 == channel )
+    {
+        chprint( "Set ppm on channel %d to value: %d\r\n", channel, value );
+        versatile_esc_set_ppm0( BRUSHLESS_MOTOR_CONTROLLER_BASE, value );
+    }
+    else if( 1 == channel )
+    {
+        chprint( "Set ppm on channel %d to value: %d\r\n", channel, value );
+        versatile_esc_set_ppm1( BRUSHLESS_MOTOR_CONTROLLER_BASE, value );
     }
     else
     {
