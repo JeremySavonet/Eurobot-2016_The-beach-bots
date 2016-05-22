@@ -99,6 +99,7 @@ include $(CHIBIOS)/os/rt/rt.mk
 include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 # Other files (optional).
 include $(CHIBIOS)/test/rt/test.mk
+include $(CHIBIOS)/os/various/fatfs_bindings/fatfs.mk
 
 # Define linker script file here
 LDSCRIPT= $(STARTUPLD)/STM32F407xG.ld
@@ -137,6 +138,7 @@ CSRC = $(STARTUPSRC) \
 	   modules/control_system/filters/quadramp/quadramp.c \
 	   modules/control_system/filters/quadramp_derivate/quadramp_derivate.c \
 	   modules/control_system/filters/ramp/ramp.c \
+	   modules/fatfs/fatfs_manager.c \
 	   modules/motor/motor_manager.c \
 	   modules/obstacle_avoidance/obstacle_avoidance.c \
 	   modules/rf/esp8266/esp8266_manager.c \
