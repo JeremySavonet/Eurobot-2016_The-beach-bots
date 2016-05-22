@@ -22,7 +22,7 @@
 #define BRUSHLESS_MOTOR_PWM_DRIVER PWMD9
 
 #define ESC_UPDATE_RATE     400 // Hz (50 Hz std servo/esc) ( 400 Hz fast servo/esc)
-#define TIM_CLOCK           10e6 // Hz
+#define TIM_CLOCK           1000000 // Hz
 
 void brushless_motor_manager_init( void );
 

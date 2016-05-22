@@ -12,8 +12,8 @@
 
 static PWMConfig esc_ppm_cfg =
 {
-    TIM_CLOCK, // 1MHz PWM clock frequency
-    (uint16_t)((uint32_t)TIM_CLOCK / (uint32_t)ESC_UPDATE_RATE), // TOP cnt,   // Initial PWM period 20ms ( 50hz (20ms) for standard servo/ESC, 400hz for fast servo/ESC (2.5ms = 2500) )
+    1000000, // 1MHz PWM clock frequency
+    2500,    // Initial PWM period 20ms ( 50hz (20ms) for standard servo/ESC, 400hz for fast servo/ESC (2.5ms = 2500) )
     NULL,    // No callback
     {
         { PWM_OUTPUT_ACTIVE_HIGH, NULL },
@@ -57,19 +57,15 @@ void versatile_esc_set_ppm( void *device, int channel, int32_t pulse_width )
         return;
     }
     
-    uint32_t cnt_val;
-    cnt_val = (uint32_t) TIM_CLOCK / 1000L + 
-              (uint32_t) TIM_CLOCK * pulse_width / ( 1000 * 255 );
-
     pwmEnableChannel( device,
                       channel,
-                      (pwmcnt_t) cnt_val );
+                      (pwmcnt_t) pulse_width );
 }
 
 void versatile_esc_set_ppm_all( int32_t pulse_width )
 {
     uint8_t i;
-    for( i = 0; i > BRUSHLESS_NUM_MOTORS; ++i )
+    for( i = 0; i < BRUSHLESS_NUM_MOTORS; ++i )
     {
         versatile_esc_set_ppm( BRUSHLESS_MOTOR_CONTROLLER_BASE, i, pulse_width ); 
     }
