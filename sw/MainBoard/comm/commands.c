@@ -12,7 +12,8 @@
 
 // for specifics commands or actions
 #include "../modules/fatfs/fatfs_manager.h"
-#include "../modules/motor/motor_manager.h"
+#include "../modules/motor/dc_motor_manager.h"
+#include "../modules/motor/qei_manager.h"
 #include "../modules/robot/trajectory_manager/trajectory_manager_core.h"
 
 // for strat
@@ -199,12 +200,12 @@ void cmd_get_encoder( int argc, char *argv[] )
     if( 0 == channel )
     {
         chprint( "Encoder %d: %d\r\n", channel, 
-            versatile_dc_get_encoder( MOTOR_ENCODER_BASE_LEFT ) );
+            versatile_qei_get_encoder( MOTOR_ENCODER_BASE_LEFT ) );
     }
     else if( 1 == channel )
     {
         chprint( "Encoder %d: %d\r\n", channel, 
-            versatile_dc_get_encoder( MOTOR_ENCODER_BASE_RIGHT ) );
+            versatile_qei_get_encoder( MOTOR_ENCODER_BASE_RIGHT ) );
     }
     else
     {
@@ -229,12 +230,12 @@ void cmd_set_pwm( int argc, char* argv[] )
     if( 0 == channel )
     {
         chprint( "Set pwm on channel %d to value: %d\r\n", channel, value );
-        versatile_dc_set_pwm0( MOTOR_CONTROLLER_BASE, value );
+        versatile_dc_set_pwm0( DC_MOTOR_CONTROLLER_BASE, value );
     }
     else if( 1 == channel )
     {
         chprint( "Set pwm on channel %d to value: %d\r\n", channel, value );
-        versatile_dc_set_pwm1( MOTOR_CONTROLLER_BASE, value );
+        versatile_dc_set_pwm1( DC_MOTOR_CONTROLLER_BASE, value );
     }
     else
     {
