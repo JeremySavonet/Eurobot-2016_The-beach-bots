@@ -32,13 +32,16 @@ Here we describe the mapping use for this project for OLIMEX E407 Rev.E board:
 <ul>IR2: PF7</ul>
 <ul>IR3: PF8</ul>
 
+<li>Can comm on CAN1</li>
+<ul>CAN_RX: PD0/AF9</ul>
+<ul>CAN_TX: PD1/AF9</ul>
+
 TODO:
 ==
 
   * Add module status flag to monitor if they're are initialized or not
   * Rework FatFs to create log file with all sensors values
   * Add support for inertial board
-  * CAN
   * I2C
   * Sys state machine
   * Deinit system
