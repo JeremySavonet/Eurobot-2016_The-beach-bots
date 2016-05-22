@@ -31,3 +31,10 @@ Here we describe the mapping use for this project for OLIMEX E407 Rev.E board:
 <ul>IR1: PF6</ul>
 <ul>IR2: PF7</ul>
 <ul>IR3: PF8</ul>
+
+TODO:
+==
+
+  * Add module status flag to monitor if they're are initialized or not
+  * Rework FatFs to create log file with all sensors values
+  * Add support for inertial board
