@@ -38,3 +38,7 @@ TODO:
   * Add module status flag to monitor if they're are initialized or not
   * Rework FatFs to create log file with all sensors values
   * Add support for inertial board
+  * CAN
+  * I2C
+  * Sys state machine
+  * Deinit system
