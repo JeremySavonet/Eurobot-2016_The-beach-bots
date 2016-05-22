@@ -27,6 +27,8 @@
 /*===========================================================================*/
 ShellCommand user_commands[] = {
 
+    { "sysstate", cmd_get_sys_state },
+
     { "mode", cmd_set_robot_mode },
     { "position", cmd_robot_position },
     { "encoder", cmd_get_encoder },
@@ -49,6 +51,50 @@ ShellCommand user_commands[] = {
     { "cat", cmd_cat },
     { NULL, NULL }
 };
+
+void cmd_get_sys_state( int argc, char *argv[] )
+{
+    (void)argc;
+    (void)argv;
+
+    if( argc > 0 )
+    {
+        chprint( "Usage: sysstate\r\n" );
+        return;
+    }
+    
+    switch( sys.sys_state )
+    {
+    case SYSTEM_INITIALIZING:
+        chprint( "System about to initialize\r\n" );
+        break;
+
+    case SYSTEM_RUNNING:
+        chprint( "System running\r\n" );
+        break;
+
+    case SYSTEM_GAME_STARTED:
+        chprint( "System game started\r\n" );
+        break;
+
+    case SYSTEM_CRASH:
+        chprint( "System crashed\r\n" );
+        break;
+
+    case SYSTEM_TERMINATING:
+        chprint( "System is about to stop\r\n" );
+        break;
+
+    case SYSTEM_STOPPED:
+        chprint( "System stopped\r\n" );
+        break;
+    
+    case SYSTEM_UNKNOWN:
+    default:
+        chprint( "System unknown state\r\n" );
+        break;
+    }
+}
 
 void cmd_start_strat( int argc, char *argv[] )
 {

@@ -60,6 +60,9 @@ static THD_FUNCTION( CLI, arg )
 
 int main( void )
 {
+    // System unknown state
+    sys.sys_state = SYSTEM_UNKNOWN;
+
     static thread_t *shelltp = NULL;
 
     /*
@@ -93,9 +96,6 @@ int main( void )
         }
         
         fatfs_dispatch_event();
-
-        // TODO: Wait for call to start over CLI or add a button
-        // ( this one is not the starter pull)
 
         chThdSleepMilliseconds( 100 ); // Iddle thread
     }

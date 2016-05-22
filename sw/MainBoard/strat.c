@@ -100,6 +100,8 @@ void strat_begin( void )
     // start game strat
     if( !running )
     {
+        sys.sys_state = SYSTEM_GAME_STARTED;
+
         running = true;
         strat_timer_stop(); // reset the timer
         // Start the strat thread : avoid blocking the main loop and the cli
@@ -139,6 +141,8 @@ static THD_FUNCTION( GameTimer, arg )
 
     running = false;
     game_tick = 0;
+    
+    sys.sys_state = SYSTEM_RUNNING;
 
     DPRINT( 1, KBLU "Stop\r\n" );
 }

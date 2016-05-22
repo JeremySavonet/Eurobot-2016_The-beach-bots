@@ -15,6 +15,9 @@
 
 #include "microshell.h"
 
+// Command to get system state
+void cmd_get_sys_state( int argc, char *argv[] );
+
 // Command to start asserv
 void cmd_start_strat( int argc, char *argv[] );
 

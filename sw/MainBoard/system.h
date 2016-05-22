@@ -21,9 +21,12 @@
 typedef enum
 {
     SYSTEM_UNKNOWN,         // System is in unknown state
-    SYSTEM_INIT,            // System is about to initialize
-    SYSTEM_WORKING,         // System is about to working
-    SYSTEM_CRASH            // System is crashed
+    SYSTEM_INITIALIZING,    // System is about to initialize
+    SYSTEM_RUNNING,         // System is running
+    SYSTEM_GAME_STARTED,    // System game started
+    SYSTEM_CRASH,           // System is crashed
+    SYSTEM_TERMINATING,     // System is about to stop
+    SYSTEM_STOPPED          // System is stopped
 } system_state_t;
 
 typedef struct
@@ -66,6 +69,7 @@ typedef struct
 typedef struct
 {
     // Aggregate here all robot structures
+    system_state_t    sys_state;
     system_comm_t     comm;
     system_sensors_t  sensors;
     system_controls_t controls;
@@ -76,5 +80,6 @@ extern system_t sys;
 
 void system_print_boot_msg( void );
 void system_init( void );
+void system_deinit( void );
 
 #endif // _SYSTEM_H_

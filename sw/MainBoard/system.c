@@ -12,6 +12,7 @@
 #include "comm/debug_manager.h"
 #include "comm/usb_manager.h"
 
+#include "modules/comm/can/can_manager.h"
 #include "modules/fatfs/fatfs_manager.h"
 #include "modules/rf/esp8266/esp8266_manager.h"
 #include "modules/rf/mrf24j40/mrf24j40.h"
@@ -110,6 +111,16 @@ static void system_print_cli_msg( void )
 // Init all peripherals
 void system_init( void )
 {
+    if( sys.sys_state == SYSTEM_UNKNOWN || sys.sys_state == SYSTEM_STOPPED )
+    {
+        sys.sys_state = SYSTEM_INITIALIZING;
+    }
+    else
+    {
+        sys.sys_state = SYSTEM_CRASH;
+        osalSysHalt( "System is already initialized, invalid operation" );
+    }
+
     // Inits IOs
     palSetPadMode( GPIOC, GPIOC_LED, PAL_MODE_OUTPUT_PUSHPULL );
     palSetPadMode( GPIOD, 1, PAL_MODE_INPUT_PULLUP ); // strat color pin
@@ -142,10 +153,18 @@ void system_init( void )
     esp8266_manager_init();
     DPRINT( 1, "[*] ESP8266 system ready\r\n" );
 
-    // Inits WiFi IoT
+    // Inits FatFs
     init_fatfs();
     DPRINT( 1, "[*] FatFs system ready\r\n" );
+   
+    // Inits CAN
+    can_manager_init();
+    DPRINT( 1, "[*] Can communication system ready\r\n" );
     
+    // Inits I2C
+    //i2c_init();
+    DPRINT( 1, "[*] I2C system ready\r\n" );
+
     // Init done => Board ready
     // Creates the blinker thread.
     chThdCreateStatic( wa_alive,
@@ -155,4 +174,23 @@ void system_init( void )
                        NULL );
 
     DPRINT( 1, "System ready\r\n" );
+
+    sys.sys_state = SYSTEM_RUNNING;
+}
+
+void system_deinit( void )
+{
+    DPRINT( 1, "System deinit sequence started\r\n" );
+    
+    if( sys.sys_state ==  SYSTEM_RUNNING )
+    {
+        sys.sys_state = SYSTEM_TERMINATING;
+    }
+    else
+    {
+        sys.sys_state = SYSTEM_CRASH;
+        osalSysHalt( "System is not running, invalid operation" );
+    }
+    
+    sys.sys_state = SYSTEM_STOPPED;
 }

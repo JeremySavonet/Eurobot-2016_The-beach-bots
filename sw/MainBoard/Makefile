@@ -131,6 +131,7 @@ CSRC = $(STARTUPSRC) \
 	   common/math/geometry/vect_base.c \
 	   modules/beacon/beacon.c \
 	   modules/blocking_detection_manager/blocking_detection_manager.c \
+	   modules/comm/can/can_manager.c \
 	   modules/control_system/control_system_manager/control_system_manager.c \
 	   modules/control_system/filters/biquad/biquad.c \
 	   modules/control_system/filters/pid/pid.c \
